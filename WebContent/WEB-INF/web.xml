@@ -4,17 +4,13 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	version="3.0">
 	<display-name>ControleFinanceiro</display-name>
-	
+
 	<!-- Welcome file list -->
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-		<welcome-file>index.htm</welcome-file>
+		<!-- Contém apenas um redirecionamento para main.action -->
 		<welcome-file>index.jsp</welcome-file>
-		<welcome-file>default.html</welcome-file>
-		<welcome-file>default.htm</welcome-file>
-		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
-	
+
 	<!-- Servlets -->
 	<servlet>
 		<description></description>
@@ -146,7 +142,7 @@
 		<servlet-name>ModeloLancamentoListar</servlet-name>
 		<url-pattern>/modelo.lancamento.listar</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- Filters -->
 	<filter>
 		<filter-name>struts2</filter-name>
