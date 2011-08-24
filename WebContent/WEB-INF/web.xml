@@ -20,7 +20,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ContaServlet</servlet-name>
-		<url-pattern>/conta.listar</url-pattern>
+		<url-pattern>/conta.listar.servlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<description></description>

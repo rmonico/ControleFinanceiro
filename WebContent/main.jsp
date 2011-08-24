@@ -18,7 +18,8 @@
             
         <li>Comum
             <ul>
-                <li><a href="conta.listar">Contas</a></li>
+                <li><a href="conta.listar.servlet">Contas</a></li>
+                <li><a href="conta.listar">Contas - struts</a></li>
                 <li><a href="formapagamento.listar">Formas de Pagamento</a></li>
             </ul>
         </li>
