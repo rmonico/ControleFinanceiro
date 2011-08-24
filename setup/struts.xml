@@ -18,7 +18,7 @@
                         <result name="success">/HelloWorld.jsp</result>
                         <result name="fail">/HelloWorld-fail.jsp</result>
                 </action -->
-                <action name="conta.listar" class="br.com.controlefinanceiro.actions.ContaActions" method="listarAction">
+                <action name="conta.listar" class="br.com.zero.controlefinanceiro.actions.ContaActions" method="listarAction">
                         <result name="success">/conta/listar.jsp</result>
                 </action>
         </package>
