@@ -36,7 +36,7 @@ public class ContaListar extends HttpServlet {
         request.setAttribute("paginaatual", 1);
         request.setAttribute("paginafinal", 1);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("conta/listar.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("conta_jstl/listar.jsp");
 
         dispatcher.forward(request, response);
     }
