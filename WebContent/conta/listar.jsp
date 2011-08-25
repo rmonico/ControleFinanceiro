@@ -9,7 +9,11 @@
 
 </head>
 <body>
+	<s:url action="main.action" var="mainActionLink" />
+	<s:url action="logoff.action" var="logoffActionLink" />
+
 	<h1>&sdot;<s:text name="contas.lista.titulo" />&sdot;</h1>
+	<h6><a href="${mainActionLink}">Controle Financeiro</a>&nbsp;&bull;&nbsp;<a href="${logoffActionLink}">Sair &times; </a></h6>
 	<br/>
 	<table border=1 cellspacing=0 cellpadding="6">
 		<!-- Header -->
@@ -39,6 +43,6 @@
 		</forEach -->
 		<!-- /Body -->
 	</table><br/>
-	<br/>
+	<h6><a href="${mainActionLink}">Controle Financeiro</a>&nbsp;&bull;&nbsp;<a href="${logoffActionLink}">Sair &times; </a></h6>
 </body>
 </html>
