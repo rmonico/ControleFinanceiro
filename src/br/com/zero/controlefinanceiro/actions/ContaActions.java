@@ -14,22 +14,25 @@ public class ContaActions extends ActionSupport {
 	 */
 	private static final long serialVersionUID = 4495054400441765031L;
     private List<Conta> contaList;
-	private ListProperties<Conta> contaListProperties;
+//	private ListProperties<Conta> contaListProperties;
 	
 	/* Ações */
 	
-	public String listarAction() throws Exception {
+	public String doListar() {
 		return SUCCESS;
 	}
 	
+	public String doInserir() {
+		return INPUT;
+	}
 	
 	/* Beans */
-	public ListProperties<Conta> getContaListProperties() {
-		if (contaListProperties == null) {
-			contaListProperties = new ListProperties<Conta>(getContaList());
-		}
-		return contaListProperties;
-	}
+//	public ListProperties<Conta> getContaListProperties() {
+//		if (contaListProperties == null) {
+//			contaListProperties = new ListProperties<Conta>(getContaList());
+//		}
+//		return contaListProperties;
+//	}
 	
 	public List<Conta> getContaList() {
         if (contaList == null) {

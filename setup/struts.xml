@@ -13,13 +13,12 @@
                 <action name="main">
                         <result>/main.jsp</result>
                 </action>
-                <!-- action name="hello" class="br.strutsdemo.HelloWorldAction"
-                        method="execute">
-                        <result name="success">/HelloWorld.jsp</result>
-                        <result name="fail">/HelloWorld-fail.jsp</result>
-                </action -->
-                <action name="conta.listar" class="br.com.zero.controlefinanceiro.actions.ContaActions" method="listarAction">
+                <action name="conta.listar" class="br.com.zero.controlefinanceiro.actions.ContaActions" method="listar">
                         <result name="success">/conta/listar.jsp</result>
+                </action>
+                <action name="conta.inserir" class="br.com.zero.controlefinanceiro.actions.ContaActions" method="inserir">
+			        <result name="input">/conta/inserir.jsp</result>
+					<result name="success" type="redirectAction">conta.listar.action</result>
                 </action>
         </package>
  </struts>
