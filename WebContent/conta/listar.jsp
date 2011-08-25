@@ -30,8 +30,18 @@
 		<!-- Body -->
 		<s:iterator value="contaList">
 			<tr>
-				<td>Alterar</td>
-				<td>Excluir</td>
+				<td>
+					<s:url action="conta.alterar.action" var="contaAlterarActionLink">
+						<s:param name="conta_id" value="id" />
+					</s:url>
+					<a href="${contaAlterarActionLink}"><s:text name="application.alterar.label" /> </a>
+				</td>
+				<td>
+					<s:url action="conta.excluir.action" var="contaExcluirActionLink">
+						<s:param name="conta_id" value="id" />
+					</s:url>
+					<a href="${contaExcluirActionLink}"><s:text name="application.excluir.label" /> </a>
+				</td>
 				<td><s:property value="id" /></td>
 				<td><s:property value="nome" /></td>
 			</tr>
