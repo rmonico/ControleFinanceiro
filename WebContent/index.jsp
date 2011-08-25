@@ -11,9 +11,9 @@ function redirect(url){
 
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Carregando...</title>
 </head>
 <body onload="redirect('main.action')">
-
+<h3>Carregando...</h3>
 </body>
 </html>
