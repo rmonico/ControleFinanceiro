@@ -29,14 +29,14 @@
 				<td><s:property value="nome" /></td>
 			</tr>
 		</s:iterator>
-		<!-- c:forEach var="conta" items="${listacontas}" >
+		<!-- forEach var="conta" items="${listacontas}" >
 			<tr>
 				<td><a href="conta.alterar?paginaorigem=${paginaatual}&id=${conta.id}">Alterar</a></td>
 				<td><form action="conta.excluir" name="formularioConfirmacaoExclusao_${conta.id}"><input type="hidden" value="${conta.id}" name="id"><a href="javascript:confirmSubmit('Tem certeza de que deseja excluir essa conta?', document.formularioConfirmacaoExclusao_${conta.id});">Excluir</a></form></td>
 				<td>${conta.id}</td>
 				<td>${conta.nome}</td>
 			</tr>
-		</c:forEach -->
+		</forEach -->
 		<!-- /Body -->
 	</table><br/>
 	<br/>
