@@ -1,31 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Lista de contas</title>
-
-<script type="text/javascript">
-	function confirmSubmit(mensagemConfirmacao, formulario) {
-		if (confirm(mensagemConfirmacao)) {
-			formulario.submit();
-		}
-	}
-</script>
+<title><s:text name="contas.lista.titulo" /></title>
 
 </head>
 <body>
-	<h1>&sdot;Lista de contas&sdot;</h1>
-	<h6><a href=".">Controle Financeiro</a>&nbsp;&bull;&nbsp;<a href="sistema.sair">Sair &times; </a></h6>
-	<a href="conta.listar?pagina=1">&laquo;</a>
-	<a href="conta.listar?pagina=<%=((Integer)request.getAttribute("paginaatual"))>1?((Integer)request.getAttribute("paginaatual"))-1:1%>">&lsaquo;</a>
-	${paginaatual}/${paginafinal}
-	<a href="conta.listar?pagina=<%=((Integer)request.getAttribute("paginaatual"))<((Integer)request.getAttribute("paginafinal"))?((Integer)request.getAttribute("paginaatual"))+1:((Integer)request.getAttribute("paginafinal"))%>">&rsaquo;</a>
-	<a href="conta.listar?pagina=${paginafinal}">&raquo;</a><br/>
+	<h1>&sdot;<s:text name="contas.lista.titulo" />&sdot;</h1>
 	<br/>
-	<h6><a href="conta.inserir">Inserir</a>&nbsp;&bull;&nbsp;<a href="conta.listar?pagina=${paginaatual}">Atualizar</a></h6>
 	<table border=1 cellspacing=0 cellpadding="6">
 		<!-- Header -->
 		<tr>
@@ -36,23 +21,24 @@
 		<!--  /Header -->
 		
 		<!-- Body -->
-		<c:forEach var="conta" items="${listacontas}">
+		<s:iterator value="contaList">
+			<tr>
+				<td>Alterar</td>
+				<td>Excluir</td>
+				<td><s:property value="id" /></td>
+				<td><s:property value="nome" /></td>
+			</tr>
+		</s:iterator>
+		<!-- c:forEach var="conta" items="${listacontas}" >
 			<tr>
 				<td><a href="conta.alterar?paginaorigem=${paginaatual}&id=${conta.id}">Alterar</a></td>
 				<td><form action="conta.excluir" name="formularioConfirmacaoExclusao_${conta.id}"><input type="hidden" value="${conta.id}" name="id"><a href="javascript:confirmSubmit('Tem certeza de que deseja excluir essa conta?', document.formularioConfirmacaoExclusao_${conta.id});">Excluir</a></form></td>
 				<td>${conta.id}</td>
 				<td>${conta.nome}</td>
 			</tr>
-		</c:forEach>
+		</c:forEach -->
 		<!-- /Body -->
 	</table><br/>
-	<a href="conta.listar?pagina=1">&laquo;</a>
-	<a href="conta.listar?pagina=<%=((Integer)request.getAttribute("paginaatual"))>1?((Integer)request.getAttribute("paginaatual"))-1:1%>">&lsaquo;</a>
-	${paginaatual}/${paginafinal}
-	<a href="conta.listar?pagina=<%=((Integer)request.getAttribute("paginaatual"))<((Integer)request.getAttribute("paginafinal"))?((Integer)request.getAttribute("paginaatual"))+1:((Integer)request.getAttribute("paginafinal"))%>">&rsaquo;</a>
-	<a href="conta.listar?pagina=${paginafinal}">&raquo;</a><br/>
-	<h6><a href=".">Controle Financeiro</a>&nbsp;&bull;&nbsp;<a href="sistema.sair">Sair &times; </a></h6>
-	<br/>
 	<br/>
 </body>
 </html>
