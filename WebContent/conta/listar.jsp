@@ -11,10 +11,13 @@
 <body>
 	<s:url action="main.action" var="mainActionLink" />
 	<s:url action="logoff.action" var="logoffActionLink" />
+	<s:url action="conta.inserir.action" var="contaInserirActionLink" />
+	<s:url action="conta.listar.action" var="contaListarActionLink" />
 
 	<h1>&sdot;<s:text name="contas.lista.titulo" />&sdot;</h1>
 	<h6><a href="${mainActionLink}"><s:text name="application.name" /></a>&nbsp;&bull;&nbsp;<a href="${logoffActionLink}"><s:text name="logoff.label" /> &times; </a></h6>
 	<br/>
+	<h6><a href="${contaInserirActionLink}"><s:text name="application.inserir.label" /> </a>&nbsp;&bull;&nbsp;<a href="${contaListarActionLink}"><s:text name="application.atualizar.label" /> </a></h6>
 	<table border=1 cellspacing=0 cellpadding="6">
 		<!-- Header -->
 		<tr>
