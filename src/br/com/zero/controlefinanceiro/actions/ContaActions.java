@@ -13,6 +13,7 @@ public class ContaActions extends ActionSupport {
 	 * 
 	 */
 	private static final long serialVersionUID = 4495054400441765031L;
+	private Conta conta;
     private List<Conta> contaList;
 //	private ListProperties<Conta> contaListProperties;
 	
@@ -23,6 +24,8 @@ public class ContaActions extends ActionSupport {
 	}
 	
 	public String doInserir() {
+		conta = null;
+		
 		return INPUT;
 	}
 	
@@ -33,6 +36,14 @@ public class ContaActions extends ActionSupport {
 //		}
 //		return contaListProperties;
 //	}
+	
+	public Conta getConta() {
+		return conta;
+	}
+	
+	public void setConta(Conta conta) {
+		this.conta = conta;
+	}
 	
 	public List<Conta> getContaList() {
         if (contaList == null) {

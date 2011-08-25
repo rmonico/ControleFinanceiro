@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title><s:text name="contas.lista.titulo" /></title>
+<title><s:text name="conta.lista.titulo" /></title>
 
 </head>
 <body>
@@ -14,7 +14,7 @@
 	<s:url action="conta.inserir.action" var="contaInserirActionLink" />
 	<s:url action="conta.listar.action" var="contaListarActionLink" />
 
-	<h1>&sdot;<s:text name="contas.lista.titulo" />&sdot;</h1>
+	<h1>&sdot;<s:text name="conta.lista.titulo" />&sdot;</h1>
 	<h6><a href="${mainActionLink}"><s:text name="application.name" /></a>&nbsp;&bull;&nbsp;<a href="${logoffActionLink}"><s:text name="logoff.label" /> &times; </a></h6>
 	<br/>
 	<h6><a href="${contaInserirActionLink}"><s:text name="application.inserir.label" /> </a>&nbsp;&bull;&nbsp;<a href="${contaListarActionLink}"><s:text name="application.atualizar.label" /> </a></h6>
@@ -22,8 +22,8 @@
 		<!-- Header -->
 		<tr>
 			<td colspan="2" align="center"><b>Funções</b></td>
-			<td><b>ID</b></td>
-			<td><b>Nome</b></td>
+			<td><b><s:text name="conta.id.label" /></b></td>
+			<td><b><s:text name="conta.nome.label" /></b></td>
 		</tr>
 		<!--  /Header -->
 		
