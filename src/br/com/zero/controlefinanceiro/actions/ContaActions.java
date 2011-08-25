@@ -29,6 +29,18 @@ public class ContaActions extends ActionSupport {
 		return INPUT;
 	}
 	
+	public String doSalvar() {
+		ContaDAO dao = new ContaDAO();
+		
+		if (conta.getId() == null) {
+			dao.inserir(conta);
+		} else {
+			dao.alterar(conta);
+		}
+		
+		return SUCCESS;
+	}
+	
 	/* Beans */
 //	public ListProperties<Conta> getContaListProperties() {
 //		if (contaListProperties == null) {

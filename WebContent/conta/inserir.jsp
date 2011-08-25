@@ -10,10 +10,10 @@
 <body>
 	<h1>&sdot;<s:text name="conta.inserir.titulo" />&sdot;</h1><br/>
 	<br/>
-	<s:form action="crud!save.action" method="post">
+	<s:form action="conta.inserir!salvar.action" method="post">
 		<s:textfield name="conta.nome" value="%{conta.nome}" label="%{getText('conta.nome.label')}" size="40"/>
 		<s:submit value="%{getText('application.inserir.label')}"/>
-		<s:submit value="%{getText('application.cancelar.label')}" name="redirect-action:listar"/>
+		<s:submit value="%{getText('application.cancelar.label')}" name="redirectAction:conta.listar"/>
 	</s:form>
 </body>
 </html>
