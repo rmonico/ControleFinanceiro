@@ -14,7 +14,7 @@ import javax.persistence.*;
     @NamedQuery(name = "findAllContas",
     query = "select c from Conta c order by c.nome"),
     @NamedQuery(name = "findContaById",
-    query = "select c from Conta c order by c.nome")})
+    query = "select c from Conta c where c.id = :id order by c.nome")})
 @DAOSetup(findAllQueryName = "findAllContas", findByIdQueryName = "findContaById", idFieldName = "id")
 public class Conta implements Serializable {
 
