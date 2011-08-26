@@ -13,12 +13,16 @@
                 <action name="main">
                         <result>/main.jsp</result>
                 </action>
-                <action name="conta.listar" class="br.com.zero.controlefinanceiro.actions.ContaActions" method="listar">
+                <!-- action name="conta.listar" class="br.com.zero.controlefinanceiro.actions.ContaActions" method="listar">
                         <result name="success">/conta/listar.jsp</result>
                 </action>
                 <action name="conta.inserir" class="br.com.zero.controlefinanceiro.actions.ContaActions" method="inserir">
 			        <result name="input">/conta/inserir.jsp</result>
 					<result name="success" type="redirectAction">conta.listar.action</result>
+                </action -->
+                <action name="conta" class="br.com.zero.controlefinanceiro.actions.ContaActions">
+					<result name="success">/conta/listar.jsp</result>
+		        	<result name="input">/conta/formulario.jsp</result>
                 </action>
         </package>
  </struts>

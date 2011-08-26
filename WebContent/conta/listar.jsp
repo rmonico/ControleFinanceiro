@@ -11,8 +11,8 @@
 <body>
 	<s:url action="main.action" var="mainActionLink" />
 	<s:url action="logoff.action" var="logoffActionLink" />
-	<s:url action="conta.inserir.action" var="contaInserirActionLink" />
-	<s:url action="conta.listar.action" var="contaListarActionLink" />
+	<s:url action="conta!inserir.action" var="contaInserirActionLink" />
+	<s:url action="conta!listar.action" var="contaListarActionLink" />
 
 	<h1>&sdot;<s:text name="conta.lista.titulo" />&sdot;</h1>
 	<h6><a href="${mainActionLink}"><s:text name="application.name" /></a>&nbsp;&bull;&nbsp;<a href="${logoffActionLink}"><s:text name="logoff.label" /> &times; </a></h6>
@@ -31,13 +31,13 @@
 		<s:iterator value="contaList">
 			<tr>
 				<td>
-					<s:url action="conta.alterar.action" var="contaAlterarActionLink">
+					<s:url action="conta!alterar.action" var="contaAlterarActionLink">
 						<s:param name="conta_id" value="id" />
 					</s:url>
 					<a href="${contaAlterarActionLink}"><s:text name="application.alterar.label" /> </a>
 				</td>
 				<td>
-					<s:url action="conta.excluir.action" var="contaExcluirActionLink">
+					<s:url action="conta!excluir.action" var="contaExcluirActionLink">
 						<s:param name="conta_id" value="id" />
 					</s:url>
 					<a href="${contaExcluirActionLink}"><s:text name="application.excluir.label" /> </a>
