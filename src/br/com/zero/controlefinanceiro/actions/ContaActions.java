@@ -29,6 +29,16 @@ public class ContaActions extends ActionSupport {
 		return INPUT;
 	}
 	
+	public String doAlterar() {
+		ContaDAO dao = new ContaDAO();
+		
+		Integer id = conta.getId();
+		
+		conta = dao.getById(id);
+		
+		return INPUT;
+	}
+	
 	public String doSalvar() {
 		ContaDAO dao = new ContaDAO();
 		

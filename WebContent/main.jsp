@@ -20,7 +20,7 @@
         <li>Comum
             <ul>
                 <li><a href="conta.listar.servlet">Contas</a></li>
-                <s:url action="conta.listar" var="conta_listar_link" />
+                <s:url action="conta!listar" var="conta_listar_link" />
                 <li><a href="${conta_listar_link}">Contas</a></li>
                 <li><a href="formapagamento.listar">Formas de Pagamento</a></li>
             </ul>

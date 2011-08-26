@@ -12,15 +12,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>
-<s:if test="funcao == 'inserir'"><s:text name="conta.inserir.titulo" /></s:if>
-<s:if test="funcao == 'alterar'"><s:text name="conta.alterar.titulo" /></s:if>
+<s:if test="#funcao == 'inserir'"><s:text name="conta.inserir.titulo" /></s:if>
+<s:if test="#funcao == 'alterar'"><s:text name="conta.alterar.titulo" /></s:if>
 </title>
 </head>
 <body>
 	<h1>
 	&sdot;
-	<s:if test="funcao == 'inserir'"><s:text name="conta.inserir.titulo" /></s:if>
-	<s:if test="funcao == 'alterar'"><s:text name="conta.alterar.titulo" /></s:if>
+	<s:if test="#funcao == 'inserir'"><s:text name="conta.inserir.titulo" /></s:if>
+	<s:if test="#funcao == 'alterar'"><s:text name="conta.alterar.titulo" /></s:if>
 	&sdot;
 	</h1><br/>
 	<br/>
