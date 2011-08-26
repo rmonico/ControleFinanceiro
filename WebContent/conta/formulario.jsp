@@ -26,7 +26,12 @@
 	<br/>
 	<s:form action="conta!salvar.action" method="post">
 		<s:textfield name="conta.nome" value="%{conta.nome}" label="%{getText('conta.nome.label')}" size="40"/>
+		<s:if test="#funcao == 'inserir'">
 		<s:submit value="%{getText('application.inserir.label')}"/>
+		</s:if>
+		<s:if test="#funcao == 'alterar'">
+		<s:submit value="%{getText('application.alterar.label')}"/>
+		</s:if>
 		<s:submit value="%{getText('application.cancelar.label')}" name="redirectAction:conta!listar"/>
 	</s:form>
 </body>
