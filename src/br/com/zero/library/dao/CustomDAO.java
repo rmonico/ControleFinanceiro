@@ -114,7 +114,8 @@ public abstract class CustomDAO<T> {
     public void alterar(T o) {
         beginTransaction();
 
-        getEntityManager().persist(o);
+//        getEntityManager().persist(o);
+        getEntityManager().merge(o);
 
         commitTransaction();
     }
