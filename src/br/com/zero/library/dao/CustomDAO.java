@@ -110,6 +110,12 @@ public abstract class CustomDAO<T> {
 
         commitTransaction();
     }
+    
+	public void excluirById(Integer id) {
+		T o = getById(id);
+		
+		excluir(o);
+	}
 
     public void alterar(T o) {
         beginTransaction();
@@ -119,4 +125,5 @@ public abstract class CustomDAO<T> {
 
         commitTransaction();
     }
+
 }

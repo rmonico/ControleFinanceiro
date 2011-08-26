@@ -5,7 +5,7 @@
 	<s:set name="funcao" value="%{'inserir'}"/>
 </s:if>
 <s:else>
-	<s:set name="funcao" value="&{'alterar'}"/>
+	<s:set name="funcao" value="%{'alterar'}"/>
 </s:else>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

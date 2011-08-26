@@ -32,11 +32,17 @@ public class ContaActions extends ActionSupport {
 	public String doAlterar() {
 		ContaDAO dao = new ContaDAO();
 		
-		Integer id = conta.getId();
-		
-		conta = dao.getById(id);
+		conta = dao.getById(conta.getId());
 		
 		return INPUT;
+	}
+	
+	public String doExcluir() {
+		ContaDAO dao = new ContaDAO();
+		
+		dao.excluirById(conta.getId());
+		
+		return SUCCESS;
 	}
 	
 	public String doSalvar() {
@@ -69,7 +75,7 @@ public class ContaActions extends ActionSupport {
 	
 	public List<Conta> getContaList() {
         if (contaList == null) {
-	        ContaDAO dao = new ContaDAO();
+        	ContaDAO dao = new ContaDAO();
 
 	        contaList = dao.listarTodos();
 
