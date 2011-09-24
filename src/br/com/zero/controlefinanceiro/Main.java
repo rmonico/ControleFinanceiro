@@ -1,10 +1,10 @@
 package br.com.zero.controlefinanceiro;
 
-import org.zero.commandlineparser.Command;
 import org.zero.commandlineparser.CommandLineParser;
 import org.zero.commandlineparser.CommandLineParserException;
 import org.zero.commandlineparser.parsers.EnumParser;
 
+import br.com.zero.controlefinanceiro.commandlineparser.Command;
 import br.com.zero.controlefinanceiro.commandlineparser.Switches;
 
 public class Main {
@@ -33,6 +33,7 @@ public class Main {
 		switch (switches.getCommand()) {
 		case LIST: {
 			System.out.println("Comando \"List\"...");
+			break;
 		}
 		default: {
 			System.out.println("Comando não implementado ainda...");
