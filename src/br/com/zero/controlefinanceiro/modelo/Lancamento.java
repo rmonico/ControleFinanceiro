@@ -14,6 +14,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import br.com.zero.controlefinanceiro.comum.Conta;
+import br.com.zero.controlefinanceiro.comum.FormaPagamento;
 import br.com.zero.library.dao.DAOSetup;
 
 
@@ -47,7 +48,9 @@ public class Lancamento implements Serializable {
 
 	private Integer diavencimento;
 
-	private Integer formapagamentoid;
+	@ManyToOne
+	@JoinColumn(name="FormaPagamentoID")
+	private FormaPagamento formaPagamento;
 
 	private String observacao;
 
@@ -88,12 +91,12 @@ public class Lancamento implements Serializable {
 		this.diavencimento = diavencimento;
 	}
 
-	public Integer getFormapagamentoid() {
-		return this.formapagamentoid;
+	public FormaPagamento getFormaPagamento() {
+		return this.formaPagamento;
 	}
 
-	public void setFormapagamentoid(Integer formapagamentoid) {
-		this.formapagamentoid = formapagamentoid;
+	public void setFormaPagamento(FormaPagamento value) {
+		this.formaPagamento = value;
 	}
 
 	public String getObservacao() {
