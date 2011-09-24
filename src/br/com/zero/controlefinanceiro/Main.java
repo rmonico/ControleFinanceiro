@@ -45,6 +45,7 @@ public class Main {
 	}
 
 	private void listarLancamentos() {
+		System.out.println("Modelos de Lançamento:\n\n");
 		LancamentoDAO dao = new LancamentoDAO();
 
 		for (Lancamento lancamento : dao.listarTodos()) {
@@ -52,13 +53,17 @@ public class Main {
 
 			sb.append("#" + lancamento.getId() + " - ");
 			sb.append(lancamento.getContaorigemid() + " -> " + lancamento.getContadestinoid() + "; ");
-			sb.append("valor " + lancamento.getValor());
+			sb.append("valor " + lancamento.getValor() + "; ");
 			sb.append("vencto " + lancamento.getDiavencimento() + "; ");
 			sb.append("forma " + lancamento.getFormapagamentoid() + "; ");
 			if (lancamento.getObservacao() != null) {
 				sb.append("(" + lancamento.getObservacao() + ")");
 			}
+			
+			System.out.println(sb.toString());
 		}
+		
+		System.out.println("-- Fim");
 
 	}
 
