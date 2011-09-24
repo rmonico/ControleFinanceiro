@@ -1,7 +1,9 @@
 package br.com.zero.controlefinanceiro;
 
+import org.zero.commandlineparser.Command;
 import org.zero.commandlineparser.CommandLineParser;
 import org.zero.commandlineparser.CommandLineParserException;
+import org.zero.commandlineparser.parsers.EnumParser;
 
 import br.com.zero.controlefinanceiro.commandlineparser.Switches;
 
@@ -46,6 +48,8 @@ public class Main {
 		switches = new Switches();
 
 		parser.setSwitchesObject(switches);
+		
+		parser.addParser("EnumParser", new EnumParser(Command.class));
 
 		parser.parse();
 	}
