@@ -6,8 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import br.com.zero.library.dao.DAOSetup;
 
 
 /**
@@ -16,6 +20,12 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(schema="controlefinanceiro_modelo")
+@NamedQueries({
+    @NamedQuery(name = "findAllLancamentos",
+    query = "select l from Lancamento l order by l.diavencimento"),
+    @NamedQuery(name = "findLancamentoById",
+    query = "select l from Lancamento l where l.id=:id")})
+@DAOSetup(findAllQueryName="findAllLancamentos", findByIdQueryName="findLancamentoById", idFieldName="id")
 public class Lancamento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
