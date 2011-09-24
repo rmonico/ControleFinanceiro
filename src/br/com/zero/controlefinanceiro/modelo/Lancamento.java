@@ -6,11 +6,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import br.com.zero.controlefinanceiro.comum.Conta;
 import br.com.zero.library.dao.DAOSetup;
 
 
@@ -34,9 +37,13 @@ public class Lancamento implements Serializable {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="LANCAMENTO_ID_GENERATOR")
 	private Integer id;
 
-	private Integer contadestinoid;
+	@ManyToOne
+	@JoinColumn(name="ContaDestinoID")
+	private Conta contaDestino;
 
-	private Integer contaorigemid;
+	@ManyToOne
+	@JoinColumn(name="ContaOrigemID")
+	private Conta contaOrigem;
 
 	private Integer diavencimento;
 
@@ -57,20 +64,20 @@ public class Lancamento implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getContadestinoid() {
-		return this.contadestinoid;
+	public Conta getContaDestino() {
+		return contaDestino;
+	}
+	
+	public void setContaDestinoID(Conta value) {
+		contaDestino = value;
 	}
 
-	public void setContadestinoid(Integer contadestinoid) {
-		this.contadestinoid = contadestinoid;
+	public Conta getContaOrigem() {
+		return this.contaOrigem;
 	}
 
-	public Integer getContaorigemid() {
-		return this.contaorigemid;
-	}
-
-	public void setContaorigemid(Integer contaorigemid) {
-		this.contaorigemid = contaorigemid;
+	public void setContaOrigem(Conta value) {
+		this.contaOrigem = value;
 	}
 
 	public Integer getDiavencimento() {

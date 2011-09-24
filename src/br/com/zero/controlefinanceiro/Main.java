@@ -52,8 +52,8 @@ public class Main {
 			StringBuilder sb = new StringBuilder();
 
 			sb.append("#" + lancamento.getId() + " - ");
-			sb.append(lancamento.getContaorigemid() + " -> " + lancamento.getContadestinoid() + "; ");
-			sb.append("valor " + lancamento.getValor() + "; ");
+			sb.append(lancamento.getContaOrigem().getNome() + " -> " + lancamento.getContaDestino().getNome() + "; ");
+			sb.append("$" + lancamento.getValor() + "; ");
 			sb.append("vencto " + lancamento.getDiavencimento() + "; ");
 			sb.append("forma " + lancamento.getFormapagamentoid() + "; ");
 			if (lancamento.getObservacao() != null) {
