@@ -1,6 +1,5 @@
 package br.com.zero.library.dao;
 
-import java.lang.annotation.Annotation;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -17,7 +16,9 @@ public abstract class CustomDAO<T> {
     private EntityTransaction entityTransaction;
 
     public CustomDAO() {
-        setup = getDAOSetupAnnotation();
+    	if (setup == null) {
+    		setup = getEntityClass().getAnnotation(DAOSetup.class);
+    	}
     }
 
     private EntityManagerFactory getEntityManagerFactory() {
@@ -57,18 +58,6 @@ public abstract class CustomDAO<T> {
      * @return 
      */
     protected abstract Class<T> getEntityClass();
-
-    private DAOSetup getDAOSetupAnnotation() {
-        Annotation[] annotations = getEntityClass().getAnnotations();
-
-        for (Annotation annotation : annotations) {
-            if (annotation instanceof DAOSetup) {
-                return (DAOSetup) annotation;
-            }
-        }
-
-        return null;
-    }
 
     @SuppressWarnings("unchecked")
     public List<T> listarTodos() {
