@@ -1,6 +1,7 @@
 package br.com.zero.controlefinanceiro;
 
 import org.zero.commandlineparser.CommandLineParser;
+import org.zero.commandlineparser.CommandLineParserException;
 
 import br.com.zero.controlefinanceiro.commandlineparser.Switches;
 
@@ -25,6 +26,12 @@ public class Main {
 	}
 
 	private void run() throws Exception {
+		parseCommandLine();
+		
+		
+	}
+
+	private void parseCommandLine() throws CommandLineParserException {
 		CommandLineParser parser = new CommandLineParser();
 		
 		parser.setCommandLine(args);
