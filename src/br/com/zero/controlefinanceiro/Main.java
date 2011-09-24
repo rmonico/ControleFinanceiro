@@ -6,6 +6,8 @@ import org.zero.commandlineparser.parsers.EnumParser;
 
 import br.com.zero.controlefinanceiro.commandlineparser.Command;
 import br.com.zero.controlefinanceiro.commandlineparser.Switches;
+import br.com.zero.controlefinanceiro.modelo.Lancamento;
+import br.com.zero.controlefinanceiro.modelo.LancamentoDAO;
 
 public class Main {
 
@@ -32,13 +34,23 @@ public class Main {
 
 		switch (switches.getCommand()) {
 		case LIST: {
-			System.out.println("Comando \"List\"...");
+			listarLancamentos();
+			
 			break;
 		}
 		default: {
 			System.out.println("Comando não implementado ainda...");
 		}
 		}
+	}
+
+	private void listarLancamentos() {
+		LancamentoDAO dao = new LancamentoDAO();
+		
+		for (Lancamento lancamento : dao.listarTodos()) {
+			System.out.println(lancamento);
+		}
+		
 	}
 
 	private void parseCommandLine() throws CommandLineParserException {
