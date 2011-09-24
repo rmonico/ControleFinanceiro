@@ -35,7 +35,7 @@ public class Main {
 		switch (switches.getCommand()) {
 		case LIST: {
 			listarLancamentos();
-			
+
 			break;
 		}
 		default: {
@@ -46,11 +46,20 @@ public class Main {
 
 	private void listarLancamentos() {
 		LancamentoDAO dao = new LancamentoDAO();
-		
+
 		for (Lancamento lancamento : dao.listarTodos()) {
-			System.out.println(lancamento);
+			StringBuilder sb = new StringBuilder();
+
+			sb.append("#" + lancamento.getId() + " - ");
+			sb.append(lancamento.getContaorigemid() + " -> " + lancamento.getContadestinoid() + "; ");
+			sb.append("valor " + lancamento.getValor());
+			sb.append("vencto " + lancamento.getDiavencimento() + "; ");
+			sb.append("forma " + lancamento.getFormapagamentoid() + "; ");
+			if (lancamento.getObservacao() != null) {
+				sb.append("(" + lancamento.getObservacao() + ")");
+			}
 		}
-		
+
 	}
 
 	private void parseCommandLine() throws CommandLineParserException {
@@ -61,7 +70,7 @@ public class Main {
 		switches = new Switches();
 
 		parser.setSwitchesObject(switches);
-		
+
 		parser.addParser("EnumParser", new EnumParser(Command.class));
 
 		parser.parse();
