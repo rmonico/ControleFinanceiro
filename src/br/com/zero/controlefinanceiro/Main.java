@@ -8,7 +8,7 @@ import br.com.zero.controlefinanceiro.commandlineparser.Switches;
 public class Main {
 	
 	private String[] args;
-	private Object switches;
+	private Switches switches;
 
 	/**
 	 * @param args
@@ -28,7 +28,7 @@ public class Main {
 	private void run() throws Exception {
 		parseCommandLine();
 		
-		
+//		case switches.
 	}
 
 	private void parseCommandLine() throws CommandLineParserException {
