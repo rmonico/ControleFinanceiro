@@ -1,6 +1,6 @@
 package br.zero.controlefinanceiro.comum;
 
-import br.zero.library.dao.CustomDAO;
+import br.zero.dbutils.CustomDAO;
 
 public class ContaDAO extends CustomDAO<Conta> {
 

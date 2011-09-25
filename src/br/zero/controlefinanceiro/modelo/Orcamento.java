@@ -11,7 +11,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import br.zero.library.dao.DAOSetup;
+import br.zero.dbutils.DAOSetup;
 
 
 /**

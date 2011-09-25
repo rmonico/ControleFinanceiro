@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 import br.zero.controlefinanceiro.comum.Conta;
 import br.zero.controlefinanceiro.comum.FormaPagamento;
-import br.zero.library.dao.DAOSetup;
+import br.zero.dbutils.DAOSetup;
 
 
 /**
