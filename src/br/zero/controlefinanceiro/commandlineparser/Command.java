@@ -1,6 +1,6 @@
 package br.zero.controlefinanceiro.commandlineparser;
 
-import org.zero.commandlineparser.CommandLineSwitchParam;
+import br.zero.commandlineparser.CommandLineSwitchParam;
 
 public enum Command {
 	@CommandLineSwitchParam(name = "list")
