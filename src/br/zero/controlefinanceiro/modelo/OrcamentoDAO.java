@@ -1,9 +1,9 @@
 package br.zero.controlefinanceiro.modelo;
 
 import br.zero.customdao.CustomDAO;
-import br.zero.customdao.DAOInfo;
+import br.zero.customdao.DAOSetup;
 
-@DAOInfo(persistenceUnitName = "ControleFinanceiro", entityClass = Orcamento.class)
+@DAOSetup(persistenceUnitName = "ControleFinanceiro", entityClass = Orcamento.class)
 public class OrcamentoDAO extends CustomDAO<Orcamento> {
 
 }

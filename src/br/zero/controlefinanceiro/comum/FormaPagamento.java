@@ -1,6 +1,6 @@
 package br.zero.controlefinanceiro.comum;
 
-import br.zero.customdao.DAOSetup;
+import br.zero.customdao.EntitySetup;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -16,7 +16,7 @@ import javax.persistence.*;
     query = "select f from FormaPagamento f order by f.nome"),
     @NamedQuery(name = "findFormaPagamentoById",
     query = "select f from FormaPagamento f where f.id=:id")})
-@DAOSetup(findAllQueryName = "findAllFormasPagamento", findByIdQueryName = "findFormaPagamentoById", idFieldName = "id")
+@EntitySetup(findAllQueryName = "findAllFormasPagamento", findByIdQueryName = "findFormaPagamentoById", idFieldName = "id")
 public class FormaPagamento implements Serializable {
 
     private static final long serialVersionUID = 1L;

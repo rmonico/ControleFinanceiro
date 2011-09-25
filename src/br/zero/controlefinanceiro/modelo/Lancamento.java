@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 import br.zero.controlefinanceiro.comum.Conta;
 import br.zero.controlefinanceiro.comum.FormaPagamento;
-import br.zero.customdao.DAOSetup;
+import br.zero.customdao.EntitySetup;
 
 
 /**
@@ -29,7 +29,7 @@ import br.zero.customdao.DAOSetup;
     query = "select l from Lancamento l order by l.diavencimento"),
     @NamedQuery(name = "findLancamentoById",
     query = "select l from Lancamento l where l.id=:id")})
-@DAOSetup(findAllQueryName="findAllLancamentos", findByIdQueryName="findLancamentoById", idFieldName="id")
+@EntitySetup(findAllQueryName="findAllLancamentos", findByIdQueryName="findLancamentoById", idFieldName="id")
 public class Lancamento implements Serializable {
 	private static final long serialVersionUID = 1L;
 

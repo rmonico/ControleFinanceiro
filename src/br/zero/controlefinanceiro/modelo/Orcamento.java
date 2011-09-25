@@ -11,7 +11,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import br.zero.customdao.DAOSetup;
+import br.zero.customdao.EntitySetup;
 
 
 /**
@@ -25,7 +25,7 @@ import br.zero.customdao.DAOSetup;
     query = "select o from Orcamento o order by o.nome"),
     @NamedQuery(name = "findOrcamentoById",
     query = "select o from Orcamento o where o.id=:id")})
-@DAOSetup(findAllQueryName = "findAllOrcamentos", findByIdQueryName = "findOrcamentoById", idFieldName = "id")
+@EntitySetup(findAllQueryName = "findAllOrcamentos", findByIdQueryName = "findOrcamentoById", idFieldName = "id")
 public class Orcamento implements Serializable {
 	private static final long serialVersionUID = 1L;
 

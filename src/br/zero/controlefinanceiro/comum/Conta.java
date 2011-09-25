@@ -1,6 +1,6 @@
 package br.zero.controlefinanceiro.comum;
 
-import br.zero.customdao.DAOSetup;
+import br.zero.customdao.EntitySetup;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -16,7 +16,7 @@ import javax.persistence.*;
     query = "select c from Conta c order by c.nome"),
     @NamedQuery(name = "findContaById",
     query = "select c from Conta c order by c.nome")})
-@DAOSetup(findAllQueryName = "findAllContas", findByIdQueryName = "findContaById", idFieldName = "id")
+@EntitySetup(findAllQueryName = "findAllContas", findByIdQueryName = "findContaById", idFieldName = "id")
 public class Conta implements Serializable {
 
     private static final long serialVersionUID = 1L;

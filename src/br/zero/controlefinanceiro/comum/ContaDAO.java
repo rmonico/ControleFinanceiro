@@ -1,9 +1,9 @@
 package br.zero.controlefinanceiro.comum;
 
 import br.zero.customdao.CustomDAO;
-import br.zero.customdao.DAOInfo;
+import br.zero.customdao.DAOSetup;
 
-@DAOInfo(persistenceUnitName = "ControleFinanceiro", entityClass = Conta.class)
+@DAOSetup(persistenceUnitName = "ControleFinanceiro", entityClass = Conta.class)
 public class ContaDAO extends CustomDAO<Conta> {
 
 }
