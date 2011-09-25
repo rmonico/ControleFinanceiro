@@ -1,6 +1,4 @@
-package br.zero.controlefinanceiro.model.modelo;
-
-import java.io.Serializable;
+package br.zero.controlefinanceiro.model.previsaomes;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,21 +9,16 @@ import javax.persistence.Table;
 
 import br.zero.customdao.EntitySetup;
 
-/**
- * The persistent class for the orcamento database table.
- * 
- */
 @Entity
-@Table(schema = "controlefinanceiro_modelo")
+@Table(schema = "controlefinanceiro_previsaomes")
 @EntitySetup(findAllQuery = "select o from Orcamento o order by o.nome", findByIdQuery = "select o from Orcamento o where o.id=:id", idFieldName = "id")
-public class Orcamento implements Serializable {
-	private static final long serialVersionUID = 1L;
-
+public class Orcamento {
+	
 	@Id
-	@SequenceGenerator(name = "CONTROLEFINANCEIRO_MODELO.ORCAMENTO_ID_SEQ", sequenceName = "CONTROLEFINANCEIRO_MODELO.ORCAMENTO_ID_SEQ")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CONTROLEFINANCEIRO_MODELO.ORCAMENTO_ID_SEQ")
+	@SequenceGenerator(name = "CONTROLEFINANCEIRO_PREVISAOMES.ORCAMENTO_ID_SEQ", sequenceName = "CONTROLEFINANCEIRO_PREVISAOMES.ORCAMENTO_ID_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CONTROLEFINANCEIRO_PREVISAOMES.ORCAMENTO_ID_SEQ")
 	private Integer id;
-
+	
 	private String nome;
 
 	public Integer getId() {

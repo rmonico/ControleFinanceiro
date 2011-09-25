@@ -5,6 +5,9 @@
 		<class>br.zero.controlefinanceiro.model.comum.FormaPagamento</class>
 		<class>br.zero.controlefinanceiro.model.modelo.Lancamento</class>
 		<class>br.zero.controlefinanceiro.model.modelo.Orcamento</class>
+		<class>br.zero.controlefinanceiro.model.previsaomes.Lancamento</class>
+		<class>br.zero.controlefinanceiro.model.previsaomes.Orcamento</class>
+		<class>br.zero.controlefinanceiro.model.realizado.Lancamento</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql:desenvolvimento"/>
 			<property name="javax.persistence.jdbc.user" value="controlefinanceiro"/>

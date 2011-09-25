@@ -8,8 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -17,47 +15,38 @@ import br.zero.controlefinanceiro.model.comum.Conta;
 import br.zero.controlefinanceiro.model.comum.FormaPagamento;
 import br.zero.customdao.EntitySetup;
 
-
 /**
  * The persistent class for the lancamento database table.
  * 
  */
 @Entity
-@Table(schema="controlefinanceiro_modelo")
-@NamedQueries({
-    @NamedQuery(name = "findAllLancamentos",
-    query = "select l from Lancamento l order by l.diavencimento"),
-    @NamedQuery(name = "findLancamentoById",
-    query = "select l from Lancamento l where l.id=:id")})
-@EntitySetup(findAllQueryName="findAllLancamentos", findByIdQueryName="findLancamentoById", idFieldName="id")
+@Table(schema = "controlefinanceiro_modelo")
+@EntitySetup(findAllQuery = "select l from Lancamento l order by l.diavencimento", findByIdQuery = "select l from Lancamento l where l.id=:id", idFieldName = "id")
 public class Lancamento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="LANCAMENTO_ID_GENERATOR", sequenceName="CONTROLEFINANCEIRO_MODELO.LANCAMENTO_ID_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="LANCAMENTO_ID_GENERATOR")
+	@SequenceGenerator(name = "CONTROLEFINANCEIRO_MODELO.LANCAMENTO_ID_SEQ", sequenceName = "CONTROLEFINANCEIRO_MODELO.LANCAMENTO_ID_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CONTROLEFINANCEIRO_MODELO.LANCAMENTO_ID_SEQ")
 	private Integer id;
 
 	@ManyToOne
-	@JoinColumn(name="ContaDestinoID")
+	@JoinColumn(name = "ContaDestinoID")
 	private Conta contaDestino;
 
 	@ManyToOne
-	@JoinColumn(name="ContaOrigemID")
+	@JoinColumn(name = "ContaOrigemID")
 	private Conta contaOrigem;
 
 	private Integer diavencimento;
 
 	@ManyToOne
-	@JoinColumn(name="FormaPagamentoID")
+	@JoinColumn(name = "FormaPagamentoID")
 	private FormaPagamento formaPagamento;
 
 	private String observacao;
 
 	private double valor;
-
-    public Lancamento() {
-    }
 
 	public Integer getId() {
 		return this.id;
@@ -70,7 +59,7 @@ public class Lancamento implements Serializable {
 	public Conta getContaDestino() {
 		return contaDestino;
 	}
-	
+
 	public void setContaDestinoID(Conta value) {
 		contaDestino = value;
 	}
