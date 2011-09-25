@@ -1,12 +1,9 @@
 package br.zero.controlefinanceiro.modelo;
 
-import br.zero.controlefinanceiro.customdao.ControleFinanceiroDAO;
+import br.zero.customdao.CustomDAO;
+import br.zero.customdao.DAOInfo;
 
-public class OrcamentoDAO extends ControleFinanceiroDAO<Orcamento> {
-
-    @Override
-    protected Class<Orcamento> getEntityClass() {
-        return Orcamento.class;
-    }
+@DAOInfo(persistenceUnitName = "ControleFinanceiro", entityClass = Orcamento.class)
+public class OrcamentoDAO extends CustomDAO<Orcamento> {
 
 }
