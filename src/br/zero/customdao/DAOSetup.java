@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.zero.dbutils;
+package br.zero.customdao;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

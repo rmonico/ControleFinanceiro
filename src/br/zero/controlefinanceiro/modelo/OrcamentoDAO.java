@@ -1,6 +1,6 @@
 package br.zero.controlefinanceiro.modelo;
 
-import br.zero.dbutils.CustomDAO;
+import br.zero.customdao.CustomDAO;
 
 public class OrcamentoDAO extends CustomDAO<Orcamento> {
 

@@ -1,6 +1,6 @@
 package br.zero.controlefinanceiro.comum;
 
-import br.zero.dbutils.DAOSetup;
+import br.zero.customdao.DAOSetup;
 
 import java.io.Serializable;
 import javax.persistence.*;

@@ -1,4 +1,4 @@
-package br.zero.dbutils;
+package br.zero.customdao;
 
 import java.util.List;
 
