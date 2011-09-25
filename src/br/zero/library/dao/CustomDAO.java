@@ -1,4 +1,4 @@
-package br.com.zero.library.dao;
+package br.zero.library.dao;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package br.com.zero.controlefinanceiro.commandlineparser;
+package br.zero.controlefinanceiro.commandlineparser;
 
 import org.zero.commandlineparser.CommandLineSwitchParam;
 

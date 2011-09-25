@@ -1,13 +1,13 @@
-package br.com.zero.controlefinanceiro;
+package br.zero.controlefinanceiro;
 
 import org.zero.commandlineparser.CommandLineParser;
 import org.zero.commandlineparser.CommandLineParserException;
 import org.zero.commandlineparser.parsers.EnumParser;
 
-import br.com.zero.controlefinanceiro.commandlineparser.Command;
-import br.com.zero.controlefinanceiro.commandlineparser.Switches;
-import br.com.zero.controlefinanceiro.modelo.Lancamento;
-import br.com.zero.controlefinanceiro.modelo.LancamentoDAO;
+import br.zero.controlefinanceiro.commandlineparser.Command;
+import br.zero.controlefinanceiro.commandlineparser.Switches;
+import br.zero.controlefinanceiro.modelo.Lancamento;
+import br.zero.controlefinanceiro.modelo.LancamentoDAO;
 
 public class Main {
 

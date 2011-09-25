@@ -1,6 +1,6 @@
-package br.com.zero.controlefinanceiro.comum;
+package br.zero.controlefinanceiro.comum;
 
-import br.com.zero.library.dao.CustomDAO;
+import br.zero.library.dao.CustomDAO;
 
 public class FormaPagamentoDAO extends CustomDAO<FormaPagamento> {
 	

@@ -1,4 +1,4 @@
-package br.com.zero.controlefinanceiro.modelo;
+package br.zero.controlefinanceiro.modelo;
 
 import java.io.Serializable;
 
@@ -13,9 +13,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import br.com.zero.controlefinanceiro.comum.Conta;
-import br.com.zero.controlefinanceiro.comum.FormaPagamento;
-import br.com.zero.library.dao.DAOSetup;
+import br.zero.controlefinanceiro.comum.Conta;
+import br.zero.controlefinanceiro.comum.FormaPagamento;
+import br.zero.library.dao.DAOSetup;
 
 
 /**

@@ -1,11 +1,11 @@
-package br.com.zero.controlefinanceiro.commandlineparser;
+package br.zero.controlefinanceiro.commandlineparser;
 
 import java.util.Calendar;
 
 import org.zero.commandlineparser.CommandLineSwitch;
 
-import br.com.zero.controlefinanceiro.comum.Conta;
-import br.com.zero.controlefinanceiro.comum.FormaPagamento;
+import br.zero.controlefinanceiro.comum.Conta;
+import br.zero.controlefinanceiro.comum.FormaPagamento;
 
 public class Switches {
 	private Command command;
