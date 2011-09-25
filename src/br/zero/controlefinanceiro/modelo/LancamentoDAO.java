@@ -1,8 +1,8 @@
 package br.zero.controlefinanceiro.modelo;
 
-import br.zero.customdao.CustomDAO;
+import br.zero.controlefinanceiro.customdao.ControleFinanceiroDAO;
 
-public class LancamentoDAO extends CustomDAO<Lancamento> {
+public class LancamentoDAO extends ControleFinanceiroDAO<Lancamento> {
 
 	@Override
 	protected Class<Lancamento> getEntityClass() {
