@@ -44,6 +44,20 @@ public class Main {
 		}
 	}
 
+	private void parseCommandLine() throws CommandLineParserException {
+		CommandLineParser parser = new CommandLineParser();
+
+		parser.setCommandLine(args);
+
+		switches = new Switches();
+
+		parser.setSwitchesObject(switches);
+
+		parser.addParser("EnumParser", new EnumParser(Command.class));
+
+		parser.parse();
+	}
+
 	private void listarLancamentos() {
 //		System.out.println("Modelos de Lançamento:\n\n");
 		LancamentoDAO dao = new LancamentoDAO();
@@ -69,20 +83,6 @@ public class Main {
 		
 		System.out.println("-- Fim");
 
-	}
-
-	private void parseCommandLine() throws CommandLineParserException {
-		CommandLineParser parser = new CommandLineParser();
-
-		parser.setCommandLine(args);
-
-		switches = new Switches();
-
-		parser.setSwitchesObject(switches);
-
-		parser.addParser("EnumParser", new EnumParser(Command.class));
-
-		parser.parse();
 	}
 
 }
