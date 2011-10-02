@@ -2,12 +2,12 @@ package br.zero.controlefinanceiro;
 
 
 import br.zero.commandlineparser.CommandLineParser;
-import br.zero.commandlineparser.CommandLineParserException;
 import br.zero.commandlineparser.parsers.EnumParser;
 import br.zero.controlefinanceiro.commandlineparser.Command;
 import br.zero.controlefinanceiro.commandlineparser.Switches;
 import br.zero.controlefinanceiro.model.modelo.Lancamento;
 import br.zero.controlefinanceiro.model.modelo.LancamentoDAO;
+import br.zero.switchesparser.ParserException;
 
 public class Main {
 
@@ -44,7 +44,7 @@ public class Main {
 		}
 	}
 
-	private void parseCommandLine() throws CommandLineParserException {
+	private void parseCommandLine() throws ParserException {
 		CommandLineParser parser = new CommandLineParser();
 
 		parser.setCommandLine(args);
