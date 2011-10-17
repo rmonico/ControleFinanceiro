@@ -47,13 +47,13 @@ public class Main {
 	private void parseCommandLine() throws ParserException {
 		CommandLineParser parser = new CommandLineParser();
 
-		parser.setCommandLine(args);
+		parser.setValuesObject(args);
 
 		switches = new Switches();
 
 		parser.setSwitchesObject(switches);
 
-		parser.addParser("EnumParser", new EnumParser(Command.class));
+		parser.getPropertyParsers().put("EnumParser", new EnumParser(Command.class));
 
 		parser.parse();
 	}
