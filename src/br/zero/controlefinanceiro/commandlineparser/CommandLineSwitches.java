@@ -7,8 +7,8 @@ import br.zero.commandlineparser.CommandLineSwitch;
 import br.zero.controlefinanceiro.model.comum.Conta;
 import br.zero.controlefinanceiro.model.comum.FormaPagamento;
 
-public class Switches {
-	private Command command;
+public class CommandLineSwitches {
+	private MainCommand command;
 	private int lancamentoID;
 	private Conta conta;
 	private Conta contaDestino;
@@ -18,12 +18,12 @@ public class Switches {
 	private Calendar dataInicial;
 	private Calendar dataFinal;
 
-	public Command getCommand() {
+	public MainCommand getCommand() {
 		return command;
 	}
 
 	@CommandLineSwitch(parser = "EnumParser.parseEnum", index = 1)
-	public void setCommand(Command value) {
+	public void setCommand(MainCommand value) {
 		command = value;
 	}
 
