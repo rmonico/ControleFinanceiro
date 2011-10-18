@@ -1,5 +1,7 @@
 package br.zero.controlefinanceiro.commandlineparser;
 
+import java.util.Map;
+
 import br.zero.commandlineparser.CommandLineParser;
 import br.zero.commandlineparser.parsers.EnumParser;
 import br.zero.switchesparser.IInvalidCommandLineArgument;
@@ -23,7 +25,13 @@ public class CommandLineLoader {
 
 		parser.setSwitchesObject(switches);
 
-		parser.getPropertyParsers().put("MainCommandParser", new EnumParser(MainCommand.class));
+		Map<String, Object> parsers = parser.getPropertyParsers();
+		
+		parsers.put("MainCommandParser", new EnumParser(MainCommand.class));
+		// TODO Fazer
+		parsers.put("ContaParser", null);
+		// TODO Fazer, rápido
+		parsers.put("DoubleParser", null);
 
 		parser.parse();
 		
