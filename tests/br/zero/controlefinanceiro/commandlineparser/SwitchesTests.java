@@ -28,11 +28,11 @@ public class SwitchesTests {
 	
 	@Test
 	public void testNewCommand() throws ParserException {
-		doLoad(new String[] {"new ContaOrigem ContaDestino 1,99"});
+		doLoad(new String[] {"new", "ContaOrigem", "ContaDestino", "1,99"});
 		
-		assertEquals("New Command - Main Command", MainCommand.NEW, switches.getCommand());
+		assertEquals("New Command - Main Command", MainCommand.NEW, switches.getMainCommand());
 		
-		NewTransactionSubCommandLine newTransaction = switches.getNewTransaction();
+		NewTransactionCommand newTransaction = switches.getNewTransactionCommand();
 		
 		assertNotNull("New Command - Sub command line", newTransaction);
 		
@@ -47,9 +47,9 @@ public class SwitchesTests {
 	public void testNewCommandCommented() throws ParserException {
 		doLoad(new String[] {"new", "ContaOrigemComentada", "ContaDestinoComentada", "2,50", "\"Comment parameter\""});
 		
-		assertEquals("New Command - Main Command", MainCommand.NEW, switches.getCommand());
+		assertEquals("New Command - Main Command", MainCommand.NEW, switches.getMainCommand());
 		
-		NewTransactionSubCommandLine newTransaction = switches.getNewTransaction();
+		NewTransactionCommand newTransaction = switches.getNewTransactionCommand();
 		
 		assertNotNull("New Command - Sub command line", newTransaction);
 		
@@ -66,17 +66,43 @@ public class SwitchesTests {
 	public void testListCommand() throws ParserException {
 		doLoad(new String[] {"list"});
 		
-		assertEquals("Main Command - list", MainCommand.LIST, switches.getCommand());
+		assertEquals("List Command - Main Command", MainCommand.LIST, switches.getMainCommand());
+		
+		ListTransactionsCommand listTransactions = switches.getListTransactionsCommand();
+
+		assertNotNull("New Command - Sub command line", listTransactions);
 	}
 	
 	@Test
 	public void testHelpCommand() throws ParserException {
-//		doLoad(new String[] {"help", "new"});
-//		
-//		assertEquals("Help Command - Main Command", MainCommand.HELP, switches.getCommand());
-//		
-//		HelpSubCommandLine help = switches.getHelp();
-//		
-//		assertEquals("Help Command - new")
+		testHelpForNewCommand();
+
+		testHelpForListCommand();
 	}
+
+	private void testHelpForNewCommand() throws ParserException {
+		doLoad(new String[] {"help", "new"});
+		
+		assertEquals("ShowHelpCommand Command - Main Command", MainCommand.HELP, switches.getMainCommand());
+		
+		ShowHelpCommand help = switches.getShowHelpCommand();
+		
+		assertNotNull("ShowHelpCommand Command - Sub command line", help);
+		
+		assertEquals("ShowHelpCommand Command - New Command", MainCommand.NEW, help.getCommand());	
+	}
+	
+	private void testHelpForListCommand() throws ParserException {
+		doLoad(new String[] {"help", "list"});
+		
+		assertEquals("ShowHelpCommand Command - Main Command", MainCommand.HELP, switches.getMainCommand());
+		
+		ShowHelpCommand help = switches.getShowHelpCommand();
+		
+		assertNotNull("ShowHelpCommand Command - Sub command line", help);
+		
+		assertEquals("ShowHelpCommand Command - List Command", MainCommand.LIST, help.getCommand());			
+	}
+
+
 }

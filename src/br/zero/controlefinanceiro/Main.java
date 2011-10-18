@@ -30,7 +30,7 @@ public class Main {
 	private void run() throws Exception {
 		parseCommandLine();
 
-		switch (switches.getCommand()) {
+		switch (switches.getMainCommand()) {
 		case LIST: {
 			listarLancamentos();
 

@@ -2,20 +2,24 @@ package br.zero.controlefinanceiro.commandlineparser;
 
 import br.zero.controlefinanceiro.model.comum.Conta;
 
-public class NewTransactionSubCommandLine {
+public class NewTransactionCommand {
 	
 	public Conta getContaOrigem() {
-		return null;
+		Conta conta = new Conta();
+		conta.setNome("ContaOrigem");
+		
+		return conta;
 	}
 
 	public Conta getContaDestino() {
-		// TODO Auto-generated method stub
-		return null;
+		Conta conta = new Conta();
+		conta.setNome("ContaDestino");
+		
+		return conta;
 	}
 
 	public double getValor() {
-		// TODO Auto-generated method stub
-		return 0.0;
+		return 1.99;
 	}
 
 	public StringBuilder getComments() {
