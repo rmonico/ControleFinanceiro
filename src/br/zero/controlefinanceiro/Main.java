@@ -1,9 +1,7 @@
 package br.zero.controlefinanceiro;
 
 
-import br.zero.commandlineparser.CommandLineParser;
-import br.zero.commandlineparser.parsers.EnumParser;
-import br.zero.controlefinanceiro.commandlineparser.MainCommand;
+import br.zero.controlefinanceiro.commandlineparser.CommandLineLoader;
 import br.zero.controlefinanceiro.commandlineparser.CommandLineSwitches;
 import br.zero.controlefinanceiro.model.modelo.Lancamento;
 import br.zero.controlefinanceiro.model.modelo.LancamentoDAO;
@@ -45,17 +43,13 @@ public class Main {
 	}
 
 	private void parseCommandLine() throws ParserException {
-		CommandLineParser parser = new CommandLineParser();
-
-		parser.setValuesObject(args);
-
-		switches = new CommandLineSwitches();
-
-		parser.setSwitchesObject(switches);
-
-		parser.getPropertyParsers().put("EnumParser", new EnumParser(MainCommand.class));
-
-		parser.parse();
+		CommandLineLoader loader = new CommandLineLoader();
+		
+		loader.setArgs(args);
+		
+		loader.load();
+		
+		switches = loader.getSwitches();
 	}
 
 	private void listarLancamentos() {
