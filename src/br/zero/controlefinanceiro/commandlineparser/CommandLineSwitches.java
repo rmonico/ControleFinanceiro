@@ -14,7 +14,7 @@ public class CommandLineSwitches {
 		mainCommand = value;
 	}
 	
-	public NewTransaction getNewTransaction() {
+	public NewTransactionSubCommandLine getNewTransaction() {
 		// TODO Auto-generated method stub
 		return null;
 	}

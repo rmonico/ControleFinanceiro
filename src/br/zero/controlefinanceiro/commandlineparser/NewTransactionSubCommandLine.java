@@ -2,7 +2,7 @@ package br.zero.controlefinanceiro.commandlineparser;
 
 import br.zero.controlefinanceiro.model.comum.Conta;
 
-public class NewTransaction {
+public class NewTransactionSubCommandLine {
 	
 	public Conta getContaOrigem() {
 		return null;
