@@ -10,3 +10,6 @@
 
 - struts_implementation
   Tentativa de implementação deste sistema para struts. Já possui algumas telas, além dos arquivos de configuração do struts. Também possui o mesmo problema da commandline de não ter atualizado para o parser de linha de comando da Utils.
+
+- ejb (não criada ainda)
+  Deverá ser criada para implementação das regras de negócio em EJB's.
