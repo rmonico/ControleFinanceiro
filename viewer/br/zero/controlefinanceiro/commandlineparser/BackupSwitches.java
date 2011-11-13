@@ -1,13 +1,22 @@
 package br.zero.controlefinanceiro.commandlineparser;
 
-public class BackupSwitches {
+import br.zero.commandlineparser.CommandLineSwitch;
 
-	public boolean isDDLOnly() {
-		return false;
+public class BackupSwitches {
+	
+	private BackupType backupType;
+
+	@CommandLineSwitch(index=1, parser = "BackupTypeParser.parseEnum")
+	public void setBackupType(BackupType value) {
+		backupType = value;
 	}
 
 	public boolean isFull() {
-		return false;
+		return backupType.equals(BackupType.FULL);
+	}
+
+	public boolean isDDLOnly() {
+		return backupType.equals(BackupType.DDLONLY);
 	}
 
 }

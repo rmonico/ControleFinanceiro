@@ -27,12 +27,15 @@ public class CommandLineLoader {
 
 		Map<String, Object> parsers = parser.getPropertyParsers();
 		
-		parsers.put("MainCommandParser", new EnumParser(Entity.class));
+		parsers.put("EntityParser", new EnumParser(Entity.class));
+		parsers.put("BackupTypeParser", new EnumParser(BackupType.class));
+		
 		// TODO Fazer
 		parsers.put("ContaParser", null);
+		
 		// TODO Fazer, rápido
 		parsers.put("DoubleParser", null);
-
+		
 		parser.parse();
 		
 		if (!parser.getErrors().isEmpty()) {

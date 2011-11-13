@@ -1,6 +1,7 @@
 package br.zero.controlefinanceiro.commandlineparser;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -29,12 +30,12 @@ public class SwitchesTests {
 	
 	@Test
 	public void doBackupTest() throws ParserException {
-		doLoad(new String[] {"backup"});
+		doLoad(new String[] {"backup", "--full"});
 		
 		assertEquals("Backup, teste simples", switches.getEntity(), switches.getEntity());
 		
-		assertTrue("Objeto de backup - isFull", switches.getBackupOptions().isFull());
-		assertTrue("Objeto de backup - isDDLOnly", switches.getBackupOptions().isDDLOnly());
+		assertTrue("Objeto de backup - isFull", switches.getBackupSwitches().isFull());
+		assertFalse("Objeto de backup - isDDLOnly", switches.getBackupSwitches().isDDLOnly());
 	}
 
 	@Test
@@ -43,8 +44,8 @@ public class SwitchesTests {
 		
 		assertEquals("Backup, teste simples", switches.getEntity(), switches.getEntity());
 		
-		assertTrue("Objeto de backup - isFull", switches.getBackupOptions().isDDLOnly());
-		assertTrue("Objeto de backup - isDDLOnly", switches.getBackupOptions().isDDLOnly());
+		assertFalse("Objeto de backup - isFull", switches.getBackupSwitches().isFull());
+		assertTrue("Objeto de backup - isDDLOnly", switches.getBackupSwitches().isDDLOnly());
 	}
-	
+		
 }
