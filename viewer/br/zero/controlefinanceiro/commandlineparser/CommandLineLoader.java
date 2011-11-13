@@ -29,6 +29,7 @@ public class CommandLineLoader {
 		
 		parsers.put("EntityParser", new EnumParser(Entity.class));
 		parsers.put("BackupTypeParser", new EnumParser(BackupType.class));
+		parsers.put("ContaCommandParser", new EnumParser(ContaCommand.class));
 		
 		// TODO Fazer
 		parsers.put("ContaParser", null);

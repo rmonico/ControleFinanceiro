@@ -30,22 +30,49 @@ public class SwitchesTests {
 	
 	@Test
 	public void doBackupTest() throws ParserException {
-		doLoad(new String[] {"backup", "--full"});
+		doLoad(new String[] {"backup", "full"});
 		
-		assertEquals("Backup, teste simples", switches.getEntity(), switches.getEntity());
+		assertEquals("Entidade", switches.getEntity(), switches.getEntity());
 		
-		assertTrue("Objeto de backup - isFull", switches.getBackupSwitches().isFull());
-		assertFalse("Objeto de backup - isDDLOnly", switches.getBackupSwitches().isDDLOnly());
+		BackupSwitches backupSwitches = switches.getBackupSwitches();
+		
+		assertTrue("isFull", backupSwitches.isFull());
+		assertFalse("isDDLOnly", backupSwitches.isDDLOnly());
 	}
 
 	@Test
 	public void doBackupDDLTest() throws ParserException {
-		doLoad(new String[] {"backup", "--ddlonly"});
+		doLoad(new String[] {"backup", "ddlonly"});
 		
-		assertEquals("Backup, teste simples", switches.getEntity(), switches.getEntity());
+		assertEquals("Entidade", Entity.BACKUP, switches.getEntity());
 		
-		assertFalse("Objeto de backup - isFull", switches.getBackupSwitches().isFull());
-		assertTrue("Objeto de backup - isDDLOnly", switches.getBackupSwitches().isDDLOnly());
+		BackupSwitches backupSwitches = switches.getBackupSwitches();
+		
+		assertFalse("Objeto de backup - isFull", backupSwitches.isFull());
+		assertTrue("Objeto de backup - isDDLOnly", backupSwitches.isDDLOnly());
+	}
+	
+	@Test
+	public void doContaListTest() throws ParserException {
+		doLoad(new String[] {"conta", "ls"});
+		
+		assertEquals("Entidade", Entity.CONTA, switches.getEntity());
+		
+		ContaSwitches contaSwitches = switches.getContaSwitches();
+		
+		assertEquals("Comando da conta", ContaCommand.LIST, contaSwitches.getCommand());
+
+		
+		doLoad(new String[] {"conta", "ls", "where_clause"});
+		
+		assertEquals("Entidade", Entity.CONTA, switches.getEntity());
+		
+		contaSwitches = switches.getContaSwitches();
+		
+		assertEquals("Comando da conta", ContaCommand.LIST, contaSwitches.getCommand());
+		
+		// TODO Ainda não sei como vou pegar esta cláusula where
+		//assertEquals("clausula where", contaSwitches.getContaAddSwitches().)
 	}
 		
 }
