@@ -5,8 +5,11 @@ import br.zero.commandlineparser.CommandLineSwitchParam;
 public enum ContaCommand {
 	@CommandLineSwitchParam(name = "ls")
 	LIST,
-	
+
 	@CommandLineSwitchParam(name = "add")
-	ADD
+	ADD,
+
+	@CommandLineSwitchParam(name = "rm")
+	REMOVE
 
 }
