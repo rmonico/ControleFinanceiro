@@ -33,7 +33,8 @@ public class SwitchesTests {
 		
 		assertEquals("Backup, teste simples", switches.getEntity(), switches.getEntity());
 		
-		assertTrue("Objeto de backup", switches.getBackupOptions().isFull());
+		assertTrue("Objeto de backup - isFull", switches.getBackupOptions().isFull());
+		assertTrue("Objeto de backup - isDDLOnly", switches.getBackupOptions().isDDLOnly());
 	}
 
 	@Test
@@ -42,7 +43,8 @@ public class SwitchesTests {
 		
 		assertEquals("Backup, teste simples", switches.getEntity(), switches.getEntity());
 		
-		assertTrue("Objeto de backup", switches.getBackupOptions().isDDLOnly());
+		assertTrue("Objeto de backup - isFull", switches.getBackupOptions().isDDLOnly());
+		assertTrue("Objeto de backup - isDDLOnly", switches.getBackupOptions().isDDLOnly());
 	}
 	
 }
