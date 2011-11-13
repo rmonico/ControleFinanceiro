@@ -1,0 +1,12 @@
+*** Este documento só deve ser atualizado na branch master!!! ***
+*** This document should be updated only on master branch!!! ***
+
+
+- master
+  Esta branch. Contém a versão mais atual do projeto (em desenvolvimento).
+
+- commandline
+  Implementação da primeira versão do ControleFinanceiro em linha de comando. Contém uma versão (muito) desatualizada do parser de linha de comando. Na master o parser de linha de comando foi movido para o projeto Utils. Excluir esta branch do servidor assim que possível. Também está faltando a pasta de testes do projeto aqui.
+
+- struts_implementation
+  Tentativa de implementação deste sistema para struts. Já possui algumas telas, além dos arquivos de configuração do struts. Também possui o mesmo problema da commandline de não ter atualizado para o parser de linha de comando da Utils.
