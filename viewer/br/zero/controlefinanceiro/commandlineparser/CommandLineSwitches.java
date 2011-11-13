@@ -42,4 +42,9 @@ public class CommandLineSwitches {
 		return null;
 	}
 
+	public BackupSwitches getBackupOptions() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
