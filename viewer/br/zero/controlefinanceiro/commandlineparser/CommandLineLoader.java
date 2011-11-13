@@ -27,7 +27,7 @@ public class CommandLineLoader {
 
 		Map<String, Object> parsers = parser.getPropertyParsers();
 		
-		parsers.put("MainCommandParser", new EnumParser(MainCommand.class));
+		parsers.put("MainCommandParser", new EnumParser(Entity.class));
 		// TODO Fazer
 		parsers.put("ContaParser", null);
 		// TODO Fazer, rápido

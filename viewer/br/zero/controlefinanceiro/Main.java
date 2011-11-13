@@ -3,8 +3,6 @@ package br.zero.controlefinanceiro;
 
 import br.zero.controlefinanceiro.commandlineparser.CommandLineLoader;
 import br.zero.controlefinanceiro.commandlineparser.CommandLineSwitches;
-import br.zero.controlefinanceiro.model.modelo.Lancamento;
-import br.zero.controlefinanceiro.model.modelo.LancamentoDAO;
 import br.zero.switchesparser.ParserException;
 
 public class Main {
@@ -30,12 +28,7 @@ public class Main {
 	private void run() throws Exception {
 		parseCommandLine();
 
-		switch (switches.getMainCommand()) {
-		case LIST: {
-			listarLancamentos();
-
-			break;
-		}
+		switch (switches.getEntity()) {
 		default: {
 			System.out.println("Comando não implementado ainda...");
 		}
@@ -52,31 +45,31 @@ public class Main {
 		switches = loader.getSwitches();
 	}
 
-	private void listarLancamentos() {
-//		System.out.println("Modelos de Lançamento:\n\n");
-		LancamentoDAO dao = new LancamentoDAO();
-
-		for (Lancamento lancamento : dao.listarTodos()) {
-			StringBuilder sb = new StringBuilder();
-
-			sb.append("#" + lancamento.getId() + " [");
-			sb.append(lancamento.getContaOrigem().getNome() + " -- " + lancamento.getContaDestino().getNome() + "; ");
-			sb.append("$" + lancamento.getValor() + "; ");
-			sb.append("vencto " + lancamento.getDiavencimento() + "; ");
-			sb.append(lancamento.getFormaPagamento().getNome());
-			if (lancamento.getObservacao() != null) {
-				sb.append("; (" + lancamento.getObservacao() + ")");
-			}
-			
-			sb.append("]");
-			
-			System.out.println(sb.toString());
-		}
-		
-		System.out.println("\n");
-		
-		System.out.println("-- Fim");
-
-	}
+//	private void listarLancamentos() {
+////		System.out.println("Modelos de Lançamento:\n\n");
+//		LancamentoDAO dao = new LancamentoDAO();
+//
+//		for (Lancamento lancamento : dao.listarTodos()) {
+//			StringBuilder sb = new StringBuilder();
+//
+//			sb.append("#" + lancamento.getId() + " [");
+//			sb.append(lancamento.getContaOrigem().getNome() + " -- " + lancamento.getContaDestino().getNome() + "; ");
+//			sb.append("$" + lancamento.getValor() + "; ");
+//			sb.append("vencto " + lancamento.getDiavencimento() + "; ");
+//			sb.append(lancamento.getFormaPagamento().getNome());
+//			if (lancamento.getObservacao() != null) {
+//				sb.append("; (" + lancamento.getObservacao() + ")");
+//			}
+//			
+//			sb.append("]");
+//			
+//			System.out.println(sb.toString());
+//		}
+//		
+//		System.out.println("\n");
+//		
+//		System.out.println("-- Fim");
+//
+//	}
 
 }
