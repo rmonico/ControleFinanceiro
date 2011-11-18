@@ -34,9 +34,6 @@ public class CommandLineLoader {
 		// TODO Fazer
 		parsers.put("ContaParser", null);
 		
-		// TODO Fazer, rápido
-		parsers.put("DoubleParser", null);
-		
 		parser.parse();
 		
 		if (!parser.getErrors().isEmpty()) {

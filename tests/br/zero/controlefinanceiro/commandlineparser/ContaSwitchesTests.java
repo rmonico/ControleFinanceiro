@@ -84,8 +84,8 @@ public class ContaSwitchesTests extends CustomParserTests {
 	
 	@Test
 	public void doContaRemoveTest() throws ParserException {
-		ContaRemoveSwitches contaRemoveSwitches = doContaRemoveLoad(new String[] {"conta", "rm", "1"}, ContaCommand.REMOVE);
+		ContaRemoveSwitches contaRemoveSwitches = doContaRemoveLoad(new String[] {"conta", "rm", "nome conta"}, ContaCommand.REMOVE);
 		
-		assertEquals("ID da conta a ser removida", (Integer) 1, contaRemoveSwitches.getContaId());
+		assertEquals("ID da conta a ser removida", "nome conta", contaRemoveSwitches.getContaNome());
 	}
 }

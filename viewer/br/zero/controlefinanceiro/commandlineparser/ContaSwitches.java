@@ -12,7 +12,7 @@ public class ContaSwitches {
 	
 	@CommandLineSwitch(index=1, parser = "ContaCommandParser.parseComplexEnum", complexParser = true, subCommandLineProperties = {
 			@SubCommandLine(value = "ADD", subCommandLineClass = ContaAddSwitches.class, propertyName = "setAddSwitches"),
-			@SubCommandLine(value = "RM", subCommandLineClass = ContaRemoveSwitches.class, propertyName = "setRemoveSwitches"),
+			@SubCommandLine(value = "REMOVE", subCommandLineClass = ContaRemoveSwitches.class, propertyName = "setRemoveSwitches"),
 			@SubCommandLine(value = "LIST", subCommandLineClass = ContaListSwitches.class, propertyName = "setListSwitches"),
 	})
 	public void setCommand(ContaCommand value) {
