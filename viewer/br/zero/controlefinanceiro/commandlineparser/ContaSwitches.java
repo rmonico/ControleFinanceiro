@@ -8,10 +8,12 @@ public class ContaSwitches {
 	private ContaCommand command;
 	private ContaAddSwitches addSwitches;
 	private ContaRemoveSwitches removeSwitches;
+	private ContaListSwitches listSwitches;
 	
-	@CommandLineSwitch(index=1, parser = "ContaCommandParser.parseEnum", complexParser = true, subCommandLineProperties = {
+	@CommandLineSwitch(index=1, parser = "ContaCommandParser.parseComplexEnum", complexParser = true, subCommandLineProperties = {
 			@SubCommandLine(value = "ADD", subCommandLineClass = ContaAddSwitches.class, propertyName = "setAddSwitches"),
 			@SubCommandLine(value = "RM", subCommandLineClass = ContaRemoveSwitches.class, propertyName = "setRemoveSwitches"),
+			@SubCommandLine(value = "LIST", subCommandLineClass = ContaListSwitches.class, propertyName = "setListSwitches"),
 	})
 	public void setCommand(ContaCommand value) {
 		this.command = value;
@@ -35,5 +37,13 @@ public class ContaSwitches {
 	
 	public ContaRemoveSwitches getRemoveSwitches() {
 		return removeSwitches;
+	}
+	
+	public void setListSwitches(ContaListSwitches value) {
+		listSwitches = value;
+	}
+	
+	public ContaListSwitches getListSwitches() {
+		return listSwitches;
 	}
 }

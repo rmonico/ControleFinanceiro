@@ -9,25 +9,6 @@ public class CommandLineSwitches {
 	private BackupSwitches backupSwitches;
 	private ContaSwitches contaSwitches;
 
-	// Especificação antiga da linha de comando
-	// @CommandLineSwitch(
-	// parser = "MainCommandParser.parseComplexEnum",
-	// complexParser = true,
-	// index = 1,
-	// subCommandLineProperties = {
-	// @SubCommandLine(value="NEW",
-	// subCommandLineClass=NewTransactionCommand.class,
-	// propertyName="setNewTransactionCommand"),
-	// @SubCommandLine(value="LIST",
-	// subCommandLineClass=ListTransactionsCommand.class,
-	// propertyName="setListTransactionsCommand"),
-	// @SubCommandLine(value="HELP", subCommandLineClass=ShowHelpCommand.class,
-	// propertyName="setShowHelpCommand")
-	// })
-	// public void setMainCommand(MainCommand value) {
-	// mainCommand = value;
-	// }
-
 	/**
 	 * Argumento principal da linha de comando.
 	 */

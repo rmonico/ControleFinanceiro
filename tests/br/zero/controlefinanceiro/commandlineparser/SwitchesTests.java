@@ -72,8 +72,9 @@ public class SwitchesTests {
 		
 		assertEquals("Comando da conta", ContaCommand.LIST, contaSwitches.getCommand());
 		
-		// TODO Ainda não sei como vou pegar esta cláusula where
-		//assertEquals("clausula where", contaSwitches.getContaAddSwitches().)
+		ContaListSwitches contaListSwitches = contaSwitches.getListSwitches();
+		
+		assertEquals("clausula where", "where_clause", contaListSwitches.getWhere());
 	}
 	
 	@Test
@@ -91,5 +92,7 @@ public class SwitchesTests {
 		assertEquals("nome da nova conta", "nova conta", contaAddSwitches.getNome());
 		assertNull("conta sem observacao", contaAddSwitches.getObservacao());
 	}
-		
+
+//	@Test
+//	public void do
 }
