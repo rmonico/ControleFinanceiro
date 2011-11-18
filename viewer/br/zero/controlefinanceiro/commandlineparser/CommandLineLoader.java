@@ -4,6 +4,7 @@ import java.util.Map;
 
 import br.zero.commandlineparser.CommandLineParser;
 import br.zero.commandlineparser.parsers.EnumParser;
+import br.zero.commandlineparser.parsers.PrimitiveParsers;
 import br.zero.switchesparser.IInvalidCommandLineArgument;
 import br.zero.switchesparser.ParserException;
 
@@ -30,6 +31,8 @@ public class CommandLineLoader {
 		parsers.put("EntityParser", new EnumParser(Entity.class));
 		parsers.put("BackupTypeParser", new EnumParser(BackupType.class));
 		parsers.put("ContaCommandParser", new EnumParser(ContaCommand.class));
+		parsers.put("LancamentoCommandParser", new EnumParser(LancamentoCommand.class));
+		parsers.put("PrimitiveParsers", new PrimitiveParsers());
 		
 		// TODO Fazer
 		parsers.put("ContaParser", null);

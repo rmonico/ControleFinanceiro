@@ -8,6 +8,7 @@ public class CommandLineSwitches {
 	private Entity entity;
 	private BackupSwitches backupSwitches;
 	private ContaSwitches contaSwitches;
+	private LancamentoSwitches lancamentoSwitches ;
 
 	/**
 	 * Argumento principal da linha de comando.
@@ -15,7 +16,7 @@ public class CommandLineSwitches {
 	@CommandLineSwitch(parser = "EntityParser.parseComplexEnum", complexParser = true, index = 1, subCommandLineProperties = { 
 			@SubCommandLine(value = "BACKUP", subCommandLineClass = BackupSwitches.class, propertyName = "setBackupSwitches"),
 			@SubCommandLine(value = "CONTA", subCommandLineClass = ContaSwitches.class, propertyName = "setContaSwitches"),
-			@SubCommandLine(value = "LANCAMENTO", subCommandLineClass = Object.class, propertyName = "setShowHelpCommand"),
+			@SubCommandLine(value = "LANCAMENTO", subCommandLineClass = LancamentoSwitches.class, propertyName = "setLancamentoSwitches"),
 			@SubCommandLine(value = "MODELO", subCommandLineClass = Object.class, propertyName = "setShowHelpCommand"), 
 			@SubCommandLine(value = "LANCAMENTO_MODELO", subCommandLineClass = Object.class, propertyName = "setShowHelpCommand"),
 			@SubCommandLine(value = "HELP", subCommandLineClass = Object.class, propertyName = "setShowHelpCommand") })
@@ -41,5 +42,13 @@ public class CommandLineSwitches {
 
 	public ContaSwitches getContaSwitches() {
 		return contaSwitches;
+	}
+
+	public void setLancamentoSwitches(LancamentoSwitches value) {
+		lancamentoSwitches = value;
+	}
+	
+	public LancamentoSwitches getLancamentoSwitches() {
+		return lancamentoSwitches;
 	}
 }

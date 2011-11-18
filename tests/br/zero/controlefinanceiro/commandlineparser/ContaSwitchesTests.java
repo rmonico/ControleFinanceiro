@@ -22,8 +22,8 @@ public class ContaSwitchesTests extends CustomParserTests {
 		assertEquals("Comando da conta", contaCommand, contaSwitches.getCommand());
 	}
 	
-	private ContaListSwitches doContaListLoad(String[] args, ContaCommand contaCommand) throws ParserException {
-		doContaLoad(args, contaCommand);
+	private ContaListSwitches doContaListLoad(String[] args) throws ParserException {
+		doContaLoad(args, ContaCommand.LIST);
 		
 		assertNotNull(contaSwitches.getListSwitches());
 		assertNull(contaSwitches.getAddSwitches());
@@ -34,20 +34,20 @@ public class ContaSwitchesTests extends CustomParserTests {
 
 	@Test
 	public void doContaListTest() throws ParserException {
-		ContaListSwitches contaListSwitches = doContaListLoad(new String[] {"conta", "ls"}, ContaCommand.LIST);
+		ContaListSwitches contaListSwitches = doContaListLoad(new String[] {"conta", "ls"});
 		
 		assertNull("clausula where", contaListSwitches.getWhere());
 	}
 	
 	@Test
 	public void doContaListTest2() throws ParserException {
-		ContaListSwitches contaListSwitches = doContaListLoad(new String[] {"conta", "ls", "where_clause"}, ContaCommand.LIST);
+		ContaListSwitches contaListSwitches = doContaListLoad(new String[] {"conta", "ls", "where_clause"});
 		
 		assertEquals("clausula where", "where_clause", contaListSwitches.getWhere());
 	}
 	
-	private ContaAddSwitches doContaAddLoad(String[] args, ContaCommand contaCommand) throws ParserException {
-		doContaLoad(args, contaCommand);
+	private ContaAddSwitches doContaAddLoad(String[] args) throws ParserException {
+		doContaLoad(args, ContaCommand.ADD);
 		
 		assertNull(contaSwitches.getListSwitches());
 		assertNotNull(contaSwitches.getAddSwitches());
@@ -58,7 +58,7 @@ public class ContaSwitchesTests extends CustomParserTests {
 	
 	@Test
 	public void doContaAddTest() throws ParserException {
-		ContaAddSwitches contaAddSwitches = doContaAddLoad(new String[] {"conta", "add", "nova conta"}, ContaCommand.ADD);
+		ContaAddSwitches contaAddSwitches = doContaAddLoad(new String[] {"conta", "add", "nova conta"});
 		
 		assertEquals("nome da nova conta", "nova conta", contaAddSwitches.getNome());
 		assertNull("conta sem observacao", contaAddSwitches.getObservacao());
@@ -66,14 +66,14 @@ public class ContaSwitchesTests extends CustomParserTests {
 
 	@Test
 	public void doContaAddTest2() throws ParserException {
-		ContaAddSwitches contaAddSwitches = doContaAddLoad(new String[] {"conta", "add", "nova conta", "Observação da nova conta"}, ContaCommand.ADD);
+		ContaAddSwitches contaAddSwitches = doContaAddLoad(new String[] {"conta", "add", "nova conta", "Observação da nova conta"});
 		
 		assertEquals("Nome", "nova conta", contaAddSwitches.getNome());
 		assertEquals("Observacao", "Observação da nova conta", contaAddSwitches.getObservacao());
 	}
 	
-	private ContaRemoveSwitches doContaRemoveLoad(String[] args, ContaCommand contaCommand) throws ParserException {
-		doContaLoad(args, contaCommand);
+	private ContaRemoveSwitches doContaRemoveLoad(String[] args) throws ParserException {
+		doContaLoad(args, ContaCommand.REMOVE);
 		
 		assertNull(contaSwitches.getListSwitches());
 		assertNull(contaSwitches.getAddSwitches());
@@ -84,8 +84,8 @@ public class ContaSwitchesTests extends CustomParserTests {
 	
 	@Test
 	public void doContaRemoveTest() throws ParserException {
-		ContaRemoveSwitches contaRemoveSwitches = doContaRemoveLoad(new String[] {"conta", "rm", "nome conta"}, ContaCommand.REMOVE);
+		ContaRemoveSwitches contaRemoveSwitches = doContaRemoveLoad(new String[] {"conta", "rm", "nome conta"});
 		
-		assertEquals("ID da conta a ser removida", "nome conta", contaRemoveSwitches.getContaNome());
+		assertEquals("Nome da conta a ser removida", "nome conta", contaRemoveSwitches.getContaNome());
 	}
 }
