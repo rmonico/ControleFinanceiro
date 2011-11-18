@@ -62,13 +62,19 @@ public class SwitchesTests {
 		ContaSwitches contaSwitches = switches.getContaSwitches();
 		
 		assertEquals("Comando da conta", ContaCommand.LIST, contaSwitches.getCommand());
-
 		
+		ContaListSwitches contaListSwitches = contaSwitches.getListSwitches();
+		
+		assertNull("clausula where", contaListSwitches.getWhere());
+	}
+	
+	@Test
+	public void doContaListTest2() throws ParserException {
 		doLoad(new String[] {"conta", "ls", "where_clause"});
 		
 		assertEquals("Entidade", Entity.CONTA, switches.getEntity());
 		
-		contaSwitches = switches.getContaSwitches();
+		ContaSwitches contaSwitches = switches.getContaSwitches();
 		
 		assertEquals("Comando da conta", ContaCommand.LIST, contaSwitches.getCommand());
 		
@@ -93,6 +99,20 @@ public class SwitchesTests {
 		assertNull("conta sem observacao", contaAddSwitches.getObservacao());
 	}
 
-//	@Test
-//	public void do
+	@Test
+	public void doContaAddTest2() throws ParserException {
+		doLoad(new String[] {"conta", "add", "nova conta", "Observação da nova conta"});
+		
+		assertEquals("Entidade", Entity.CONTA, switches.getEntity());
+		
+		ContaSwitches contaSwitches = switches.getContaSwitches();
+		
+		assertEquals("Comando da conta", ContaCommand.ADD, contaSwitches.getCommand());
+
+		ContaAddSwitches contaAddSwitches = contaSwitches.getAddSwitches();
+		
+		assertEquals("Nome", "nova conta", contaAddSwitches.getNome());
+		
+		assertEquals("Observacao", "Observação da nova conta", contaAddSwitches.getObservacao());
+	}
 }
