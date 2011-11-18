@@ -22,11 +22,11 @@ public class LancamentoAddFullSwitches {
 		this.modelo = modelo;
 	}
 
-	public Calendar getDate() {
+	public Calendar getData() {
 		return date;
 	}
 
-	@CommandLineSwitch(index = 2)
+	@CommandLineSwitch(index = 2, parser="UtilsParser.parseCalendar")
 	public void setDate(Calendar date) {
 		this.date = date;
 	}
@@ -53,7 +53,7 @@ public class LancamentoAddFullSwitches {
 		return valor;
 	}
 
-	@CommandLineSwitch(index = 5)
+	@CommandLineSwitch(index = 5, parser="PrimitiveParsers.parseDouble")
 	public void setValor(double valor) {
 		this.valor = valor;
 	}

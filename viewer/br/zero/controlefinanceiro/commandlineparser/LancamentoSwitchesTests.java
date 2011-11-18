@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import java.text.SimpleDateFormat;
+
 import org.junit.Test;
 
 import br.zero.switchesparser.ParserException;
@@ -90,25 +92,80 @@ public class LancamentoSwitchesTests extends CustomParserTests {
 
 	private LancamentoAddSwitches baseAddTests(String[] args) throws ParserException {
 		LancamentoAddSwitches addSwitches = doLancamentoAddLoad(args);
-		
+
 		assertEquals("Origem", "origem", addSwitches.getContaOrigem());
 		assertEquals("Destino", "destino", addSwitches.getContaDestino());
 		assertEquals("Valor", 2.55, addSwitches.getValor(), 0.0);
-		
+
 		return addSwitches;
 	}
 
 	@Test
 	public void doAddTest() throws ParserException {
-		LancamentoAddSwitches addSwitches = baseAddTests(new String[] {"lanc", "add", "origem", "destino", "2.55" });
-		
+		LancamentoAddSwitches addSwitches = baseAddTests(new String[] { "lanc", "add", "origem", "destino", "2.55" });
+
 		assertNull("Observacao", addSwitches.getObservacao());
+	}
+
+	@Test
+	public void doAddTests2() throws ParserException {
+		LancamentoAddSwitches addSwitches = baseAddTests(new String[] { "lanc", "add", "origem", "destino", "2.55", "observacao" });
+
+		assertEquals("Observacao", "observacao", addSwitches.getObservacao());
+	}
+
+	private LancamentoAddFullSwitches doLancamentoAddFullLoad(String[] args) throws ParserException {
+		doLancamentoLoad(args, LancamentoCommand.ADD_FULL);
+
+		assertNull("Switches de lista", lancamentoSwitches.getListSwitches());
+		assertNull("Switches de balance", lancamentoSwitches.getBalanceSwitches());
+		assertNull("Switches de add", lancamentoSwitches.getAddSwitches());
+		assertNotNull("Switches de addfull", lancamentoSwitches.getAddFullSwitches());
+		assertNull("Switches de remove", lancamentoSwitches.getRemoveSwitches());
+
+		return lancamentoSwitches.getAddFullSwitches();
+	}
+
+	private LancamentoAddFullSwitches baseAddFullTests(String[] args) throws ParserException {
+		LancamentoAddFullSwitches addFullSwitches = doLancamentoAddFullLoad(args);
+
+		assertEquals("Modelo", "modelo", addFullSwitches.getModelo());
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
+		assertEquals("Data", "18/Nov/2011", sdf.format(addFullSwitches.getData().getTime()));
+		assertEquals("Origem", "origem", addFullSwitches.getContaOrigem());
+		assertEquals("Origem", "origem", addFullSwitches.getContaOrigem());
+		assertEquals("Destino", "destino", addFullSwitches.getContaDestino());
+		assertEquals("Valor", 3.99, addFullSwitches.getValor(), 0.0);
+
+		return addFullSwitches;
+	}
+
+	@Test
+	public void doAddFullTest() throws ParserException {
+		LancamentoAddFullSwitches addFullSwitches = baseAddFullTests(new String[] { "lanc", "addfull", "modelo", "18/nov/2011", "origem", "destino", "3.99" });
+
+		assertNull("Observacao", addFullSwitches.getObservacao());
+	}
+
+	@Test
+	public void doAddFullTest2() throws ParserException {
+		LancamentoAddFullSwitches addFullSwitches = baseAddFullTests(new String[] { "lanc", "addfull", "modelo", "18/nov/2011", "origem", "destino", "3.99", "observacao" });
+
+		assertEquals("Observacao", "observacao", addFullSwitches.getObservacao());
 	}
 	
 	@Test
-	public void doAddTests2() throws ParserException {
-		LancamentoAddSwitches addSwitches = baseAddTests(new String[] {"lanc", "add", "origem", "destino", "2.55", "observacao"});
+	public void doRemoveTest() throws ParserException {
+		doLancamentoLoad(new String[] {"lanc", "rm", "45"}, LancamentoCommand.REMOVE);
+
+		assertNull("Switches de lista", lancamentoSwitches.getListSwitches());
+		assertNull("Switches de balance", lancamentoSwitches.getBalanceSwitches());
+		assertNull("Switches de add", lancamentoSwitches.getAddSwitches());
+		assertNull("Switches de addfull", lancamentoSwitches.getAddFullSwitches());
+		assertNotNull("Switches de remove", lancamentoSwitches.getRemoveSwitches());
+
+		LancamentoRemoveSwitches removeSwitches = lancamentoSwitches.getRemoveSwitches();
 		
-		assertEquals("Observacao", "observacao", addSwitches.getObservacao());
+		assertEquals("ID", 45, removeSwitches.getId());
 	}
 }

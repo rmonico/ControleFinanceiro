@@ -9,7 +9,7 @@ public class LancamentoRemoveSwitches {
 		return id;
 	}
 
-	@CommandLineSwitch(index = 1)
+	@CommandLineSwitch(index = 1, parser="PrimitiveParsers.parseInteger")
 	public void setId(int id) {
 		this.id = id;
 	}

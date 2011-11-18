@@ -10,5 +10,8 @@ public enum Entity {
 	CONTA,
 
 	@CommandLineSwitchParam(name = "lanc")
-	LANCAMENTO, MODELO, LANCAMENTO_MODELO, HELP
+	LANCAMENTO,
+
+	@CommandLineSwitchParam(name = "modelo")
+	MODELO, LANCAMENTO_MODELO, HELP
 }

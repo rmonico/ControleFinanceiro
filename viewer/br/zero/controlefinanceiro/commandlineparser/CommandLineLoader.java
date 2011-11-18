@@ -1,10 +1,12 @@
 package br.zero.controlefinanceiro.commandlineparser;
 
+import java.text.SimpleDateFormat;
 import java.util.Map;
 
 import br.zero.commandlineparser.CommandLineParser;
 import br.zero.commandlineparser.parsers.EnumParser;
 import br.zero.commandlineparser.parsers.PrimitiveParsers;
+import br.zero.commandlineparser.parsers.UtilsParser;
 import br.zero.switchesparser.IInvalidCommandLineArgument;
 import br.zero.switchesparser.ParserException;
 
@@ -34,8 +36,11 @@ public class CommandLineLoader {
 		parsers.put("LancamentoCommandParser", new EnumParser(LancamentoCommand.class));
 		parsers.put("PrimitiveParsers", new PrimitiveParsers());
 		
-		// TODO Fazer
-		parsers.put("ContaParser", null);
+		UtilsParser calendarParser = new UtilsParser();
+		
+		calendarParser.setDateFormat(new SimpleDateFormat("dd/MMM/yyyy"));
+		
+		parsers.put("UtilsParser", calendarParser);
 		
 		parser.parse();
 		

@@ -10,7 +10,7 @@ public class ContaRemoveSwitches {
 	}
 
 	@CommandLineSwitch(index=1)
-	public void setContaId(String value) {
+	public void setContaNome(String value) {
 		contaNome = value;
 	}
 	
