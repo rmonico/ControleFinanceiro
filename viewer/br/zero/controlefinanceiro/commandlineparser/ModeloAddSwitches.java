@@ -5,6 +5,7 @@ import br.zero.commandlineparser.CommandLineSwitch;
 public class ModeloAddSwitches {
 
 	private String nome;
+	private String observacao;
 
 	public String getNome() {
 		return nome;
@@ -13,5 +14,14 @@ public class ModeloAddSwitches {
 	@CommandLineSwitch(index = 1)
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getObservacao() {
+		return observacao;
+	}
+
+	@CommandLineSwitch(index = 2)
+	public void setObservacao(String value) {
+		observacao = value;
 	}
 }
