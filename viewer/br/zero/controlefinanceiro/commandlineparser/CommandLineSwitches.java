@@ -10,6 +10,8 @@ public class CommandLineSwitches {
 	private ContaSwitches contaSwitches;
 	private LancamentoSwitches lancamentoSwitches;
 	private ModeloSwitches modeloSwitches;
+	private LancamentoModeloSwitches lancamentoModeloSwitches;
+	private HelpSwitches helpSwitches;
 
 	/**
 	 * Argumento principal da linha de comando.
@@ -19,8 +21,8 @@ public class CommandLineSwitches {
 			@SubCommandLine(value = "CONTA", subCommandLineClass = ContaSwitches.class, propertyName = "setContaSwitches"),
 			@SubCommandLine(value = "LANCAMENTO", subCommandLineClass = LancamentoSwitches.class, propertyName = "setLancamentoSwitches"),
 			@SubCommandLine(value = "MODELO", subCommandLineClass = ModeloSwitches.class, propertyName = "setModeloSwitches"), 
-			@SubCommandLine(value = "LANCAMENTO_MODELO", subCommandLineClass = Object.class, propertyName = "setShowHelpCommand"),
-			@SubCommandLine(value = "HELP", subCommandLineClass = Object.class, propertyName = "setShowHelpCommand") })
+			@SubCommandLine(value = "LANCAMENTO_MODELO", subCommandLineClass = LancamentoModeloSwitches.class, propertyName = "setLancamentoModeloSwitches"),
+			@SubCommandLine(value = "HELP", subCommandLineClass = HelpSwitches.class, propertyName = "setHelpSwitches") })
 	public void setEntity(Entity entity) {
 		this.entity = entity;
 	}
@@ -60,5 +62,20 @@ public class CommandLineSwitches {
 	public ModeloSwitches getModeloSwitches() {
 		return modeloSwitches;
 	}
+
+	public void setLancamentoModeloSwitches(LancamentoModeloSwitches value) {
+		lancamentoModeloSwitches = value;
+	}
 	
+	public LancamentoModeloSwitches getLancamentoModeloSwitches() {
+		return lancamentoModeloSwitches;
+	}
+	
+	public void setHelpSwitches(HelpSwitches value) {
+		helpSwitches = value;
+	}
+	
+	public HelpSwitches getHelpSwitches() {
+		return helpSwitches;
+	}
 }
