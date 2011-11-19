@@ -52,4 +52,13 @@ public class CommandLineSwitches {
 	public LancamentoSwitches getLancamentoSwitches() {
 		return lancamentoSwitches;
 	}
+	
+	public void setModeloSwitches(ModeloSwitches value) {
+		modeloSwitches = value;
+	}
+
+	public ModeloSwitches getModeloSwitches() {
+		return modeloSwitches;
+	}
+	
 }
