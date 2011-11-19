@@ -58,9 +58,8 @@ public class LancamentoModeloSwitchesTests extends CustomParserTests {
 		return lancamentoModeloSwitches.getAddSwitches();
 	}
 
-	@Test
-	public void doAddTest() throws ParserException {
-		LancamentoModeloAddSwitches addSwitches = doLancamentoModeloAddLoad(new String[] { "lancmodelo", "add", "modelo", "19/nov/2011", "conta origem", "conta destino", "1.99" });
+	private LancamentoModeloAddSwitches baseAddTests(String[] args) throws ParserException {
+		LancamentoModeloAddSwitches addSwitches = doLancamentoModeloAddLoad(args);
 
 		assertEquals("Nome", "modelo", addSwitches.getModelo());
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
@@ -68,5 +67,21 @@ public class LancamentoModeloSwitchesTests extends CustomParserTests {
 		assertEquals("Conta origem", "conta origem", addSwitches.getContaOrigem());
 		assertEquals("Conta destino", "conta destino", addSwitches.getContaDestino());
 		assertEquals("Valor", 1.99, addSwitches.getValor(), 0);
+
+		return addSwitches;
+	}
+
+	@Test
+	public void doAddTest() throws ParserException {
+		LancamentoModeloAddSwitches addSwitches = baseAddTests(new String[] { "lancmodelo", "add", "modelo", "19/nov/2011", "conta origem", "conta destino", "1.99" });
+
+		assertNull("Observacao", addSwitches.getObservacao());
+	}
+
+	@Test
+	public void doAddTest2() throws ParserException {
+		LancamentoModeloAddSwitches addSwitches = baseAddTests(new String[] { "lancmodelo", "add", "modelo", "19/nov/2011", "conta origem", "conta destino", "1.99", "observacao" });
+
+		assertEquals("Observacao", "observacao", addSwitches.getObservacao());
 	}
 }
