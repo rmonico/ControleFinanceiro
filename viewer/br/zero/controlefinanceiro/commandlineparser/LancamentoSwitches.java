@@ -4,7 +4,7 @@ import br.zero.commandlineparser.CommandLineSwitch;
 import br.zero.commandlineparser.SubCommandLine;
 
 public class LancamentoSwitches {
-	
+
 	private LancamentoCommand command;
 	private LancamentoListSwitches listSwitches;
 	private LancamentoBalanceSwitches balanceSwitches;
@@ -12,17 +12,16 @@ public class LancamentoSwitches {
 	private LancamentoAddFullSwitches addFullSwitches;
 	private LancamentoRemoveSwitches removeSwitches;
 
-	@CommandLineSwitch(index=1, parser = "LancamentoCommandParser.parseComplexEnum", complexParser = true, subCommandLineProperties = {
-			@SubCommandLine(value = "LIST", subCommandLineClass = LancamentoListSwitches.class, propertyName = "setListSwitches"),
+	@CommandLineSwitch(index = 1, parser = "LancamentoCommandParser.parseComplexEnum", complexParser = true, subCommandLineProperties = {
+			@SubCommandLine(value = "LIST", subCommandLineClass = LancamentoListSwitches.class, propertyName = "setListSwitches"), 
 			@SubCommandLine(value = "BALANCE", subCommandLineClass = LancamentoBalanceSwitches.class, propertyName = "setBalanceSwitches"),
-			@SubCommandLine(value = "ADD", subCommandLineClass = LancamentoAddSwitches.class, propertyName = "setAddSwitches"),
-			@SubCommandLine(value = "ADD_FULL", subCommandLineClass = LancamentoAddFullSwitches.class, propertyName = "setAddFullSwitches"),
-			@SubCommandLine(value = "REMOVE", subCommandLineClass = LancamentoRemoveSwitches.class, propertyName = "setRemoveSwitches"),
-	})
+			@SubCommandLine(value = "ADD", subCommandLineClass = LancamentoAddSwitches.class, propertyName = "setAddSwitches"), 
+			@SubCommandLine(value = "ADD_FULL", subCommandLineClass = LancamentoAddFullSwitches.class, propertyName = "setAddFullSwitches"), 
+			@SubCommandLine(value = "REMOVE", subCommandLineClass = LancamentoRemoveSwitches.class, propertyName = "setRemoveSwitches"), })
 	public void setCommand(LancamentoCommand value) {
 		command = value;
 	}
-	
+
 	public LancamentoCommand getCommand() {
 		return command;
 	}
@@ -66,5 +65,5 @@ public class LancamentoSwitches {
 	public void setRemoveSwitches(LancamentoRemoveSwitches removeSwitches) {
 		this.removeSwitches = removeSwitches;
 	}
-	
+
 }

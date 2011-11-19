@@ -34,6 +34,7 @@ public class CommandLineLoader {
 		parsers.put("BackupTypeParser", new EnumParser(BackupType.class));
 		parsers.put("ContaCommandParser", new EnumParser(ContaCommand.class));
 		parsers.put("LancamentoCommandParser", new EnumParser(LancamentoCommand.class));
+		parsers.put("ModeloCommandParser", new EnumParser(ModeloCommand.class));
 		parsers.put("PrimitiveParsers", new PrimitiveParsers());
 		
 		UtilsParser calendarParser = new UtilsParser();
