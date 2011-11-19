@@ -15,7 +15,7 @@ public class ModeloSwitchesTests extends CustomParserTests {
 	private void doModeloLoad(String[] args, ModeloCommand modeloCommand) throws ParserException {
 		doLoad(args);
 
-		assertEquals("Entidade", Entity.LANCAMENTO, switches.getEntity());
+		assertEquals("Entidade", Entity.MODELO, switches.getEntity());
 
 		modeloSwitches = switches.getModeloSwitches();
 
@@ -41,5 +41,11 @@ public class ModeloSwitchesTests extends CustomParserTests {
 		assertNull("Where", listSwitches.getFiltroNome());
 	}
 
+	@Test
+	public void doListTest2() throws ParserException {
+		ModeloListSwitches listSwitches = doModeloListLoad(new String[] { "modelo", "ls", "nome do modelo para filtro"});
+
+		assertEquals("Where", "nome do modelo para filtro", listSwitches.getFiltroNome());
+	}
 
 }
