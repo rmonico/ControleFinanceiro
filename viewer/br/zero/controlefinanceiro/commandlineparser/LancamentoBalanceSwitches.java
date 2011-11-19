@@ -6,12 +6,11 @@ public class LancamentoBalanceSwitches {
 	private String conta;
 	private String where;
 
-	
 	public String getConta() {
 		return conta;
 	}
 
-	@CommandLineSwitch(index=1)
+	@CommandLineSwitch(index = 1)
 	public void setConta(String conta) {
 		this.conta = conta;
 	}
@@ -20,7 +19,12 @@ public class LancamentoBalanceSwitches {
 		return where;
 	}
 
-	@CommandLineSwitch(index=2)
+	/**
+	 * TODO Trocar por filtros mais adequados
+	 * 
+	 * @param where
+	 */
+	@CommandLineSwitch(index = 2)
 	public void setWhere(String where) {
 		this.where = where;
 	}
