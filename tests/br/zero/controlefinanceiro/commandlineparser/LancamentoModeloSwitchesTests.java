@@ -84,4 +84,18 @@ public class LancamentoModeloSwitchesTests extends CustomParserTests {
 
 		assertEquals("Observacao", "observacao", addSwitches.getObservacao());
 	}
+	
+	@Test
+	public void doRemoveTest() throws ParserException {
+		doLancamentoModeloLoad(new String[] {"lancmodelo", "rm", "54"}, LancamentoModeloCommand.REMOVE);
+		
+		assertNull("Switches de lista", lancamentoModeloSwitches.getListSwitches());
+		assertNull("Switches de add", lancamentoModeloSwitches.getAddSwitches());
+		assertNotNull("Switches de remove", lancamentoModeloSwitches.getRemoveSwitches());
+
+		
+		LancamentoModeloRemoveSwitches removeSwitches = lancamentoModeloSwitches.getRemoveSwitches();
+		
+		assertEquals("ID", 54, removeSwitches.getId());
+	}
 }
