@@ -23,7 +23,7 @@ public class ModeloSwitches {
 			@SubCommandLine(value = "REMOVE", subCommandLineClass = ModeloRemoveSwitches.class, propertyName = "setRemoveSwitches"),
 			@SubCommandLine(value = "CLONE", subCommandLineClass = ModeloCloneSwitches.class, propertyName = "setCloneSwitches"), })
 	public void setCommand(ModeloCommand value) {
-		value = command;
+		command = value;
 	}
 
 	public ModeloListSwitches getListSwitches() {
