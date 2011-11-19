@@ -7,5 +7,8 @@ public enum LancamentoModeloCommand {
 	LIST,
 
 	@CommandLineSwitchParam(name = "add")
-	ADD
+	ADD,
+
+	@CommandLineSwitchParam(name = "rm")
+	REMOVE
 }
