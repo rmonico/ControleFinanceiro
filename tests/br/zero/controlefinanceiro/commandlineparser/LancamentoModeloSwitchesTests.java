@@ -38,4 +38,11 @@ public class LancamentoModeloSwitchesTests extends CustomParserTests {
 
 		assertNull("Nome do modelo", listSwitches.getModelo());
 	}
+	
+	@Test
+	public void doListTest2() throws ParserException {
+		LancamentoModeloListSwitches listSwitches = doLancamentoModeloListLoad(new String[] { "lancmodelo", "ls", "modelo"});
+
+		assertEquals("Nome do modelo", "modelo", listSwitches.getModelo());
+	}
 }
