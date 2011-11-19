@@ -48,5 +48,22 @@ public class ModeloSwitchesTests extends CustomParserTests {
 		assertEquals("Filtro de nome", "nome do modelo para filtro", listSwitches.getFiltroNome());
 	}
 
+	private ModeloAddSwitches doModeloAddLoad(String[] args) throws ParserException {
+		doModeloLoad(args, ModeloCommand.ADD);
+
+		assertNull("Switches de lista", modeloSwitches.getListSwitches());
+		assertNotNull("Switches de add", modeloSwitches.getAddSwitches());
+		assertNull("Switches de simulate", modeloSwitches.getSimulateSwitches());
+		assertNull("Switches de remove", modeloSwitches.getRemoveSwitches());
+		assertNull("Switches de clone", modeloSwitches.getCloneSwitches());
+
+		return modeloSwitches.getAddSwitches();
+	}
 	
+	@Test
+	public void doAddTest() throws ParserException {
+		ModeloAddSwitches addSwitches = doModeloAddLoad(new String[] { "modelo", "add", "novo modelo" });
+
+		assertEquals("Nome do modelo", "novo modelo", addSwitches.getNome());
+	}
 }
