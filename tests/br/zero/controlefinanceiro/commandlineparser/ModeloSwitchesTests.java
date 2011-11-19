@@ -76,8 +76,9 @@ public class ModeloSwitchesTests extends CustomParserTests {
 		assertEquals("Observacao do modelo", "observacao", addSwitches.getObservacao());
 	}
 	
-	private ModeloSimulateSwitches doModeloSimulateLoad(String[] args) throws ParserException {
-		doModeloLoad(args, ModeloCommand.SIMULATE);
+	@Test
+	public void doSimulateTest() throws ParserException {
+		doModeloLoad(new String[] { "modelo", "simulate", "nome modelo" }, ModeloCommand.SIMULATE);
 
 		assertNull("Switches de lista", modeloSwitches.getListSwitches());
 		assertNull("Switches de add", modeloSwitches.getAddSwitches());
@@ -85,13 +86,26 @@ public class ModeloSwitchesTests extends CustomParserTests {
 		assertNull("Switches de remove", modeloSwitches.getRemoveSwitches());
 		assertNull("Switches de clone", modeloSwitches.getCloneSwitches());
 
-		return modeloSwitches.getSimulateSwitches();
+
+		ModeloSimulateSwitches simulateSwitches = modeloSwitches.getSimulateSwitches();
+
+		assertEquals("Nome do modelo", "nome modelo", simulateSwitches.getNomeModelo());
 	}
 	
 	@Test
-	public void doSimulateTest() throws ParserException {
-		ModeloSimulateSwitches simulateSwitches = doModeloSimulateLoad(new String[] { "modelo", "simulate", "nome modelo" });
+	public void doRemoveTest() throws ParserException {
+		doModeloLoad(new String[] { "modelo", "rm", "nome modelo" }, ModeloCommand.REMOVE);
 
-		assertEquals("Nome do modelo", "nome modelo", simulateSwitches.getNomeModelo());
+		assertNull("Switches de lista", modeloSwitches.getListSwitches());
+		assertNull("Switches de add", modeloSwitches.getAddSwitches());
+		assertNull("Switches de simulate", modeloSwitches.getSimulateSwitches());
+		assertNotNull("Switches de remove", modeloSwitches.getRemoveSwitches());
+		assertNull("Switches de clone", modeloSwitches.getCloneSwitches());
+
+
+		ModeloRemoveSwitches removeSwitches = modeloSwitches.getRemoveSwitches();
+
+		assertEquals("Nome do modelo", "nome modelo", removeSwitches.getNomeModelo());
+		
 	}
 }
