@@ -36,14 +36,14 @@ public class ContaSwitchesTests extends CustomParserTests {
 	public void doContaListTest() throws ParserException {
 		ContaListSwitches contaListSwitches = doContaListLoad(new String[] {"conta", "ls"});
 		
-		assertNull("clausula where", contaListSwitches.getWhere());
+		assertNull("filtro de nome", contaListSwitches.getFiltroNome());
 	}
 	
 	@Test
 	public void doContaListTest2() throws ParserException {
-		ContaListSwitches contaListSwitches = doContaListLoad(new String[] {"conta", "ls", "where_clause"});
+		ContaListSwitches contaListSwitches = doContaListLoad(new String[] {"conta", "ls", "nome para filtrar"});
 		
-		assertEquals("clausula where", "where_clause", contaListSwitches.getWhere());
+		assertEquals("filtro de nome", "nome para filtrar", contaListSwitches.getFiltroNome());
 	}
 	
 	private ContaAddSwitches doContaAddLoad(String[] args) throws ParserException {

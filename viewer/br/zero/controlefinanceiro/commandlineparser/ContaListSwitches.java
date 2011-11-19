@@ -4,14 +4,14 @@ import br.zero.commandlineparser.CommandLineSwitch;
 
 public class ContaListSwitches {
 	
-	private String where;
+	private String filtroNome;
 
 	@CommandLineSwitch(index=1)
-	public void setWhere(String value) {
-		this.where = value;
+	public void setFiltroNome(String value) {
+		this.filtroNome = value;
 	}
 	
-	public String getWhere() {
-		return where;
+	public String getFiltroNome() {
+		return filtroNome;
 	}
 }
