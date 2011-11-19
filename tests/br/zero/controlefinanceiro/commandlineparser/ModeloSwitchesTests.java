@@ -106,6 +106,22 @@ public class ModeloSwitchesTests extends CustomParserTests {
 		ModeloRemoveSwitches removeSwitches = modeloSwitches.getRemoveSwitches();
 
 		assertEquals("Nome do modelo", "nome modelo", removeSwitches.getNomeModelo());
-		
+	}
+	
+	@Test
+	public void doCloneTest() throws ParserException {
+		doModeloLoad(new String[] { "modelo", "clone", "modelo base", "modelo novo"}, ModeloCommand.CLONE);
+
+		assertNull("Switches de lista", modeloSwitches.getListSwitches());
+		assertNull("Switches de add", modeloSwitches.getAddSwitches());
+		assertNull("Switches de simulate", modeloSwitches.getSimulateSwitches());
+		assertNull("Switches de remove", modeloSwitches.getRemoveSwitches());
+		assertNotNull("Switches de clone", modeloSwitches.getCloneSwitches());
+
+
+		ModeloCloneSwitches removeSwitches = modeloSwitches.getCloneSwitches();
+
+		assertEquals("Modelo base", "modelo base", removeSwitches.getModeloBase());
+		assertEquals("Modelo novo", "modelo novo", removeSwitches.getModeloNovo());
 	}
 }
