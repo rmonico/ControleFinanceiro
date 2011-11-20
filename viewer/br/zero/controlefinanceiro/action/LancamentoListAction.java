@@ -18,9 +18,7 @@ public class LancamentoListAction implements Action {
 
 	}
 
-	private static final TextGrid grid = createGrid();
-
-	private static TextGrid createGrid() {
+	private TextGrid createGrid() {
 		TextGrid grid = new TextGrid();
 		
 		grid.getData().setHeaderSeparatorChar('=');
@@ -43,6 +41,8 @@ public class LancamentoListAction implements Action {
 
 		List<Lancamento> lancamentoList = dao.listarTodos();
 
+		TextGrid grid = createGrid();
+		
 		grid.setValues(lancamentoList);
 
 		try {
