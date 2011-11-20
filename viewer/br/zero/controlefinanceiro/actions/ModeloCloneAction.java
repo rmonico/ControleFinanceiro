@@ -5,13 +5,7 @@ import br.zero.tinycontroller.Action;
 public class ModeloCloneAction implements Action {
 
 	@Override
-	public void setParams(Object o) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void run() {
+	public void run(Object param) {
 		// TODO Auto-generated method stub
 
 	}

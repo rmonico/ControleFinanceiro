@@ -6,11 +6,11 @@ import br.zero.commandlineparser.SubCommandLine;
 public class LancamentoSwitches {
 
 	private LancamentoCommand command;
-	private LancamentoListSwitches listSwitches;
-	private LancamentoBalanceSwitches balanceSwitches;
-	private LancamentoAddSwitches addSwitches;
-	private LancamentoAddFullSwitches addFullSwitches;
-	private LancamentoRemoveSwitches removeSwitches;
+	private LancamentoListSwitches listSwitches = new LancamentoListSwitches();
+	private LancamentoBalanceSwitches balanceSwitches = new LancamentoBalanceSwitches();
+	private LancamentoAddSwitches addSwitches = new LancamentoAddSwitches();
+	private LancamentoAddFullSwitches addFullSwitches = new LancamentoAddFullSwitches();
+	private LancamentoRemoveSwitches removeSwitches = new LancamentoRemoveSwitches();
 
 	@CommandLineSwitch(index = 1, parser = "LancamentoCommandParser.parseComplexEnum", complexParser = true, subCommandLineProperties = {
 			@SubCommandLine(value = "LIST", subCommandLineClass = LancamentoListSwitches.class, propertyName = "setListSwitches"), 

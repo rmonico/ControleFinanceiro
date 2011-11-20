@@ -6,13 +6,7 @@ import br.zero.tinycontroller.Action;
 public class ContaAddAction implements Action {
 
 	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setParams(Object o) {
+	public void run(Object param) {
 		// TODO Auto-generated method stub
 
 	}

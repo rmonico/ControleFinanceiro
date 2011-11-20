@@ -8,15 +8,8 @@ import br.zero.controlefinanceiro.model.LancamentoDAO;
 import br.zero.textgrid.TextGrid;
 import br.zero.textgrid.TextGridException;
 import br.zero.tinycontroller.Action;
-import br.zero.tinycontroller.TinyControllerException;
 
 public class LancamentoListAction implements Action {
-
-	@Override
-	public void setParams(Object o) {
-		// TODO Auto-generated method stub
-
-	}
 
 	private TextGrid createGrid() {
 		TextGrid grid = new TextGrid();
@@ -36,7 +29,7 @@ public class LancamentoListAction implements Action {
 	}
 
 	@Override
-	public void run() throws TinyControllerException {
+	public void run(Object param) throws TextGridException {
 		LancamentoDAO dao = new LancamentoDAO();
 
 		List<Lancamento> lancamentoList = dao.listarTodos();
@@ -45,11 +38,7 @@ public class LancamentoListAction implements Action {
 		
 		grid.setValues(lancamentoList);
 
-		try {
-			grid.show();
-		} catch (TextGridException e) {
-			throw new TinyControllerException(e);
-		}
+		grid.show();
 	}
 
 }

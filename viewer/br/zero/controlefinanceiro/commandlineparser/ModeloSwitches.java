@@ -6,11 +6,11 @@ import br.zero.commandlineparser.SubCommandLine;
 public class ModeloSwitches {
 
 	private ModeloCommand command;
-	private ModeloListSwitches listSwitches;
-	private ModeloAddSwitches addSwitches;
-	private ModeloSimulateSwitches simulateSwitches;
-	private ModeloRemoveSwitches removeSwitches;
-	private ModeloCloneSwitches cloneSwitches;
+	private ModeloListSwitches listSwitches = new ModeloListSwitches();
+	private ModeloAddSwitches addSwitches = new ModeloAddSwitches();
+	private ModeloSimulateSwitches simulateSwitches = new ModeloSimulateSwitches();
+	private ModeloRemoveSwitches removeSwitches = new ModeloRemoveSwitches();
+	private ModeloCloneSwitches cloneSwitches = new ModeloCloneSwitches();
 
 	public ModeloCommand getCommand() {
 		return command;

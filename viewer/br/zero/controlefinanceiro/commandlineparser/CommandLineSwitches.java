@@ -6,12 +6,12 @@ import br.zero.commandlineparser.SubCommandLine;
 public class CommandLineSwitches {
 
 	private Entity entity;
-	private BackupSwitches backupSwitches;
-	private ContaSwitches contaSwitches;
-	private LancamentoSwitches lancamentoSwitches;
-	private ModeloSwitches modeloSwitches;
-	private LancamentoModeloSwitches lancamentoModeloSwitches;
-	private HelpSwitches helpSwitches;
+	private BackupSwitches backupSwitches = new BackupSwitches();
+	private ContaSwitches contaSwitches = new ContaSwitches();
+	private LancamentoSwitches lancamentoSwitches = new LancamentoSwitches();
+	private ModeloSwitches modeloSwitches = new ModeloSwitches();
+	private LancamentoModeloSwitches lancamentoModeloSwitches = new LancamentoModeloSwitches();
+	private HelpSwitches helpSwitches = new HelpSwitches();
 
 	/**
 	 * Argumento principal da linha de comando.

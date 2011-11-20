@@ -6,9 +6,9 @@ import br.zero.commandlineparser.SubCommandLine;
 public class ContaSwitches {
 
 	private ContaCommand command;
-	private ContaAddSwitches addSwitches;
-	private ContaRemoveSwitches removeSwitches;
-	private ContaListSwitches listSwitches;
+	private ContaAddSwitches addSwitches = new ContaAddSwitches();
+	private ContaRemoveSwitches removeSwitches = new ContaRemoveSwitches();
+	private ContaListSwitches listSwitches = new ContaListSwitches();
 	
 	@CommandLineSwitch(index=1, parser = "ContaCommandParser.parseComplexEnum", complexParser = true, subCommandLineProperties = {
 			@SubCommandLine(value = "ADD", subCommandLineClass = ContaAddSwitches.class, propertyName = "setAddSwitches"),

@@ -6,9 +6,9 @@ import br.zero.commandlineparser.SubCommandLine;
 public class LancamentoModeloSwitches {
 
 	private LancamentoModeloCommand command;
-	private LancamentoModeloListSwitches lancamentoModeloListSwitches;
-	private LancamentoModeloAddSwitches lancamentoModeloAddSwitches;
-	private LancamentoModeloRemoveSwitches lancamentoModeloRemoveSwitches;
+	private LancamentoModeloListSwitches lancamentoModeloListSwitches = new LancamentoModeloListSwitches();
+	private LancamentoModeloAddSwitches lancamentoModeloAddSwitches = new LancamentoModeloAddSwitches();
+	private LancamentoModeloRemoveSwitches lancamentoModeloRemoveSwitches = new LancamentoModeloRemoveSwitches();
 
 	public LancamentoModeloCommand getCommand() {
 		return command;
