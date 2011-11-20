@@ -12,9 +12,8 @@ public class LancamentoListAction implements Action {
 
 	@Override
 	public void run() {
-//		private void listarLancamentos() {
-////	System.out.println("Modelos de Lançamento:\n\n");
-//	LancamentoDAO dao = new LancamentoDAO();
+//	System.out.println("Modelos de Lançamento:\n\n");
+//	LancamentoModeloDAO dao = new LancamentoModeloDAO();
 //
 //	for (Lancamento lancamento : dao.listarTodos()) {
 //		StringBuilder sb = new StringBuilder();
@@ -37,7 +36,7 @@ public class LancamentoListAction implements Action {
 //	
 //	System.out.println("-- Fim");
 //
-//}
+//
 	}
 
 }

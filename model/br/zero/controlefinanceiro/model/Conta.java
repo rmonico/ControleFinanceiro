@@ -1,4 +1,4 @@
-package br.zero.controlefinanceiro.model.comum;
+package br.zero.controlefinanceiro.model;
 
 import br.zero.customdao.EntitySetup;
 
@@ -10,16 +10,17 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(schema = "controlefinanceiro_comum")
+@Table(schema = "controlefinanceiro")
 @EntitySetup(findAllQuery = "select c from Conta c order by c.nome", findByIdQuery = "select c from Conta c where l.id=:id", idFieldName = "id")
 public class Conta implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	@SequenceGenerator(name = "CONTROLEFINANCEIRO_COMUM.CONTA_ID_SEQ", sequenceName = "CONTROLEFINANCEIRO_COMUM.CONTA_ID_SEQ")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CONTROLEFINANCEIRO_COMUM.CONTA_ID_SEQ")
+	@SequenceGenerator(name = "CONTROLEFINANCEIRO.CONTA_ID_SEQ", sequenceName = "CONTROLEFINANCEIRO.CONTA_ID_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CONTROLEFINANCEIRO.CONTA_ID_SEQ")
 	private Integer id;
 	private String nome;
+	private String observacao;	
 
 	public Integer getId() {
 		return this.id;
@@ -35,5 +36,13 @@ public class Conta implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getObservacao() {
+		return this.observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
 	}
 }

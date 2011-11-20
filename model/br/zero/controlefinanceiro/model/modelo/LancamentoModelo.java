@@ -11,8 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import br.zero.controlefinanceiro.model.comum.Conta;
-import br.zero.controlefinanceiro.model.comum.FormaPagamento;
+import br.zero.controlefinanceiro.model.Conta;
 import br.zero.customdao.EntitySetup;
 
 /**
@@ -21,8 +20,8 @@ import br.zero.customdao.EntitySetup;
  */
 @Entity
 @Table(schema = "controlefinanceiro_modelo")
-@EntitySetup(findAllQuery = "select l from Lancamento l order by l.diavencimento", findByIdQuery = "select l from Lancamento l where l.id=:id", idFieldName = "id")
-public class Lancamento implements Serializable {
+@EntitySetup(findAllQuery = "select l from LancamentoModelo l order by l.diavencimento", findByIdQuery = "select l from LancamentoModelo l where l.id=:id", idFieldName = "id")
+public class LancamentoModelo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -31,23 +30,24 @@ public class Lancamento implements Serializable {
 	private Integer id;
 
 	@ManyToOne
-	@JoinColumn(name = "ContaDestinoID")
-	private Conta contaDestino;
+	@JoinColumn(name = "ModeloID")
+	private Modelo modelo;
+	
+	private Integer diavencimento;
 
 	@ManyToOne
 	@JoinColumn(name = "ContaOrigemID")
 	private Conta contaOrigem;
 
-	private Integer diavencimento;
-
 	@ManyToOne
-	@JoinColumn(name = "FormaPagamentoID")
-	private FormaPagamento formaPagamento;
-
-	private String observacao;
+	@JoinColumn(name = "ContaDestinoID")
+	private Conta contaDestino;
 
 	private double valor;
 
+	private String observacao;
+
+	
 	public Integer getId() {
 		return this.id;
 	}
@@ -56,12 +56,20 @@ public class Lancamento implements Serializable {
 		this.id = id;
 	}
 
-	public Conta getContaDestino() {
-		return contaDestino;
+	public Modelo getModelo() {
+		return modelo;
+	}
+	
+	public void setModelo(Modelo modelo) {
+		this.modelo = modelo;
+	}
+	
+	public Integer getDiavencimento() {
+		return this.diavencimento;
 	}
 
-	public void setContaDestinoID(Conta value) {
-		contaDestino = value;
+	public void setDiavencimento(Integer diavencimento) {
+		this.diavencimento = diavencimento;
 	}
 
 	public Conta getContaOrigem() {
@@ -72,28 +80,12 @@ public class Lancamento implements Serializable {
 		this.contaOrigem = value;
 	}
 
-	public Integer getDiavencimento() {
-		return this.diavencimento;
+	public Conta getContaDestino() {
+		return contaDestino;
 	}
 
-	public void setDiavencimento(Integer diavencimento) {
-		this.diavencimento = diavencimento;
-	}
-
-	public FormaPagamento getFormaPagamento() {
-		return this.formaPagamento;
-	}
-
-	public void setFormaPagamento(FormaPagamento value) {
-		this.formaPagamento = value;
-	}
-
-	public String getObservacao() {
-		return this.observacao;
-	}
-
-	public void setObservacao(String observacao) {
-		this.observacao = observacao;
+	public void setContaDestinoID(Conta value) {
+		contaDestino = value;
 	}
 
 	public double getValor() {
@@ -102,6 +94,14 @@ public class Lancamento implements Serializable {
 
 	public void setValor(double valor) {
 		this.valor = valor;
+	}
+
+	public String getObservacao() {
+		return this.observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
 	}
 
 }

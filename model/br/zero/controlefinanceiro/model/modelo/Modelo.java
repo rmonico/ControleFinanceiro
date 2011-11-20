@@ -17,16 +17,19 @@ import br.zero.customdao.EntitySetup;
  */
 @Entity
 @Table(schema = "controlefinanceiro_modelo")
-@EntitySetup(findAllQuery = "select o from Orcamento o order by o.nome", findByIdQuery = "select o from Orcamento o where o.id=:id", idFieldName = "id")
-public class Orcamento implements Serializable {
+@EntitySetup(findAllQuery = "select o from Modelo o order by o.nome", findByIdQuery = "select o from Modelo o where o.id=:id", idFieldName = "id")
+public class Modelo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "CONTROLEFINANCEIRO_MODELO.ORCAMENTO_ID_SEQ", sequenceName = "CONTROLEFINANCEIRO_MODELO.ORCAMENTO_ID_SEQ")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CONTROLEFINANCEIRO_MODELO.ORCAMENTO_ID_SEQ")
+	@SequenceGenerator(name = "CONTROLEFINANCEIRO_MODELO.MODELO_ID_SEQ", sequenceName = "CONTROLEFINANCEIRO_MODELO.MODELO_ID_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CONTROLEFINANCEIRO_MODELO.MODELO_ID_SEQ")
 	private Integer id;
 
 	private String nome;
+	
+	private String observacao;
+	
 
 	public Integer getId() {
 		return this.id;
@@ -42,6 +45,14 @@ public class Orcamento implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	public String getObservacao() {
+		return observacao;
+	}
+	
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
 	}
 
 }

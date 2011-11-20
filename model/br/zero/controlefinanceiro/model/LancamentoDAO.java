@@ -1,4 +1,4 @@
-package br.zero.controlefinanceiro.model.modelo;
+package br.zero.controlefinanceiro.model;
 
 import br.zero.customdao.CustomDAO;
 import br.zero.customdao.DAOSetup;
