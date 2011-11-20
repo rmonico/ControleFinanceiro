@@ -4,11 +4,11 @@ import java.text.SimpleDateFormat;
 import java.util.Map;
 
 import br.zero.commandlineparser.CommandLineParser;
+import br.zero.commandlineparser.IInvalidCommandLineArgument;
+import br.zero.commandlineparser.ParserException;
 import br.zero.commandlineparser.parsers.EnumParser;
 import br.zero.commandlineparser.parsers.PrimitiveParsers;
 import br.zero.commandlineparser.parsers.UtilsParser;
-import br.zero.switchesparser.IInvalidCommandLineArgument;
-import br.zero.switchesparser.ParserException;
 
 public class CommandLineLoader {
 

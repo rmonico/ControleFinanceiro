@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import br.zero.switchesparser.ParserException;
+import br.zero.commandlineparser.ParserException;
 
 public class BackupSwitchesTests extends CustomParserTests {
 	

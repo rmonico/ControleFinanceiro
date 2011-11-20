@@ -2,7 +2,7 @@ package br.zero.controlefinanceiro.commandlineparser;
 
 import org.junit.Before;
 
-import br.zero.switchesparser.ParserException;
+import br.zero.commandlineparser.ParserException;
 
 
 public class CustomParserTests {
