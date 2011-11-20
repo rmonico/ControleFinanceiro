@@ -1,8 +1,8 @@
-package br.zero.controlefinanceiro.action;
+package br.zero.controlefinanceiro.actions;
 
 import br.zero.tinycontroller.Action;
 
-public class ModeloAddAction implements Action {
+public class LancamentoBalanceAction implements Action {
 
 	@Override
 	public void setParams(Object o) {

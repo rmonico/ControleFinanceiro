@@ -1,8 +1,8 @@
-package br.zero.controlefinanceiro.action;
+package br.zero.controlefinanceiro.actions;
 
 import br.zero.tinycontroller.Action;
 
-public class ContaRemoveAction implements Action {
+public class LancamentoRemoveAction implements Action {
 
 	@Override
 	public void setParams(Object o) {

@@ -1,4 +1,4 @@
-package br.zero.controlefinanceiro.action;
+package br.zero.controlefinanceiro.actions;
 
 import java.util.List;
 

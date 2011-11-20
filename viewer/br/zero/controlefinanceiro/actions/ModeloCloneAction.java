@@ -1,8 +1,8 @@
-package br.zero.controlefinanceiro.action;
+package br.zero.controlefinanceiro.actions;
 
 import br.zero.tinycontroller.Action;
 
-public class ContaListAction implements Action {
+public class ModeloCloneAction implements Action {
 
 	@Override
 	public void setParams(Object o) {
