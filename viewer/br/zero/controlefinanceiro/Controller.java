@@ -13,8 +13,6 @@ import br.zero.controlefinanceiro.actions.BackupAction;
 import br.zero.controlefinanceiro.actions.ContaAddAction;
 import br.zero.controlefinanceiro.commandlineparser.CommandLineSwitches;
 import br.zero.controlefinanceiro.commandlineparser.ContaSwitches;
-import br.zero.controlefinanceiro.commandlineparser.LancamentoAddFullSwitches;
-import br.zero.controlefinanceiro.commandlineparser.LancamentoBalanceSwitches;
 import br.zero.controlefinanceiro.commandlineparser.LancamentoSwitches;
 import br.zero.controlefinanceiro.commandlineparser.ModeloSwitches;
 
