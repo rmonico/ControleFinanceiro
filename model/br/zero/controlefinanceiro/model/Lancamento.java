@@ -15,7 +15,8 @@ import br.zero.customdao.EntitySetup;
 
 @Entity
 @Table(schema = "controlefinanceiro")
-@EntitySetup(findAllQuery = "select l from LancamentoModelo l order by data", findByIdQuery = "select l from LancamentoModelo l where l.id=:id", idFieldName = "id")
+//@EntitySetup(findAllQuery = "select l from Lancamento l order by data", findByIdQuery = "select l from Lancamento l where l.id=:id", idFieldName = "id")
+@EntitySetup(findAllQuery = "select l from Lancamento l", findByIdQuery = "select l from Lancamento l where l.id=:id", idFieldName = "id")
 public class Lancamento {
 
 	@Id
@@ -25,8 +26,8 @@ public class Lancamento {
 
 	
 	@ManyToOne
-	@JoinColumn(name = "LancamentoPrevistoID")
-	private br.zero.controlefinanceiro.model.modelo.LancamentoModelo lancamentoPrevisto;
+	@JoinColumn(name = "LancamentoModeloID")
+	private br.zero.controlefinanceiro.model.modelo.LancamentoModelo lancamentoModelo;
 	
 	private Calendar data;
 	
@@ -53,12 +54,12 @@ public class Lancamento {
 		this.id = id;
 	}
 
-	public br.zero.controlefinanceiro.model.modelo.LancamentoModelo getLancamentoPrevisto() {
-		return lancamentoPrevisto;
+	public br.zero.controlefinanceiro.model.modelo.LancamentoModelo getLancamentoModelo() {
+		return lancamentoModelo;
 	}
 
-	public void setLancamentoPrevisto(br.zero.controlefinanceiro.model.modelo.LancamentoModelo lancamentoPrevisto) {
-		this.lancamentoPrevisto = lancamentoPrevisto;
+	public void setLancamentoModelo(br.zero.controlefinanceiro.model.modelo.LancamentoModelo lancamentoModelo) {
+		this.lancamentoModelo = lancamentoModelo;
 	}
 
 	public Calendar getData() {
