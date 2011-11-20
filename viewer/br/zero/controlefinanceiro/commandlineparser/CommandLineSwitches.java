@@ -78,4 +78,32 @@ public class CommandLineSwitches {
 	public HelpSwitches getHelpSwitches() {
 		return helpSwitches;
 	}
+	
+	public Enum<?> getEntityCommand() {
+		switch (entity) {
+		case BACKUP: {
+			return null;
+		}
+		case CONTA: {
+			return contaSwitches.getCommand();
+		}
+		case LANCAMENTO: {
+			return lancamentoSwitches.getCommand();
+		}
+		case MODELO: {
+			return modeloSwitches.getCommand();
+		}
+		case LANCAMENTO_MODELO: {
+			return lancamentoModeloSwitches.getCommand();
+		}
+		case HELP: {
+			return null;
+		}
+
+		default: {
+			return null;
+		}
+		}
+	}
+
 }

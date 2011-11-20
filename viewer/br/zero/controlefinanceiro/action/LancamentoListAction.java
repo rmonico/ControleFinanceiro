@@ -8,7 +8,7 @@ import br.zero.controlefinanceiro.model.LancamentoDAO;
 import br.zero.textgrid.TextGrid;
 import br.zero.textgrid.TextGridException;
 import br.zero.tinycontroller.Action;
-import br.zero.tinycontroller.ActionException;
+import br.zero.tinycontroller.TinyControllerException;
 
 public class LancamentoListAction implements Action {
 
@@ -38,7 +38,7 @@ public class LancamentoListAction implements Action {
 	}
 
 	@Override
-	public void run() throws ActionException {
+	public void run() throws TinyControllerException {
 		LancamentoDAO dao = new LancamentoDAO();
 
 		List<Lancamento> lancamentoList = dao.listarTodos();
@@ -48,7 +48,7 @@ public class LancamentoListAction implements Action {
 		try {
 			grid.show();
 		} catch (TextGridException e) {
-			throw new ActionException(e);
+			throw new TinyControllerException(e);
 		}
 	}
 
