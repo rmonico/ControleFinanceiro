@@ -1,11 +1,11 @@
 package br.zero.controlefinanceiro;
 
-import br.zero.controlefinanceiro.actions.Action;
+import br.zero.tinycontroller.Action;
 
 public class ModeloCloneAction implements Action {
 
 	@Override
-	public void setSwitches(Object o) {
+	public void setParams(Object o) {
 		// TODO Auto-generated method stub
 
 	}

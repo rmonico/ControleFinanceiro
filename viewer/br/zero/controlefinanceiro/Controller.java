@@ -8,13 +8,13 @@ import br.zero.controlefinanceiro.action.LancamentoBalanceAction;
 import br.zero.controlefinanceiro.action.LancamentoListAction;
 import br.zero.controlefinanceiro.action.LancamentoRemoveAction;
 import br.zero.controlefinanceiro.action.ModeloAddAction;
-import br.zero.controlefinanceiro.actions.Action;
 import br.zero.controlefinanceiro.actions.BackupAction;
 import br.zero.controlefinanceiro.actions.ContaAddAction;
 import br.zero.controlefinanceiro.commandlineparser.CommandLineSwitches;
 import br.zero.controlefinanceiro.commandlineparser.ContaSwitches;
 import br.zero.controlefinanceiro.commandlineparser.LancamentoSwitches;
 import br.zero.controlefinanceiro.commandlineparser.ModeloSwitches;
+import br.zero.tinycontroller.Action;
 
 public class Controller {
 
@@ -170,7 +170,7 @@ public class Controller {
 		Object switches = data.getSwitches();
 
 		if ((action != null) && (switches != null)) {
-			action.setSwitches(switches);
+			action.setParams(switches);
 		}
 
 		return action;

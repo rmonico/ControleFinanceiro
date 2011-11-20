@@ -1,10 +1,11 @@
 package br.zero.controlefinanceiro;
 
 
-import br.zero.controlefinanceiro.actions.Action;
 import br.zero.controlefinanceiro.commandlineparser.CommandLineLoader;
 import br.zero.controlefinanceiro.commandlineparser.CommandLineSwitches;
 import br.zero.switchesparser.ParserException;
+import br.zero.tinycontroller.Action;
+import br.zero.tinycontroller.ActionException;
 
 public class Main {
 
@@ -33,7 +34,7 @@ public class Main {
 		return loader.getSwitches();
 	}
 	
-	private void runController(CommandLineSwitches switches) {
+	private void runController(CommandLineSwitches switches) throws ActionException {
 		Controller mainController = new Controller();
 		
 		mainController.setSwitches(switches);

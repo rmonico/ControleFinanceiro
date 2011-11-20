@@ -1,11 +1,11 @@
 package br.zero.controlefinanceiro.action;
 
-import br.zero.controlefinanceiro.actions.Action;
+import br.zero.tinycontroller.Action;
 
 public class ContaRemoveAction implements Action {
 
 	@Override
-	public void setSwitches(Object o) {
+	public void setParams(Object o) {
 		// TODO Auto-generated method stub
 
 	}

@@ -10,13 +10,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import br.zero.controlefinanceiro.model.modelo.LancamentoModelo;
 import br.zero.customdao.EntitySetup;
 
 @Entity
-@Table(schema = "controlefinanceiro")
+@Table(name="lancamento", schema = "controlefinanceiro")
 //@EntitySetup(findAllQuery = "select l from Lancamento l order by data", findByIdQuery = "select l from Lancamento l where l.id=:id", idFieldName = "id")
-@EntitySetup(findAllQuery = "select l from Lancamento l", findByIdQuery = "select l from Lancamento l where l.id=:id", idFieldName = "id")
+@EntitySetup(findAllQuery = "select l from Lancamento l order by l.id", findByIdQuery = "select l from Lancamento l where l.id=:id", idFieldName = "id")
 public class Lancamento {
 
 	@Id
@@ -27,8 +30,9 @@ public class Lancamento {
 	
 	@ManyToOne
 	@JoinColumn(name = "LancamentoModeloID")
-	private br.zero.controlefinanceiro.model.modelo.LancamentoModelo lancamentoModelo;
+	private LancamentoModelo lancamentoModelo;
 	
+	@Temporal(TemporalType.DATE)
 	private Calendar data;
 	
 	private int n;
@@ -54,11 +58,11 @@ public class Lancamento {
 		this.id = id;
 	}
 
-	public br.zero.controlefinanceiro.model.modelo.LancamentoModelo getLancamentoModelo() {
+	public LancamentoModelo getLancamentoModelo() {
 		return lancamentoModelo;
 	}
 
-	public void setLancamentoModelo(br.zero.controlefinanceiro.model.modelo.LancamentoModelo lancamentoModelo) {
+	public void setLancamentoModelo(LancamentoModelo lancamentoModelo) {
 		this.lancamentoModelo = lancamentoModelo;
 	}
 

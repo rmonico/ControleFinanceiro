@@ -1,43 +1,55 @@
 package br.zero.controlefinanceiro.action;
 
-import br.zero.controlefinanceiro.actions.Action;
+import java.util.List;
+
+import br.zero.controlefinanceiro.ControleFinanceiroFormatters;
 import br.zero.controlefinanceiro.model.Lancamento;
 import br.zero.controlefinanceiro.model.LancamentoDAO;
+import br.zero.textgrid.TextGrid;
+import br.zero.textgrid.TextGridException;
+import br.zero.tinycontroller.Action;
+import br.zero.tinycontroller.ActionException;
 
 public class LancamentoListAction implements Action {
 
 	@Override
-	public void setSwitches(Object o) {
+	public void setParams(Object o) {
 		// TODO Auto-generated method stub
 
 	}
 
+	private static final TextGrid grid = createGrid();
+
+	private static TextGrid createGrid() {
+		TextGrid grid = new TextGrid();
+		
+		grid.getData().setHeaderSeparatorChar('=');
+		grid.getData().setTitle("Lista de Lançamentos");
+		
+		grid.getData().createColumn("id", TextGrid.ID_FORMATTER, "getId");
+		grid.getData().createColumn("data", TextGrid.DATE_FORMATTER, "getData");
+		grid.getData().createColumn("n", TextGrid.INTEGER_FORMATTER, "getN");
+		grid.getData().createColumn("contaorigem", ControleFinanceiroFormatters.CONTA_FORMATTER, "getContaOrigem", " -> ");
+		grid.getData().createColumn("contadestino", ControleFinanceiroFormatters.CONTA_FORMATTER, "getContaDestino");
+		grid.getData().createColumn("valor", TextGrid.MONEY_FORMATTER, "getValor");
+		grid.getData().createColumn("observacao", TextGrid.STRING_FORMATTER, "getObservacao");
+		
+		return grid;
+	}
+
 	@Override
-	public void run() {
-		System.out.println("Modelos de Lançamento:\n\n");
+	public void run() throws ActionException {
 		LancamentoDAO dao = new LancamentoDAO();
 
-		for (Lancamento lancamento : dao.listarTodos()) {
-			StringBuilder sb = new StringBuilder();
+		List<Lancamento> lancamentoList = dao.listarTodos();
 
-			sb.append("#" + lancamento.getId());
-			sb.append("; " + lancamento.getData());
-			sb.append("; " + lancamento.getN() + " [");
-			sb.append(lancamento.getContaOrigem().getNome() + " -- " + lancamento.getContaDestino().getNome() + "; ");
-			sb.append("$" + lancamento.getValor() + "; ");
-			if (lancamento.getObservacao() != null) {
-				sb.append("; (" + lancamento.getObservacao() + ")");
-			}
+		grid.setValues(lancamentoList);
 
-			sb.append("]");
-
-			System.out.println(sb.toString());
+		try {
+			grid.show();
+		} catch (TextGridException e) {
+			throw new ActionException(e);
 		}
-
-		System.out.println("\n");
-
-		System.out.println("-- Fim");
-
 	}
 
 }

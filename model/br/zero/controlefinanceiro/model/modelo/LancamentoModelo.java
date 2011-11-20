@@ -1,7 +1,5 @@
 package br.zero.controlefinanceiro.model.modelo;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,10 +17,9 @@ import br.zero.customdao.EntitySetup;
  * 
  */
 @Entity
-@Table(schema = "controlefinanceiro_modelo")
+@Table(name="lancamento", schema = "controlefinanceiro_modelo")
 @EntitySetup(findAllQuery = "select l from LancamentoModelo l order by l.diavencimento", findByIdQuery = "select l from LancamentoModelo l where l.id=:id", idFieldName = "id")
-public class LancamentoModelo implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class LancamentoModelo {
 
 	@Id
 	@SequenceGenerator(name = "CONTROLEFINANCEIRO_MODELO.LANCAMENTO_ID_SEQ", sequenceName = "CONTROLEFINANCEIRO_MODELO.LANCAMENTO_ID_SEQ")
