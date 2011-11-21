@@ -9,7 +9,7 @@ public class LancamentoAddFullSwitches {
 	private Calendar date;
 	private String contaOrigem;
 	private String contaDestino;
-	private double valor;
+	private Double valor;
 	private String observacao;
 
 
@@ -49,12 +49,12 @@ public class LancamentoAddFullSwitches {
 		this.contaDestino = contaDestino;
 	}
 
-	public double getValor() {
+	public Double getValor() {
 		return valor;
 	}
 
 	@CommandLineSwitch(index = 5, parser="PrimitiveParsers.parseDouble")
-	public void setValor(double valor) {
+	public void setValor(Double valor) {
 		this.valor = valor;
 	}
 
