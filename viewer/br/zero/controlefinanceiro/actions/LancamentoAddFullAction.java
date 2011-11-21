@@ -1,9 +1,5 @@
 package br.zero.controlefinanceiro.actions;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-
 import br.zero.controlefinanceiro.ControleFinanceiroException;
 import br.zero.controlefinanceiro.commandlineparser.LancamentoAddFullSwitches;
 import br.zero.controlefinanceiro.model.Conta;
@@ -57,15 +53,9 @@ public class LancamentoAddFullAction implements Action {
 		LancamentoModelo lancamentoModelo = lancamentoModeloDAO.getById(switches.getLancamentoModeloID());
 		
 		lancamento.setLancamentoModelo(lancamentoModelo);
-		
+		lancamento.setData(switches.getData());
 		lancamento.setContaOrigem(contaOrigem);
 		lancamento.setContaDestino(contaDestino);
-		
-		Calendar today = GregorianCalendar.getInstance();
-		today.setTime(new Date());
-		
-		lancamento.setData(today);
-		lancamento.setLancamentoModelo(null);
 		lancamento.setValor(switches.getValor());
 		lancamento.setObservacao(switches.getObservacao());
 		
