@@ -16,11 +16,11 @@ public class Conta implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	@SequenceGenerator(name = "CONTROLEFINANCEIRO.CONTA_ID_SEQ", sequenceName = "CONTROLEFINANCEIRO.CONTA_ID_SEQ")
+	@SequenceGenerator(name = "CONTROLEFINANCEIRO.CONTA_ID_SEQ", sequenceName = "CONTROLEFINANCEIRO.CONTA_ID_SEQ", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CONTROLEFINANCEIRO.CONTA_ID_SEQ")
 	private Integer id;
 	private String nome;
-	private String observacao;	
+	private String observacao;
 
 	public Integer getId() {
 		return this.id;

@@ -17,38 +17,35 @@ import br.zero.controlefinanceiro.model.modelo.LancamentoModelo;
 import br.zero.customdao.EntitySetup;
 
 @Entity
-@Table(name="lancamento", schema = "controlefinanceiro")
-//@EntitySetup(findAllQuery = "select l from Lancamento l order by data", findByIdQuery = "select l from Lancamento l where l.id=:id", idFieldName = "id")
-@EntitySetup(findAllQuery = "select l from Lancamento l order by l.id", findByIdQuery = "select l from Lancamento l where l.id=:id", idFieldName = "id")
+@Table(name = "lancamento", schema = "controlefinanceiro")
+@EntitySetup(findAllQuery = "select l from Lancamento l order by l.data, l.n", findByIdQuery = "select l from Lancamento l where l.id=:id", idFieldName = "id")
 public class Lancamento {
 
 	@Id
-	@SequenceGenerator(name = "CONTROLEFINANCEIRO.LANCAMENTO_ID_SEQ", sequenceName = "CONTROLEFINANCEIRO.LANCAMENTO_ID_SEQ")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CONTROLEFINANCEIRO.LANCAMENTO_ID_SEQ")
+	@SequenceGenerator(name = "CONTROLEFINANCEIRO.LANCAMENTO_ID_SEQ", sequenceName = "CONTROLEFINANCEIRO.LANCAMENTO_ID_SEQ", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "CONTROLEFINANCEIRO.LANCAMENTO_ID_SEQ")
 	private Integer id;
 
-	
 	@ManyToOne
 	@JoinColumn(name = "LancamentoModeloID")
 	private LancamentoModelo lancamentoModelo;
-	
+
 	@Temporal(TemporalType.DATE)
 	private Calendar data;
-	
+
 	private int n;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "ContaOrigemID")
 	private Conta contaOrigem;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "ContaDestinoID")
 	private Conta contaDestino;
-	
+
 	private Double valor;
-	
+
 	private String observacao;
-	
 
 	public Integer getId() {
 		return id;
@@ -77,11 +74,11 @@ public class Lancamento {
 	public int getN() {
 		return n;
 	}
-	
+
 	public void setN(int n) {
 		this.n = n;
 	}
-	
+
 	public Conta getContaOrigem() {
 		return contaOrigem;
 	}
@@ -113,5 +110,5 @@ public class Lancamento {
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
-	
+
 }
