@@ -5,7 +5,7 @@ import java.util.Calendar;
 import br.zero.commandlineparser.CommandLineSwitch;
 
 public class LancamentoAddFullSwitches {
-	private String modelo;
+	private int lancamentoModeloID;
 	private Calendar date;
 	private String contaOrigem;
 	private String contaDestino;
@@ -13,13 +13,13 @@ public class LancamentoAddFullSwitches {
 	private String observacao;
 
 
-	public String getModelo() {
-		return modelo;
+	public int getLancamentoModeloID() {
+		return lancamentoModeloID;
 	}
 
-	@CommandLineSwitch(index = 1)
-	public void setModelo(String modelo) {
-		this.modelo = modelo;
+	@CommandLineSwitch(index = 1, parser="PrimitiveParsers.parseInteger")
+	public void setLancamentoModeloID(int lancamentoModeloID) {
+		this.lancamentoModeloID = lancamentoModeloID;
 	}
 
 	public Calendar getData() {
