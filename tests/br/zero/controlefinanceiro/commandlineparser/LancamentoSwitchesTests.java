@@ -129,7 +129,7 @@ public class LancamentoSwitchesTests extends CustomParserTests {
 	private LancamentoAddFullSwitches baseAddFullTests(String[] args) throws ParserException {
 		LancamentoAddFullSwitches addFullSwitches = doLancamentoAddFullLoad(args);
 
-		assertEquals("Modelo", "modelo", addFullSwitches.getModelo());
+		assertEquals("Modelo", 105, addFullSwitches.getLancamentoModeloID());
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
 		assertEquals("Data", "18/Nov/2011", sdf.format(addFullSwitches.getData().getTime()));
 		assertEquals("Origem", "origem", addFullSwitches.getContaOrigem());
@@ -142,14 +142,14 @@ public class LancamentoSwitchesTests extends CustomParserTests {
 
 	@Test
 	public void doAddFullTest() throws ParserException {
-		LancamentoAddFullSwitches addFullSwitches = baseAddFullTests(new String[] { "lanc", "addfull", "modelo", "18/nov/2011", "origem", "destino", "3.99" });
+		LancamentoAddFullSwitches addFullSwitches = baseAddFullTests(new String[] { "lanc", "addfull", "105", "18/nov/2011", "origem", "destino", "3.99" });
 
 		assertNull("Observacao", addFullSwitches.getObservacao());
 	}
 
 	@Test
 	public void doAddFullTest2() throws ParserException {
-		LancamentoAddFullSwitches addFullSwitches = baseAddFullTests(new String[] { "lanc", "addfull", "modelo", "18/nov/2011", "origem", "destino", "3.99", "observacao" });
+		LancamentoAddFullSwitches addFullSwitches = baseAddFullTests(new String[] { "lanc", "addfull", "105", "18/nov/2011", "origem", "destino", "3.99", "observacao" });
 
 		assertEquals("Observacao", "observacao", addFullSwitches.getObservacao());
 	}
