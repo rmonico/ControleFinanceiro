@@ -72,10 +72,6 @@ public class LancamentoAddFullAction implements Action {
 		
 		LancamentoAddFullSwitches switches = (LancamentoAddFullSwitches) param;
 		
-		if (switches.getLancamentoModeloID() == null) {
-			throw new LancamentoAddFullException("Modelo deve ser informado.");
-		}
-		
 		if (switches.getData() == null) {
 			throw new LancamentoAddFullException("Data deve ser informada.");
 		}
