@@ -6,7 +6,7 @@ public class LancamentoAddFullAction implements Action {
 
 	@Override
 	public void run(Object param) {
-		// TODO Auto-generated method stub
+		throw new RuntimeException("Not implemented yet...");
 
 	}
 
