@@ -96,6 +96,6 @@ public class LancamentoModeloSwitchesTests extends CustomParserTests {
 		
 		LancamentoModeloRemoveSwitches removeSwitches = lancamentoModeloSwitches.getRemoveSwitches();
 		
-		assertEquals("ID", 54, removeSwitches.getId());
+		assertEquals("ID", (Integer) 54, removeSwitches.getId());
 	}
 }
