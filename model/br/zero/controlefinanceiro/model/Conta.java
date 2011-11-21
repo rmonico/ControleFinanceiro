@@ -11,7 +11,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(schema = "controlefinanceiro")
-@EntitySetup(findAllQuery = "select c from Conta c order by c.nome", findByIdQuery = "select c from Conta c where l.id=:id", idFieldName = "id")
+@EntitySetup(findAllQuery = "select c from Conta c order by c.nome", findByIdQuery = "select c from Conta c where c.id=:id", idFieldName = "id")
 public class Conta implements Serializable {
 
 	private static final long serialVersionUID = 1L;
