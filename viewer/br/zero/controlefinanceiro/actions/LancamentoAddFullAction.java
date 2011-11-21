@@ -82,20 +82,20 @@ public class LancamentoAddFullAction implements Action {
 		
 		LancamentoAddFullSwitches switches = (LancamentoAddFullSwitches) param;
 		
-		if (switches.getContaOrigem() ==  null) {
-			throw new LancamentoAddFullException("Conta de origem deve ser informada.");
-		}
-		
-		if (switches.getContaDestino() == null) {
-			throw new LancamentoAddFullException("Conta de destino deve ser informada.");
+		if (switches.getLancamentoModeloID() == null) {
+			throw new LancamentoAddFullException("Modelo deve ser informado.");
 		}
 		
 		if (switches.getData() == null) {
 			throw new LancamentoAddFullException("Data deve ser informada.");
 		}
 		
-		if (switches.getLancamentoModeloID() == null) {
-			throw new LancamentoAddFullException("Modelo deve ser informado.");
+		if (switches.getContaOrigem() ==  null) {
+			throw new LancamentoAddFullException("Conta de origem deve ser informada.");
+		}
+		
+		if (switches.getContaDestino() == null) {
+			throw new LancamentoAddFullException("Conta de destino deve ser informada.");
 		}
 		
 		return switches;
