@@ -5,7 +5,7 @@ import br.zero.commandlineparser.CommandLineSwitch;
 public class LancamentoAddSwitches {
 	private String contaOrigem;
 	private String contaDestino;
-	private double valor;
+	private Double valor;
 	private String observacao;
 
 	public String getContaOrigem() {
@@ -26,12 +26,12 @@ public class LancamentoAddSwitches {
 		this.contaDestino = contaDestino;
 	}
 
-	public double getValor() {
+	public Double getValor() {
 		return valor;
 	}
 
 	@CommandLineSwitch(index = 3, parser="PrimitiveParsers.parseDouble")
-	public void setValor(double valor) {
+	public void setValor(Double valor) {
 		this.valor = valor;
 	}
 
