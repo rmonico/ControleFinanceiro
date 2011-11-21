@@ -3,14 +3,14 @@ package br.zero.controlefinanceiro.commandlineparser;
 import br.zero.commandlineparser.CommandLineSwitch;
 
 public class LancamentoModeloRemoveSwitches {
-	private int id;
+	private Integer id;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
 	@CommandLineSwitch(index = 1, parser = "PrimitiveParsers.parseInteger")
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
