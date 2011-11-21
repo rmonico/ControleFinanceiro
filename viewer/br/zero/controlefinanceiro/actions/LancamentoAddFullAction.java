@@ -10,8 +10,8 @@ import br.zero.controlefinanceiro.model.Conta;
 import br.zero.controlefinanceiro.model.ContaDAO;
 import br.zero.controlefinanceiro.model.Lancamento;
 import br.zero.controlefinanceiro.model.LancamentoDAO;
+import br.zero.controlefinanceiro.model.modelo.LancamentoModelo;
 import br.zero.controlefinanceiro.model.modelo.LancamentoModeloDAO;
-import br.zero.controlefinanceiro.model.modelo.Modelo;
 import br.zero.tinycontroller.Action;
 
 public class LancamentoAddFullAction implements Action {
@@ -54,9 +54,9 @@ public class LancamentoAddFullAction implements Action {
 		
 		LancamentoModeloDAO lancamentoModeloDAO = new LancamentoModeloDAO();
 		
-		LancamentoModelo lancamentoModelo = lancamentoModeloDAO.getByNome(switches.getModelo());
+		LancamentoModelo lancamentoModelo = lancamentoModeloDAO.getById(switches.getLancamentoModeloID());
 		
-		lancamento.setLancamentoModelo(modelo);
+		lancamento.setLancamentoModelo(lancamentoModelo);
 		
 		lancamento.setContaOrigem(contaOrigem);
 		lancamento.setContaDestino(contaDestino);
@@ -94,7 +94,7 @@ public class LancamentoAddFullAction implements Action {
 			throw new LancamentoAddFullException("Data deve ser informada.");
 		}
 		
-		if (switches.getModelo() == null) {
+		if (switches.getLancamentoModeloID() == null) {
 			throw new LancamentoAddFullException("Modelo deve ser informado.");
 		}
 		
