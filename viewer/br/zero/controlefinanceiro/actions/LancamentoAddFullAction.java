@@ -98,6 +98,10 @@ public class LancamentoAddFullAction implements Action {
 			throw new LancamentoAddFullException("Conta de destino deve ser informada.");
 		}
 		
+		if (switches.getValor() == null) {
+			throw new LancamentoAddFullException("Valor deve ser informado.");
+		}
+		
 		return switches;
 	}
 
