@@ -1,0 +1,53 @@
+backup
+  --full
+  --ddlonly
+
+conta
+  ls
+  add
+  rm
+
+lancamento
+  ls - ok
+  balance  
+  add - ok
+  addfull - ok
+  rm
+
+modelo
+  ls
+  add
+  rm
+  simulate
+  clone
+
+lancamentomodelo
+  ls
+  add
+  rm
+
+help
+  backup
+  conta
+  lancamento
+  modelo
+  lancamentomodelo
+
+
+lancamento balance
+
+-- milestone 1 - Lancamento do realizado (básico) --
+
+
+conta ls
+modelo ls
+modelo add
+lancamentomodelo ls - Alteração de escopo: permitir nome do modelo como parâmetro
+lancamentomodelo add
+modelo simulate
+modelo clone
+
+-- milestone 2 - previsão com base no modelo --
+
+
+- Pegar demais funcionalidades nas notas que estão no palm
