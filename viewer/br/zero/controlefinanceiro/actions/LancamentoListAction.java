@@ -6,6 +6,7 @@ import br.zero.controlefinanceiro.ControleFinanceiroFormatters;
 import br.zero.controlefinanceiro.model.Lancamento;
 import br.zero.controlefinanceiro.model.LancamentoDAO;
 import br.zero.textgrid.TextGrid;
+import br.zero.textgrid.TextGridColumnAlignment;
 import br.zero.textgrid.TextGridException;
 import br.zero.textgrid.TextGridFormattedColumn;
 import br.zero.tinycontroller.Action;
@@ -18,13 +19,13 @@ public class LancamentoListAction implements Action {
 		grid.getData().setHeaderSeparatorChar('=');
 		grid.getData().setTitle("Lista de Lançamentos");
 		
-		TextGridFormattedColumn.createFormattedColumn(grid, "id", TextGridFormattedColumn.ID_FORMATTER, "getId");
-		TextGridFormattedColumn.createFormattedColumn(grid, "data", TextGridFormattedColumn.DATE_FORMATTER, "getData");
-		TextGridFormattedColumn.createFormattedColumn(grid, "n", TextGridFormattedColumn.INTEGER_FORMATTER, "getN");
-		TextGridFormattedColumn.createFormattedColumn(grid, "contaorigem", ControleFinanceiroFormatters.CONTA_FORMATTER, "getContaOrigem", " -> ");
-		TextGridFormattedColumn.createFormattedColumn(grid, "contadestino", ControleFinanceiroFormatters.CONTA_FORMATTER, "getContaDestino");
-		TextGridFormattedColumn.createFormattedColumn(grid, "valor", TextGridFormattedColumn.MONEY_FORMATTER, "getValor");
-		TextGridFormattedColumn.createFormattedColumn(grid, "observacao", TextGridFormattedColumn.STRING_FORMATTER, "getObservacao");
+		TextGridFormattedColumn.createFormattedColumn(grid, "id", TextGridFormattedColumn.ID_FORMATTER, TextGridColumnAlignment.LEFT, "getId");
+		TextGridFormattedColumn.createFormattedColumn(grid, "data", TextGridFormattedColumn.DATE_FORMATTER, TextGridColumnAlignment.LEFT, "getData");
+		TextGridFormattedColumn.createFormattedColumn(grid, "n", TextGridFormattedColumn.INTEGER_FORMATTER, TextGridColumnAlignment.LEFT, "getN");
+		TextGridFormattedColumn.createFormattedColumn(grid, "contaorigem", ControleFinanceiroFormatters.CONTA_FORMATTER, TextGridColumnAlignment.LEFT, "getContaOrigem", " -> ");
+		TextGridFormattedColumn.createFormattedColumn(grid, "contadestino", ControleFinanceiroFormatters.CONTA_FORMATTER, TextGridColumnAlignment.RIGHT, "getContaDestino");
+		TextGridFormattedColumn.createFormattedColumn(grid, "valor", TextGridFormattedColumn.MONEY_FORMATTER, TextGridColumnAlignment.RIGHT, "getValor");
+		TextGridFormattedColumn.createFormattedColumn(grid, "observacao", TextGridFormattedColumn.STRING_FORMATTER, TextGridColumnAlignment.LEFT, "getObservacao");
 		
 		return grid;
 	}
