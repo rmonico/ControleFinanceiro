@@ -12,14 +12,14 @@ public class ControleFinanceiroFormatters {
 		TextGridFormatter contaFormatter = new TextGridFormatter() {
 			
 			@Override
-			public String parse(Object cellValue) throws TextGridException {
+			public StringBuilder parse(Object cellValue) throws TextGridException {
 				if (!(cellValue instanceof Conta)) {
 					throw new TextGridException("CONTA_FORMATTER: Must be used only with br.zero.controlefinanceiro.model.Conta fields.");
 				}
 				
 				Conta value = (Conta) cellValue;
 				
-				String finalValue = value.getNome();
+				StringBuilder finalValue = new StringBuilder(value.getNome());
 				
 				return finalValue;
 			}
