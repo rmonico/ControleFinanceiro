@@ -17,13 +17,13 @@ public class LancamentoListAction implements Action {
 		grid.getData().setHeaderSeparatorChar('=');
 		grid.getData().setTitle("Lista de Lançamentos");
 		
-		grid.getData().createColumn("id", TextGrid.ID_FORMATTER, "getId");
-		grid.getData().createColumn("data", TextGrid.DATE_FORMATTER, "getData");
-		grid.getData().createColumn("n", TextGrid.INTEGER_FORMATTER, "getN");
-		grid.getData().createColumn("contaorigem", ControleFinanceiroFormatters.CONTA_FORMATTER, "getContaOrigem", " -> ");
-		grid.getData().createColumn("contadestino", ControleFinanceiroFormatters.CONTA_FORMATTER, "getContaDestino");
-		grid.getData().createColumn("valor", TextGrid.MONEY_FORMATTER, "getValor");
-		grid.getData().createColumn("observacao", TextGrid.STRING_FORMATTER, "getObservacao");
+		grid.getData().createFormattedColumn("id", TextGrid.ID_FORMATTER, "getId");
+		grid.getData().createFormattedColumn("data", TextGrid.DATE_FORMATTER, "getData");
+		grid.getData().createFormattedColumn("n", TextGrid.INTEGER_FORMATTER, "getN");
+		grid.getData().createFormattedColumn("contaorigem", ControleFinanceiroFormatters.CONTA_FORMATTER, "getContaOrigem", " -> ");
+		grid.getData().createFormattedColumn("contadestino", ControleFinanceiroFormatters.CONTA_FORMATTER, "getContaDestino");
+		grid.getData().createFormattedColumn("valor", TextGrid.MONEY_FORMATTER, "getValor");
+		grid.getData().createFormattedColumn("observacao", TextGrid.STRING_FORMATTER, "getObservacao");
 		
 		return grid;
 	}
