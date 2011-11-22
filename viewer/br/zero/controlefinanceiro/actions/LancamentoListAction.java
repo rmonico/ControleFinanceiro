@@ -18,13 +18,13 @@ public class LancamentoListAction implements Action {
 		grid.getData().setHeaderSeparatorChar('=');
 		grid.getData().setTitle("Lista de Lançamentos");
 		
-		grid.getData().createFormattedColumn("id", TextGridFormattedColumn.ID_FORMATTER, "getId");
-		grid.getData().createFormattedColumn("data", TextGridFormattedColumn.DATE_FORMATTER, "getData");
-		grid.getData().createFormattedColumn("n", TextGridFormattedColumn.INTEGER_FORMATTER, "getN");
-		grid.getData().createFormattedColumn("contaorigem", ControleFinanceiroFormatters.CONTA_FORMATTER, "getContaOrigem", " -> ");
-		grid.getData().createFormattedColumn("contadestino", ControleFinanceiroFormatters.CONTA_FORMATTER, "getContaDestino");
-		grid.getData().createFormattedColumn("valor", TextGridFormattedColumn.MONEY_FORMATTER, "getValor");
-		grid.getData().createFormattedColumn("observacao", TextGridFormattedColumn.STRING_FORMATTER, "getObservacao");
+		TextGridFormattedColumn.createFormattedColumn(grid, "id", TextGridFormattedColumn.ID_FORMATTER, "getId");
+		TextGridFormattedColumn.createFormattedColumn(grid, "data", TextGridFormattedColumn.DATE_FORMATTER, "getData");
+		TextGridFormattedColumn.createFormattedColumn(grid, "n", TextGridFormattedColumn.INTEGER_FORMATTER, "getN");
+		TextGridFormattedColumn.createFormattedColumn(grid, "contaorigem", ControleFinanceiroFormatters.CONTA_FORMATTER, "getContaOrigem", " -> ");
+		TextGridFormattedColumn.createFormattedColumn(grid, "contadestino", ControleFinanceiroFormatters.CONTA_FORMATTER, "getContaDestino");
+		TextGridFormattedColumn.createFormattedColumn(grid, "valor", TextGridFormattedColumn.MONEY_FORMATTER, "getValor");
+		TextGridFormattedColumn.createFormattedColumn(grid, "observacao", TextGridFormattedColumn.STRING_FORMATTER, "getObservacao");
 		
 		return grid;
 	}
