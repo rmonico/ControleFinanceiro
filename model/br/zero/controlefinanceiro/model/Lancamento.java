@@ -1,5 +1,6 @@
 package br.zero.controlefinanceiro.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import javax.persistence.Entity;
@@ -111,4 +112,27 @@ public class Lancamento {
 		this.observacao = observacao;
 	}
 
+	@Override
+	public String toString() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
+		
+		String data = (this.data != null) ? (sdf.format(this.data)) : "[null]";
+		String n = ((Integer) this.n).toString();
+		String contaOrigemNome = (contaOrigem != null) ? contaOrigem.getNome() : "[null]";
+		String contaDestinoNome = (contaDestino != null) ? contaDestino.getNome() : "[null]";
+		String valor = (this.valor != null) ? this.valor.toString() : "[null]";
+		String observacao = (this.observacao != null) ? this.observacao : "[null]";
+		
+		return data + ", " + n + ", " + contaOrigemNome + " -> " + contaDestinoNome + ", " + valor + ", " + observacao;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		
+		if (id == null) {
+			return false;
+		}
+		
+		return id.equals(obj);
+	}
 }
