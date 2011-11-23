@@ -57,10 +57,16 @@ public class LancamentoAddFullAction implements Action {
 		lancamento.setContaOrigem(contaOrigem);
 		lancamento.setContaDestino(contaDestino);
 		lancamento.setValor(switches.getValor());
-		lancamento.setObservacao(switches.getObservacao());
-		
 		
 		LancamentoDAO lancamentoDAO = new LancamentoDAO();
+
+		int n = lancamentoDAO.getNextN(switches.getData());
+		
+		lancamento.setN(n);
+		
+		
+		lancamento.setObservacao(switches.getObservacao());
+		
 		
 		lancamentoDAO.inserir(lancamento);
 	}

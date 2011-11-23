@@ -59,10 +59,16 @@ public class LancamentoAddAction implements Action {
 		lancamento.setData(today);
 		lancamento.setLancamentoModelo(null);
 		lancamento.setValor(switches.getValor());
+		
+		LancamentoDAO lancamentoDAO = new LancamentoDAO();
+
+		int n = lancamentoDAO.getNextN(today);
+		
+		lancamento.setN(n);
+		
 		lancamento.setObservacao(switches.getObservacao());
 		
 		
-		LancamentoDAO lancamentoDAO = new LancamentoDAO();
 		
 		lancamentoDAO.inserir(lancamento);
 	}

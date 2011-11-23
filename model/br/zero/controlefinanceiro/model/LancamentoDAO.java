@@ -1,5 +1,6 @@
 package br.zero.controlefinanceiro.model;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -12,7 +13,7 @@ public class LancamentoDAO extends CustomDAO<Lancamento> {
 
 	public List<Lancamento> listarPorConta(Conta conta) {
 		StringBuilder listarPorContaQuery = new StringBuilder();
-		
+
 		listarPorContaQuery.append("select\n");
 		listarPorContaQuery.append("  lancamento\n");
 		listarPorContaQuery.append("\n");
@@ -22,16 +23,40 @@ public class LancamentoDAO extends CustomDAO<Lancamento> {
 		listarPorContaQuery.append("where\n");
 		listarPorContaQuery.append("  lancamento.contaOrigem = :conta\n");
 		listarPorContaQuery.append("  or lancamento.contaDestino = :conta\n");
-		
-		
+
 		Query q = getEntityManager().createQuery(listarPorContaQuery.toString());
-		
+
 		q.setParameter("conta", conta);
 
 		@SuppressWarnings("unchecked")
 		List<Lancamento> results = q.getResultList();
-		
+
 		return results;
+	}
+
+	public int getNextN(Calendar data) {
+		StringBuilder selectMaxNQuery = new StringBuilder();
+
+		selectMaxNQuery.append("select\n");
+		selectMaxNQuery.append("  max(lancamento.n)\n");
+		selectMaxNQuery.append("\n");
+		selectMaxNQuery.append("from\n");
+		selectMaxNQuery.append("  Lancamento lancamento\n");
+		selectMaxNQuery.append("\n");
+		selectMaxNQuery.append("where\n");
+		selectMaxNQuery.append("  lancamento.data = :data");
+
+		Query q = getEntityManager().createQuery(selectMaxNQuery.toString());
+
+		q.setParameter("data", data);
+
+		Integer nextN = (Integer) q.getSingleResult();
+		
+		nextN = (nextN == null) ? 0 : nextN;
+		
+		nextN++;
+
+		return nextN;
 	}
 
 }
