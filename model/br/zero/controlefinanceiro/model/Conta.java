@@ -45,4 +45,23 @@ public class Conta implements Serializable {
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
+	
+	@Override
+	public String toString() {
+		return nome;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		
+		if (!(obj instanceof Conta)) {
+			return false;
+		}
+		
+		if (id == null) {
+			return false;
+		}
+		
+		return id.equals(((Conta) obj).getId());
+	}
 }
