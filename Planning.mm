@@ -261,14 +261,14 @@
 </html>
 </richcontent>
 </node>
-<node CREATED="1322272525859" ID="ID_29405650" MODIFIED="1322272555736" TEXT="Arquivo de configura&#xe7;&#xe3;o">
+<node CREATED="1322272525859" ID="ID_29405650" MODIFIED="1322272790395" TEXT="Arquivo de configura&#xe7;&#xe3;o">
 <richcontent TYPE="NOTE"><html>
   <head>
     
   </head>
   <body>
     <p>
-      Mover as configura&#231;&#245;es de conex&#227;o para&#160;&#160;um arquivo .properties
+      Mover as configura&#231;&#245;es de conex&#227;o para&#160;&#160;um arquivo .properties (externo ao jar)
     </p>
   </body>
 </html>
