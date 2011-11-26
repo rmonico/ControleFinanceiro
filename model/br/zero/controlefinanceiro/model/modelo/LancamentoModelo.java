@@ -18,7 +18,7 @@ import br.zero.customdao.EntitySetup;
  */
 @Entity
 @Table(name = "lancamento", schema = "controlefinanceiro_modelo")
-@EntitySetup(findAllQuery = "select l from LancamentoModelo l order by l.diavencimento", findByIdQuery = "select l from LancamentoModelo l where l.id=:id", idFieldName = "id")
+@EntitySetup(findAllQuery = "select lm from LancamentoModelo lm order by lm.modelo.nome, lm.diaVencimento", findByIdQuery = "select lm from LancamentoModelo lm where lm.id=:id", idFieldName = "id")
 public class LancamentoModelo {
 
 	@Id
@@ -60,12 +60,12 @@ public class LancamentoModelo {
 		this.modelo = modelo;
 	}
 
-	public Integer getDiavencimento() {
+	public Integer getDiaVencimento() {
 		return this.diaVencimento;
 	}
 
-	public void setDiavencimento(Integer diavencimento) {
-		this.diaVencimento = diavencimento;
+	public void setDiaVencimento(Integer diaVencimento) {
+		this.diaVencimento = diaVencimento;
 	}
 
 	public Conta getContaOrigem() {

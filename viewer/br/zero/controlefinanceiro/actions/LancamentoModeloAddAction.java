@@ -35,7 +35,7 @@ public class LancamentoModeloAddAction implements Action {
 
 		lancamentoModelo.setModelo(modelo);
 
-		lancamentoModelo.setDiavencimento(switches.getDiaVencimento());
+		lancamentoModelo.setDiaVencimento(switches.getDiaVencimento());
 
 		Conta contaOrigem = getConta(switches.getContaOrigem());
 
