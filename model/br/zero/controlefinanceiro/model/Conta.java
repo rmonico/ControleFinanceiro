@@ -48,7 +48,10 @@ public class Conta implements Serializable {
 	
 	@Override
 	public String toString() {
-		return nome;
+		String nomeConta = (nome != null) ? nome : "[null]";
+		String observacaoConta = (observacao != null) ? observacao : "[null]";
+		
+		return nomeConta + ", " + observacaoConta;
 	}
 	
 	@Override

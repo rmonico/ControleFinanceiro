@@ -71,6 +71,12 @@ public class LancamentoAddAction implements Action {
 		
 		
 		lancamentoDAO.inserir(lancamento);
+		
+		System.out.println();
+		
+		System.out.println("-- Lançamento adicionado --");
+		
+		System.out.println(lancamento);
 	}
 
 	private LancamentoAddSwitches checkParamValid(Object param) throws LancamentoAddException {

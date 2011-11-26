@@ -116,7 +116,7 @@ public class Lancamento {
 	public String toString() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
 		
-		String data = (this.data != null) ? (sdf.format(this.data)) : "[null]";
+		String data = (this.data != null) ? (sdf.format(this.data.getTime())) : "[null]";
 		String n = ((Integer) this.n).toString();
 		String contaOrigemNome = (contaOrigem != null) ? contaOrigem.getNome() : "[null]";
 		String contaDestinoNome = (contaDestino != null) ? contaDestino.getNome() : "[null]";

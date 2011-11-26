@@ -1,18 +1,18 @@
-backup
+backup - opcional
   --full
   --ddlonly
 
 conta
-  ls
-  add
+  ls - ok (codificar filtro por nome)
+  add - ok
   rm
 
 lancamento
-  ls - ok
-  balance  
+  ls - ok (fazer filtro por where, ver melhor se isso é mesmo uma boa idéia, talvez outros filtros mais específicos possam ser uma melhor alternativa)
+  balance  - ok (O filtro por conta já foi feito, precisaria aplicar a claúsula where que é recebida nos switches, verificar se não é melhor criar filtros mais específicos)
   add - ok
   addfull - ok
-  rm
+  rm - depois
 
 modelo
   ls
