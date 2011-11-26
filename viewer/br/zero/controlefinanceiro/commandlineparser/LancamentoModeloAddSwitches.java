@@ -1,12 +1,10 @@
 package br.zero.controlefinanceiro.commandlineparser;
 
-import java.util.Calendar;
-
 import br.zero.commandlineparser.CommandLineSwitch;
 
 public class LancamentoModeloAddSwitches {
 	private String modelo;
-	private Calendar data;
+	private Integer diaVencimento;
 	private String contaOrigem;
 	private String contaDestino;
 	private Double valor;
@@ -21,13 +19,13 @@ public class LancamentoModeloAddSwitches {
 		this.modelo = modelo;
 	}
 
-	public Calendar getData() {
-		return data;
+	public Integer getDiaVencimento() {
+		return diaVencimento;
 	}
 
-	@CommandLineSwitch(index = 2, parser="UtilsParser.parseCalendar")
-	public void setData(Calendar data) {
-		this.data = data;
+	@CommandLineSwitch(index = 2, parser="PrimitiveParsers.parseInteger")
+	public void setDiaVencimento(Integer diaVencimento) {
+		this.diaVencimento = diaVencimento;
 	}
 
 	public String getContaOrigem() {
