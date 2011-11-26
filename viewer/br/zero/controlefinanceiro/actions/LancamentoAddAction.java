@@ -27,12 +27,10 @@ public class LancamentoAddAction implements Action {
 		
 	}
 	
-	private LancamentoAddSwitches switches;
-
 	@Override
 	public void run(Object param) throws LancamentoAddException {
 		
-		switches = checkParamValid(param);
+		LancamentoAddSwitches switches = checkParamValid(param);
 		
 		ContaDAO contaDAO = new ContaDAO();
 		
