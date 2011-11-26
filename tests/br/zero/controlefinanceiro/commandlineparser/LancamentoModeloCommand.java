@@ -10,5 +10,11 @@ public enum LancamentoModeloCommand {
 	ADD,
 
 	@CommandLineSwitchParam(name = "rm")
-	REMOVE
+	REMOVE,
+
+	@CommandLineSwitchParam(name = "clone")
+	CLONE,
+
+	@CommandLineSwitchParam(name = "simulate")
+	SIMULATE
 }
