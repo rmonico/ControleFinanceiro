@@ -5,6 +5,7 @@ import br.zero.controlefinanceiro.commandlineparser.LancamentoModeloAddSwitches;
 import br.zero.controlefinanceiro.model.Conta;
 import br.zero.controlefinanceiro.model.ContaDAO;
 import br.zero.controlefinanceiro.model.modelo.LancamentoModelo;
+import br.zero.controlefinanceiro.model.modelo.LancamentoModeloDAO;
 import br.zero.controlefinanceiro.model.modelo.Modelo;
 import br.zero.controlefinanceiro.model.modelo.ModeloDAO;
 import br.zero.tinycontroller.Action;
@@ -49,6 +50,10 @@ public class LancamentoModeloAddAction implements Action {
 		
 		lancamentoModelo.setObservacao(switches.getObservacao());
 		
+		
+		LancamentoModeloDAO dao = new LancamentoModeloDAO();
+		
+		dao.inserir(lancamentoModelo);
 
 		System.out.println();
 
