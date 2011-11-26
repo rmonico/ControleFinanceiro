@@ -15,6 +15,10 @@ public class ControleFinanceiroFormatters {
 			
 			@Override
 			public StringBuilder parse(Object cellValue) throws TextGridException {
+				if (cellValue == null) {
+					return new StringBuilder("[null]");
+				}
+				
 				if (!(cellValue instanceof Conta)) {
 					throw new TextGridException("CONTA_FORMATTER: Must be used only with br.zero.controlefinanceiro.model.Conta fields.");
 				}
@@ -35,6 +39,10 @@ public class ControleFinanceiroFormatters {
 			
 			@Override
 			public StringBuilder parse(Object cellValue) throws TextGridException {
+				if (cellValue == null) {
+					return new StringBuilder("[null]");
+				}
+				
 				if (!(cellValue instanceof Modelo)) {
 					throw new TextGridException("MODELO_FORMATTER: Must be used only with br.zero.controlefinanceiro.model.Modelo fields.");
 				}
