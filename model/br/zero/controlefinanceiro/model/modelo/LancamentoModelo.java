@@ -112,4 +112,17 @@ public class LancamentoModelo {
 		return modeloNome + ", " + diaVencimento + ", " + contaOrigemNome + " -> " + contaDestinoNome + ", " + valor + ", " + observacao;
 	}
 
+	@Override
+	public LancamentoModelo clone() throws CloneNotSupportedException {
+		LancamentoModelo lancamentoClonado = new LancamentoModelo();
+		
+		lancamentoClonado.setDiaVencimento(diaVencimento);
+		lancamentoClonado.setModelo(modelo);
+		lancamentoClonado.setContaOrigem(contaOrigem);
+		lancamentoClonado.setContaDestino(contaDestino);
+		lancamentoClonado.setValor(valor);
+		lancamentoClonado.setObservacao(observacao);
+		
+		return lancamentoClonado;
+	}
 }
