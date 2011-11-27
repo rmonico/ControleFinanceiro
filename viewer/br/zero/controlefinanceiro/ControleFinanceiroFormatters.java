@@ -3,6 +3,7 @@ package br.zero.controlefinanceiro;
 import br.zero.controlefinanceiro.model.Conta;
 import br.zero.controlefinanceiro.model.modelo.Modelo;
 import br.zero.textgrid.TextGridException;
+import br.zero.textgrid.TextGridFormattedColumn;
 import br.zero.textgrid.TextGridFormatter;
 
 public class ControleFinanceiroFormatters {
@@ -16,7 +17,7 @@ public class ControleFinanceiroFormatters {
 			@Override
 			public StringBuilder parse(Object cellValue) throws TextGridException {
 				if (cellValue == null) {
-					return new StringBuilder("[null]");
+					return TextGridFormattedColumn.NULL_FORMATTER.parse(cellValue);
 				}
 				
 				if (!(cellValue instanceof Conta)) {

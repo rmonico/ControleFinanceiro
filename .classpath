@@ -20,7 +20,7 @@
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/Utils.jar">
+	<classpathentry kind="lib" path="lib/Utils.jar" sourcepath="/Utils">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
