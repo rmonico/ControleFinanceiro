@@ -1,9 +1,17 @@
 package br.zero.controlefinanceiro;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import br.zero.controlefinanceiro.commandlineparser.ModeloSimulateSwitches;
 import br.zero.controlefinanceiro.model.Conta;
+import br.zero.controlefinanceiro.model.Lancamento;
+import br.zero.controlefinanceiro.model.LancamentoDAO;
+import br.zero.controlefinanceiro.model.modelo.LancamentoModelo;
+import br.zero.controlefinanceiro.model.modelo.LancamentoModeloDAO;
+import br.zero.controlefinanceiro.model.modelo.Modelo;
+import br.zero.controlefinanceiro.model.modelo.ModeloDAO;
 import br.zero.textgrid.TextGrid;
 import br.zero.textgrid.TextGridColumnAlignment;
 import br.zero.textgrid.TextGridException;
@@ -40,10 +48,9 @@ public class ModeloSimulateAction implements Action {
 		}
 	}
 
-	private class LancamentoForList {
+	public class LancamentoForList {
 		private Integer id;
 		private TipoLancamento tipo;
-		private Integer lancamentoId;
 		private Calendar data;
 		private Integer n;
 		private Conta contaOrigem;
@@ -52,6 +59,33 @@ public class ModeloSimulateAction implements Action {
 		private Double saldoDestino;
 		private Double valor;
 		private String observacao;
+
+		public LancamentoForList(Lancamento lancamento) {
+			super();
+
+			setId(lancamento.getId());
+			setTipo(TipoLancamento.REALIZADO);
+			setData(lancamento.getData());
+			setN(lancamento.getN());
+			setContaOrigem(lancamento.getContaOrigem());
+			setContaDestino(lancamento.getContaDestino());
+			setValor(lancamento.getValor());
+			setObservacao(lancamento.getObservacao());
+		}
+
+		public LancamentoForList(Calendar dataBase, LancamentoModelo lancamentoModelo) {
+			super();
+
+			setId(lancamentoModelo.getId());
+			setTipo(TipoLancamento.PREVISTO);
+			
+			Calendar dataLancamento = (Calendar) dataBase.clone();
+			dataLancamento.add(Calendar.DAY_OF_MONTH, lancamentoModelo.getDiaVencimento()-1);
+			
+			setData(dataLancamento);
+			setContaOrigem(lancamentoModelo.getContaOrigem());
+			setContaDestino(lancamentoModelo.getContaDestino());
+		}
 
 		public Integer getId() {
 			return id;
@@ -67,14 +101,6 @@ public class ModeloSimulateAction implements Action {
 
 		public void setTipo(TipoLancamento tipo) {
 			this.tipo = tipo;
-		}
-
-		public Integer getLancamentoId() {
-			return lancamentoId;
-		}
-
-		public void setLancamentoId(Integer lancamentoId) {
-			this.lancamentoId = lancamentoId;
 		}
 
 		public Calendar getData() {
@@ -168,7 +194,6 @@ public class ModeloSimulateAction implements Action {
 
 		TextGridFormattedColumn.createFormattedColumn(grid, "id", TextGridFormattedColumn.ID_FORMATTER, TextGridColumnAlignment.RIGHT, "getId");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Tipo", tipoLancamentoFormatter, TextGridColumnAlignment.LEFT, "getTipo");
-		TextGridFormattedColumn.createFormattedColumn(grid, "Lanc ID", TextGridFormattedColumn.INTEGER_FORMATTER, TextGridColumnAlignment.RIGHT, "getLancamentoId");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Data", TextGridFormattedColumn.DATE_FORMATTER, TextGridColumnAlignment.CENTER, "getData");
 		TextGridFormattedColumn.createFormattedColumn(grid, "N", TextGridFormattedColumn.INTEGER_FORMATTER, TextGridColumnAlignment.LEFT, "getN");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Origem", ControleFinanceiroFormatters.CONTA_FORMATTER, TextGridColumnAlignment.RIGHT, "getContaOrigem");
@@ -182,9 +207,60 @@ public class ModeloSimulateAction implements Action {
 	}
 
 	@Override
-	public void run(Object param) throws ModeloSimulateException {
+	public void run(Object param) throws ModeloSimulateException, TextGridException {
 		ModeloSimulateSwitches switches = checkParamValid(param);
 
+		List<Lancamento> lancamentoList = getLancamentoList();
+
+		List<LancamentoForList> list = new ArrayList<LancamentoForList>();
+
+		packageLancamentos(list, lancamentoList);
+
+		List<LancamentoModelo> lancamentoModeloList = getLancamentoModeloList(switches.getNomeModelo());
+
+		packageLancamentosModelo(list, switches.getDataBase(), lancamentoModeloList);
+
+		TextGrid grid = createGrid();
+
+		grid.setValues(list);
+
+		grid.show();
+	}
+
+	private void packageLancamentosModelo(List<LancamentoForList> list, Calendar dataBase, List<LancamentoModelo> lancamentoModeloList) {
+		for (LancamentoModelo lancamentoModelo : lancamentoModeloList) {
+			LancamentoForList lancamentoForList = new LancamentoForList(dataBase, lancamentoModelo);
+
+			list.add(lancamentoForList);
+		}
+	}
+
+	private List<LancamentoModelo> getLancamentoModeloList(String nomeModelo) throws ModeloSimulateException {
+		ModeloDAO modeloDAO = new ModeloDAO();
+
+		Modelo modelo = modeloDAO.getByNome(nomeModelo);
+
+		if (modelo == null) {
+			throw new ModeloSimulateException("Modelo não encontrado: \"" + nomeModelo + "\".");
+		}
+
+		LancamentoModeloDAO dao = new LancamentoModeloDAO();
+
+		return dao.listarPorModelo(modelo);
+	}
+
+	private List<Lancamento> getLancamentoList() {
+		LancamentoDAO dao = new LancamentoDAO();
+
+		return dao.listarTodos();
+	}
+
+	private void packageLancamentos(List<LancamentoForList> list, List<Lancamento> lancamentoList) {
+		for (Lancamento lancamento : lancamentoList) {
+			LancamentoForList lancamentoForList = new LancamentoForList(lancamento);
+
+			list.add(lancamentoForList);
+		}
 	}
 
 	private ModeloSimulateSwitches checkParamValid(Object param) throws ModeloSimulateException {
@@ -197,8 +273,13 @@ public class ModeloSimulateAction implements Action {
 		if (switches.getNomeModelo() == null) {
 			throw new ModeloSimulateException("Nome do Modelo deve ser informado.");
 		}
+		
+		if (switches.getDataBase() == null) {
+			throw new ModeloSimulateException("Data base deve ser informada.");
+		}
 
 		return switches;
 	}
 
 }
+ 

@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import java.text.SimpleDateFormat;
+
 import org.junit.Test;
 
 import br.zero.commandlineparser.ParserException;
@@ -56,7 +58,7 @@ public class ModeloSwitchesTests extends CustomParserTests {
 	
 	@Test
 	public void doSimulateTest() throws ParserException {
-		doModeloLoad(new String[] { "modelo", "simulate", "nome modelo" }, ModeloCommand.SIMULATE);
+		doModeloLoad(new String[] { "modelo", "simulate", "nome modelo", "nov/2011" }, ModeloCommand.SIMULATE);
 
 		assertNull("Switches de add", modeloSwitches.getAddSwitches());
 		assertNotNull("Switches de simulate", modeloSwitches.getSimulateSwitches());
@@ -67,6 +69,10 @@ public class ModeloSwitchesTests extends CustomParserTests {
 		ModeloSimulateSwitches simulateSwitches = modeloSwitches.getSimulateSwitches();
 
 		assertEquals("Nome do modelo", "nome modelo", simulateSwitches.getNomeModelo());
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
+		
+		assertEquals("Data base", "01/Nov/2011", sdf.format(simulateSwitches.getDataBase().getTime()));
 	}
 	
 	@Test
