@@ -1,9 +1,12 @@
-package br.zero.controlefinanceiro;
+package br.zero.controlefinanceiro.actions;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
+import br.zero.controlefinanceiro.ControleFinanceiroException;
+import br.zero.controlefinanceiro.ControleFinanceiroFormatters;
 import br.zero.controlefinanceiro.commandlineparser.ModeloSimulateSwitches;
 import br.zero.controlefinanceiro.model.Conta;
 import br.zero.controlefinanceiro.model.Lancamento;
@@ -48,7 +51,7 @@ public class ModeloSimulateAction implements Action {
 		}
 	}
 
-	public class LancamentoForList {
+	public class LancamentoForList implements Comparable<LancamentoForList> {
 		private Integer id;
 		private TipoLancamento tipo;
 		private Calendar data;
@@ -78,10 +81,10 @@ public class ModeloSimulateAction implements Action {
 
 			setId(lancamentoModelo.getId());
 			setTipo(TipoLancamento.PREVISTO);
-			
+
 			Calendar dataLancamento = (Calendar) dataBase.clone();
-			dataLancamento.add(Calendar.DAY_OF_MONTH, lancamentoModelo.getDiaVencimento()-1);
-			
+			dataLancamento.add(Calendar.DAY_OF_MONTH, lancamentoModelo.getDiaVencimento() - 1);
+
 			setData(dataLancamento);
 			setContaOrigem(lancamentoModelo.getContaOrigem());
 			setContaDestino(lancamentoModelo.getContaDestino());
@@ -167,6 +170,57 @@ public class ModeloSimulateAction implements Action {
 			this.observacao = observacao;
 		}
 
+		@Override
+		public int compareTo(LancamentoForList otherInstance) {
+			if (otherInstance == null) {
+				return -1;
+			}
+
+			if (data == null) {
+				return +1;
+			} else if (otherInstance.getData() == null) {
+				return -1;
+			}
+
+			int dataComparision = data.compareTo(otherInstance.getData());
+
+			if (dataComparision != 0) {
+				return dataComparision;
+			}
+
+			if (n == null) {
+				return +1;
+			} else if (otherInstance.getN() == null) {
+				return -1;
+			}
+
+			int nComparision = n.compareTo(otherInstance.getN());
+
+			if (nComparision != 0) {
+				return nComparision;
+			}
+
+			if (tipo == null) {
+				return +1;
+			} else if (otherInstance.getTipo() == null) {
+				return -1;
+			}
+
+			int tipoComparision = tipo.compareTo(otherInstance.getTipo());
+
+			if (tipoComparision != 0) {
+				return tipoComparision;
+			}
+
+			if (id == null) {
+				return +1;
+			} else if (otherInstance.getId() == null) {
+				return -1;
+			}
+
+			return id.compareTo(otherInstance.getId());
+		}
+
 	}
 
 	private TextGrid createGrid() {
@@ -219,6 +273,18 @@ public class ModeloSimulateAction implements Action {
 		List<LancamentoModelo> lancamentoModeloList = getLancamentoModeloList(switches.getNomeModelo());
 
 		packageLancamentosModelo(list, switches.getDataBase(), lancamentoModeloList);
+
+		Collections.sort(list);
+
+		// Calendar data = null;
+		// int n;
+		// for (LancamentoForList lancamento : list) {
+		// if (!lancamento.getData().equals(data)) {
+		// n=0;
+		// }
+		//
+		//
+		// }
 
 		TextGrid grid = createGrid();
 
@@ -273,7 +339,7 @@ public class ModeloSimulateAction implements Action {
 		if (switches.getNomeModelo() == null) {
 			throw new ModeloSimulateException("Nome do Modelo deve ser informado.");
 		}
-		
+
 		if (switches.getDataBase() == null) {
 			throw new ModeloSimulateException("Data base deve ser informada.");
 		}
@@ -282,4 +348,3 @@ public class ModeloSimulateAction implements Action {
 	}
 
 }
- 
