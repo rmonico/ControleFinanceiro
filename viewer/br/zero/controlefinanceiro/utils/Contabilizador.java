@@ -1,5 +1,6 @@
 package br.zero.controlefinanceiro.utils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,18 @@ public class Contabilizador {
 
 	private List<? extends Contabilizavel> lancamentoList;
 	private Map<Conta, Double> saldos;
+	
+	public <Packed extends Contabilizavel, ToPack> List<Packed> packageList(List<ToPack> toPackList, Packager<Packed, ToPack> packager) {
+		List<Packed> packedList = new ArrayList<Packed>();
+		
+		for (ToPack toPack : toPackList) {
+			Packed packed = packager.pack(toPack);
+			
+			packedList.add(packed);
+		}
+		
+		return packedList;
+	}
 
 	public void setList(List<? extends Contabilizavel> lancamentoForList) {
 		this.lancamentoList = lancamentoForList;

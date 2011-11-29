@@ -1,17 +1,15 @@
 package br.zero.controlefinanceiro.actions;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
 import br.zero.controlefinanceiro.model.Conta;
 import br.zero.controlefinanceiro.model.Lancamento;
 import br.zero.controlefinanceiro.model.LancamentoDAO;
-import br.zero.controlefinanceiro.model.modelo.LancamentoModelo;
 import br.zero.controlefinanceiro.utils.Contabilizador;
-import br.zero.controlefinanceiro.utils.Contabilizavel;
 import br.zero.controlefinanceiro.utils.ControleFinanceiroFormatters;
+import br.zero.controlefinanceiro.utils.LancamentoContabilizavel;
+import br.zero.controlefinanceiro.utils.Packager;
 import br.zero.textgrid.TextGrid;
 import br.zero.textgrid.TextGridColumnAlignment;
 import br.zero.textgrid.TextGridException;
@@ -19,65 +17,6 @@ import br.zero.textgrid.TextGridFormattedColumn;
 import br.zero.tinycontroller.Action;
 
 public class LancamentoListAction implements Action {
-
-	public class LancamentoContabilizavel implements Contabilizavel {
-		private Double saldoOrigem;
-		private Double saldoDestino;
-		private Lancamento lancamento;
-
-		public LancamentoContabilizavel(Lancamento lancamento) {
-			this.lancamento = lancamento;
-		}
-
-		public Integer getId() {
-			return lancamento.getId();
-		}
-
-		public LancamentoModelo getLancamentoModelo() {
-			return lancamento.getLancamentoModelo();
-		}
-
-		public Calendar getData() {
-			return lancamento.getData();
-		}
-
-		public int getN() {
-			return lancamento.getN();
-		}
-
-		public Conta getContaOrigem() {
-			return lancamento.getContaOrigem();
-		}
-
-		public Conta getContaDestino() {
-			return lancamento.getContaDestino();
-		}
-
-		public Double getValor() {
-			return lancamento.getValor();
-		}
-
-		public String getObservacao() {
-			return lancamento.getObservacao();
-		}
-
-		public Double getSaldoOrigem() {
-			return saldoOrigem;
-		}
-
-		public void setSaldoOrigem(Double saldoOrigem) {
-			this.saldoOrigem = saldoOrigem;
-		}
-
-		public Double getSaldoDestino() {
-			return saldoDestino;
-		}
-
-		public void setSaldoDestino(Double saldoDestino) {
-			this.saldoDestino = saldoDestino;
-		}
-
-	}
 
 	private TextGrid createGrid() {
 		TextGrid grid = new TextGrid();
@@ -104,17 +43,21 @@ public class LancamentoListAction implements Action {
 
 		List<Lancamento> lancamentoList = dao.listarTodos();
 
-		List<LancamentoContabilizavel> lancamentoForList = new ArrayList<LancamentoContabilizavel>();
-
-		for (Lancamento lancamento : lancamentoList) {
-			LancamentoContabilizavel lancamentoForListItem = new LancamentoContabilizavel(lancamento);
-
-			lancamentoForList.add(lancamentoForListItem);
-		}
-		
+//		List<LancamentoContabilizavel> lancamentoForList = new ArrayList<LancamentoContabilizavel>();
+//
+//		for (Lancamento lancamento : lancamentoList) {
+//			LancamentoContabilizavel lancamentoForListItem = new LancamentoContabilizavel(lancamento);
+//
+//			lancamentoForList.add(lancamentoForListItem);
+//		}
+//		
 		Contabilizador contabilizador = new Contabilizador();
 
-		contabilizador.setList(lancamentoForList);
+		Packager<LancamentoContabilizavel, Lancamento> packager = Packager.LANCAMENTO_LANCAMENTOCONTABILIZAVEL_PACKAGER;
+		
+		List<LancamentoContabilizavel> lancamentoContabilizavelList = contabilizador.packageList(lancamentoList, packager);
+		
+		contabilizador.setList(lancamentoContabilizavelList);
 
 		contabilizador.contabilizar();
 
@@ -122,7 +65,7 @@ public class LancamentoListAction implements Action {
 
 		TextGrid grid = createGrid();
 
-		grid.setValues(lancamentoForList);
+		grid.setValues(lancamentoContabilizavelList);
 
 		grid.show();
 
