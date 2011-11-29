@@ -1,17 +1,18 @@
 package br.zero.controlefinanceiro.actions;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 import br.zero.controlefinanceiro.commandlineparser.LancamentoBalanceSwitches;
 import br.zero.controlefinanceiro.model.Conta;
 import br.zero.controlefinanceiro.model.ContaDAO;
 import br.zero.controlefinanceiro.model.Lancamento;
 import br.zero.controlefinanceiro.model.LancamentoDAO;
-import br.zero.controlefinanceiro.model.modelo.LancamentoModelo;
+import br.zero.controlefinanceiro.utils.Contabilizador;
 import br.zero.controlefinanceiro.utils.ControleFinanceiroException;
 import br.zero.controlefinanceiro.utils.ControleFinanceiroFormatters;
+import br.zero.controlefinanceiro.utils.LancamentoContabilizavel;
+import br.zero.controlefinanceiro.utils.Packager;
 import br.zero.textgrid.TextGrid;
 import br.zero.textgrid.TextGridColumnAlignment;
 import br.zero.textgrid.TextGridException;
@@ -21,6 +22,7 @@ import br.zero.tinycontroller.Action;
 public class LancamentoBalanceAction implements Action {
 
 	private LancamentoBalanceSwitches switches;
+	private Conta contaBalance;
 
 	public class LancamentoBalanceException extends ControleFinanceiroException {
 
@@ -35,53 +37,10 @@ public class LancamentoBalanceAction implements Action {
 
 	}
 
-	public class LancamentoBalance {
-
-		private Double saldo;
-		private Lancamento lancamento;
-
-		public LancamentoBalance(Lancamento lancamento) {
-			this.lancamento = lancamento;
-		}
-
-		public Integer getId() {
-			return lancamento.getId();
-		}
-
-		public LancamentoModelo getLancamentoModelo() {
-			return lancamento.getLancamentoModelo();
-		}
-
-		public Calendar getData() {
-			return lancamento.getData();
-		}
-
-		public int getN() {
-			return lancamento.getN();
-		}
-
-		public Conta getContaOrigem() {
-			return lancamento.getContaOrigem();
-		}
-
-		public Conta getContaDestino() {
-			return lancamento.getContaDestino();
-		}
-
-		public Double getValor() {
-			return lancamento.getValor();
-		}
-
+	public class LancamentoBalance extends LancamentoContabilizavel {
+		
 		public Double getSaldo() {
-			return saldo;
-		}
-
-		public void setSaldo(Double saldo) {
-			this.saldo = saldo;
-		}
-
-		public String getObservacao() {
-			return lancamento.getObservacao();
+			return getContaOrigem().equals(contaBalance) ? getSaldoOrigem(): getSaldoDestino();
 		}
 
 	}
@@ -116,7 +75,7 @@ public class LancamentoBalanceAction implements Action {
 
 		ContaDAO contaDAO = new ContaDAO();
 
-		Conta contaBalance = contaDAO.getByNome(switches.getConta());
+		contaBalance = contaDAO.getByNome(switches.getConta());
 
 		if (contaBalance == null) {
 			throw new TextGridException(new LancamentoBalanceException("Conta \"" + switches.getConta() + "\" não encontrada..."));
@@ -124,30 +83,32 @@ public class LancamentoBalanceAction implements Action {
 
 		List<Lancamento> lancamentoList = dao.listarPorConta(contaBalance);
 
-		List<LancamentoBalance> lancamentoBalanceList = new ArrayList<LancamentoBalance>();
-
-		Double saldo = 0.0;
+		Contabilizador contabilizador = new Contabilizador();
 		
-		// TODO Recalcular o N, ignorar o do banco de dados
-		for (Lancamento lancamento : lancamentoList) {
-			LancamentoBalance lancamentoBalance = new LancamentoBalance(lancamento);
-
-			if (lancamento.getContaOrigem().equals(contaBalance)) {
-				saldo -= lancamento.getValor();
-			} else {
-				saldo += lancamento.getValor();
+		Packager<LancamentoBalance, Lancamento> packager = new Packager<LancamentoBalance, Lancamento>() {
+			@Override
+			public LancamentoBalance pack(Lancamento lancamento) {
+				LancamentoBalance lancamentoBalance = new LancamentoBalance();
+				lancamentoBalance.setLancamento(lancamento);
+				
+				return lancamentoBalance;
 			}
-			
-			lancamentoBalance.setSaldo(saldo);
-			
-			lancamentoBalanceList.add(lancamentoBalance);
-		}
+		};
+		
+		List<LancamentoBalance> lancamentoBalanceList = contabilizador.packageList(lancamentoList, packager);
+		
+		contabilizador.setList(lancamentoBalanceList);
+		
+		contabilizador.contabilizar();
 
 		TextGrid grid = createGrid();
 
 		grid.setValues(lancamentoBalanceList);
 
 		grid.show();
+		
+		Map<Conta, Double> saldosPorConta = contabilizador.getSaldosPorConta();
+		Double saldo = saldosPorConta.get(contaBalance);
 		
 		System.out.println("===> Saldo: " + saldo);
 	}

@@ -43,14 +43,6 @@ public class LancamentoListAction implements Action {
 
 		List<Lancamento> lancamentoList = dao.listarTodos();
 
-//		List<LancamentoContabilizavel> lancamentoForList = new ArrayList<LancamentoContabilizavel>();
-//
-//		for (Lancamento lancamento : lancamentoList) {
-//			LancamentoContabilizavel lancamentoForListItem = new LancamentoContabilizavel(lancamento);
-//
-//			lancamentoForList.add(lancamentoForListItem);
-//		}
-//		
 		Contabilizador contabilizador = new Contabilizador();
 
 		Packager<LancamentoContabilizavel, Lancamento> packager = Packager.LANCAMENTO_LANCAMENTOCONTABILIZAVEL_PACKAGER;

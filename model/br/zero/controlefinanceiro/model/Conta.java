@@ -48,10 +48,16 @@ public class Conta implements Serializable {
 	
 	@Override
 	public String toString() {
+		String idConta = (id != null) ? id.toString() : "[null]";
 		String nomeConta = (nome != null) ? nome : "[null]";
 		String observacaoConta = (observacao != null) ? observacao : "[null]";
 		
-		return nomeConta + ", " + observacaoConta;
+		return "#" + idConta + "," + nomeConta + ", " + observacaoConta;
+	}
+	
+	@Override
+	public int hashCode() {
+		return id;
 	}
 	
 	@Override
@@ -61,10 +67,12 @@ public class Conta implements Serializable {
 			return false;
 		}
 		
+		Conta contaObj = (Conta) obj;
+		
 		if (id == null) {
 			return false;
 		}
 		
-		return id.equals(((Conta) obj).getId());
+		return id.equals(contaObj.getId());
 	}
 }
