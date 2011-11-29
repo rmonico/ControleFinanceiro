@@ -20,12 +20,12 @@ import br.zero.tinycontroller.Action;
 
 public class LancamentoListAction implements Action {
 
-	public class LancamentoForList implements Contabilizavel {
+	public class LancamentoContabilizavel implements Contabilizavel {
 		private Double saldoOrigem;
 		private Double saldoDestino;
 		private Lancamento lancamento;
 
-		public LancamentoForList(Lancamento lancamento) {
+		public LancamentoContabilizavel(Lancamento lancamento) {
 			this.lancamento = lancamento;
 		}
 
@@ -104,10 +104,10 @@ public class LancamentoListAction implements Action {
 
 		List<Lancamento> lancamentoList = dao.listarTodos();
 
-		List<LancamentoForList> lancamentoForList = new ArrayList<LancamentoForList>();
+		List<LancamentoContabilizavel> lancamentoForList = new ArrayList<LancamentoContabilizavel>();
 
 		for (Lancamento lancamento : lancamentoList) {
-			LancamentoForList lancamentoForListItem = new LancamentoForList(lancamento);
+			LancamentoContabilizavel lancamentoForListItem = new LancamentoContabilizavel(lancamento);
 
 			lancamentoForList.add(lancamentoForListItem);
 		}
