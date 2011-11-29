@@ -13,7 +13,7 @@ public class LancamentoContabilizavel implements Contabilizavel {
 	private Lancamento lancamento;
 	private LancamentoModelo lancamentoModelo;
 	private Calendar lancamentoModeloData;
-	private int lancamentoModeloN;
+	private Integer lancamentoModeloN;
 	
 	public void setLancamentoBase(Lancamento lancamento) {
 		this.lancamento = lancamento;
@@ -45,11 +45,11 @@ public class LancamentoContabilizavel implements Contabilizavel {
 		return (lancamentoModelo == null) ? lancamento.getData() : lancamentoModeloData;
 	}
 
-	public int getN() {
+	public Integer getN() {
 		return (lancamentoModelo == null) ? lancamento.getN() : lancamentoModeloN;
 	}
 	
-	public void setN(int n) {
+	public void setN(Integer n) {
 		if (lancamentoModelo == null) {
 			return;
 		}
