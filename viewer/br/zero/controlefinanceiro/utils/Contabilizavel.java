@@ -1,4 +1,4 @@
-package br.zero.controlefinanceiro;
+package br.zero.controlefinanceiro.utils;
 
 import br.zero.controlefinanceiro.model.Conta;
 

@@ -1,9 +1,9 @@
 package br.zero.controlefinanceiro.actions;
 
-import br.zero.controlefinanceiro.ControleFinanceiroException;
 import br.zero.controlefinanceiro.commandlineparser.ModeloAddSwitches;
 import br.zero.controlefinanceiro.model.modelo.Modelo;
 import br.zero.controlefinanceiro.model.modelo.ModeloDAO;
+import br.zero.controlefinanceiro.utils.ControleFinanceiroException;
 import br.zero.tinycontroller.Action;
 
 public class ModeloAddAction implements Action {

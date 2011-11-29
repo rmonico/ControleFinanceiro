@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import br.zero.controlefinanceiro.ControleFinanceiroException;
-import br.zero.controlefinanceiro.ControleFinanceiroFormatters;
 import br.zero.controlefinanceiro.commandlineparser.LancamentoBalanceSwitches;
 import br.zero.controlefinanceiro.model.Conta;
 import br.zero.controlefinanceiro.model.ContaDAO;
 import br.zero.controlefinanceiro.model.Lancamento;
 import br.zero.controlefinanceiro.model.LancamentoDAO;
 import br.zero.controlefinanceiro.model.modelo.LancamentoModelo;
+import br.zero.controlefinanceiro.utils.ControleFinanceiroException;
+import br.zero.controlefinanceiro.utils.ControleFinanceiroFormatters;
 import br.zero.textgrid.TextGrid;
 import br.zero.textgrid.TextGridColumnAlignment;
 import br.zero.textgrid.TextGridException;

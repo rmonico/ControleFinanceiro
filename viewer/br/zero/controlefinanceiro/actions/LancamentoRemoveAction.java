@@ -1,9 +1,9 @@
 package br.zero.controlefinanceiro.actions;
 
-import br.zero.controlefinanceiro.ControleFinanceiroException;
 import br.zero.controlefinanceiro.commandlineparser.LancamentoRemoveSwitches;
 import br.zero.controlefinanceiro.model.Lancamento;
 import br.zero.controlefinanceiro.model.LancamentoDAO;
+import br.zero.controlefinanceiro.utils.ControleFinanceiroException;
 import br.zero.tinycontroller.Action;
 
 public class LancamentoRemoveAction implements Action {

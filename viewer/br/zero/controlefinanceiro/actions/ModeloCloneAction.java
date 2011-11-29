@@ -2,12 +2,12 @@ package br.zero.controlefinanceiro.actions;
 
 import java.util.List;
 
-import br.zero.controlefinanceiro.ControleFinanceiroException;
 import br.zero.controlefinanceiro.commandlineparser.ModeloCloneSwitches;
 import br.zero.controlefinanceiro.model.modelo.LancamentoModelo;
 import br.zero.controlefinanceiro.model.modelo.LancamentoModeloDAO;
 import br.zero.controlefinanceiro.model.modelo.Modelo;
 import br.zero.controlefinanceiro.model.modelo.ModeloDAO;
+import br.zero.controlefinanceiro.utils.ControleFinanceiroException;
 import br.zero.tinycontroller.Action;
 
 public class ModeloCloneAction implements Action {

@@ -1,4 +1,4 @@
-package br.zero.controlefinanceiro;
+package br.zero.controlefinanceiro.utils;
 
 public class ControleFinanceiroException extends Exception {
 
