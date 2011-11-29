@@ -2,10 +2,11 @@ package br.zero.controlefinanceiro.actions;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import br.zero.controlefinanceiro.Contabilizador;
+import br.zero.controlefinanceiro.Contabilizavel;
 import br.zero.controlefinanceiro.ControleFinanceiroFormatters;
 import br.zero.controlefinanceiro.model.Conta;
 import br.zero.controlefinanceiro.model.Lancamento;
@@ -19,7 +20,7 @@ import br.zero.tinycontroller.Action;
 
 public class LancamentoListAction implements Action {
 
-	public class LancamentoForList {
+	public class LancamentoForList implements Contabilizavel {
 		private Double saldoOrigem;
 		private Double saldoDestino;
 		private Lancamento lancamento;
@@ -105,50 +106,26 @@ public class LancamentoListAction implements Action {
 
 		List<LancamentoForList> lancamentoForList = new ArrayList<LancamentoForList>();
 
-		Map<Conta, Double> saldos = new HashMap<Conta, Double>();
-
 		for (Lancamento lancamento : lancamentoList) {
 			LancamentoForList lancamentoForListItem = new LancamentoForList(lancamento);
 
-			Conta contaOrigem = lancamento.getContaOrigem();
-
-			Double saldoOrigem = saldos.get(contaOrigem);
-
-			if (saldoOrigem == null) {
-				saldoOrigem = 0.0;
-			}
-
-			saldoOrigem -= lancamento.getValor();
-			
-			saldos.put(contaOrigem, saldoOrigem);
-
-			lancamentoForListItem.setSaldoOrigem(saldoOrigem);
-			
-
-			Conta contaDestino = lancamento.getContaDestino();
-
-			Double saldoDestino = saldos.get(contaDestino);
-
-			if (saldoDestino == null) {
-				saldoDestino = 0.0;
-			}
-
-			saldoDestino += lancamento.getValor();
-
-			saldos.put(contaDestino, saldoDestino);
-
-			lancamentoForListItem.setSaldoDestino(saldoDestino);
-			
-
 			lancamentoForList.add(lancamentoForListItem);
 		}
+		
+		Contabilizador contabilizador = new Contabilizador();
+
+		contabilizador.setList(lancamentoForList);
+
+		contabilizador.contabilizar();
+
+		Map<Conta, Double> saldos = contabilizador.getSaldosPorConta();
 
 		TextGrid grid = createGrid();
 
 		grid.setValues(lancamentoForList);
 
 		grid.show();
-		
+
 		System.out.println();
 		System.out.println();
 		System.out.println("-- Saldos: --");
