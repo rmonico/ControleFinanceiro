@@ -3,6 +3,7 @@ package br.zero.controlefinanceiro.actions;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import br.zero.controlefinanceiro.ControleFinanceiroException;
@@ -38,7 +39,7 @@ public class ModeloSimulateAction implements Action {
 	}
 
 	private enum TipoLancamento {
-		PREVISTO(new StringBuilder("P")), REALIZADO(new StringBuilder("R"));
+		REALIZADO(new StringBuilder("R")), PREVISTO(new StringBuilder("P"));
 
 		private StringBuilder sb;
 
@@ -51,7 +52,7 @@ public class ModeloSimulateAction implements Action {
 		}
 	}
 
-	public class LancamentoForList implements Comparable<LancamentoForList> {
+	public class LancamentoForList /* implements Comparable<LancamentoForList> */{
 		private Integer id;
 		private TipoLancamento tipo;
 		private Calendar data;
@@ -170,57 +171,6 @@ public class ModeloSimulateAction implements Action {
 			this.observacao = observacao;
 		}
 
-		@Override
-		public int compareTo(LancamentoForList otherInstance) {
-			if (otherInstance == null) {
-				return -1;
-			}
-
-			if (data == null) {
-				return +1;
-			} else if (otherInstance.getData() == null) {
-				return -1;
-			}
-
-			int dataComparision = data.compareTo(otherInstance.getData());
-
-			if (dataComparision != 0) {
-				return dataComparision;
-			}
-
-			if (n == null) {
-				return +1;
-			} else if (otherInstance.getN() == null) {
-				return -1;
-			}
-
-			int nComparision = n.compareTo(otherInstance.getN());
-
-			if (nComparision != 0) {
-				return nComparision;
-			}
-
-			if (tipo == null) {
-				return +1;
-			} else if (otherInstance.getTipo() == null) {
-				return -1;
-			}
-
-			int tipoComparision = tipo.compareTo(otherInstance.getTipo());
-
-			if (tipoComparision != 0) {
-				return tipoComparision;
-			}
-
-			if (id == null) {
-				return +1;
-			} else if (otherInstance.getId() == null) {
-				return -1;
-			}
-
-			return id.compareTo(otherInstance.getId());
-		}
-
 	}
 
 	private TextGrid createGrid() {
@@ -274,17 +224,69 @@ public class ModeloSimulateAction implements Action {
 
 		packageLancamentosModelo(list, switches.getDataBase(), lancamentoModeloList);
 
-		Collections.sort(list);
+		Comparator<LancamentoForList> dataSorter = new Comparator<LancamentoForList>() {
 
-		// Calendar data = null;
-		// int n;
-		// for (LancamentoForList lancamento : list) {
-		// if (!lancamento.getData().equals(data)) {
-		// n=0;
-		// }
-		//
-		//
-		// }
+			@Override
+			public int compare(LancamentoForList o1, LancamentoForList o2) {
+				if (o1.data == null) {
+					return +1;
+				} else if (o2.getData() == null) {
+					return -1;
+				}
+
+				int dataComparision = o1.getData().compareTo(o2.getData());
+
+				if (dataComparision != 0) {
+					return dataComparision;
+				}
+				
+				if ((o1.getN() != null) && (o2.getN() != null)) {
+					int nComparision = o1.getN().compareTo(o2.getN());
+					
+					if (nComparision != 0) {
+						return nComparision;
+					}
+				}
+
+				if (o1.getTipo() == null) {
+					return +1;
+				} else if (o2.getTipo() == null) {
+					return -1;
+				}
+
+				int tipoComparision = o1.getTipo().compareTo(o2.getTipo());
+
+				if (tipoComparision != 0) {
+					return tipoComparision;
+				}
+
+				if (o1.getId() == null) {
+					return +1;
+				} else if (o2.getId() == null) {
+					return -1;
+				}
+
+				return o1.getId().compareTo(o2.getId());
+			}
+
+		};
+
+		Collections.sort(list, dataSorter);
+
+		Calendar data = null;
+		int n = 1;
+
+		// TODO Calcular os saldos
+		// TODO Fazer o cálculo de saldo abstrato baseado na interface Contabilizavel
+		// TODO Criar campo na tabela Conta chamado contabilizavel (boolean, indica que a conta pode acumular valores, não é como a conta de almoço por exemplo).
+		for (LancamentoForList lancamento : list) {
+			if (!lancamento.getData().equals(data)) {
+				n = 1;
+				data = lancamento.getData();
+			}
+
+			lancamento.setN(n++);
+		}
 
 		TextGrid grid = createGrid();
 
