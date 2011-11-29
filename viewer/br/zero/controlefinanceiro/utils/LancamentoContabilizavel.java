@@ -12,17 +12,25 @@ public class LancamentoContabilizavel implements Contabilizavel {
 	private Double saldoDestino;
 	private Lancamento lancamento;
 	private LancamentoModelo lancamentoModelo;
+	private Calendar lancamentoModeloData;
+	private int lancamentoModeloN;
 	
 	public void setLancamentoBase(Lancamento lancamento) {
 		this.lancamento = lancamento;
+		lancamentoModelo = null;
 	}
 	
 	public Lancamento getLancamentoBase() {
 		return lancamento;
 	}
 	
-	public void setLancamentoModeloBase(LancamentoModelo lancamentoModelo) {
+	public void setLancamentoModeloBase(LancamentoModelo lancamentoModelo, Calendar dataBase) {
 		this.lancamentoModelo = lancamentoModelo;
+		lancamento = null;
+		
+		lancamentoModeloData = (Calendar) dataBase.clone();
+		
+		lancamentoModeloData.add(Calendar.DAY_OF_MONTH, lancamentoModelo.getDiaVencimento());
 	}
 	
 	public LancamentoModelo getLancamentoModeloBase() {
@@ -30,31 +38,39 @@ public class LancamentoContabilizavel implements Contabilizavel {
 	}
 	
 	public Integer getId() {
-		return lancamento.getId();
+		return (lancamentoModelo == null) ? lancamento.getId() : lancamentoModelo.getId();
 	}
 
 	public Calendar getData() {
-		return lancamento.getData();
+		return (lancamentoModelo == null) ? lancamento.getData() : lancamentoModeloData;
 	}
 
 	public int getN() {
-		return lancamento.getN();
+		return (lancamentoModelo == null) ? lancamento.getN() : lancamentoModeloN;
+	}
+	
+	public void setN(int n) {
+		if (lancamentoModelo == null) {
+			return;
+		}
+		
+		this.lancamentoModeloN = n;
 	}
 
 	public Conta getContaOrigem() {
-		return lancamento.getContaOrigem();
+		return (lancamentoModelo == null) ? lancamento.getContaOrigem() : lancamentoModelo.getContaOrigem();
 	}
 
 	public Conta getContaDestino() {
-		return lancamento.getContaDestino();
+		return (lancamentoModelo == null) ? lancamento.getContaDestino() : lancamentoModelo.getContaDestino();
 	}
 
 	public Double getValor() {
-		return lancamento.getValor();
+		return (lancamentoModelo == null) ? lancamento.getValor() : lancamentoModelo.getValor();
 	}
 
 	public String getObservacao() {
-		return lancamento.getObservacao();
+		return (lancamentoModelo == null) ? lancamento.getObservacao() : lancamentoModelo.getObservacao();
 	}
 
 	public Double getSaldoOrigem() {
