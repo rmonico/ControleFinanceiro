@@ -89,7 +89,7 @@ public class LancamentoBalanceAction implements Action {
 			@Override
 			public LancamentoBalance pack(Lancamento lancamento) {
 				LancamentoBalance lancamentoBalance = new LancamentoBalance();
-				lancamentoBalance.setLancamento(lancamento);
+				lancamentoBalance.setLancamentoBase(lancamento);
 				
 				return lancamentoBalance;
 			}

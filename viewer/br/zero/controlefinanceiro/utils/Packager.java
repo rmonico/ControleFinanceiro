@@ -9,7 +9,7 @@ public interface Packager<Packed extends Contabilizavel, ToPack> {
 		@Override
 		public LancamentoContabilizavel pack(Lancamento lancamento) {
 			LancamentoContabilizavel lancamentoContabilizavel = new LancamentoContabilizavel();
-			lancamentoContabilizavel.setLancamento(lancamento);
+			lancamentoContabilizavel.setLancamentoBase(lancamento);
 
 			return lancamentoContabilizavel;
 		};

@@ -11,21 +11,26 @@ public class LancamentoContabilizavel implements Contabilizavel {
 	private Double saldoOrigem;
 	private Double saldoDestino;
 	private Lancamento lancamento;
+	private LancamentoModelo lancamentoModelo;
 	
-	public void setLancamento(Lancamento lancamento) {
+	public void setLancamentoBase(Lancamento lancamento) {
 		this.lancamento = lancamento;
 	}
 	
-	public Lancamento getLancamento() {
+	public Lancamento getLancamentoBase() {
 		return lancamento;
 	}
-
+	
+	public void setLancamentoModeloBase(LancamentoModelo lancamentoModelo) {
+		this.lancamentoModelo = lancamentoModelo;
+	}
+	
+	public LancamentoModelo getLancamentoModeloBase() {
+		return lancamentoModelo;
+	}
+	
 	public Integer getId() {
 		return lancamento.getId();
-	}
-
-	public LancamentoModelo getLancamentoModelo() {
-		return lancamento.getLancamentoModelo();
 	}
 
 	public Calendar getData() {
