@@ -128,6 +128,7 @@ public class LancamentoBalanceAction implements Action {
 
 		Double saldo = 0.0;
 		
+		// TODO Recalcular o N, ignorar o do banco de dados
 		for (Lancamento lancamento : lancamentoList) {
 			LancamentoBalance lancamentoBalance = new LancamentoBalance(lancamento);
 
