@@ -7,15 +7,17 @@ import java.util.Comparator;
 import java.util.List;
 
 import br.zero.controlefinanceiro.commandlineparser.ModeloSimulateSwitches;
-import br.zero.controlefinanceiro.model.Conta;
 import br.zero.controlefinanceiro.model.Lancamento;
 import br.zero.controlefinanceiro.model.LancamentoDAO;
 import br.zero.controlefinanceiro.model.modelo.LancamentoModelo;
 import br.zero.controlefinanceiro.model.modelo.LancamentoModeloDAO;
 import br.zero.controlefinanceiro.model.modelo.Modelo;
 import br.zero.controlefinanceiro.model.modelo.ModeloDAO;
+import br.zero.controlefinanceiro.utils.Contabilizador;
 import br.zero.controlefinanceiro.utils.ControleFinanceiroException;
 import br.zero.controlefinanceiro.utils.ControleFinanceiroFormatters;
+import br.zero.controlefinanceiro.utils.LancamentoContabilizavel;
+import br.zero.controlefinanceiro.utils.Packager;
 import br.zero.textgrid.TextGrid;
 import br.zero.textgrid.TextGridColumnAlignment;
 import br.zero.textgrid.TextGridException;
@@ -52,52 +54,8 @@ public class ModeloSimulateAction implements Action {
 		}
 	}
 
-	public class LancamentoForList /* implements Comparable<LancamentoForList> */{
-		private Integer id;
+	public class LancamentoForList extends LancamentoContabilizavel {
 		private TipoLancamento tipo;
-		private Calendar data;
-		private Integer n;
-		private Conta contaOrigem;
-		private Double saldoOrigem;
-		private Conta contaDestino;
-		private Double saldoDestino;
-		private Double valor;
-		private String observacao;
-
-		public LancamentoForList(Lancamento lancamento) {
-			super();
-
-			setId(lancamento.getId());
-			setTipo(TipoLancamento.REALIZADO);
-			setData(lancamento.getData());
-			setN(lancamento.getN());
-			setContaOrigem(lancamento.getContaOrigem());
-			setContaDestino(lancamento.getContaDestino());
-			setValor(lancamento.getValor());
-			setObservacao(lancamento.getObservacao());
-		}
-
-		public LancamentoForList(Calendar dataBase, LancamentoModelo lancamentoModelo) {
-			super();
-
-			setId(lancamentoModelo.getId());
-			setTipo(TipoLancamento.PREVISTO);
-
-			Calendar dataLancamento = (Calendar) dataBase.clone();
-			dataLancamento.add(Calendar.DAY_OF_MONTH, lancamentoModelo.getDiaVencimento() - 1);
-
-			setData(dataLancamento);
-			setContaOrigem(lancamentoModelo.getContaOrigem());
-			setContaDestino(lancamentoModelo.getContaDestino());
-		}
-
-		public Integer getId() {
-			return id;
-		}
-
-		public void setId(Integer id) {
-			this.id = id;
-		}
 
 		public TipoLancamento getTipo() {
 			return tipo;
@@ -105,70 +63,6 @@ public class ModeloSimulateAction implements Action {
 
 		public void setTipo(TipoLancamento tipo) {
 			this.tipo = tipo;
-		}
-
-		public Calendar getData() {
-			return data;
-		}
-
-		public void setData(Calendar data) {
-			this.data = data;
-		}
-
-		public Integer getN() {
-			return n;
-		}
-
-		public void setN(Integer n) {
-			this.n = n;
-		}
-
-		public Conta getContaOrigem() {
-			return contaOrigem;
-		}
-
-		public void setContaOrigem(Conta contaOrigem) {
-			this.contaOrigem = contaOrigem;
-		}
-
-		public Double getSaldoOrigem() {
-			return saldoOrigem;
-		}
-
-		public void setSaldoOrigem(Double saldoOrigem) {
-			this.saldoOrigem = saldoOrigem;
-		}
-
-		public Conta getContaDestino() {
-			return contaDestino;
-		}
-
-		public void setContaDestino(Conta contaDestino) {
-			this.contaDestino = contaDestino;
-		}
-
-		public Double getSaldoDestino() {
-			return saldoDestino;
-		}
-
-		public void setSaldoDestino(Double saldoDestino) {
-			this.saldoDestino = saldoDestino;
-		}
-
-		public Double getValor() {
-			return valor;
-		}
-
-		public void setValor(Double valor) {
-			this.valor = valor;
-		}
-
-		public String getObservacao() {
-			return observacao;
-		}
-
-		public void setObservacao(String observacao) {
-			this.observacao = observacao;
 		}
 
 	}
@@ -215,20 +109,54 @@ public class ModeloSimulateAction implements Action {
 		ModeloSimulateSwitches switches = checkParamValid(param);
 
 		List<Lancamento> lancamentoList = getLancamentoList();
+		
+		Contabilizador contabilizador = new Contabilizador();
+		
+		Packager<LancamentoForList, Lancamento> lancamentoToLancamentoForListPackager = new Packager<ModeloSimulateAction.LancamentoForList, Lancamento>() {
+			
+			@Override
+			public LancamentoForList pack(Lancamento lancamento) {
+				LancamentoForList lfl = new LancamentoForList();
+				lfl.setLancamentoBase(lancamento);
 
-		List<LancamentoForList> list = new ArrayList<LancamentoForList>();
+				return lfl;
+			}
+		};
+		
+		List<LancamentoForList> lancamentoContabilizavelList = contabilizador.packageList(lancamentoList, lancamentoToLancamentoForListPackager);
 
-		packageLancamentos(list, lancamentoList);
+//		List<LancamentoForList> list = new ArrayList<LancamentoForList>();
+//
+//		packageLancamentos(list, lancamentoList);
 
 		List<LancamentoModelo> lancamentoModeloList = getLancamentoModeloList(switches.getNomeModelo());
 
-		packageLancamentosModelo(list, switches.getDataBase(), lancamentoModeloList);
+		final Calendar dataBase = switches.getDataBase();
+		
+		Packager<LancamentoForList, LancamentoModelo> packager = new Packager<LancamentoForList, LancamentoModelo>() {
+			@Override
+			public LancamentoForList pack(LancamentoModelo lm) {
+				LancamentoForList lfl = new LancamentoForList();
+				
+				lfl.setLancamentoModeloBase(lm, dataBase);
+				
+				return lfl;
+			}
+		};
+		
+		List<LancamentoForList> lancamentoModeloContabilizavelList = contabilizador.packageList(lancamentoModeloList, packager);
+//		packageLancamentosModelo(list, switches.getDataBase(), lancamentoModeloList);
+		
+		List<LancamentoForList> list = new ArrayList<LancamentoForList>();
+		
+		list.addAll(lancamentoContabilizavelList);
+		list.addAll(lancamentoModeloContabilizavelList);
 
 		Comparator<LancamentoForList> dataSorter = new Comparator<LancamentoForList>() {
 
 			@Override
 			public int compare(LancamentoForList o1, LancamentoForList o2) {
-				if (o1.data == null) {
+				if (o1.getData() == null) {
 					return +1;
 				} else if (o2.getData() == null) {
 					return -1;
@@ -295,13 +223,13 @@ public class ModeloSimulateAction implements Action {
 		grid.show();
 	}
 
-	private void packageLancamentosModelo(List<LancamentoForList> list, Calendar dataBase, List<LancamentoModelo> lancamentoModeloList) {
-		for (LancamentoModelo lancamentoModelo : lancamentoModeloList) {
-			LancamentoForList lancamentoForList = new LancamentoForList(dataBase, lancamentoModelo);
-
-			list.add(lancamentoForList);
-		}
-	}
+//	private void packageLancamentosModelo(List<LancamentoForList> list, Calendar dataBase, List<LancamentoModelo> lancamentoModeloList) {
+//		for (LancamentoModelo lancamentoModelo : lancamentoModeloList) {
+//			LancamentoForList lancamentoForList = new LancamentoForList(dataBase, lancamentoModelo);
+//
+//			list.add(lancamentoForList);
+//		}
+//	}
 
 	private List<LancamentoModelo> getLancamentoModeloList(String nomeModelo) throws ModeloSimulateException {
 		ModeloDAO modeloDAO = new ModeloDAO();
@@ -323,13 +251,13 @@ public class ModeloSimulateAction implements Action {
 		return dao.listarTodos();
 	}
 
-	private void packageLancamentos(List<LancamentoForList> list, List<Lancamento> lancamentoList) {
-		for (Lancamento lancamento : lancamentoList) {
-			LancamentoForList lancamentoForList = new LancamentoForList(lancamento);
-
-			list.add(lancamentoForList);
-		}
-	}
+//	private void packageLancamentos(List<LancamentoForList> list, List<Lancamento> lancamentoList) {
+//		for (Lancamento lancamento : lancamentoList) {
+//			LancamentoForList lancamentoForList = new LancamentoForList(lancamento);
+//
+//			list.add(lancamentoForList);
+//		}
+//	}
 
 	private ModeloSimulateSwitches checkParamValid(Object param) throws ModeloSimulateException {
 		if (!(param instanceof ModeloSimulateSwitches)) {
