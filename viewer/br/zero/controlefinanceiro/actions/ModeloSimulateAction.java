@@ -156,36 +156,11 @@ public class ModeloSimulateAction implements Action {
 
 		Contabilizador contabilizador = new Contabilizador();
 
-		Packager<LancamentoSimulated, Lancamento> lancamentoToLancamentoForListPackager = new Packager<ModeloSimulateAction.LancamentoSimulated, Lancamento>() {
-
-			@Override
-			public LancamentoSimulated pack(Lancamento lancamento) {
-				LancamentoSimulated lfl = new LancamentoSimulated();
-				lfl.setTipo(TipoLancamento.REALIZADO);
-				lfl.setLancamentoBase(lancamento);
-
-				return lfl;
-			}
-		};
-
-		List<LancamentoSimulated> lancamentoContabilizavelList = contabilizador.packageList(lancamentoList, lancamentoToLancamentoForListPackager);
-
+		List<LancamentoSimulated> lancamentoContabilizavelList = packListLancamento(contabilizador, lancamentoList);
+		
 		List<LancamentoModelo> lancamentoModeloList = getLancamentoModeloList(switches.getNomeModelo());
 
-		final Calendar dataBase = switches.getDataBase();
-
-		Packager<LancamentoSimulated, LancamentoModelo> packager = new Packager<LancamentoSimulated, LancamentoModelo>() {
-			@Override
-			public LancamentoSimulated pack(LancamentoModelo lm) {
-				LancamentoSimulated lfl = new LancamentoSimulated();
-				lfl.setTipo(TipoLancamento.PREVISTO);
-				lfl.setLancamentoModeloBase(lm, dataBase);
-
-				return lfl;
-			}
-		};
-
-		List<LancamentoSimulated> lancamentoModeloContabilizavelList = contabilizador.packageList(lancamentoModeloList, packager);
+		List<LancamentoSimulated> lancamentoModeloContabilizavelList = packListLancamentoModelo(contabilizador, switches.getDataBase(), lancamentoModeloList);
 
 		List<LancamentoSimulated> list = new ArrayList<LancamentoSimulated>();
 
@@ -224,6 +199,41 @@ public class ModeloSimulateAction implements Action {
 		for (Conta conta : saldos.keySet()) {
 			System.out.println("===> " + conta.getNome() + ": " + saldos.get(conta));
 		}
+	}
+
+	private List<LancamentoSimulated> packListLancamentoModelo(Contabilizador contabilizador, final Calendar dataBase, List<LancamentoModelo> lancamentoModeloList) {
+		Packager<LancamentoSimulated, LancamentoModelo> packager = new Packager<LancamentoSimulated, LancamentoModelo>() {
+			@Override
+			public LancamentoSimulated pack(LancamentoModelo lm) {
+				LancamentoSimulated lfl = new LancamentoSimulated();
+				lfl.setTipo(TipoLancamento.PREVISTO);
+				lfl.setLancamentoModeloBase(lm, dataBase);
+
+				return lfl;
+			}
+		};
+
+		List<LancamentoSimulated> lancamentoSimulatedList = contabilizador.packageList(lancamentoModeloList, packager);
+		return lancamentoSimulatedList;
+	}
+
+	private List<LancamentoSimulated> packListLancamento(Contabilizador contabilizador, List<Lancamento> lancamentoList) {
+		// TODO Extrair a montagem das listas para métodos separados
+		Packager<LancamentoSimulated, Lancamento> lancamentoToLancamentoForListPackager = new Packager<ModeloSimulateAction.LancamentoSimulated, Lancamento>() {
+
+			@Override
+			public LancamentoSimulated pack(Lancamento lancamento) {
+				LancamentoSimulated lfl = new LancamentoSimulated();
+				lfl.setTipo(TipoLancamento.REALIZADO);
+				lfl.setLancamentoBase(lancamento);
+
+				return lfl;
+			}
+		};
+
+		List<LancamentoSimulated> lancamentoSimulatedList = contabilizador.packageList(lancamentoList, lancamentoToLancamentoForListPackager);
+
+		return lancamentoSimulatedList;
 	}
 
 	private List<LancamentoModelo> getLancamentoModeloList(String nomeModelo) throws ModeloSimulateException {
