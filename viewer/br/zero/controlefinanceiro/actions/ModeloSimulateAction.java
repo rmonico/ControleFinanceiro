@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import br.zero.controlefinanceiro.commandlineparser.ModeloSimulateSwitches;
+import br.zero.controlefinanceiro.model.Conta;
 import br.zero.controlefinanceiro.model.Lancamento;
 import br.zero.controlefinanceiro.model.LancamentoDAO;
 import br.zero.controlefinanceiro.model.modelo.LancamentoModelo;
@@ -195,9 +197,6 @@ public class ModeloSimulateAction implements Action {
 		Calendar data = null;
 		int n = 1;
 
-		// TODO Calcular os saldos
-		// TODO Fazer o cálculo de saldo abstrato baseado na interface
-		// Contabilizavel
 		// TODO Criar campo na tabela Conta chamado contabilizavel (boolean,
 		// indica que a conta pode acumular valores, não é como a conta de
 		// almoço por exemplo).
@@ -209,17 +208,22 @@ public class ModeloSimulateAction implements Action {
 
 			lancamento.setN(n++);
 		}
-		
+
 		contabilizador.setList(list);
-		
+
 		contabilizador.contabilizar();
-		
 
 		TextGrid grid = createGrid();
 
 		grid.setValues(list);
 
 		grid.show();
+
+		Map<Conta, Double> saldos = contabilizador.getSaldosPorConta();
+
+		for (Conta conta : saldos.keySet()) {
+			System.out.println("===> " + conta.getNome() + ": " + saldos.get(conta));
+		}
 	}
 
 	private List<LancamentoModelo> getLancamentoModeloList(String nomeModelo) throws ModeloSimulateException {
