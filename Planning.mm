@@ -27,7 +27,7 @@
 <node BACKGROUND_COLOR="#99ff99" CREATED="1322269973722" ID="ID_1540285104" MODIFIED="1322269993883" TEXT="Ok (F3)"/>
 <node CREATED="1322269975090" ID="ID_716897189" MODIFIED="1322270304082" TEXT="Pendente (F1)"/>
 </node>
-<node CREATED="1322270133624" ID="ID_209304459" MODIFIED="1322314275001" POSITION="right" TEXT="Milestone 2">
+<node BACKGROUND_COLOR="#99ff99" CREATED="1322270133624" FOLDED="true" ID="ID_209304459" MODIFIED="1322678572315" POSITION="right" TEXT="Milestone 2">
 <node CREATED="1322270137269" ID="ID_1707435879" MODIFIED="1322270160278" TEXT="Objetivos">
 <richcontent TYPE="NOTE"><html>
   <head>
@@ -113,6 +113,31 @@
   </body>
 </html></richcontent>
 </node>
+<node CREATED="1322270952879" ID="ID_170195965" MODIFIED="1322678883801" TEXT="jfin modelo analyse">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      - Recebe como par&#226;metros &quot;data inicial&quot;, &quot;data final&quot; e nome do modelo
+    </p>
+    <p>
+      - Abre os lancamentos dentro da faixa de datas especificadas e os compara com os lan&#231;amentos do modelo
+    </p>
+    <p>
+      - Caso um lan&#231;amento do modelo tenha mesma origem, destino e valor de um lan&#231;amento realizado, e o lan&#231;amento realizado tenha lanctomodeloid null, atualizar o lanctomodeloid para o id do lancamento do modelo.
+    </p>
+    <p>
+      - Para os lancamentos modelo que n&#227;o puderem ser relacionados, propor um insert into com uma data base como par&#226;metro
+    </p>
+    <p>
+      - Criar um switch boolean para apenas diferenciar entre uma simula&#231;&#227;o e realiza&#231;&#227;o do modelo no banco de dados.
+    </p>
+  </body>
+</html>
+</richcontent>
+</node>
 <node CREATED="1322270725708" ID="ID_623657749" MODIFIED="1322272223139" TEXT="jfin extrato import">
 <richcontent TYPE="NOTE"><html>
   <head>
@@ -137,28 +162,7 @@
   </body>
 </html></richcontent>
 </node>
-<node CREATED="1322270952879" ID="ID_170195965" MODIFIED="1322271295452" TEXT="jfin modelo analyse">
-<richcontent TYPE="NOTE"><html>
-  <head>
-    
-  </head>
-  <body>
-    <p>
-      - Recebe como par&#226;metros &quot;data inicial&quot;, &quot;data final&quot; e nome do modelo
-    </p>
-    <p>
-      - Abre os lancamentos dentro da faixa de datas especificadas e os compara com os lan&#231;amentos do modelo
-    </p>
-    <p>
-      - Caso um lan&#231;amento do modelo tenha mesma origem, destino e valor de um lan&#231;amento realizado, e o lan&#231;amento realizado tenha lanctomodeloid null, atualizar o lanctomodeloid para o id do lancamento do modelo.
-    </p>
-    <p>
-      - Para os lancamentos modelo que n&#227;o puderem ser relacionados, propor um insert into com uma data base como par&#226;metro
-    </p>
-  </body>
-</html></richcontent>
-</node>
-<node CREATED="1322271284140" ID="ID_1921731818" MODIFIED="1322272081964" TEXT="jfin extrato analyse">
+<node CREATED="1322271284140" ID="ID_1921731818" MODIFIED="1322678883999" TEXT="jfin extrato analyse">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -186,9 +190,9 @@
       - Fazer isso em uma classe java que devera receber o nome do banco como par&#226;metro, passa-lo a uma factory para devolver o objeto com o conhecimento sobre o formato da linha no extrato (a classe tamb&#233;m dever&#225; receber a linha do extrato)
     </p>
   </body>
-</html></richcontent>
+</html>
+</richcontent>
 </node>
-<node BACKGROUND_COLOR="#ff9999" CREATED="1322272326813" ID="ID_891586341" MODIFIED="1322272338131" TEXT="Planejamento pendente!"/>
 </node>
 <node CREATED="1322272082887" ID="ID_1707116991" MODIFIED="1322272128780" POSITION="right" TEXT="Futuras funcionalidades">
 <richcontent TYPE="NOTE"><html>
