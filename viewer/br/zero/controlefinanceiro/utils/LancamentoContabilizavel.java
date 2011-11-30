@@ -14,29 +14,29 @@ public class LancamentoContabilizavel implements Contabilizavel {
 	private LancamentoModelo lancamentoModelo;
 	private Calendar lancamentoModeloData;
 	private Integer lancamentoModeloN;
-	
+
 	public void setLancamentoBase(Lancamento lancamento) {
 		this.lancamento = lancamento;
 		lancamentoModelo = null;
 	}
-	
+
 	public Lancamento getLancamentoBase() {
 		return lancamento;
 	}
-	
+
 	public void setLancamentoModeloBase(LancamentoModelo lancamentoModelo, Calendar dataBase) {
 		this.lancamentoModelo = lancamentoModelo;
 		lancamento = null;
-		
+
 		lancamentoModeloData = (Calendar) dataBase.clone();
-		
-		lancamentoModeloData.add(Calendar.DAY_OF_MONTH, lancamentoModelo.getDiaVencimento());
+
+		lancamentoModeloData.add(Calendar.DAY_OF_MONTH, lancamentoModelo.getDiaVencimento() - 1);
 	}
-	
+
 	public LancamentoModelo getLancamentoModeloBase() {
 		return lancamentoModelo;
 	}
-	
+
 	public Integer getId() {
 		return (lancamentoModelo == null) ? lancamento.getId() : lancamentoModelo.getId();
 	}
@@ -52,12 +52,12 @@ public class LancamentoContabilizavel implements Contabilizavel {
 			return lancamentoModeloN;
 		}
 	}
-	
+
 	public void setN(Integer n) {
 		if (lancamentoModelo == null) {
 			return;
 		}
-		
+
 		this.lancamentoModeloN = n;
 	}
 
