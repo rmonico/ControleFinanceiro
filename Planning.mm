@@ -74,7 +74,7 @@
   </body>
 </html></richcontent>
 </node>
-<node CREATED="1322270492830" ID="ID_1372398862" MODIFIED="1322679514842" TEXT="Altera&#xe7;&#xf5;es no banco de dados">
+<node BACKGROUND_COLOR="#99ff99" CREATED="1322270492830" ID="ID_1372398862" MODIFIED="1322680648248" TEXT="Altera&#xe7;&#xf5;es no banco de dados">
 <richcontent TYPE="NOTE"><html>
   <head>
     
