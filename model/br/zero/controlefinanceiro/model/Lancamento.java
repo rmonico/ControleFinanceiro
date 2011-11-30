@@ -35,6 +35,10 @@ public class Lancamento {
 	private Calendar data;
 
 	private int n;
+	
+	@ManyToOne
+	@JoinColumn(name = "ExtratoID")
+	private Extrato extrato;
 
 	@ManyToOne
 	@JoinColumn(name = "ContaOrigemID")
@@ -78,6 +82,14 @@ public class Lancamento {
 
 	public void setN(int n) {
 		this.n = n;
+	}
+
+	public Extrato getExtrato() {
+		return extrato;
+	}
+
+	public void setExtrato(Extrato extrato) {
+		this.extrato = extrato;
 	}
 
 	public Conta getContaOrigem() {
