@@ -53,7 +53,7 @@ public class ModeloSimulateAction implements Action {
 		}
 	}
 
-	public class LancamentoForList extends LancamentoContabilizavel implements Comparable<LancamentoForList> {
+	public class LancamentoSimulated extends LancamentoContabilizavel implements Comparable<LancamentoSimulated> {
 		private TipoLancamento tipo;
 
 		public TipoLancamento getTipo() {
@@ -65,7 +65,7 @@ public class ModeloSimulateAction implements Action {
 		}
 
 		@Override
-		public int compareTo(LancamentoForList otherInstance) {
+		public int compareTo(LancamentoSimulated otherInstance) {
 			if (getData() == null) {
 				return +1;
 			} else if (otherInstance.getData() == null) {
@@ -154,11 +154,11 @@ public class ModeloSimulateAction implements Action {
 
 		Contabilizador contabilizador = new Contabilizador();
 
-		Packager<LancamentoForList, Lancamento> lancamentoToLancamentoForListPackager = new Packager<ModeloSimulateAction.LancamentoForList, Lancamento>() {
+		Packager<LancamentoSimulated, Lancamento> lancamentoToLancamentoForListPackager = new Packager<ModeloSimulateAction.LancamentoSimulated, Lancamento>() {
 
 			@Override
-			public LancamentoForList pack(Lancamento lancamento) {
-				LancamentoForList lfl = new LancamentoForList();
+			public LancamentoSimulated pack(Lancamento lancamento) {
+				LancamentoSimulated lfl = new LancamentoSimulated();
 				lfl.setTipo(TipoLancamento.REALIZADO);
 				lfl.setLancamentoBase(lancamento);
 
@@ -166,16 +166,16 @@ public class ModeloSimulateAction implements Action {
 			}
 		};
 
-		List<LancamentoForList> lancamentoContabilizavelList = contabilizador.packageList(lancamentoList, lancamentoToLancamentoForListPackager);
+		List<LancamentoSimulated> lancamentoContabilizavelList = contabilizador.packageList(lancamentoList, lancamentoToLancamentoForListPackager);
 
 		List<LancamentoModelo> lancamentoModeloList = getLancamentoModeloList(switches.getNomeModelo());
 
 		final Calendar dataBase = switches.getDataBase();
 
-		Packager<LancamentoForList, LancamentoModelo> packager = new Packager<LancamentoForList, LancamentoModelo>() {
+		Packager<LancamentoSimulated, LancamentoModelo> packager = new Packager<LancamentoSimulated, LancamentoModelo>() {
 			@Override
-			public LancamentoForList pack(LancamentoModelo lm) {
-				LancamentoForList lfl = new LancamentoForList();
+			public LancamentoSimulated pack(LancamentoModelo lm) {
+				LancamentoSimulated lfl = new LancamentoSimulated();
 				lfl.setTipo(TipoLancamento.PREVISTO);
 				lfl.setLancamentoModeloBase(lm, dataBase);
 
@@ -183,9 +183,9 @@ public class ModeloSimulateAction implements Action {
 			}
 		};
 
-		List<LancamentoForList> lancamentoModeloContabilizavelList = contabilizador.packageList(lancamentoModeloList, packager);
+		List<LancamentoSimulated> lancamentoModeloContabilizavelList = contabilizador.packageList(lancamentoModeloList, packager);
 
-		List<LancamentoForList> list = new ArrayList<LancamentoForList>();
+		List<LancamentoSimulated> list = new ArrayList<LancamentoSimulated>();
 
 		list.addAll(lancamentoContabilizavelList);
 		list.addAll(lancamentoModeloContabilizavelList);
@@ -201,7 +201,7 @@ public class ModeloSimulateAction implements Action {
 		// TODO Criar campo na tabela Conta chamado contabilizavel (boolean,
 		// indica que a conta pode acumular valores, não é como a conta de
 		// almoço por exemplo).
-		for (LancamentoForList lancamento : list) {
+		for (LancamentoSimulated lancamento : list) {
 			if (!lancamento.getData().equals(data)) {
 				n = 1;
 				data = lancamento.getData();
