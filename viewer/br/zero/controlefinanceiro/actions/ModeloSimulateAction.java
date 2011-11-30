@@ -152,24 +152,13 @@ public class ModeloSimulateAction implements Action {
 	public void run(Object param) throws ModeloSimulateException, TextGridException {
 		ModeloSimulateSwitches switches = checkParamValid(param);
 
-		List<Lancamento> lancamentoList = getLancamentoList();
-
 		Contabilizador contabilizador = new Contabilizador();
 
-		List<LancamentoSimulated> lancamentoContabilizavelList = packListLancamento(contabilizador, lancamentoList);
+		List<LancamentoSimulated> lancamentoContabilizavelList = getLancamentoSimulatedList(contabilizador);
 		
-		List<LancamentoModelo> lancamentoModeloList = getLancamentoModeloList(switches.getNomeModelo());
+		List<LancamentoSimulated> lancamentoModeloContabilizavelList = getLancamentoModeloSimulatedList(contabilizador, switches.getNomeModelo(), switches.getDataBase());
 
-		List<LancamentoSimulated> lancamentoModeloContabilizavelList = packListLancamentoModelo(contabilizador, switches.getDataBase(), lancamentoModeloList);
-
-		List<LancamentoSimulated> list = new ArrayList<LancamentoSimulated>();
-
-		list.addAll(lancamentoContabilizavelList);
-		list.addAll(lancamentoModeloContabilizavelList);
-
-		Collections.sort(list);
-
-		calcNs(list);
+		List<LancamentoSimulated> list = createFinalList(lancamentoContabilizavelList, lancamentoModeloContabilizavelList);
 
 		contabilizador.setList(list);
 
@@ -188,13 +177,39 @@ public class ModeloSimulateAction implements Action {
 		}
 	}
 
+	private List<LancamentoSimulated> createFinalList(List<LancamentoSimulated> lancamentoContabilizavelList, List<LancamentoSimulated> lancamentoModeloContabilizavelList) {
+		List<LancamentoSimulated> list = new ArrayList<LancamentoSimulated>();
+
+		list.addAll(lancamentoContabilizavelList);
+		list.addAll(lancamentoModeloContabilizavelList);
+
+		Collections.sort(list);
+
+		calcNs(list);
+		
+		return list;
+	}
+
+	private List<LancamentoSimulated> getLancamentoModeloSimulatedList(Contabilizador contabilizador, String nomeModelo, Calendar dataBase) throws ModeloSimulateException {
+		List<LancamentoModelo> lancamentoModeloList = getLancamentoModeloList(nomeModelo);
+
+		List<LancamentoSimulated> lancamentoModeloContabilizavelList = packListLancamentoModelo(contabilizador, dataBase, lancamentoModeloList);
+		
+		return lancamentoModeloContabilizavelList;
+	}
+
+	private List<LancamentoSimulated> getLancamentoSimulatedList(Contabilizador contabilizador) {
+		List<Lancamento> lancamentoList = getLancamentoList();
+
+		List<LancamentoSimulated> lancamentoSimulatedList = packListLancamento(contabilizador, lancamentoList);
+		
+		return lancamentoSimulatedList;
+	}
+
 	private void calcNs(List<LancamentoSimulated> list) {
 		Calendar data = null;
 		int n = 1;
 
-		// TODO Criar campo na tabela Conta chamado contabilizavel (boolean,
-		// indica que a conta pode acumular valores, não é como a conta de
-		// almoço por exemplo).
 		for (LancamentoSimulated lancamento : list) {
 			if (!lancamento.getData().equals(data)) {
 				n = 1;
