@@ -45,7 +45,7 @@ public class LancamentoListAction implements Action {
 
 		Contabilizador contabilizador = new Contabilizador();
 
-		Packer<LancamentoContabilizavel, Lancamento> packager = Packer.LANCAMENTO_LANCAMENTOCONTABILIZAVEL_PACKAGER;
+		Packer<LancamentoContabilizavel, Lancamento> packager = Packer.LANCAMENTO_LANCAMENTOCONTABILIZAVEL_PACKER;
 		
 		List<LancamentoContabilizavel> lancamentoContabilizavelList = contabilizador.packageList(lancamentoList, packager);
 		

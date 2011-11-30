@@ -221,7 +221,7 @@ public class ModeloSimulateAction implements Action {
 	}
 
 	private List<LancamentoSimulated> packListLancamentoModelo(Contabilizador contabilizador, final Calendar dataBase, List<LancamentoModelo> lancamentoModeloList) {
-		Packer<LancamentoSimulated, LancamentoModelo> packager = new Packer<LancamentoSimulated, LancamentoModelo>() {
+		Packer<LancamentoSimulated, LancamentoModelo> packer = new Packer<LancamentoSimulated, LancamentoModelo>() {
 			@Override
 			public LancamentoSimulated pack(LancamentoModelo lm) {
 				LancamentoSimulated lfl = new LancamentoSimulated();
@@ -232,13 +232,13 @@ public class ModeloSimulateAction implements Action {
 			}
 		};
 
-		List<LancamentoSimulated> lancamentoSimulatedList = contabilizador.packageList(lancamentoModeloList, packager);
+		List<LancamentoSimulated> lancamentoSimulatedList = contabilizador.packageList(lancamentoModeloList, packer);
 		return lancamentoSimulatedList;
 	}
 
 	private List<LancamentoSimulated> packListLancamento(Contabilizador contabilizador, List<Lancamento> lancamentoList) {
 		// TODO Extrair a montagem das listas para métodos separados
-		Packer<LancamentoSimulated, Lancamento> lancamentoToLancamentoForListPackager = new Packer<ModeloSimulateAction.LancamentoSimulated, Lancamento>() {
+		Packer<LancamentoSimulated, Lancamento> lancamentoToLancamentoForListPacker = new Packer<ModeloSimulateAction.LancamentoSimulated, Lancamento>() {
 
 			@Override
 			public LancamentoSimulated pack(Lancamento lancamento) {
@@ -250,7 +250,7 @@ public class ModeloSimulateAction implements Action {
 			}
 		};
 
-		List<LancamentoSimulated> lancamentoSimulatedList = contabilizador.packageList(lancamentoList, lancamentoToLancamentoForListPackager);
+		List<LancamentoSimulated> lancamentoSimulatedList = contabilizador.packageList(lancamentoList, lancamentoToLancamentoForListPacker);
 
 		return lancamentoSimulatedList;
 	}
