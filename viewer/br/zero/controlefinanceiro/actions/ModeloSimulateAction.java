@@ -168,10 +168,6 @@ public class ModeloSimulateAction implements Action {
 
 		List<LancamentoForList> lancamentoContabilizavelList = contabilizador.packageList(lancamentoList, lancamentoToLancamentoForListPackager);
 
-		// List<LancamentoForList> list = new ArrayList<LancamentoForList>();
-		//
-		// packageLancamentos(list, lancamentoList);
-
 		List<LancamentoModelo> lancamentoModeloList = getLancamentoModeloList(switches.getNomeModelo());
 
 		final Calendar dataBase = switches.getDataBase();
@@ -188,8 +184,6 @@ public class ModeloSimulateAction implements Action {
 		};
 
 		List<LancamentoForList> lancamentoModeloContabilizavelList = contabilizador.packageList(lancamentoModeloList, packager);
-		// packageLancamentosModelo(list, switches.getDataBase(),
-		// lancamentoModeloList);
 
 		List<LancamentoForList> list = new ArrayList<LancamentoForList>();
 
@@ -228,16 +222,6 @@ public class ModeloSimulateAction implements Action {
 		grid.show();
 	}
 
-	// private void packageLancamentosModelo(List<LancamentoForList> list,
-	// Calendar dataBase, List<LancamentoModelo> lancamentoModeloList) {
-	// for (LancamentoModelo lancamentoModelo : lancamentoModeloList) {
-	// LancamentoForList lancamentoForList = new LancamentoForList(dataBase,
-	// lancamentoModelo);
-	//
-	// list.add(lancamentoForList);
-	// }
-	// }
-
 	private List<LancamentoModelo> getLancamentoModeloList(String nomeModelo) throws ModeloSimulateException {
 		ModeloDAO modeloDAO = new ModeloDAO();
 
@@ -257,15 +241,6 @@ public class ModeloSimulateAction implements Action {
 
 		return dao.listarTodos();
 	}
-
-	// private void packageLancamentos(List<LancamentoForList> list,
-	// List<Lancamento> lancamentoList) {
-	// for (Lancamento lancamento : lancamentoList) {
-	// LancamentoForList lancamentoForList = new LancamentoForList(lancamento);
-	//
-	// list.add(lancamentoForList);
-	// }
-	// }
 
 	private ModeloSimulateSwitches checkParamValid(Object param) throws ModeloSimulateException {
 		if (!(param instanceof ModeloSimulateSwitches)) {
