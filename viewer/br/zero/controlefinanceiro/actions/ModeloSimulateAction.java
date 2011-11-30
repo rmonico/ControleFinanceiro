@@ -169,20 +169,7 @@ public class ModeloSimulateAction implements Action {
 
 		Collections.sort(list);
 
-		Calendar data = null;
-		int n = 1;
-
-		// TODO Criar campo na tabela Conta chamado contabilizavel (boolean,
-		// indica que a conta pode acumular valores, não é como a conta de
-		// almoço por exemplo).
-		for (LancamentoSimulated lancamento : list) {
-			if (!lancamento.getData().equals(data)) {
-				n = 1;
-				data = lancamento.getData();
-			}
-
-			lancamento.setN(n++);
-		}
+		calcNs(list);
 
 		contabilizador.setList(list);
 
@@ -198,6 +185,23 @@ public class ModeloSimulateAction implements Action {
 
 		for (Conta conta : saldos.keySet()) {
 			System.out.println("===> " + conta.getNome() + ": " + saldos.get(conta));
+		}
+	}
+
+	private void calcNs(List<LancamentoSimulated> list) {
+		Calendar data = null;
+		int n = 1;
+
+		// TODO Criar campo na tabela Conta chamado contabilizavel (boolean,
+		// indica que a conta pode acumular valores, não é como a conta de
+		// almoço por exemplo).
+		for (LancamentoSimulated lancamento : list) {
+			if (!lancamento.getData().equals(data)) {
+				n = 1;
+				data = lancamento.getData();
+			}
+
+			lancamento.setN(n++);
 		}
 	}
 
