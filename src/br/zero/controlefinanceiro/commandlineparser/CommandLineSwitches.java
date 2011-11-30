@@ -2,7 +2,6 @@ package br.zero.controlefinanceiro.commandlineparser;
 
 import br.zero.commandlineparser.CommandLineSwitch;
 import br.zero.commandlineparser.SubCommandLine;
-import br.zero.types.DateRange;
 
 public class CommandLineSwitches {
 
