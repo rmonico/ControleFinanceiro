@@ -111,17 +111,16 @@
       alter table lancamento add field extratoid fk to extrato.id
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
-<node CREATED="1322270952879" ID="ID_170195965" MODIFIED="1322678883801" TEXT="jfin modelo analyse">
+<node CREATED="1322270952879" ID="ID_170195965" MODIFIED="1322694326036" TEXT="jfin modelo analyse">
 <richcontent TYPE="NOTE"><html>
   <head>
     
   </head>
   <body>
     <p>
-      - Recebe como par&#226;metros &quot;data inicial&quot;, &quot;data final&quot; e nome do modelo
+      - Recebe como par&#226;metros &quot;data base&quot; e nome do modelo
     </p>
     <p>
       - Abre os lancamentos dentro da faixa de datas especificadas e os compara com os lan&#231;amentos do modelo
@@ -191,8 +190,7 @@
       - Fazer isso em uma classe java que devera receber o nome do banco como par&#226;metro, passa-lo a uma factory para devolver o objeto com o conhecimento sobre o formato da linha no extrato (a classe tamb&#233;m dever&#225; receber a linha do extrato)
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 </node>
 <node CREATED="1322272082887" ID="ID_1707116991" MODIFIED="1322272128780" POSITION="right" TEXT="Futuras funcionalidades">
