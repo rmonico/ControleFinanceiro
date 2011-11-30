@@ -18,6 +18,7 @@ import br.zero.controlefinanceiro.actions.ModeloAddAction;
 import br.zero.controlefinanceiro.actions.ModeloCloneAction;
 import br.zero.controlefinanceiro.actions.ModeloListAction;
 import br.zero.controlefinanceiro.actions.ModeloRemoveAction;
+import br.zero.controlefinanceiro.actions.ModeloSimulateAction;
 import br.zero.controlefinanceiro.commandlineparser.CommandLineLoader;
 import br.zero.controlefinanceiro.commandlineparser.CommandLineSwitches;
 import br.zero.controlefinanceiro.commandlineparser.ContaCommand;

@@ -170,7 +170,7 @@ public class CommandLineSwitches {
 			return modeloSwitches.getCloneSwitches();
 		}
 		case LIST: {
-			return modeloSwitches.getListSwitches();
+			return null;
 		}
 		case REMOVE: {
 			return modeloSwitches.getRemoveSwitches();

@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import java.text.SimpleDateFormat;
+
 import org.junit.Test;
 
 import br.zero.commandlineparser.ParserException;
@@ -22,36 +24,14 @@ public class ModeloSwitchesTests extends CustomParserTests {
 		assertEquals("Comando do modelo", modeloCommand, modeloSwitches.getCommand());
 	}
 
-	private ModeloListSwitches doModeloListLoad(String[] args) throws ParserException {
-		doModeloLoad(args, ModeloCommand.LIST);
-
-		assertNotNull("Switches de lista", modeloSwitches.getListSwitches());
-		assertNull("Switches de add", modeloSwitches.getAddSwitches());
-		assertNull("Switches de simulate", modeloSwitches.getSimulateSwitches());
-		assertNull("Switches de remove", modeloSwitches.getRemoveSwitches());
-		assertNull("Switches de clone", modeloSwitches.getCloneSwitches());
-
-		return modeloSwitches.getListSwitches();
-	}
-
 	@Test
 	public void doListTest() throws ParserException {
-		ModeloListSwitches listSwitches = doModeloListLoad(new String[] { "modelo", "ls" });
-
-		assertNull("Filtro de nome", listSwitches.getFiltroNome());
-	}
-
-	@Test
-	public void doListTest2() throws ParserException {
-		ModeloListSwitches listSwitches = doModeloListLoad(new String[] { "modelo", "ls", "nome do modelo para filtro" });
-
-		assertEquals("Filtro de nome", "nome do modelo para filtro", listSwitches.getFiltroNome());
+		doModeloLoad(new String[] { "modelo", "ls" }, ModeloCommand.LIST);
 	}
 
 	private ModeloAddSwitches doModeloAddLoad(String[] args) throws ParserException {
 		doModeloLoad(args, ModeloCommand.ADD);
 
-		assertNull("Switches de lista", modeloSwitches.getListSwitches());
 		assertNotNull("Switches de add", modeloSwitches.getAddSwitches());
 		assertNull("Switches de simulate", modeloSwitches.getSimulateSwitches());
 		assertNull("Switches de remove", modeloSwitches.getRemoveSwitches());
@@ -78,9 +58,8 @@ public class ModeloSwitchesTests extends CustomParserTests {
 	
 	@Test
 	public void doSimulateTest() throws ParserException {
-		doModeloLoad(new String[] { "modelo", "simulate", "nome modelo" }, ModeloCommand.SIMULATE);
+		doModeloLoad(new String[] { "modelo", "simulate", "nome modelo", "nov/2011" }, ModeloCommand.SIMULATE);
 
-		assertNull("Switches de lista", modeloSwitches.getListSwitches());
 		assertNull("Switches de add", modeloSwitches.getAddSwitches());
 		assertNotNull("Switches de simulate", modeloSwitches.getSimulateSwitches());
 		assertNull("Switches de remove", modeloSwitches.getRemoveSwitches());
@@ -90,13 +69,16 @@ public class ModeloSwitchesTests extends CustomParserTests {
 		ModeloSimulateSwitches simulateSwitches = modeloSwitches.getSimulateSwitches();
 
 		assertEquals("Nome do modelo", "nome modelo", simulateSwitches.getNomeModelo());
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
+		
+		assertEquals("Data base", "01/Nov/2011", sdf.format(simulateSwitches.getDataBase().getTime()));
 	}
 	
 	@Test
 	public void doRemoveTest() throws ParserException {
 		doModeloLoad(new String[] { "modelo", "rm", "nome modelo" }, ModeloCommand.REMOVE);
 
-		assertNull("Switches de lista", modeloSwitches.getListSwitches());
 		assertNull("Switches de add", modeloSwitches.getAddSwitches());
 		assertNull("Switches de simulate", modeloSwitches.getSimulateSwitches());
 		assertNotNull("Switches de remove", modeloSwitches.getRemoveSwitches());
@@ -112,7 +94,6 @@ public class ModeloSwitchesTests extends CustomParserTests {
 	public void doCloneTest() throws ParserException {
 		doModeloLoad(new String[] { "modelo", "clone", "modelo base", "modelo novo"}, ModeloCommand.CLONE);
 
-		assertNull("Switches de lista", modeloSwitches.getListSwitches());
 		assertNull("Switches de add", modeloSwitches.getAddSwitches());
 		assertNull("Switches de simulate", modeloSwitches.getSimulateSwitches());
 		assertNull("Switches de remove", modeloSwitches.getRemoveSwitches());

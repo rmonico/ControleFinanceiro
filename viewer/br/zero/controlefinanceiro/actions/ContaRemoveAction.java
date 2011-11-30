@@ -1,9 +1,9 @@
 package br.zero.controlefinanceiro.actions;
 
-import br.zero.controlefinanceiro.ControleFinanceiroException;
 import br.zero.controlefinanceiro.commandlineparser.ContaRemoveSwitches;
 import br.zero.controlefinanceiro.model.Conta;
 import br.zero.controlefinanceiro.model.ContaDAO;
+import br.zero.controlefinanceiro.utils.ControleFinanceiroException;
 import br.zero.tinycontroller.Action;
 
 public class ContaRemoveAction implements Action {

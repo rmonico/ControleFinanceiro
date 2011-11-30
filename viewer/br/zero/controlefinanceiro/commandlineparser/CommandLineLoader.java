@@ -44,6 +44,12 @@ public class CommandLineLoader {
 		
 		parsers.put("UtilsParser", calendarParser);
 		
+		UtilsParser monthDateParser = new UtilsParser();
+		
+		monthDateParser.setDateFormat(new SimpleDateFormat("MMM/yyyy"));
+		
+		parsers.put("MonthDateParser", monthDateParser);
+
 		parser.parse();
 		
 		if (!parser.getErrors().isEmpty()) {

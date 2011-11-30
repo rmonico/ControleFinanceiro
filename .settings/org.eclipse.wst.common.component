@@ -3,5 +3,6 @@
     <wb-module deploy-name="ControleFinanceiro">
         <wb-resource deploy-path="/" source-path="/tests"/>
         <wb-resource deploy-path="/" source-path="/model"/>
+        <wb-resource deploy-path="/" source-path="/viewer"/>
     </wb-module>
 </project-modules>

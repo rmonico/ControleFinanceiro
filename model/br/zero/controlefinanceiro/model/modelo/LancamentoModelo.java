@@ -17,20 +17,20 @@ import br.zero.customdao.EntitySetup;
  * 
  */
 @Entity
-@Table(name="lancamento", schema = "controlefinanceiro_modelo")
-@EntitySetup(findAllQuery = "select l from LancamentoModelo l order by l.diavencimento", findByIdQuery = "select l from LancamentoModelo l where l.id=:id", idFieldName = "id")
+@Table(name = "lancamento", schema = "controlefinanceiro_modelo")
+@EntitySetup(findAllQuery = "select lm from LancamentoModelo lm order by lm.modelo.nome, lm.diaVencimento", findByIdQuery = "select lm from LancamentoModelo lm where lm.id=:id", idFieldName = "id")
 public class LancamentoModelo {
 
 	@Id
-	@SequenceGenerator(name = "CONTROLEFINANCEIRO_MODELO.LANCAMENTO_ID_SEQ", sequenceName = "CONTROLEFINANCEIRO_MODELO.LANCAMENTO_ID_SEQ")
+	@SequenceGenerator(name = "CONTROLEFINANCEIRO_MODELO.LANCAMENTO_ID_SEQ", sequenceName = "CONTROLEFINANCEIRO_MODELO.LANCAMENTO_ID_SEQ", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CONTROLEFINANCEIRO_MODELO.LANCAMENTO_ID_SEQ")
 	private Integer id;
 
 	@ManyToOne
 	@JoinColumn(name = "ModeloID")
 	private Modelo modelo;
-	
-	private Integer diavencimento;
+
+	private Integer diaVencimento;
 
 	@ManyToOne
 	@JoinColumn(name = "ContaOrigemID")
@@ -40,11 +40,10 @@ public class LancamentoModelo {
 	@JoinColumn(name = "ContaDestinoID")
 	private Conta contaDestino;
 
-	private double valor;
+	private Double valor;
 
 	private String observacao;
 
-	
 	public Integer getId() {
 		return this.id;
 	}
@@ -56,17 +55,17 @@ public class LancamentoModelo {
 	public Modelo getModelo() {
 		return modelo;
 	}
-	
+
 	public void setModelo(Modelo modelo) {
 		this.modelo = modelo;
 	}
-	
-	public Integer getDiavencimento() {
-		return this.diavencimento;
+
+	public Integer getDiaVencimento() {
+		return this.diaVencimento;
 	}
 
-	public void setDiavencimento(Integer diavencimento) {
-		this.diavencimento = diavencimento;
+	public void setDiaVencimento(Integer diaVencimento) {
+		this.diaVencimento = diaVencimento;
 	}
 
 	public Conta getContaOrigem() {
@@ -81,15 +80,15 @@ public class LancamentoModelo {
 		return contaDestino;
 	}
 
-	public void setContaDestinoID(Conta value) {
+	public void setContaDestino(Conta value) {
 		contaDestino = value;
 	}
 
-	public double getValor() {
+	public Double getValor() {
 		return this.valor;
 	}
 
-	public void setValor(double valor) {
+	public void setValor(Double valor) {
 		this.valor = valor;
 	}
 
@@ -101,4 +100,29 @@ public class LancamentoModelo {
 		this.observacao = observacao;
 	}
 
+	@Override
+	public String toString() {
+		String modeloNome = (modelo != null) ? modelo.getNome() : "[null]";
+		String diaVencimento = (this.diaVencimento != null) ? (this.diaVencimento.toString()) : "[null]";
+		String contaOrigemNome = (contaOrigem != null) ? contaOrigem.getNome() : "[null]";
+		String contaDestinoNome = (contaDestino != null) ? contaDestino.getNome() : "[null]";
+		String valor = (this.valor != null) ? this.valor.toString() : "[null]";
+		String observacao = (this.observacao != null) ? this.observacao : "[null]";
+
+		return modeloNome + ", " + diaVencimento + ", " + contaOrigemNome + " -> " + contaDestinoNome + ", " + valor + ", " + observacao;
+	}
+
+	@Override
+	public LancamentoModelo clone() throws CloneNotSupportedException {
+		LancamentoModelo lancamentoClonado = new LancamentoModelo();
+		
+		lancamentoClonado.setDiaVencimento(diaVencimento);
+		lancamentoClonado.setModelo(modelo);
+		lancamentoClonado.setContaOrigem(contaOrigem);
+		lancamentoClonado.setContaDestino(contaDestino);
+		lancamentoClonado.setValor(valor);
+		lancamentoClonado.setObservacao(observacao);
+		
+		return lancamentoClonado;
+	}
 }

@@ -22,14 +22,13 @@ public class Modelo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "CONTROLEFINANCEIRO_MODELO.MODELO_ID_SEQ", sequenceName = "CONTROLEFINANCEIRO_MODELO.MODELO_ID_SEQ")
+	@SequenceGenerator(name = "CONTROLEFINANCEIRO_MODELO.MODELO_ID_SEQ", sequenceName = "CONTROLEFINANCEIRO_MODELO.MODELO_ID_SEQ", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CONTROLEFINANCEIRO_MODELO.MODELO_ID_SEQ")
 	private Integer id;
 
 	private String nome;
-	
+
 	private String observacao;
-	
 
 	public Integer getId() {
 		return this.id;
@@ -46,13 +45,21 @@ public class Modelo implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 	public String getObservacao() {
 		return observacao;
 	}
-	
+
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
+	}
+
+	@Override
+	public String toString() {
+		String nomeModelo = (nome != null) ? nome : "[null]";
+		String observacaoModelo = (observacao != null) ? observacao : "[null]";
+
+		return nomeModelo + ", " + observacaoModelo;
 	}
 
 }

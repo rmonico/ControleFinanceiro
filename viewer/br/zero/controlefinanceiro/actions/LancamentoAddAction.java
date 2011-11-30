@@ -4,12 +4,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import br.zero.controlefinanceiro.ControleFinanceiroException;
 import br.zero.controlefinanceiro.commandlineparser.LancamentoAddSwitches;
 import br.zero.controlefinanceiro.model.Conta;
 import br.zero.controlefinanceiro.model.ContaDAO;
 import br.zero.controlefinanceiro.model.Lancamento;
 import br.zero.controlefinanceiro.model.LancamentoDAO;
+import br.zero.controlefinanceiro.utils.ControleFinanceiroException;
 import br.zero.tinycontroller.Action;
 
 public class LancamentoAddAction implements Action {
@@ -27,12 +27,10 @@ public class LancamentoAddAction implements Action {
 		
 	}
 	
-	private LancamentoAddSwitches switches;
-
 	@Override
 	public void run(Object param) throws LancamentoAddException {
 		
-		switches = checkParamValid(param);
+		LancamentoAddSwitches switches = checkParamValid(param);
 		
 		ContaDAO contaDAO = new ContaDAO();
 		

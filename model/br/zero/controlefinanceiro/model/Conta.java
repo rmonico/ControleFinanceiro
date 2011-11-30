@@ -20,6 +20,8 @@ public class Conta implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CONTROLEFINANCEIRO.CONTA_ID_SEQ")
 	private Integer id;
 	private String nome;
+	private Boolean contabilizavel;
+
 	private String observacao;
 
 	public Integer getId() {
@@ -38,6 +40,14 @@ public class Conta implements Serializable {
 		this.nome = nome;
 	}
 
+	public Boolean getContabilizavel() {
+		return contabilizavel;
+	}
+
+	public void setContabilizavel(Boolean contabilizavel) {
+		this.contabilizavel = contabilizavel;
+	}
+
 	public String getObservacao() {
 		return this.observacao;
 	}
@@ -48,10 +58,16 @@ public class Conta implements Serializable {
 	
 	@Override
 	public String toString() {
+		String idConta = (id != null) ? id.toString() : "[null]";
 		String nomeConta = (nome != null) ? nome : "[null]";
 		String observacaoConta = (observacao != null) ? observacao : "[null]";
 		
-		return nomeConta + ", " + observacaoConta;
+		return "#" + idConta + "," + nomeConta + ", " + observacaoConta;
+	}
+	
+	@Override
+	public int hashCode() {
+		return id;
 	}
 	
 	@Override
@@ -61,10 +77,12 @@ public class Conta implements Serializable {
 			return false;
 		}
 		
+		Conta contaObj = (Conta) obj;
+		
 		if (id == null) {
 			return false;
 		}
 		
-		return id.equals(((Conta) obj).getId());
+		return id.equals(contaObj.getId());
 	}
 }

@@ -6,7 +6,6 @@ import br.zero.commandlineparser.SubCommandLine;
 public class ModeloSwitches {
 
 	private ModeloCommand command;
-	private ModeloListSwitches listSwitches;
 	private ModeloAddSwitches addSwitches;
 	private ModeloSimulateSwitches simulateSwitches;
 	private ModeloRemoveSwitches removeSwitches;
@@ -17,21 +16,12 @@ public class ModeloSwitches {
 	}
 
 	@CommandLineSwitch(index = 1, parser = "ModeloCommandParser.parseComplexEnum", complexParser = true, subCommandLineProperties = {
-			@SubCommandLine(value = "LIST", subCommandLineClass = ModeloListSwitches.class, propertyName = "setListSwitches"),
 			@SubCommandLine(value = "ADD", subCommandLineClass = ModeloAddSwitches.class, propertyName = "setAddSwitches"),
 			@SubCommandLine(value = "SIMULATE", subCommandLineClass = ModeloSimulateSwitches.class, propertyName = "setSimulateSwitches"),
 			@SubCommandLine(value = "REMOVE", subCommandLineClass = ModeloRemoveSwitches.class, propertyName = "setRemoveSwitches"),
 			@SubCommandLine(value = "CLONE", subCommandLineClass = ModeloCloneSwitches.class, propertyName = "setCloneSwitches"), })
 	public void setCommand(ModeloCommand value) {
 		command = value;
-	}
-
-	public ModeloListSwitches getListSwitches() {
-		return listSwitches;
-	}
-
-	public void setListSwitches(ModeloListSwitches value) {
-		listSwitches = value;
 	}
 
 	public ModeloAddSwitches getAddSwitches() {
