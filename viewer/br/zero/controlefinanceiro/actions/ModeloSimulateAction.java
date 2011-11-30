@@ -18,7 +18,7 @@ import br.zero.controlefinanceiro.utils.Contabilizador;
 import br.zero.controlefinanceiro.utils.ControleFinanceiroException;
 import br.zero.controlefinanceiro.utils.ControleFinanceiroFormatters;
 import br.zero.controlefinanceiro.utils.LancamentoContabilizavel;
-import br.zero.controlefinanceiro.utils.Packager;
+import br.zero.controlefinanceiro.utils.Packer;
 import br.zero.textgrid.TextGrid;
 import br.zero.textgrid.TextGridColumnAlignment;
 import br.zero.textgrid.TextGridException;
@@ -221,7 +221,7 @@ public class ModeloSimulateAction implements Action {
 	}
 
 	private List<LancamentoSimulated> packListLancamentoModelo(Contabilizador contabilizador, final Calendar dataBase, List<LancamentoModelo> lancamentoModeloList) {
-		Packager<LancamentoSimulated, LancamentoModelo> packager = new Packager<LancamentoSimulated, LancamentoModelo>() {
+		Packer<LancamentoSimulated, LancamentoModelo> packager = new Packer<LancamentoSimulated, LancamentoModelo>() {
 			@Override
 			public LancamentoSimulated pack(LancamentoModelo lm) {
 				LancamentoSimulated lfl = new LancamentoSimulated();
@@ -238,7 +238,7 @@ public class ModeloSimulateAction implements Action {
 
 	private List<LancamentoSimulated> packListLancamento(Contabilizador contabilizador, List<Lancamento> lancamentoList) {
 		// TODO Extrair a montagem das listas para métodos separados
-		Packager<LancamentoSimulated, Lancamento> lancamentoToLancamentoForListPackager = new Packager<ModeloSimulateAction.LancamentoSimulated, Lancamento>() {
+		Packer<LancamentoSimulated, Lancamento> lancamentoToLancamentoForListPackager = new Packer<ModeloSimulateAction.LancamentoSimulated, Lancamento>() {
 
 			@Override
 			public LancamentoSimulated pack(Lancamento lancamento) {

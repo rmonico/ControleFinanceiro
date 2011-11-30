@@ -9,7 +9,7 @@ import br.zero.controlefinanceiro.model.LancamentoDAO;
 import br.zero.controlefinanceiro.utils.Contabilizador;
 import br.zero.controlefinanceiro.utils.ControleFinanceiroFormatters;
 import br.zero.controlefinanceiro.utils.LancamentoContabilizavel;
-import br.zero.controlefinanceiro.utils.Packager;
+import br.zero.controlefinanceiro.utils.Packer;
 import br.zero.textgrid.TextGrid;
 import br.zero.textgrid.TextGridColumnAlignment;
 import br.zero.textgrid.TextGridException;
@@ -45,7 +45,7 @@ public class LancamentoListAction implements Action {
 
 		Contabilizador contabilizador = new Contabilizador();
 
-		Packager<LancamentoContabilizavel, Lancamento> packager = Packager.LANCAMENTO_LANCAMENTOCONTABILIZAVEL_PACKAGER;
+		Packer<LancamentoContabilizavel, Lancamento> packager = Packer.LANCAMENTO_LANCAMENTOCONTABILIZAVEL_PACKAGER;
 		
 		List<LancamentoContabilizavel> lancamentoContabilizavelList = contabilizador.packageList(lancamentoList, packager);
 		

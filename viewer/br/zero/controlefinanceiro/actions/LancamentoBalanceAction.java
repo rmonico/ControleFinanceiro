@@ -12,7 +12,7 @@ import br.zero.controlefinanceiro.utils.Contabilizador;
 import br.zero.controlefinanceiro.utils.ControleFinanceiroException;
 import br.zero.controlefinanceiro.utils.ControleFinanceiroFormatters;
 import br.zero.controlefinanceiro.utils.LancamentoContabilizavel;
-import br.zero.controlefinanceiro.utils.Packager;
+import br.zero.controlefinanceiro.utils.Packer;
 import br.zero.textgrid.TextGrid;
 import br.zero.textgrid.TextGridColumnAlignment;
 import br.zero.textgrid.TextGridException;
@@ -85,7 +85,7 @@ public class LancamentoBalanceAction implements Action {
 
 		Contabilizador contabilizador = new Contabilizador();
 		
-		Packager<LancamentoBalance, Lancamento> packager = new Packager<LancamentoBalance, Lancamento>() {
+		Packer<LancamentoBalance, Lancamento> packager = new Packer<LancamentoBalance, Lancamento>() {
 			@Override
 			public LancamentoBalance pack(Lancamento lancamento) {
 				LancamentoBalance lancamentoBalance = new LancamentoBalance();

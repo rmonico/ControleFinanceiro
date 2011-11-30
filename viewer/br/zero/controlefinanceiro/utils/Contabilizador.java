@@ -18,7 +18,7 @@ public class Contabilizador {
 	private List<? extends Contabilizavel> lancamentoList;
 	private Map<Conta, Double> saldos;
 
-	public <Packed extends Contabilizavel, ToPack> List<Packed> packageList(List<ToPack> toPackList, Packager<Packed, ToPack> packager) {
+	public <Packed extends Contabilizavel, ToPack> List<Packed> packageList(List<ToPack> toPackList, Packer<Packed, ToPack> packager) {
 		List<Packed> packedList = new ArrayList<Packed>();
 
 		for (ToPack toPack : toPackList) {
