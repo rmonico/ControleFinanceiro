@@ -21,7 +21,7 @@ public class Conta implements Serializable {
 	private Integer id;
 	private String nome;
 	private Boolean contabilizavel;
-
+	private String extrato;
 	private String observacao;
 
 	public Integer getId() {
@@ -48,6 +48,19 @@ public class Conta implements Serializable {
 		this.contabilizavel = contabilizavel;
 	}
 
+	/**
+	 * Indica a forma como esta conta deverá aparecer no extrato.
+	 * 
+	 * @return
+	 */
+	public String getExtrato() {
+		return extrato;
+	}
+
+	public void setExtrato(String extrato) {
+		this.extrato = extrato;
+	}
+
 	public String getObservacao() {
 		return this.observacao;
 	}
@@ -55,34 +68,34 @@ public class Conta implements Serializable {
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
-	
+
 	@Override
 	public String toString() {
 		String idConta = (id != null) ? id.toString() : "[null]";
 		String nomeConta = (nome != null) ? nome : "[null]";
 		String observacaoConta = (observacao != null) ? observacao : "[null]";
-		
+
 		return "#" + idConta + "," + nomeConta + ", " + observacaoConta;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return id;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
-		
+
 		if (!(obj instanceof Conta)) {
 			return false;
 		}
-		
+
 		Conta contaObj = (Conta) obj;
-		
+
 		if (id == null) {
 			return false;
 		}
-		
+
 		return id.equals(contaObj.getId());
 	}
 }
