@@ -46,7 +46,11 @@ public class LancamentoContabilizavel implements Contabilizavel {
 	}
 
 	public Integer getN() {
-		return (lancamentoModelo == null) ? lancamento.getN() : lancamentoModeloN;
+		if (lancamentoModelo == null) {
+			return lancamento.getN();
+		} else {
+			return lancamentoModeloN;
+		}
 	}
 	
 	public void setN(Integer n) {
