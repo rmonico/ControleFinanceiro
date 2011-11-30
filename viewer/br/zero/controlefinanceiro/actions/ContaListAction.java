@@ -20,6 +20,7 @@ public class ContaListAction implements Action {
 
 		TextGridFormattedColumn.createFormattedColumn(grid, "id", TextGridFormattedColumn.ID_FORMATTER, TextGridColumnAlignment.RIGHT, "getId");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Nome", TextGridFormattedColumn.STRING_FORMATTER, TextGridColumnAlignment.LEFT, "getNome");
+		TextGridFormattedColumn.createFormattedColumn(grid, "Contab.", TextGridFormattedColumn.BOOLEAN_FORMATTER, TextGridColumnAlignment.CENTER, "getContabilizavel");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Observação", TextGridFormattedColumn.STRING_FORMATTER, TextGridColumnAlignment.LEFT, "getObservacao");
 
 		return grid;

@@ -20,6 +20,8 @@ public class Conta implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CONTROLEFINANCEIRO.CONTA_ID_SEQ")
 	private Integer id;
 	private String nome;
+	private Boolean contabilizavel;
+
 	private String observacao;
 
 	public Integer getId() {
@@ -36,6 +38,14 @@ public class Conta implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public Boolean getContabilizavel() {
+		return contabilizavel;
+	}
+
+	public void setContabilizavel(Boolean contabilizavel) {
+		this.contabilizavel = contabilizavel;
 	}
 
 	public String getObservacao() {
