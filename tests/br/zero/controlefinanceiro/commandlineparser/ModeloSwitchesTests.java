@@ -36,6 +36,7 @@ public class ModeloSwitchesTests extends CustomParserTests {
 		assertNull("Switches de simulate", modeloSwitches.getSimulateSwitches());
 		assertNull("Switches de remove", modeloSwitches.getRemoveSwitches());
 		assertNull("Switches de clone", modeloSwitches.getCloneSwitches());
+		assertNull("Switches de analyse", modeloSwitches.getAnalyseSwitches());
 
 		return modeloSwitches.getAddSwitches();
 	}
@@ -64,6 +65,7 @@ public class ModeloSwitchesTests extends CustomParserTests {
 		assertNotNull("Switches de simulate", modeloSwitches.getSimulateSwitches());
 		assertNull("Switches de remove", modeloSwitches.getRemoveSwitches());
 		assertNull("Switches de clone", modeloSwitches.getCloneSwitches());
+		assertNull("Switches de analyse", modeloSwitches.getAnalyseSwitches());
 
 
 		ModeloSimulateSwitches simulateSwitches = modeloSwitches.getSimulateSwitches();
@@ -83,6 +85,7 @@ public class ModeloSwitchesTests extends CustomParserTests {
 		assertNull("Switches de simulate", modeloSwitches.getSimulateSwitches());
 		assertNotNull("Switches de remove", modeloSwitches.getRemoveSwitches());
 		assertNull("Switches de clone", modeloSwitches.getCloneSwitches());
+		assertNull("Switches de analyse", modeloSwitches.getAnalyseSwitches());
 
 
 		ModeloRemoveSwitches removeSwitches = modeloSwitches.getRemoveSwitches();
@@ -98,11 +101,30 @@ public class ModeloSwitchesTests extends CustomParserTests {
 		assertNull("Switches de simulate", modeloSwitches.getSimulateSwitches());
 		assertNull("Switches de remove", modeloSwitches.getRemoveSwitches());
 		assertNotNull("Switches de clone", modeloSwitches.getCloneSwitches());
+		assertNull("Switches de analyse", modeloSwitches.getAnalyseSwitches());
 
 
 		ModeloCloneSwitches removeSwitches = modeloSwitches.getCloneSwitches();
 
 		assertEquals("Modelo base", "modelo base", removeSwitches.getModeloBase());
 		assertEquals("Modelo novo", "modelo novo", removeSwitches.getModeloNovo());
+	}
+	
+	@Test
+	public void doAnalyseTest() throws ParserException {
+		doModeloLoad(new String[] { "modelo", "analyse", "nome modelo", "nov/2011"}, ModeloCommand.ANALYSE);
+
+		assertNull("Switches de add", modeloSwitches.getAddSwitches());
+		assertNull("Switches de simulate", modeloSwitches.getSimulateSwitches());
+		assertNull("Switches de remove", modeloSwitches.getRemoveSwitches());
+		assertNull("Switches de clone", modeloSwitches.getCloneSwitches());
+		assertNotNull("Switches de analyse", modeloSwitches.getAnalyseSwitches());
+
+
+		ModeloAnalyseSwitches analyseSwitches = modeloSwitches.getAnalyseSwitches();
+
+		assertEquals("Nome modelo", "nome modelo", analyseSwitches.getNomeModelo());
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
+		assertEquals("Data base", "01/Nov/2011", sdf.format(analyseSwitches.getDataBase().getTime()));
 	}
 }

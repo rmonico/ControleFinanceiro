@@ -10,6 +10,7 @@ public class ModeloSwitches {
 	private ModeloSimulateSwitches simulateSwitches;
 	private ModeloRemoveSwitches removeSwitches;
 	private ModeloCloneSwitches cloneSwitches;
+	private ModeloAnalyseSwitches analyseSwitches;
 
 	public ModeloCommand getCommand() {
 		return command;
@@ -19,7 +20,8 @@ public class ModeloSwitches {
 			@SubCommandLine(value = "ADD", subCommandLineClass = ModeloAddSwitches.class, propertyName = "setAddSwitches"),
 			@SubCommandLine(value = "SIMULATE", subCommandLineClass = ModeloSimulateSwitches.class, propertyName = "setSimulateSwitches"),
 			@SubCommandLine(value = "REMOVE", subCommandLineClass = ModeloRemoveSwitches.class, propertyName = "setRemoveSwitches"),
-			@SubCommandLine(value = "CLONE", subCommandLineClass = ModeloCloneSwitches.class, propertyName = "setCloneSwitches"), })
+			@SubCommandLine(value = "CLONE", subCommandLineClass = ModeloCloneSwitches.class, propertyName = "setCloneSwitches"),
+			@SubCommandLine(value = "ANALYSE", subCommandLineClass = ModeloAnalyseSwitches.class, propertyName = "setAnalyseSwitches"), })
 	public void setCommand(ModeloCommand value) {
 		command = value;
 	}
@@ -55,4 +57,13 @@ public class ModeloSwitches {
 	public void setCloneSwitches(ModeloCloneSwitches value) {
 		cloneSwitches = value;
 	}
+
+	public ModeloAnalyseSwitches getAnalyseSwitches() {
+		return analyseSwitches;
+	}
+	
+	public void setAnalyseSwitches(ModeloAnalyseSwitches value) {
+		analyseSwitches = value;
+	}
+
 }
