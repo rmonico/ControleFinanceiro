@@ -1,0 +1,402 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = off;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET escape_string_warning = off;
+
+--
+-- Name: controlefinanceiro; Type: SCHEMA; Schema: -; Owner: controlefinanceiro
+--
+
+CREATE SCHEMA controlefinanceiro;
+
+
+ALTER SCHEMA controlefinanceiro OWNER TO controlefinanceiro;
+
+--
+-- Name: controlefinanceiro_modelo; Type: SCHEMA; Schema: -; Owner: controlefinanceiro
+--
+
+CREATE SCHEMA controlefinanceiro_modelo;
+
+
+ALTER SCHEMA controlefinanceiro_modelo OWNER TO controlefinanceiro;
+
+SET search_path = controlefinanceiro, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: conta; Type: TABLE; Schema: controlefinanceiro; Owner: controlefinanceiro; Tablespace: 
+--
+
+CREATE TABLE conta (
+    id integer NOT NULL,
+    nome character varying(250) NOT NULL,
+    observacao text,
+    contabilizavel boolean DEFAULT false NOT NULL
+);
+
+
+ALTER TABLE controlefinanceiro.conta OWNER TO controlefinanceiro;
+
+--
+-- Name: conta_id_seq; Type: SEQUENCE; Schema: controlefinanceiro; Owner: controlefinanceiro
+--
+
+CREATE SEQUENCE conta_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE controlefinanceiro.conta_id_seq OWNER TO controlefinanceiro;
+
+--
+-- Name: conta_id_seq; Type: SEQUENCE OWNED BY; Schema: controlefinanceiro; Owner: controlefinanceiro
+--
+
+ALTER SEQUENCE conta_id_seq OWNED BY conta.id;
+
+
+--
+-- Name: lancamento; Type: TABLE; Schema: controlefinanceiro; Owner: controlefinanceiro; Tablespace: 
+--
+
+CREATE TABLE lancamento (
+    id integer NOT NULL,
+    lancamentomodeloid integer,
+    data date NOT NULL,
+    contaorigemid integer NOT NULL,
+    contadestinoid integer NOT NULL,
+    valor double precision NOT NULL,
+    observacao text,
+    n integer NOT NULL
+);
+
+
+ALTER TABLE controlefinanceiro.lancamento OWNER TO controlefinanceiro;
+
+--
+-- Name: lancamento_id_seq; Type: SEQUENCE; Schema: controlefinanceiro; Owner: controlefinanceiro
+--
+
+CREATE SEQUENCE lancamento_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE controlefinanceiro.lancamento_id_seq OWNER TO controlefinanceiro;
+
+--
+-- Name: lancamento_id_seq; Type: SEQUENCE OWNED BY; Schema: controlefinanceiro; Owner: controlefinanceiro
+--
+
+ALTER SEQUENCE lancamento_id_seq OWNED BY lancamento.id;
+
+
+SET search_path = controlefinanceiro_modelo, pg_catalog;
+
+--
+-- Name: lancamento; Type: TABLE; Schema: controlefinanceiro_modelo; Owner: controlefinanceiro; Tablespace: 
+--
+
+CREATE TABLE lancamento (
+    id integer NOT NULL,
+    modeloid integer NOT NULL,
+    diavencimento integer NOT NULL,
+    contaorigemid integer NOT NULL,
+    contadestinoid integer NOT NULL,
+    valor double precision NOT NULL,
+    observacao text
+);
+
+
+ALTER TABLE controlefinanceiro_modelo.lancamento OWNER TO controlefinanceiro;
+
+--
+-- Name: lancamento_id_seq; Type: SEQUENCE; Schema: controlefinanceiro_modelo; Owner: controlefinanceiro
+--
+
+CREATE SEQUENCE lancamento_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE controlefinanceiro_modelo.lancamento_id_seq OWNER TO controlefinanceiro;
+
+--
+-- Name: lancamento_id_seq; Type: SEQUENCE OWNED BY; Schema: controlefinanceiro_modelo; Owner: controlefinanceiro
+--
+
+ALTER SEQUENCE lancamento_id_seq OWNED BY lancamento.id;
+
+
+--
+-- Name: modelo; Type: TABLE; Schema: controlefinanceiro_modelo; Owner: controlefinanceiro; Tablespace: 
+--
+
+CREATE TABLE modelo (
+    id integer NOT NULL,
+    nome character varying(250) NOT NULL,
+    observacao text
+);
+
+
+ALTER TABLE controlefinanceiro_modelo.modelo OWNER TO controlefinanceiro;
+
+--
+-- Name: modelo_id_seq; Type: SEQUENCE; Schema: controlefinanceiro_modelo; Owner: controlefinanceiro
+--
+
+CREATE SEQUENCE modelo_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE controlefinanceiro_modelo.modelo_id_seq OWNER TO controlefinanceiro;
+
+--
+-- Name: modelo_id_seq; Type: SEQUENCE OWNED BY; Schema: controlefinanceiro_modelo; Owner: controlefinanceiro
+--
+
+ALTER SEQUENCE modelo_id_seq OWNED BY modelo.id;
+
+
+--
+-- Name: v_simulacao; Type: VIEW; Schema: controlefinanceiro_modelo; Owner: controlefinanceiro
+--
+
+CREATE VIEW v_simulacao AS
+    SELECT query.id, query.modeloid, query.modelo, query.lancamentomodeloid, query.data, query.n, query.contaorigemid, query.contaorigem, query.contadestinoid, query.contadestino, query.valor, query.observacao FROM (SELECT lancamento.id, (-1) AS modeloid, 'realizado' AS modelo, lancamento.lancamentomodeloid, lancamento.data, lancamento.n, contaorigem.id AS contaorigemid, contaorigem.nome AS contaorigem, contadestino.id AS contadestinoid, contadestino.nome AS contadestino, lancamento.valor, lancamento.observacao FROM ((controlefinanceiro.lancamento lancamento LEFT JOIN controlefinanceiro.conta contaorigem ON ((lancamento.contaorigemid = contaorigem.id))) LEFT JOIN controlefinanceiro.conta contadestino ON ((lancamento.contadestinoid = contadestino.id))) UNION SELECT (lancamentomodelo.id + (SELECT max(lancamento.id) AS max FROM controlefinanceiro.lancamento)) AS id, modelo.id AS modeloid, modelo.nome AS modelo, lancamentomodelo.id AS lancamentomodeloid, (('2011-11-01'::date + lancamentomodelo.diavencimento) - 1) AS data, (lancamentomodelo.id + 999) AS n, contaorigem.id AS contaorigemid, contaorigem.nome AS contaorigem, contadestino.id AS contadestinoid, contadestino.nome AS contadestino, lancamentomodelo.valor, lancamentomodelo.observacao FROM (((modelo modelo LEFT JOIN lancamento lancamentomodelo ON ((lancamentomodelo.modeloid = modelo.id))) LEFT JOIN controlefinanceiro.conta contaorigem ON ((lancamentomodelo.contaorigemid = contaorigem.id))) LEFT JOIN controlefinanceiro.conta contadestino ON ((lancamentomodelo.contadestinoid = contadestino.id)))) query ORDER BY query.data, query.n;
+
+
+ALTER TABLE controlefinanceiro_modelo.v_simulacao OWNER TO controlefinanceiro;
+
+--
+-- Name: VIEW v_simulacao; Type: COMMENT; Schema: controlefinanceiro_modelo; Owner: controlefinanceiro
+--
+
+COMMENT ON VIEW v_simulacao IS 'select
+  id
+  , modeloid
+  , modelo
+  , lancamentomodeloid
+  , data
+  , n
+  , contaorigemid
+  , contaorigem
+  , contadestinoid
+  , contadestino
+  , valor
+  , observacao
+
+from (
+  select
+    lancamento.id as id
+    , -1 as modeloid
+    , ''realizado'' as modelo
+    , lancamento.lancamentomodeloid as lancamentomodeloid
+    , lancamento.data
+    , lancamento.n as n
+    , contaorigem.id as contaorigemid
+    , contaorigem.nome as contaorigem
+    , contadestino.id as contadestinoid
+    , contadestino.nome as contadestino
+    , lancamento.valor
+    , lancamento.observacao
+
+  from
+    controlefinanceiro.lancamento lancamento
+
+    left join controlefinanceiro.conta contaorigem on
+      (lancamento.contaorigemid=contaorigem.id)
+
+    left join controlefinanceiro.conta contadestino on
+      (lancamento.contadestinoid=contadestino.id)
+
+  union select
+    lancamentomodelo.id + (select max(id) from controlefinanceiro.lancamento) as id
+    , modelo.id as modeloid
+    , modelo.nome as modelo
+    , lancamentomodelo.id as lancamentomodeloid
+    , ''11/01/2011''::date + lancamentomodelo.diavencimento - 1 as data
+    , lancamentomodelo.id+999 as n
+    , contaorigem.id as contaorigemid
+    , contaorigem.nome as contaorigem
+    , contadestino.id as contadestinoid
+    , contadestino.nome as contadestino
+    , lancamentomodelo.valor
+    , lancamentomodelo.observacao
+
+  from
+    controlefinanceiro_modelo.modelo modelo
+
+    left join controlefinanceiro_modelo.lancamento lancamentomodelo on
+      (lancamentomodelo.modeloid=modelo.id)
+
+    left join controlefinanceiro.conta contaorigem on
+      (lancamentomodelo.contaorigemid=contaorigem.id)
+
+    left join controlefinanceiro.conta contadestino on
+      (lancamentomodelo.contadestinoid=contadestino.id)
+
+) as query
+
+order by
+  query.data
+  , query.n';
+
+
+SET search_path = controlefinanceiro, pg_catalog;
+
+--
+-- Name: id; Type: DEFAULT; Schema: controlefinanceiro; Owner: controlefinanceiro
+--
+
+ALTER TABLE conta ALTER COLUMN id SET DEFAULT nextval('conta_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: controlefinanceiro; Owner: controlefinanceiro
+--
+
+ALTER TABLE lancamento ALTER COLUMN id SET DEFAULT nextval('lancamento_id_seq'::regclass);
+
+
+SET search_path = controlefinanceiro_modelo, pg_catalog;
+
+--
+-- Name: id; Type: DEFAULT; Schema: controlefinanceiro_modelo; Owner: controlefinanceiro
+--
+
+ALTER TABLE lancamento ALTER COLUMN id SET DEFAULT nextval('lancamento_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: controlefinanceiro_modelo; Owner: controlefinanceiro
+--
+
+ALTER TABLE modelo ALTER COLUMN id SET DEFAULT nextval('modelo_id_seq'::regclass);
+
+
+SET search_path = controlefinanceiro, pg_catalog;
+
+--
+-- Name: conta_pk; Type: CONSTRAINT; Schema: controlefinanceiro; Owner: controlefinanceiro; Tablespace: 
+--
+
+ALTER TABLE ONLY conta
+    ADD CONSTRAINT conta_pk PRIMARY KEY (id);
+
+
+--
+-- Name: lancamento_pk; Type: CONSTRAINT; Schema: controlefinanceiro; Owner: controlefinanceiro; Tablespace: 
+--
+
+ALTER TABLE ONLY lancamento
+    ADD CONSTRAINT lancamento_pk PRIMARY KEY (id);
+
+
+SET search_path = controlefinanceiro_modelo, pg_catalog;
+
+--
+-- Name: lancamento_pk; Type: CONSTRAINT; Schema: controlefinanceiro_modelo; Owner: controlefinanceiro; Tablespace: 
+--
+
+ALTER TABLE ONLY lancamento
+    ADD CONSTRAINT lancamento_pk PRIMARY KEY (id);
+
+
+--
+-- Name: orcamentomodelo_pk; Type: CONSTRAINT; Schema: controlefinanceiro_modelo; Owner: controlefinanceiro; Tablespace: 
+--
+
+ALTER TABLE ONLY modelo
+    ADD CONSTRAINT orcamentomodelo_pk PRIMARY KEY (id);
+
+
+SET search_path = controlefinanceiro, pg_catalog;
+
+--
+-- Name: lancamento_contadestino_fk; Type: FK CONSTRAINT; Schema: controlefinanceiro; Owner: controlefinanceiro
+--
+
+ALTER TABLE ONLY lancamento
+    ADD CONSTRAINT lancamento_contadestino_fk FOREIGN KEY (contadestinoid) REFERENCES conta(id);
+
+
+--
+-- Name: lancamento_contaorigem_fk; Type: FK CONSTRAINT; Schema: controlefinanceiro; Owner: controlefinanceiro
+--
+
+ALTER TABLE ONLY lancamento
+    ADD CONSTRAINT lancamento_contaorigem_fk FOREIGN KEY (contaorigemid) REFERENCES conta(id);
+
+
+--
+-- Name: lancamentomodelo_fk; Type: FK CONSTRAINT; Schema: controlefinanceiro; Owner: controlefinanceiro
+--
+
+ALTER TABLE ONLY lancamento
+    ADD CONSTRAINT lancamentomodelo_fk FOREIGN KEY (lancamentomodeloid) REFERENCES controlefinanceiro_modelo.lancamento(id);
+
+
+SET search_path = controlefinanceiro_modelo, pg_catalog;
+
+--
+-- Name: lancamento_contadestino_fk; Type: FK CONSTRAINT; Schema: controlefinanceiro_modelo; Owner: controlefinanceiro
+--
+
+ALTER TABLE ONLY lancamento
+    ADD CONSTRAINT lancamento_contadestino_fk FOREIGN KEY (contadestinoid) REFERENCES controlefinanceiro.conta(id);
+
+
+--
+-- Name: lancamento_contaorigem_fk; Type: FK CONSTRAINT; Schema: controlefinanceiro_modelo; Owner: controlefinanceiro
+--
+
+ALTER TABLE ONLY lancamento
+    ADD CONSTRAINT lancamento_contaorigem_fk FOREIGN KEY (contaorigemid) REFERENCES controlefinanceiro.conta(id);
+
+
+--
+-- Name: lancamento_orcamento_fk; Type: FK CONSTRAINT; Schema: controlefinanceiro_modelo; Owner: controlefinanceiro
+--
+
+ALTER TABLE ONLY lancamento
+    ADD CONSTRAINT lancamento_orcamento_fk FOREIGN KEY (modeloid) REFERENCES modelo(id);
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
