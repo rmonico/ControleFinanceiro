@@ -74,7 +74,7 @@
   </body>
 </html></richcontent>
 </node>
-<node CREATED="1322270492830" ID="ID_1372398862" MODIFIED="1322270672423" TEXT="Altera&#xe7;&#xf5;es no banco de dados">
+<node CREATED="1322270492830" ID="ID_1372398862" MODIFIED="1322679514842" TEXT="Altera&#xe7;&#xf5;es no banco de dados">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -105,13 +105,14 @@
       
     </p>
     <p>
-      alter table conta add field extrato --(ser&#225; utilizado para localizar a conta em um lancamento do extrato)
+      alter table conta add field extrato --(&#233; como a conta dever&#225; ser localizada em uma linha do extrato)
     </p>
     <p>
       alter table lancamento add field extratoid fk to extrato.id
     </p>
   </body>
-</html></richcontent>
+</html>
+</richcontent>
 </node>
 <node CREATED="1322270952879" ID="ID_170195965" MODIFIED="1322678883801" TEXT="jfin modelo analyse">
 <richcontent TYPE="NOTE"><html>
