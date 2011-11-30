@@ -16,5 +16,8 @@ public enum ModeloCommand {
 	REMOVE,
 	
 	@CommandLineSwitchParam(name="clone")
-	CLONE
+	CLONE,
+	
+	@CommandLineSwitchParam(name="analyse")
+	ANALYSE
 }
