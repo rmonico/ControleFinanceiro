@@ -5,8 +5,6 @@ import java.util.List;
 import br.zero.controlefinanceiro.commandlineparser.LancamentoModeloListSwitches;
 import br.zero.controlefinanceiro.model.modelo.LancamentoModelo;
 import br.zero.controlefinanceiro.model.modelo.LancamentoModeloDAO;
-import br.zero.controlefinanceiro.model.modelo.Modelo;
-import br.zero.controlefinanceiro.model.modelo.ModeloDAO;
 import br.zero.controlefinanceiro.utils.ControleFinanceiroException;
 import br.zero.controlefinanceiro.utils.ControleFinanceiroFormatters;
 import br.zero.textgrid.TextGrid;
@@ -69,20 +67,10 @@ public class LancamentoModeloListAction implements Action {
 		if (switches.getModelo() == null) {
 			lancamentoModeloList = dao.listarTodos();
 		} else {
-			Modelo modelo = getModelo(switches.getModelo());
-			
-			lancamentoModeloList = dao.listarPorModelo(modelo);
+			lancamentoModeloList = dao.listarPorModelo(switches.getModelo());
 		}
 		
 		return lancamentoModeloList;
-	}
-
-	private Modelo getModelo(String nomeModelo) {
-		ModeloDAO dao = new ModeloDAO();
-		
-		Modelo modelo = dao.getByNome(nomeModelo);
-		
-		return modelo;
 	}
 
 	private LancamentoModeloListSwitches checkParamValid(Object param) throws LancamentoModeloListException {

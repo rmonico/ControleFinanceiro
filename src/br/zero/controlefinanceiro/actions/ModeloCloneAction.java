@@ -70,12 +70,12 @@ public class ModeloCloneAction implements Action {
 		dao.inserir(modeloClonado);
 		
 		
-		clonarLancamentos(modeloBase, modeloClonado);
+		clonarLancamentos(modeloBase.getNome(), modeloClonado);
 		
 		return modeloClonado;
 	}
 
-	private void clonarLancamentos(Modelo modeloBase, Modelo modeloClonado) {
+	private void clonarLancamentos(String modeloBase, Modelo modeloClonado) {
 		LancamentoModeloDAO dao = new LancamentoModeloDAO();
 		
 		List<LancamentoModelo> modeloBaseLancamentoList = dao.listarPorModelo(modeloBase);

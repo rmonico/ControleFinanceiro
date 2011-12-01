@@ -10,9 +10,9 @@ import br.zero.customdao.DAOSetup;
 @DAOSetup(persistenceUnitName = "ControleFinanceiro", entityClass = LancamentoModelo.class)
 public class LancamentoModeloDAO extends CustomDAO<LancamentoModelo> {
 
-	public List<LancamentoModelo> listarPorModelo(Modelo modelo) {
-		Query q = getEntityManager().createQuery("select lm from LancamentoModelo lm where lm.modelo = :modelo");
-		q.setParameter("modelo", modelo);
+	public List<LancamentoModelo> listarPorModelo(String nomeModelo) {
+		Query q = getEntityManager().createQuery("select lm from LancamentoModelo lm where lm.modelo.nome = :nomeModelo");
+		q.setParameter("nomeModelo", nomeModelo);
 
 		@SuppressWarnings("unchecked")
 		List<LancamentoModelo> resultList = (List<LancamentoModelo>) q.getResultList();

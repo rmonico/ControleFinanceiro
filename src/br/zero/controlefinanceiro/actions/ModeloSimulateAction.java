@@ -12,8 +12,6 @@ import br.zero.controlefinanceiro.model.Lancamento;
 import br.zero.controlefinanceiro.model.LancamentoDAO;
 import br.zero.controlefinanceiro.model.modelo.LancamentoModelo;
 import br.zero.controlefinanceiro.model.modelo.LancamentoModeloDAO;
-import br.zero.controlefinanceiro.model.modelo.Modelo;
-import br.zero.controlefinanceiro.model.modelo.ModeloDAO;
 import br.zero.controlefinanceiro.utils.Contabilizador;
 import br.zero.controlefinanceiro.utils.ControleFinanceiroException;
 import br.zero.controlefinanceiro.utils.ControleFinanceiroFormatters;
@@ -190,7 +188,7 @@ public class ModeloSimulateAction implements Action {
 		return list;
 	}
 
-	private List<LancamentoSimulated> getLancamentoModeloSimulatedList(Contabilizador contabilizador, String nomeModelo, Calendar dataBase) throws ModeloSimulateException {
+	private List<LancamentoSimulated> getLancamentoModeloSimulatedList(Contabilizador contabilizador, String nomeModelo, Calendar dataBase) {
 		List<LancamentoModelo> lancamentoModeloList = getLancamentoModeloList(nomeModelo);
 
 		List<LancamentoSimulated> lancamentoModeloContabilizavelList = packListLancamentoModelo(contabilizador, dataBase, lancamentoModeloList);
@@ -255,18 +253,10 @@ public class ModeloSimulateAction implements Action {
 		return lancamentoSimulatedList;
 	}
 
-	private List<LancamentoModelo> getLancamentoModeloList(String nomeModelo) throws ModeloSimulateException {
-		ModeloDAO modeloDAO = new ModeloDAO();
-
-		Modelo modelo = modeloDAO.getByNome(nomeModelo);
-
-		if (modelo == null) {
-			throw new ModeloSimulateException("Modelo não encontrado: \"" + nomeModelo + "\".");
-		}
-
+	private List<LancamentoModelo> getLancamentoModeloList(String nomeModelo) {
 		LancamentoModeloDAO dao = new LancamentoModeloDAO();
 
-		return dao.listarPorModelo(modelo);
+		return dao.listarPorModelo(nomeModelo);
 	}
 
 	private List<Lancamento> getLancamentoList() {
