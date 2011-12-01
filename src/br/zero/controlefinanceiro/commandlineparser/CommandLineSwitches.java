@@ -107,6 +107,9 @@ public class CommandLineSwitches {
 		case LANCAMENTO_MODELO: {
 			return lancamentoModeloSwitches.getCommand();
 		}
+		case EXTRATO: {
+			return extratoSwitches.getCommand();
+		}
 		case HELP: {
 			return null;
 		}
@@ -224,7 +227,7 @@ public class CommandLineSwitches {
 	}
 
 	public Object getExtratoSubSwitches(ExtratoCommand command) {
-		if (!entity.equals(Entity.LANCAMENTO_MODELO)) {
+		if (!entity.equals(Entity.EXTRATO)) {
 			return null;
 		}
 		
@@ -232,10 +235,12 @@ public class CommandLineSwitches {
 		case LIST: {
 			return extratoSwitches.getListSwitches();
 		}
-		}
+		default: {
+			assert false : "Comando de lançamento modelo não implementado!";
 
-		// TODO Auto-generated method stub
-		return null;
+			return null;
+		}
+		}
 	}
 
 }

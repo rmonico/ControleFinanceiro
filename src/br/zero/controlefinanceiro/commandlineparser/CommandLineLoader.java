@@ -9,6 +9,7 @@ import br.zero.commandlineparser.ParserException;
 import br.zero.commandlineparser.parsers.EnumParser;
 import br.zero.commandlineparser.parsers.PrimitiveParsers;
 import br.zero.commandlineparser.parsers.UtilsParser;
+import br.zero.controlefinanceiro.ExtratoCommand;
 
 public class CommandLineLoader {
 
@@ -36,6 +37,7 @@ public class CommandLineLoader {
 		parsers.put("LancamentoCommandParser", new EnumParser(LancamentoCommand.class));
 		parsers.put("ModeloCommandParser", new EnumParser(ModeloCommand.class));
 		parsers.put("LancamentoModeloCommandParser", new EnumParser(LancamentoModeloCommand.class)); 
+		parsers.put("ExtratoCommandParser", new EnumParser(ExtratoCommand.class)); 
 		parsers.put("PrimitiveParsers", new PrimitiveParsers());
 		
 		UtilsParser calendarParser = new UtilsParser(new SimpleDateFormat("dd/MMM/yyyy"));
