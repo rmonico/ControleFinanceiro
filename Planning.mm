@@ -113,23 +113,26 @@
   </body>
 </html></richcontent>
 </node>
-<node CREATED="1322270952879" ID="ID_170195965" MODIFIED="1322694326036" TEXT="jfin modelo analyse">
+<node CREATED="1322270952879" ID="ID_170195965" MODIFIED="1322738308193" TEXT="jfin modelo analyse">
 <richcontent TYPE="NOTE"><html>
   <head>
     
   </head>
   <body>
     <p>
-      - Recebe como par&#226;metros &quot;data base&quot; e nome do modelo
+      - Par&#226;metros: &lt;nome modelo&gt; &lt;data base&gt; &lt;intervalo de lan&#231;amentos para verificar - opcional, default: database-database+1 m&#234;s&gt;
     </p>
     <p>
       - Abre os lancamentos dentro da faixa de datas especificadas e os compara com os lan&#231;amentos do modelo
     </p>
     <p>
-      - Caso um lan&#231;amento do modelo tenha mesma origem, destino e valor de um lan&#231;amento realizado, e o lan&#231;amento realizado tenha lanctomodeloid null, atualizar o lanctomodeloid para o id do lancamento do modelo.
+      - Caso um lan&#231;amento do modelo tenha mesma origem e destino e o lan&#231;amento realizado tenha lanctomodeloid null, atualizar o lanctomodeloid para o id do lancamento do modelo.
     </p>
     <p>
-      - Para os lancamentos modelo que n&#227;o puderem ser relacionados, propor um insert into com uma data base como par&#226;metro
+      - Caso exista mais de um lan&#231;amento com mesma origem e destino (e lanctomodeloid nulo), n&#227;o fazer o lan&#231;amento, informar a condi&#231;&#227;o ao usu&#225;rio
+    </p>
+    <p>
+      - Apenas mostrar o que ser&#225; feito. Receber da linha de comando uma flag --realizar para gravar no banco de dados
     </p>
     <p>
       - Criar um switch boolean para apenas diferenciar entre uma simula&#231;&#227;o e realiza&#231;&#227;o do modelo no banco de dados.
@@ -192,8 +195,53 @@
   </body>
 </html></richcontent>
 </node>
+<node CREATED="1322738416483" ID="ID_1354654228" MODIFIED="1322738431230" TEXT="Extens&#xe3;o do modelo simulate">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      - modelo simulate: permitir mais de um par de modelo/database, anexar todos ao final como &#233; feito hoje.
+    </p>
+    <p>
+      &#160;&#160;- Pode ser criado um parser de arrays para isso
+    </p>
+  </body>
+</html>
+</richcontent>
 </node>
-<node CREATED="1322272082887" ID="ID_1707116991" MODIFIED="1322272128780" POSITION="right" TEXT="Futuras funcionalidades">
+<node CREATED="1322738576183" ID="ID_1153208439" MODIFIED="1322738610579" TEXT="modelo simulate: corre&#xe7;&#xe3;o de bug">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      - simula&#231;&#227;o de modelo: n&#227;o mostrar os lan&#231;amentos do modelo que j&#225; tiverem algum lan&#231;amento correspondente
+    </p>
+    <p>
+      - so mostrar nas listagens lancamentos com um m&#234;s ou menos de idade
+    </p>
+  </body>
+</html>
+</richcontent>
+</node>
+<node CREATED="1322738611754" ID="ID_1966233343" MODIFIED="1322738620103" TEXT="Filtro de Saldos">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      - Nas listagens mostrar o saldo apenas para contas contabiliz&#225;veis.
+    </p>
+  </body>
+</html>
+</richcontent>
+</node>
+</node>
+<node CREATED="1322272082887" ID="ID_1707116991" MODIFIED="1322738317283" POSITION="right" TEXT="Funcionalidades futuras">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -204,6 +252,36 @@
     </p>
   </body>
 </html></richcontent>
+<node CREATED="1322738319787" ID="ID_964412691" MODIFIED="1322738324271" TEXT="modelos derivados"/>
+<node CREATED="1322738326482" ID="ID_1080856909" MODIFIED="1322738385788" TEXT="Listagem de lan&#xe7;amentos previstos">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      Listar os lan&#231;amentos previstos (com lancamentomodeloid &lt;&gt; null) e os n&#227;o previstos (lancamentomodeloid == null)
+    </p>
+  </body>
+</html>
+</richcontent>
+</node>
+<node CREATED="1322738456790" ID="ID_1146040637" MODIFIED="1322738475360" TEXT="Flag de conta antiga">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      - Criar uma flag para conta antiga (n&#227;o devem aparecer nas listagens de contas, seus lan&#231;amentos n&#227;o aparecem nas listagens, nunca deveriam aparecer em lugar nenhum, a menos que explicitamente solicitado.
+    </p>
+    <p>
+      &#160;&#160;- Contas sem lancamento ha mais de dois meses poderiam ser consideradas antigas.
+    </p>
+  </body>
+</html>
+</richcontent>
+</node>
 </node>
 <node CREATED="1322272446879" ID="ID_1717968237" MODIFIED="1322272454069" POSITION="right" TEXT="Funcionalidades n&#xe3;o-essenciais">
 <node CREATED="1322272462078" ID="ID_1625700189" MODIFIED="1322272469429" TEXT="help">
