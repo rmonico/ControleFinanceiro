@@ -20,7 +20,7 @@ import br.zero.customdao.EntitySetup;
 @Entity
 @Table(name = "lancamento", schema = "controlefinanceiro")
 @EntitySetup(findAllQuery = "select l from Lancamento l order by l.data, l.n", findByIdQuery = "select l from Lancamento l where l.id=:id", idFieldName = "id")
-public class Lancamento {
+public class Lancamento implements Comparable<Lancamento> {
 
 	@Id
 	@SequenceGenerator(name = "CONTROLEFINANCEIRO.LANCAMENTO_ID_SEQ", sequenceName = "CONTROLEFINANCEIRO.LANCAMENTO_ID_SEQ", allocationSize = 1)
@@ -34,8 +34,8 @@ public class Lancamento {
 	@Temporal(TemporalType.DATE)
 	private Calendar data;
 
-	private int n;
-	
+	private Integer n;
+
 	@ManyToOne
 	@JoinColumn(name = "ExtratoID")
 	private Extrato extrato;
@@ -76,11 +76,11 @@ public class Lancamento {
 		this.data = data;
 	}
 
-	public int getN() {
+	public Integer getN() {
 		return n;
 	}
 
-	public void setN(int n) {
+	public void setN(Integer n) {
 		this.n = n;
 	}
 
@@ -127,24 +127,55 @@ public class Lancamento {
 	@Override
 	public String toString() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
-		
+
 		String data = (this.data != null) ? (sdf.format(this.data.getTime())) : "[null]";
 		String n = ((Integer) this.n).toString();
 		String contaOrigemNome = (contaOrigem != null) ? contaOrigem.getNome() : "[null]";
 		String contaDestinoNome = (contaDestino != null) ? contaDestino.getNome() : "[null]";
 		String valor = (this.valor != null) ? this.valor.toString() : "[null]";
 		String observacao = (this.observacao != null) ? this.observacao : "[null]";
-		
+
 		return data + ", " + n + ", " + contaOrigemNome + " -> " + contaDestinoNome + ", " + valor + ", " + observacao;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
-		
+
 		if (id == null) {
 			return false;
 		}
-		
+
 		return id.equals(obj);
+	}
+
+	@Override
+	public int compareTo(Lancamento otherInstance) {
+		if (getData() == null) {
+			return +1;
+		} else if (otherInstance.getData() == null) {
+			return -1;
+		}
+
+		int dataComparision = getData().compareTo(otherInstance.getData());
+
+		if (dataComparision != 0) {
+			return dataComparision;
+		}
+
+		if ((getN() != null) && (otherInstance.getN() != null)) {
+			int nComparision = getN().compareTo(otherInstance.getN());
+
+			if (nComparision != 0) {
+				return nComparision;
+			}
+		}
+
+		if (getId() == null) {
+			return +1;
+		} else if (otherInstance.getId() == null) {
+			return -1;
+		}
+
+		return getId().compareTo(otherInstance.getId());
 	}
 }
