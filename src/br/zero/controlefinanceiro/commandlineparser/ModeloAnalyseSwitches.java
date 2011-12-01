@@ -10,6 +10,7 @@ public class ModeloAnalyseSwitches {
 	private String nomeModelo;
 	private Calendar dataBase;
 	private DateRange lancamentoRange;
+	private Boolean realize;
 
 	
 	public String getNomeModelo() {
@@ -37,6 +38,15 @@ public class ModeloAnalyseSwitches {
 	
 	public DateRange getLancamentoRange() {
 		return lancamentoRange;
+	}
+	
+	@CommandLineSwitch(param="--realize")
+	public void setRealizeFlag(Boolean value) {
+		realize = value;
+	}
+	
+	public Boolean getRealizeFlag() {
+		return realize;
 	}
 
 }
