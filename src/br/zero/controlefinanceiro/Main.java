@@ -15,6 +15,7 @@ import br.zero.controlefinanceiro.actions.LancamentoModeloListAction;
 import br.zero.controlefinanceiro.actions.LancamentoModeloRemoveAction;
 import br.zero.controlefinanceiro.actions.LancamentoRemoveAction;
 import br.zero.controlefinanceiro.actions.ModeloAddAction;
+import br.zero.controlefinanceiro.actions.ModeloAnalyseAction;
 import br.zero.controlefinanceiro.actions.ModeloCloneAction;
 import br.zero.controlefinanceiro.actions.ModeloListAction;
 import br.zero.controlefinanceiro.actions.ModeloRemoveAction;
@@ -77,6 +78,7 @@ public class Main {
 		controller.registerAction(ModeloSimulateAction.class, switches.getModeloSubSwitches(ModeloCommand.SIMULATE), Entity.MODELO, ModeloCommand.SIMULATE);
 		controller.registerAction(ModeloRemoveAction.class, switches.getModeloSubSwitches(ModeloCommand.REMOVE), Entity.MODELO, ModeloCommand.REMOVE);
 		controller.registerAction(ModeloCloneAction.class, switches.getModeloSubSwitches(ModeloCommand.CLONE), Entity.MODELO, ModeloCommand.CLONE);
+		controller.registerAction(ModeloAnalyseAction.class, switches.getModeloSubSwitches(ModeloCommand.ANALYSE), Entity.MODELO, ModeloCommand.ANALYSE);
 		
 		controller.registerAction(LancamentoModeloListAction.class, switches.getLancamentoModeloSubSwitches(LancamentoModeloCommand.LIST), Entity.LANCAMENTO_MODELO, LancamentoModeloCommand.LIST);
 		controller.registerAction(LancamentoModeloAddAction.class, switches.getLancamentoModeloSubSwitches(LancamentoModeloCommand.ADD), Entity.LANCAMENTO_MODELO, LancamentoModeloCommand.ADD);
