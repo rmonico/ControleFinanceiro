@@ -5,6 +5,7 @@ import br.zero.controlefinanceiro.actions.BackupAction;
 import br.zero.controlefinanceiro.actions.ContaAddAction;
 import br.zero.controlefinanceiro.actions.ContaListAction;
 import br.zero.controlefinanceiro.actions.ContaRemoveAction;
+import br.zero.controlefinanceiro.actions.ExtratoListAction;
 import br.zero.controlefinanceiro.actions.HelpAction;
 import br.zero.controlefinanceiro.actions.LancamentoAddAction;
 import br.zero.controlefinanceiro.actions.LancamentoAddFullAction;
