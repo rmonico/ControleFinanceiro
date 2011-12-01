@@ -3,15 +3,15 @@ package br.zero.controlefinanceiro.commandlineparser;
 import br.zero.commandlineparser.CommandLineSwitch;
 
 public class ExtratoListSwitches {
-	private String nomeModelo;
+	private String nomeConta;
 
-	public String getNomeModelo() {
-		return nomeModelo;
+	public String getNomeConta() {
+		return nomeConta;
 	}
 
 	@CommandLineSwitch(index = 1)
-	public void setNomeModelo(String nomeModelo) {
-		this.nomeModelo = nomeModelo;
+	public void setNomeConta(String nomeConta) {
+		this.nomeConta = nomeConta;
 	}
 
 }
