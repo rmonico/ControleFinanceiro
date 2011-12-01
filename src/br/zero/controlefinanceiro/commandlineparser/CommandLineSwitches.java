@@ -178,6 +178,9 @@ public class CommandLineSwitches {
 		case SIMULATE: {
 			return modeloSwitches.getSimulateSwitches();
 		}
+		case ANALYSE: {
+			return modeloSwitches.getAnalyseSwitches();
+		}
 		default: {
 			assert false : "Comando de modelo não implementado!";
 
