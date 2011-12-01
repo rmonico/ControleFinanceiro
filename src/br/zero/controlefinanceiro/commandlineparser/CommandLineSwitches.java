@@ -24,6 +24,7 @@ public class CommandLineSwitches {
 			@SubCommandLine(value = "LANCAMENTO", subCommandLineClass = LancamentoSwitches.class, propertyName = "setLancamentoSwitches"), 
 			@SubCommandLine(value = "MODELO", subCommandLineClass = ModeloSwitches.class, propertyName = "setModeloSwitches"), 
 			@SubCommandLine(value = "LANCAMENTO_MODELO", subCommandLineClass = LancamentoModeloSwitches.class, propertyName = "setLancamentoModeloSwitches"),
+			@SubCommandLine(value = "EXTRATO", subCommandLineClass = ExtratoSwitches.class, propertyName = "setExtratoSwitches"),
 			@SubCommandLine(value = "HELP", subCommandLineClass = HelpSwitches.class, propertyName = "setHelpSwitches") })
 	public void setEntity(Entity entity) {
 		this.entity = entity;
@@ -71,6 +72,14 @@ public class CommandLineSwitches {
 
 	public LancamentoModeloSwitches getLancamentoModeloSwitches() {
 		return lancamentoModeloSwitches;
+	}
+	
+	public void setExtratoSwitches(ExtratoSwitches value) {
+		extratoSwitches = value;
+	}
+	
+	public ExtratoSwitches getExtratoSwitches() {
+		return extratoSwitches;
 	}
 
 	public void setHelpSwitches(HelpSwitches value) {
