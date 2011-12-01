@@ -1,0 +1,4 @@
+#!/bin/bash
+# packer
+
+jar cvf ControleFinanceiro.jar -C build/ .
