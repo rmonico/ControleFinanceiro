@@ -56,7 +56,7 @@ public class ModeloSwitchesTests extends CustomParserTests {
 		assertEquals("Nome do modelo", "novo modelo", addSwitches.getNome());
 		assertEquals("Observacao do modelo", "observacao", addSwitches.getObservacao());
 	}
-	
+
 	@Test
 	public void doSimulateTest() throws ParserException {
 		doModeloLoad(new String[] { "modelo", "simulate", "nome modelo", "nov/2011" }, ModeloCommand.SIMULATE);
@@ -67,16 +67,15 @@ public class ModeloSwitchesTests extends CustomParserTests {
 		assertNull("Switches de clone", modeloSwitches.getCloneSwitches());
 		assertNull("Switches de analyse", modeloSwitches.getAnalyseSwitches());
 
-
 		ModeloSimulateSwitches simulateSwitches = modeloSwitches.getSimulateSwitches();
 
 		assertEquals("Nome do modelo", "nome modelo", simulateSwitches.getNomeModelo());
-		
+
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
-		
+
 		assertEquals("Data base", "01/Nov/2011", sdf.format(simulateSwitches.getDataBase().getTime()));
 	}
-	
+
 	@Test
 	public void doRemoveTest() throws ParserException {
 		doModeloLoad(new String[] { "modelo", "rm", "nome modelo" }, ModeloCommand.REMOVE);
@@ -87,15 +86,14 @@ public class ModeloSwitchesTests extends CustomParserTests {
 		assertNull("Switches de clone", modeloSwitches.getCloneSwitches());
 		assertNull("Switches de analyse", modeloSwitches.getAnalyseSwitches());
 
-
 		ModeloRemoveSwitches removeSwitches = modeloSwitches.getRemoveSwitches();
 
 		assertEquals("Nome do modelo", "nome modelo", removeSwitches.getNomeModelo());
 	}
-	
+
 	@Test
 	public void doCloneTest() throws ParserException {
-		doModeloLoad(new String[] { "modelo", "clone", "modelo base", "modelo novo"}, ModeloCommand.CLONE);
+		doModeloLoad(new String[] { "modelo", "clone", "modelo base", "modelo novo" }, ModeloCommand.CLONE);
 
 		assertNull("Switches de add", modeloSwitches.getAddSwitches());
 		assertNull("Switches de simulate", modeloSwitches.getSimulateSwitches());
@@ -103,16 +101,14 @@ public class ModeloSwitchesTests extends CustomParserTests {
 		assertNotNull("Switches de clone", modeloSwitches.getCloneSwitches());
 		assertNull("Switches de analyse", modeloSwitches.getAnalyseSwitches());
 
-
 		ModeloCloneSwitches removeSwitches = modeloSwitches.getCloneSwitches();
 
 		assertEquals("Modelo base", "modelo base", removeSwitches.getModeloBase());
 		assertEquals("Modelo novo", "modelo novo", removeSwitches.getModeloNovo());
 	}
-	
-	@Test
-	public void doAnalyseTest() throws ParserException {
-		doModeloLoad(new String[] { "modelo", "analyse", "nome modelo", "nov/2011"}, ModeloCommand.ANALYSE);
+
+	private ModeloAnalyseSwitches doModeloAnalyseLoad(String[] args) throws ParserException {
+		doModeloLoad(args, ModeloCommand.ANALYSE);
 
 		assertNull("Switches de add", modeloSwitches.getAddSwitches());
 		assertNull("Switches de simulate", modeloSwitches.getSimulateSwitches());
@@ -120,11 +116,31 @@ public class ModeloSwitchesTests extends CustomParserTests {
 		assertNull("Switches de clone", modeloSwitches.getCloneSwitches());
 		assertNotNull("Switches de analyse", modeloSwitches.getAnalyseSwitches());
 
-
 		ModeloAnalyseSwitches analyseSwitches = modeloSwitches.getAnalyseSwitches();
+
+		return analyseSwitches;
+	}
+
+	@Test
+	public void doAnalyseTest() throws ParserException {
+		ModeloAnalyseSwitches analyseSwitches = doModeloAnalyseLoad(new String[] { "modelo", "analyse", "nome modelo", "nov/2011" });
 
 		assertEquals("Nome modelo", "nome modelo", analyseSwitches.getNomeModelo());
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
 		assertEquals("Data base", "01/Nov/2011", sdf.format(analyseSwitches.getDataBase().getTime()));
+		assertNull("Lancamento Range", analyseSwitches.getLancamentoRange());
+	}
+
+	@Test
+	public void doAnalyseTest2() throws ParserException {
+		ModeloAnalyseSwitches analyseSwitches = doModeloAnalyseLoad(new String[] { "modelo", "analyse", "nome modelo", "nov/2011", "--lancamento-range", "05/nov/2011-25/nov/2011"});
+
+		assertEquals("Nome modelo", "nome modelo", analyseSwitches.getNomeModelo());
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
+		assertEquals("Data base", "01/Nov/2011", sdf.format(analyseSwitches.getDataBase().getTime()));
+		
+		assertNotNull("Lancamento Range", analyseSwitches.getLancamentoRange());
+		assertEquals("Lancamento Range - inicio", "05/Nov/2011", sdf.format(analyseSwitches.getLancamentoRange().getStart().getTime()));
+		assertEquals("Lancamento Range - fim", "25/Nov/2011", sdf.format(analyseSwitches.getLancamentoRange().getEnd().getTime()));
 	}
 }
