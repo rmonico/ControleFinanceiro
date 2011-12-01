@@ -165,7 +165,7 @@
   </body>
 </html></richcontent>
 </node>
-<node CREATED="1322271284140" ID="ID_1921731818" MODIFIED="1322678883999" TEXT="jfin extrato analyse">
+<node CREATED="1322271284140" ID="ID_1921731818" MODIFIED="1322738912498" TEXT="jfin extrato analyse">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -193,8 +193,11 @@
       - Fazer isso em uma classe java que devera receber o nome do banco como par&#226;metro, passa-lo a uma factory para devolver o objeto com o conhecimento sobre o formato da linha no extrato (a classe tamb&#233;m dever&#225; receber a linha do extrato)
     </p>
   </body>
-</html></richcontent>
+</html>
+</richcontent>
 </node>
+</node>
+<node CREATED="1322738893562" FOLDED="true" ID="ID_1250441849" MODIFIED="1322738914920" POSITION="right" TEXT="Milestone 4">
 <node CREATED="1322738416483" ID="ID_1354654228" MODIFIED="1322738431230" TEXT="Extens&#xe3;o do modelo simulate">
 <richcontent TYPE="NOTE"><html>
   <head>
@@ -208,8 +211,7 @@
       &#160;&#160;- Pode ser criado um parser de arrays para isso
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 <node CREATED="1322738576183" ID="ID_1153208439" MODIFIED="1322738610579" TEXT="modelo simulate: corre&#xe7;&#xe3;o de bug">
 <richcontent TYPE="NOTE"><html>
@@ -224,8 +226,7 @@
       - so mostrar nas listagens lancamentos com um m&#234;s ou menos de idade
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 <node CREATED="1322738611754" ID="ID_1966233343" MODIFIED="1322738620103" TEXT="Filtro de Saldos">
 <richcontent TYPE="NOTE"><html>
@@ -237,11 +238,10 @@
       - Nas listagens mostrar o saldo apenas para contas contabiliz&#225;veis.
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 </node>
-<node CREATED="1322272082887" ID="ID_1707116991" MODIFIED="1322738317283" POSITION="right" TEXT="Funcionalidades futuras">
+<node CREATED="1322272082887" FOLDED="true" ID="ID_1707116991" MODIFIED="1322738954405" POSITION="right" TEXT="Funcionalidades futuras">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -283,7 +283,7 @@
 </richcontent>
 </node>
 </node>
-<node CREATED="1322272446879" ID="ID_1717968237" MODIFIED="1322272454069" POSITION="right" TEXT="Funcionalidades n&#xe3;o-essenciais">
+<node CREATED="1322272446879" FOLDED="true" ID="ID_1717968237" MODIFIED="1322738953629" POSITION="right" TEXT="Funcionalidades n&#xe3;o-essenciais">
 <node CREATED="1322272462078" ID="ID_1625700189" MODIFIED="1322272469429" TEXT="help">
 <richcontent TYPE="NOTE"><html>
   <head>
@@ -343,6 +343,19 @@
     </p>
   </body>
 </html></richcontent>
+</node>
+<node CREATED="1322738931393" ID="ID_769915033" MODIFIED="1322738952535" TEXT="Diminuir tempo de conex&#xe3;o com o banco">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      Provavelmente &#233; alguma configura&#231;&#227;o no EclipseLink
+    </p>
+  </body>
+</html>
+</richcontent>
 </node>
 </node>
 </node>
