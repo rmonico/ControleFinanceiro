@@ -38,16 +38,10 @@ public class CommandLineLoader {
 		parsers.put("LancamentoModeloCommandParser", new EnumParser(LancamentoModeloCommand.class)); 
 		parsers.put("PrimitiveParsers", new PrimitiveParsers());
 		
-		UtilsParser calendarParser = new UtilsParser();
-		
-		calendarParser.setDateFormat(new SimpleDateFormat("dd/MMM/yyyy"));
-		
+		UtilsParser calendarParser = new UtilsParser(new SimpleDateFormat("dd/MMM/yyyy"));
 		parsers.put("UtilsParser", calendarParser);
 		
-		UtilsParser monthDateParser = new UtilsParser();
-		
-		monthDateParser.setDateFormat(new SimpleDateFormat("MMM/yyyy"));
-		
+		UtilsParser monthDateParser = new UtilsParser(new SimpleDateFormat("MMM/yyyy"));
 		parsers.put("MonthDateParser", monthDateParser);
 
 		parser.parse();
