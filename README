@@ -1,3 +1,6 @@
 Projeto ControleFinanceiro
 
-Projeto criado inicialmente com a finalidade de exercitar as principais funcionalidades no frameworks mais comuns do Java, e criar um projeto de controle pessoal de fluxo de caixa web leve e de fácil utilização.
+Objetivos:
+- Permitir prever o saldos em momentos futuros
+- Manter um histórico financeiro
+- Permitir manter os saldos atualizados de forma rápida
