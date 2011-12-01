@@ -24,6 +24,7 @@ import br.zero.controlefinanceiro.commandlineparser.CommandLineLoader;
 import br.zero.controlefinanceiro.commandlineparser.CommandLineSwitches;
 import br.zero.controlefinanceiro.commandlineparser.ContaCommand;
 import br.zero.controlefinanceiro.commandlineparser.Entity;
+import br.zero.controlefinanceiro.commandlineparser.ExtratoCommand;
 import br.zero.controlefinanceiro.commandlineparser.LancamentoCommand;
 import br.zero.controlefinanceiro.commandlineparser.LancamentoModeloCommand;
 import br.zero.controlefinanceiro.commandlineparser.ModeloCommand;
