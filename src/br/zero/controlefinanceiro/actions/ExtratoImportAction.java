@@ -1,5 +1,9 @@
 package br.zero.controlefinanceiro.actions;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+
 import br.zero.controlefinanceiro.commandlineparser.ExtratoImportSwitches;
 import br.zero.controlefinanceiro.model.Conta;
 import br.zero.controlefinanceiro.model.ContaDAO;
@@ -27,6 +31,19 @@ public class ExtratoImportAction implements Action {
 		switches = checkParamValid(param);
 		
 		Conta conta = getConta(switches.getNomeConta());
+		
+		BufferedReader file = getFile(switches.getNomeArquivo());
+		
+		doImport(file, conta);
+	}
+
+	private void doImport(BufferedReader file, Conta conta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private BufferedReader getFile(String nomeArquivo) throws FileNotFoundException {
+		return new BufferedReader(new FileReader(nomeArquivo));
 	}
 
 	private Conta getConta(String nomeConta) throws ExtratoImportException {
