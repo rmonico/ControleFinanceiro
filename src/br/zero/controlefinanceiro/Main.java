@@ -84,6 +84,8 @@ public class Main {
 		controller.registerAction(LancamentoModeloAddAction.class, switches.getLancamentoModeloSubSwitches(LancamentoModeloCommand.ADD), Entity.LANCAMENTO_MODELO, LancamentoModeloCommand.ADD);
 		controller.registerAction(LancamentoModeloRemoveAction.class, switches.getLancamentoModeloSubSwitches(LancamentoModeloCommand.REMOVE), Entity.LANCAMENTO_MODELO, LancamentoModeloCommand.REMOVE);
 		
+		controller.registerAction(ExtratoListAction.class, switches.getExtratoSubSwitches(ExtratoCommand.LIST), Entity.EXTRATO, ExtratoCommand.LIST);
+		
 		controller.registerAction(HelpAction.class, switches.getHelpSwitches(), Entity.HELP);
 
 		

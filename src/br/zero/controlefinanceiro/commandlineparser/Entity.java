@@ -18,6 +18,9 @@ public enum Entity {
 	@CommandLineSwitchParam(name = "lancmodelo")
 	LANCAMENTO_MODELO,
 
+	@CommandLineSwitchParam(name = "extrato")
+	EXTRATO,
+	
 	@CommandLineSwitchParam(name = "help")
 	HELP
 }

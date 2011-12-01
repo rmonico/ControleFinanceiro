@@ -2,6 +2,7 @@ package br.zero.controlefinanceiro.commandlineparser;
 
 import br.zero.commandlineparser.CommandLineSwitch;
 import br.zero.commandlineparser.SubCommandLine;
+import br.zero.controlefinanceiro.ExtratoCommand;
 
 public class CommandLineSwitches {
 
@@ -11,6 +12,7 @@ public class CommandLineSwitches {
 	private LancamentoSwitches lancamentoSwitches;
 	private ModeloSwitches modeloSwitches;
 	private LancamentoModeloSwitches lancamentoModeloSwitches;
+	private ExtratoSwitches extratoSwitches;
 	private HelpSwitches helpSwitches;
 
 	/**
@@ -210,6 +212,21 @@ public class CommandLineSwitches {
 			return null;
 		}
 		}
+	}
+
+	public Object getExtratoSubSwitches(ExtratoCommand command) {
+		if (!entity.equals(Entity.LANCAMENTO_MODELO)) {
+			return null;
+		}
+		
+		switch (command) {
+		case LIST: {
+			return extratoSwitches.getListSwitches();
+		}
+		}
+
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
