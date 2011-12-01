@@ -113,7 +113,7 @@
   </body>
 </html></richcontent>
 </node>
-<node BACKGROUND_COLOR="#99ff99" CREATED="1322270952879" ID="ID_170195965" MODIFIED="1322778145001" TEXT="jfin modelo analyse - Conclu&#xed;do parcialmente">
+<node BACKGROUND_COLOR="#99ff99" CREATED="1322270952879" ID="ID_170195965" MODIFIED="1322781929127" TEXT="jfin modelo analyse - Conclu&#xed;do parcialmente">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -137,10 +137,33 @@
     <p>
       - Criar um switch boolean para apenas diferenciar entre uma simula&#231;&#227;o e realiza&#231;&#227;o do modelo no banco de dados.
     </p>
+    <p>
+      
+    </p>
+    <p>
+      - Ainda falta fazer a parte persistir os objetos alterados no banco
+    </p>
   </body>
-</html></richcontent>
+</html>
+</richcontent>
 </node>
-<node CREATED="1322270725708" ID="ID_623657749" MODIFIED="1322778309697" TEXT="jfin extrato import">
+<node BACKGROUND_COLOR="#99ff99" CREATED="1322778310655" ID="ID_532456165" MODIFIED="1322781904886" TEXT="jfin extrato ls">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      - Filtro por conta, data inicio e fim
+    </p>
+    <p>
+      - Apenas listas o extrato
+    </p>
+  </body>
+</html>
+</richcontent>
+</node>
+<node CREATED="1322270725708" ID="ID_623657749" MODIFIED="1322781897174" TEXT="jfin extrato import">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -165,23 +188,7 @@
 </html>
 </richcontent>
 </node>
-<node CREATED="1322778310655" ID="ID_532456165" MODIFIED="1322778344779" TEXT="jfin extrato ls">
-<richcontent TYPE="NOTE"><html>
-  <head>
-    
-  </head>
-  <body>
-    <p>
-      - Filtro por conta, data inicio e fim
-    </p>
-    <p>
-      - Apenas listas o extrato
-    </p>
-  </body>
-</html>
-</richcontent>
-</node>
-<node CREATED="1322271284140" ID="ID_1921731818" MODIFIED="1322738912498" TEXT="jfin extrato analyse">
+<node CREATED="1322271284140" ID="ID_1921731818" MODIFIED="1322781905113" TEXT="jfin extrato analyse">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -209,7 +216,8 @@
       - Fazer isso em uma classe java que devera receber o nome do banco como par&#226;metro, passa-lo a uma factory para devolver o objeto com o conhecimento sobre o formato da linha no extrato (a classe tamb&#233;m dever&#225; receber a linha do extrato)
     </p>
   </body>
-</html></richcontent>
+</html>
+</richcontent>
 </node>
 </node>
 <node CREATED="1322738893562" FOLDED="true" ID="ID_1250441849" MODIFIED="1322738914920" POSITION="right" TEXT="Milestone 4">
