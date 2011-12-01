@@ -34,6 +34,7 @@ public class ContaAddAction implements Action {
 		Conta conta = new Conta();
 		
 		conta.setNome(switches.getNome());
+		conta.setContabilizavel(switches.getContabilizavel());
 		conta.setObservacao(switches.getObservacao());
 		
 		contaDAO.inserir(conta);
