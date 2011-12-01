@@ -1,6 +1,8 @@
 package br.zero.controlefinanceiro.actions;
 
 import br.zero.controlefinanceiro.commandlineparser.ExtratoImportSwitches;
+import br.zero.controlefinanceiro.model.Conta;
+import br.zero.controlefinanceiro.model.ContaDAO;
 import br.zero.tinycontroller.Action;
 
 public class ExtratoImportAction implements Action {
@@ -23,6 +25,20 @@ public class ExtratoImportAction implements Action {
 	@Override
 	public void run(Object param) throws Exception {
 		switches = checkParamValid(param);
+		
+		Conta conta = getConta(switches.getNomeConta());
+	}
+
+	private Conta getConta(String nomeConta) throws ExtratoImportException {
+		ContaDAO dao = new ContaDAO();
+		
+		Conta conta = dao.getByNome(nomeConta);
+		
+		if (conta == null) {
+			throw new ExtratoImportException("Conta não encontrada: \"" + nomeConta + "\".");
+		}
+		
+		return conta;
 	}
 
 	private ExtratoImportSwitches checkParamValid(Object param) throws ExtratoImportException {
