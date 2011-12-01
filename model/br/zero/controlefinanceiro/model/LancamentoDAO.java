@@ -59,4 +59,28 @@ public class LancamentoDAO extends CustomDAO<Lancamento> {
 		return nextN;
 	}
 
+	public List<Lancamento> listarPorData(Calendar dataInicio, Calendar dataFim) {
+		StringBuilder listarPorContaQuery = new StringBuilder();
+
+		listarPorContaQuery.append("select\n");
+		listarPorContaQuery.append("  lancamento\n");
+		listarPorContaQuery.append("\n");
+		listarPorContaQuery.append("from\n");
+		listarPorContaQuery.append("  Lancamento lancamento\n");
+		listarPorContaQuery.append("\n");
+		listarPorContaQuery.append("where\n");
+		listarPorContaQuery.append("  lancamento.data >= :datainicio\n");
+		listarPorContaQuery.append("  and lancamento.data <= :datafim\n");
+
+		Query q = getEntityManager().createQuery(listarPorContaQuery.toString());
+
+		q.setParameter("datainicio", dataInicio);
+		q.setParameter("datafim", dataFim);
+
+		@SuppressWarnings("unchecked")
+		List<Lancamento> results = q.getResultList();
+
+		return results;
+	}
+
 }
