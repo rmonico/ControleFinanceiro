@@ -113,7 +113,7 @@
   </body>
 </html></richcontent>
 </node>
-<node CREATED="1322270952879" ID="ID_170195965" MODIFIED="1322738308193" TEXT="jfin modelo analyse">
+<node BACKGROUND_COLOR="#99ff99" CREATED="1322270952879" ID="ID_170195965" MODIFIED="1322778145001" TEXT="jfin modelo analyse - Conclu&#xed;do parcialmente">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -138,10 +138,9 @@
       - Criar um switch boolean para apenas diferenciar entre uma simula&#231;&#227;o e realiza&#231;&#227;o do modelo no banco de dados.
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
-<node CREATED="1322270725708" ID="ID_623657749" MODIFIED="1322272223139" TEXT="jfin extrato import">
+<node CREATED="1322270725708" ID="ID_623657749" MODIFIED="1322778309697" TEXT="jfin extrato import">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -163,7 +162,24 @@
       - Depois que isso estiver pronto, pegar no extrato do cart&#227;o de cr&#233;dito as despesas que est&#227;o caindo todo o m&#234;s
     </p>
   </body>
-</html></richcontent>
+</html>
+</richcontent>
+</node>
+<node CREATED="1322778310655" ID="ID_532456165" MODIFIED="1322778344779" TEXT="jfin extrato ls">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      - Filtro por conta, data inicio e fim
+    </p>
+    <p>
+      - Apenas listas o extrato
+    </p>
+  </body>
+</html>
+</richcontent>
 </node>
 <node CREATED="1322271284140" ID="ID_1921731818" MODIFIED="1322738912498" TEXT="jfin extrato analyse">
 <richcontent TYPE="NOTE"><html>
@@ -193,8 +209,7 @@
       - Fazer isso em uma classe java que devera receber o nome do banco como par&#226;metro, passa-lo a uma factory para devolver o objeto com o conhecimento sobre o formato da linha no extrato (a classe tamb&#233;m dever&#225; receber a linha do extrato)
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 </node>
 <node CREATED="1322738893562" FOLDED="true" ID="ID_1250441849" MODIFIED="1322738914920" POSITION="right" TEXT="Milestone 4">
@@ -263,8 +278,7 @@
       Listar os lan&#231;amentos previstos (com lancamentomodeloid &lt;&gt; null) e os n&#227;o previstos (lancamentomodeloid == null)
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 <node CREATED="1322738456790" ID="ID_1146040637" MODIFIED="1322738475360" TEXT="Flag de conta antiga">
 <richcontent TYPE="NOTE"><html>
@@ -279,8 +293,7 @@
       &#160;&#160;- Contas sem lancamento ha mais de dois meses poderiam ser consideradas antigas.
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 </node>
 <node CREATED="1322272446879" FOLDED="true" ID="ID_1717968237" MODIFIED="1322738953629" POSITION="right" TEXT="Funcionalidades n&#xe3;o-essenciais">
@@ -354,8 +367,7 @@
       Provavelmente &#233; alguma configura&#231;&#227;o no EclipseLink
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 </node>
 </node>
