@@ -234,6 +234,9 @@ public class CommandLineSwitches {
 		case LIST: {
 			return extratoSwitches.getListSwitches();
 		}
+		case IMPORT: {
+			return extratoSwitches.getImportSwitches();
+		}
 		default: {
 			assert false : "Comando de lançamento modelo não implementado!";
 

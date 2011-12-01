@@ -5,6 +5,9 @@ import br.zero.commandlineparser.CommandLineSwitchParam;
 public enum ExtratoCommand {
 
 	@CommandLineSwitchParam(name = "ls")
-	LIST;
+	LIST,
+
+	@CommandLineSwitchParam(name = "import")
+	IMPORT;
 
 }
