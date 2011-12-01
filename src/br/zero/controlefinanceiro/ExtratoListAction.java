@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.zero.controlefinanceiro.commandlineparser.ExtratoListSwitches;
 import br.zero.controlefinanceiro.model.Extrato;
+import br.zero.controlefinanceiro.model.ExtratoDAO;
 import br.zero.controlefinanceiro.utils.ControleFinanceiroFormatters;
 import br.zero.textgrid.TextGrid;
 import br.zero.textgrid.TextGridColumnAlignment;

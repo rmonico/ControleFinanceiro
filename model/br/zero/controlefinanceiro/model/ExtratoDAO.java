@@ -1,10 +1,9 @@
-package br.zero.controlefinanceiro;
+package br.zero.controlefinanceiro.model;
 
 import java.util.List;
 
 import javax.persistence.Query;
 
-import br.zero.controlefinanceiro.model.Extrato;
 import br.zero.customdao.CustomDAO;
 import br.zero.customdao.DAOSetup;
 
