@@ -71,7 +71,7 @@ public class LancamentoDAO extends CustomDAO<Lancamento> {
 		listarPorContaQuery.append("where\n");
 		listarPorContaQuery.append("  lancamento.data >= :datainicio\n");
 		listarPorContaQuery.append("  and lancamento.data <= :datafim\n");
-		listarPorContaQuery.append("  and lancamento.modelo = null\n");
+		listarPorContaQuery.append("  and lancamento.lancamentoModelo is null\n");
 
 		Query q = getEntityManager().createQuery(listarPorContaQuery.toString());
 
