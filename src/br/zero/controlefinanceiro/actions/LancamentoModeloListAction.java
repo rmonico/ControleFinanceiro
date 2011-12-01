@@ -28,8 +28,18 @@ public class LancamentoModeloListAction implements Action {
 
 	}
 
-	private TextGrid createGrid() {
-		TextGrid grid = new TextGrid();
+	private static TextGrid grid = null;
+	
+	public static TextGrid getGrid() {
+		if (grid == null) {
+			createGrid();
+		}
+		
+		return grid;
+	}
+	
+	private static void createGrid() {
+		LancamentoModeloListAction.grid = new TextGrid();
 
 		grid.getData().setHeaderSeparatorChar('=');
 		grid.getData().setTitle("Lista de Lançamentos");
@@ -41,8 +51,6 @@ public class LancamentoModeloListAction implements Action {
 		TextGridFormattedColumn.createFormattedColumn(grid, "Conta Destino", ControleFinanceiroFormatters.CONTA_FORMATTER, TextGridColumnAlignment.LEFT, "getContaDestino");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Valor", TextGridFormattedColumn.MONEY_FORMATTER, TextGridColumnAlignment.RIGHT, "getValor");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Observação", TextGridFormattedColumn.STRING_FORMATTER, TextGridColumnAlignment.LEFT, "getObservacao");
-
-		return grid;
 	}
 
 	@Override
@@ -52,7 +60,7 @@ public class LancamentoModeloListAction implements Action {
 		
 		List<LancamentoModelo> lancamentoModeloList = getLancamentosPorModelo(switches);
 
-		TextGrid grid = createGrid();
+		TextGrid grid = getGrid();
 
 		grid.setValues(lancamentoModeloList);
 		
