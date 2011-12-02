@@ -58,12 +58,16 @@ public class ExtratoImportAction implements Action {
 		}
 
 		while ((line = file.readLine()) != null) {
+			ep.parse(line);
+			
+			if (!ep.isTransferLine()) {
+				continue;
+			}
+			
 			Extrato extrato = new Extrato();
 
 			extrato.setBanco(conta);
 			extrato.setOriginal(line);
-			
-			ep.parse(line);
 			extrato.setData(ep.getData());
 
 			dao.inserir(extrato);
