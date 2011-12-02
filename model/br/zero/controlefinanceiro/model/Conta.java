@@ -68,6 +68,10 @@ public class Conta implements Serializable {
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
+	
+	public ExtratoParser getParser() {
+		return ContaDAO.getParser(this);
+	}
 
 	@Override
 	public String toString() {

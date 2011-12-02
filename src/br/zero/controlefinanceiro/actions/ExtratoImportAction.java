@@ -3,10 +3,14 @@ package br.zero.controlefinanceiro.actions;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 
 import br.zero.controlefinanceiro.commandlineparser.ExtratoImportSwitches;
 import br.zero.controlefinanceiro.model.Conta;
 import br.zero.controlefinanceiro.model.ContaDAO;
+import br.zero.controlefinanceiro.model.Extrato;
+import br.zero.controlefinanceiro.model.ExtratoDAO;
+import br.zero.controlefinanceiro.model.ExtratoParser;
 import br.zero.tinycontroller.Action;
 
 public class ExtratoImportAction implements Action {
@@ -29,17 +33,41 @@ public class ExtratoImportAction implements Action {
 	@Override
 	public void run(Object param) throws Exception {
 		switches = checkParamValid(param);
-		
+
 		Conta conta = getConta(switches.getNomeConta());
-		
+
 		BufferedReader file = getFile(switches.getNomeArquivo());
-		
-		doImport(file, conta);
+
+		try {
+			doImport(file, conta);
+
+		} finally {
+			file.close();
+		}
 	}
 
-	private void doImport(BufferedReader file, Conta conta) {
-		// TODO Auto-generated method stub
+	private void doImport(BufferedReader file, Conta conta) throws IOException, ExtratoImportException {
+		ExtratoDAO dao = new ExtratoDAO();
+
+		String line;
 		
+		ExtratoParser ep = conta.getParser();
+		
+		if (ep == null) {
+			throw new ExtratoImportException("Conta \"" + conta.getNome() + "\" não possui um parser de extrato registrado.");
+		}
+
+		while ((line = file.readLine()) != null) {
+			Extrato extrato = new Extrato();
+
+			extrato.setBanco(conta);
+			extrato.setOriginal(line);
+			
+			ep.parse(line);
+			extrato.setData(ep.getData());
+
+			dao.inserir(extrato);
+		}
 	}
 
 	private BufferedReader getFile(String nomeArquivo) throws FileNotFoundException {
@@ -48,13 +76,13 @@ public class ExtratoImportAction implements Action {
 
 	private Conta getConta(String nomeConta) throws ExtratoImportException {
 		ContaDAO dao = new ContaDAO();
-		
+
 		Conta conta = dao.getByNome(nomeConta);
-		
+
 		if (conta == null) {
 			throw new ExtratoImportException("Conta não encontrada: \"" + nomeConta + "\".");
 		}
-		
+
 		return conta;
 	}
 
@@ -62,17 +90,17 @@ public class ExtratoImportAction implements Action {
 		if (!(param instanceof ExtratoImportSwitches)) {
 			throw new ExtratoImportException("Parâmetro deve ser um ExtratoImportSwitches.");
 		}
-		
+
 		ExtratoImportSwitches switches = (ExtratoImportSwitches) param;
-		
-		if (switches.getNomeConta() ==  null) {
+
+		if (switches.getNomeConta() == null) {
 			throw new ExtratoImportException("Nome da conta deve ser informada.");
 		}
-		
+
 		if (switches.getNomeArquivo() == null) {
 			throw new ExtratoImportException("Nome do arquivo deve ser informado.");
 		}
-		
+
 		return switches;
 	}
 }
