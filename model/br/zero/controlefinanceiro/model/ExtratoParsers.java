@@ -20,6 +20,7 @@ public class ExtratoParsers {
 			
 			private boolean isTransferLine;
 			private Calendar data;
+			private ParseException threwException;
 
 			@Override
 			public void parse(String line) {
@@ -44,13 +45,18 @@ public class ExtratoParsers {
 				try {
 					data.setTime(sdf.parse(dataStr));
 				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					threwException = e;
+					isTransferLine = false;
 				}
 				
 				data.set(Calendar.YEAR, GregorianCalendar.getInstance().get(Calendar.YEAR));
 				
 				isTransferLine = true;
+			}
+			
+			@Override
+			public Exception getThrewException() {
+				return threwException;
 			}
 			
 			@Override
@@ -86,6 +92,12 @@ public class ExtratoParsers {
 			public boolean isTransferLine() {
 				// TODO Auto-generated method stub
 				return false;
+			}
+
+			@Override
+			public Exception getThrewException() {
+				// TODO Auto-generated method stub
+				return null;
 			}
 		};
 		

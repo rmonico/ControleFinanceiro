@@ -9,4 +9,6 @@ public interface ExtratoParser {
 	public Calendar getData();
 
 	public boolean isTransferLine();
+
+	Exception getThrewException();
 }
