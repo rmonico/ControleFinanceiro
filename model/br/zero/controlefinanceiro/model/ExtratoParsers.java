@@ -34,6 +34,12 @@ public class ExtratoParsers {
 				if ("SALDO ANTERIOR".equals(fields[3])) {
 					isTransferLine = false;
 					return;
+				} else if ("S A L D O".equals(fields[3])) {
+					isTransferLine = false;
+					return;
+				} else if ("SDO CTA/APL AUTOMATICAS".equals(fields[3])) {
+					isTransferLine = false;
+					return;
 				}
 				
 				String dataStr = fields[0];

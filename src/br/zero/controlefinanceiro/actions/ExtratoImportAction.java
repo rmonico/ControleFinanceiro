@@ -61,6 +61,12 @@ public class ExtratoImportAction implements Action {
 			ep.parse(line);
 			
 			if (!ep.isTransferLine()) {
+				String message = line + " [ FAIL! ]";
+				if (ep.getThrewException() != null) {
+					message += " ==> " + ep.getThrewException().getMessage();
+				}
+				
+				System.out.println(message);
 				continue;
 			}
 			
@@ -71,6 +77,8 @@ public class ExtratoImportAction implements Action {
 			extrato.setData(ep.getData());
 
 			dao.inserir(extrato);
+			
+			System.out.println(line + " [ OK ]" );
 		}
 	}
 
