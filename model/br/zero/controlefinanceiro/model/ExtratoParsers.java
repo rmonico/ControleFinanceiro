@@ -8,14 +8,9 @@ import java.util.Calendar;
  * @author Rafael Monico
  * 
  */
-class ExtratoParsers {
-	private static final ExtratoParser ITAU_EXTRATO_PARSER = createItauParser();
-	private static final ExtratoParser SANTANDER_EXTRATO_PARSER = createSantanderParser();
-	
-	{
-		ContaDAO.registerExtratoParser("itau", ITAU_EXTRATO_PARSER);
-		ContaDAO.registerExtratoParser("santander", SANTANDER_EXTRATO_PARSER);
-	}
+public class ExtratoParsers {
+	public static final ExtratoParser ITAU_EXTRATO_PARSER = createItauParser();
+	public static final ExtratoParser SANTANDER_EXTRATO_PARSER = createSantanderParser();
 	
 	private static ExtratoParser createItauParser() {
 		ExtratoParser itauParser = new ExtratoParser() {

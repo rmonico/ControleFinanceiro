@@ -20,6 +20,11 @@ public class ContaDAO extends CustomDAO<Conta> {
 		return (Conta) q.getSingleResult();
 	}
 	
+	{
+		ContaDAO.registerExtratoParser("itau", ExtratoParsers.ITAU_EXTRATO_PARSER);
+		ContaDAO.registerExtratoParser("santander", ExtratoParsers.SANTANDER_EXTRATO_PARSER);
+	}
+	
 	public static void registerExtratoParser(String parserName, ExtratoParser extratoParser) {
 		extratoParsers.put(parserName, extratoParser);
 	}
