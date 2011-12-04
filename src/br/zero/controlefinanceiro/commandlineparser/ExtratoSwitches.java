@@ -9,14 +9,16 @@ public class ExtratoSwitches {
 	private ExtratoCommand command;
 	private ExtratoListSwitches listSwitches;
 	private ExtratoImportSwitches importSwitches;
+	private ExtratoAnalyseSwitches analyseSwitches;
 
 	public ExtratoCommand getCommand() {
 		return command;
 	}
 
-	@CommandLineSwitch(index = 1, parser = "ExtratoCommandParser.parseComplexEnum", complexParser = true, subCommandLineProperties = {
-			@SubCommandLine(value = "LIST", subCommandLineClass = ExtratoListSwitches.class, propertyName = "setListSwitches"),
-			@SubCommandLine(value = "IMPORT", subCommandLineClass = ExtratoImportSwitches.class, propertyName = "setImportSwitches") })
+	@CommandLineSwitch(index = 1, parser = "ExtratoCommandParser.parseComplexEnum", complexParser = true, subCommandLineProperties = { 
+			@SubCommandLine(value = "LIST", subCommandLineClass = ExtratoListSwitches.class, propertyName = "setListSwitches"), 
+			@SubCommandLine(value = "IMPORT", subCommandLineClass = ExtratoImportSwitches.class, propertyName = "setImportSwitches"),
+			@SubCommandLine(value = "ANALYSE", subCommandLineClass = ExtratoAnalyseSwitches.class, propertyName = "setAnalyseSwitches") })
 	public void setCommand(ExtratoCommand command) {
 		this.command = command;
 	}
@@ -35,6 +37,14 @@ public class ExtratoSwitches {
 
 	public ExtratoImportSwitches getImportSwitches() {
 		return importSwitches;
+	}
+
+	public void setAnalyseSwitches(ExtratoAnalyseSwitches value) {
+		analyseSwitches = value;
+	}
+
+	public ExtratoAnalyseSwitches getAnalyseSwitches() {
+		return analyseSwitches;
 	}
 
 }

@@ -8,6 +8,9 @@ public enum ExtratoCommand {
 	LIST,
 
 	@CommandLineSwitchParam(name = "import")
-	IMPORT;
+	IMPORT,
+
+	@CommandLineSwitchParam(name = "analyse")
+	ANALYSE;
 
 }
