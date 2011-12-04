@@ -1,7 +1,7 @@
 <map version="0.9.0">
 <!-- To view this file, download free mind mapping software FreeMind from http://freemind.sourceforge.net -->
 <node CREATED="1322269798993" ID="ID_1526915694" MODIFIED="1322272365576" TEXT="jfin - Planning">
-<node BACKGROUND_COLOR="#99ff99" CREATED="1322269815461" FOLDED="true" ID="ID_1671579002" MODIFIED="1322616083280" POSITION="right" TEXT="Milestone 1">
+<node BACKGROUND_COLOR="#99ff99" CREATED="1322269815461" FOLDED="true" ID="ID_1671579002" MODIFIED="1322875338262" POSITION="right" TEXT="Milestone 1">
 <node CREATED="1322269881657" ID="ID_802172816" MODIFIED="1322269949887" TEXT="Objetivos">
 <richcontent TYPE="NOTE"><html>
   <head>
@@ -27,7 +27,7 @@
 <node BACKGROUND_COLOR="#99ff99" CREATED="1322269973722" ID="ID_1540285104" MODIFIED="1322269993883" TEXT="Ok (F3)"/>
 <node CREATED="1322269975090" ID="ID_716897189" MODIFIED="1322270304082" TEXT="Pendente (F1)"/>
 </node>
-<node BACKGROUND_COLOR="#99ff99" CREATED="1322270133624" FOLDED="true" ID="ID_209304459" MODIFIED="1322678572315" POSITION="right" TEXT="Milestone 2">
+<node BACKGROUND_COLOR="#99ff99" CREATED="1322270133624" FOLDED="true" ID="ID_209304459" MODIFIED="1322875335983" POSITION="right" TEXT="Milestone 2">
 <node CREATED="1322270137269" ID="ID_1707435879" MODIFIED="1322270160278" TEXT="Objetivos">
 <richcontent TYPE="NOTE"><html>
   <head>
@@ -144,8 +144,7 @@
       - Ainda falta fazer a parte persistir os objetos alterados no banco
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 <node BACKGROUND_COLOR="#99ff99" CREATED="1322778310655" ID="ID_532456165" MODIFIED="1322781904886" TEXT="jfin extrato ls">
 <richcontent TYPE="NOTE"><html>
@@ -160,8 +159,7 @@
       - Apenas listas o extrato
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 <node CREATED="1322270725708" ID="ID_623657749" MODIFIED="1322781897174" TEXT="jfin extrato import">
 <richcontent TYPE="NOTE"><html>
@@ -185,8 +183,7 @@
       - Depois que isso estiver pronto, pegar no extrato do cart&#227;o de cr&#233;dito as despesas que est&#227;o caindo todo o m&#234;s
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 <node CREATED="1322271284140" ID="ID_1921731818" MODIFIED="1322781905113" TEXT="jfin extrato analyse">
 <richcontent TYPE="NOTE"><html>
@@ -216,11 +213,10 @@
       - Fazer isso em uma classe java que devera receber o nome do banco como par&#226;metro, passa-lo a uma factory para devolver o objeto com o conhecimento sobre o formato da linha no extrato (a classe tamb&#233;m dever&#225; receber a linha do extrato)
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 </node>
-<node CREATED="1322738893562" FOLDED="true" ID="ID_1250441849" MODIFIED="1322738914920" POSITION="right" TEXT="Milestone 4">
+<node CREATED="1322738893562" FOLDED="true" ID="ID_1250441849" MODIFIED="1322875305886" POSITION="right" TEXT="Milestone 4">
 <node CREATED="1322738416483" ID="ID_1354654228" MODIFIED="1322738431230" TEXT="Extens&#xe3;o do modelo simulate">
 <richcontent TYPE="NOTE"><html>
   <head>
