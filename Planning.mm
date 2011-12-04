@@ -156,7 +156,7 @@
   </body>
 </html></richcontent>
 </node>
-<node CREATED="1322270725708" ID="ID_623657749" MODIFIED="1322781897174" TEXT="jfin extrato import">
+<node BACKGROUND_COLOR="#99ff99" CREATED="1322270725708" ID="ID_623657749" MODIFIED="1323021745947" TEXT="jfin extrato import">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -180,7 +180,7 @@
   </body>
 </html></richcontent>
 </node>
-<node CREATED="1322271284140" ID="ID_1921731818" MODIFIED="1322781905113" TEXT="jfin extrato analyse">
+<node CREATED="1322271284140" ID="ID_1921731818" MODIFIED="1323021747675" TEXT="jfin extrato analyse">
 <richcontent TYPE="NOTE"><html>
   <head>
     
