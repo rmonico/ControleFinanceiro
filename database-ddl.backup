@@ -41,7 +41,8 @@ CREATE TABLE conta (
     id integer NOT NULL,
     nome character varying(250) NOT NULL,
     observacao text,
-    contabilizavel boolean DEFAULT false NOT NULL
+    contabilizavel boolean DEFAULT false NOT NULL,
+    extrato text
 );
 
 
@@ -69,6 +70,40 @@ ALTER SEQUENCE conta_id_seq OWNED BY conta.id;
 
 
 --
+-- Name: extrato; Type: TABLE; Schema: controlefinanceiro; Owner: controlefinanceiro; Tablespace: 
+--
+
+CREATE TABLE extrato (
+    id integer NOT NULL,
+    bancoid integer NOT NULL,
+    original text NOT NULL
+);
+
+
+ALTER TABLE controlefinanceiro.extrato OWNER TO controlefinanceiro;
+
+--
+-- Name: extrato_id_seq; Type: SEQUENCE; Schema: controlefinanceiro; Owner: controlefinanceiro
+--
+
+CREATE SEQUENCE extrato_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE controlefinanceiro.extrato_id_seq OWNER TO controlefinanceiro;
+
+--
+-- Name: extrato_id_seq; Type: SEQUENCE OWNED BY; Schema: controlefinanceiro; Owner: controlefinanceiro
+--
+
+ALTER SEQUENCE extrato_id_seq OWNED BY extrato.id;
+
+
+--
 -- Name: lancamento; Type: TABLE; Schema: controlefinanceiro; Owner: controlefinanceiro; Tablespace: 
 --
 
@@ -80,7 +115,8 @@ CREATE TABLE lancamento (
     contadestinoid integer NOT NULL,
     valor double precision NOT NULL,
     observacao text,
-    n integer NOT NULL
+    n integer NOT NULL,
+    extratoid integer
 );
 
 
@@ -279,6 +315,13 @@ ALTER TABLE conta ALTER COLUMN id SET DEFAULT nextval('conta_id_seq'::regclass);
 -- Name: id; Type: DEFAULT; Schema: controlefinanceiro; Owner: controlefinanceiro
 --
 
+ALTER TABLE extrato ALTER COLUMN id SET DEFAULT nextval('extrato_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: controlefinanceiro; Owner: controlefinanceiro
+--
+
 ALTER TABLE lancamento ALTER COLUMN id SET DEFAULT nextval('lancamento_id_seq'::regclass);
 
 
@@ -299,6 +342,14 @@ ALTER TABLE modelo ALTER COLUMN id SET DEFAULT nextval('modelo_id_seq'::regclass
 
 
 SET search_path = controlefinanceiro, pg_catalog;
+
+--
+-- Name: Extrato_PK; Type: CONSTRAINT; Schema: controlefinanceiro; Owner: controlefinanceiro; Tablespace: 
+--
+
+ALTER TABLE ONLY extrato
+    ADD CONSTRAINT "Extrato_PK" PRIMARY KEY (id);
+
 
 --
 -- Name: conta_pk; Type: CONSTRAINT; Schema: controlefinanceiro; Owner: controlefinanceiro; Tablespace: 
@@ -335,6 +386,22 @@ ALTER TABLE ONLY modelo
 
 
 SET search_path = controlefinanceiro, pg_catalog;
+
+--
+-- Name: Extrato_Banco_FK; Type: FK CONSTRAINT; Schema: controlefinanceiro; Owner: controlefinanceiro
+--
+
+ALTER TABLE ONLY extrato
+    ADD CONSTRAINT "Extrato_Banco_FK" FOREIGN KEY (bancoid) REFERENCES conta(id);
+
+
+--
+-- Name: Lancamento_Extrato_FK; Type: FK CONSTRAINT; Schema: controlefinanceiro; Owner: controlefinanceiro
+--
+
+ALTER TABLE ONLY lancamento
+    ADD CONSTRAINT "Lancamento_Extrato_FK" FOREIGN KEY (extratoid) REFERENCES extrato(id);
+
 
 --
 -- Name: lancamento_contadestino_fk; Type: FK CONSTRAINT; Schema: controlefinanceiro; Owner: controlefinanceiro
