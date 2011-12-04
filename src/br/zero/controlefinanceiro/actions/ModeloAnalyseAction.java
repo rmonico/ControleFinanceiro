@@ -42,41 +42,44 @@ public class ModeloAnalyseAction implements Action {
 	@Override
 	public void run(Object param) throws ModeloAnalyseException, TextGridException {
 		ModeloAnalyseSwitches switches = checkParamValid(param);
-		
+
 		String modeMessage = switches.getRealizeFlag() ? "Modo de Gravação Ativo" : "Modo de Simulação Ativo (use --realize para gravar).";
-		
+
 		System.out.println(modeMessage);
-		
+
 		mountLists(switches);
-		
+
 		showUnrelatedLancamentos();
-		
+
 		showProposedChanges();
 	}
 
 	private void showProposedChanges() {
+
+		// TODO: Mostrar a lista de alterações usando o TextGrid, com uma coluna
+		// adicional de status para indicar o que aconteceu com o lançamento
 		Set<LancamentoModelo> keySet = lancamentoModeloMap.keySet();
-		
+
 		for (LancamentoModelo lm : keySet) {
 			List<Lancamento> ll = lancamentoModeloMap.get(lm);
-			
+
 			System.out.println();
-			
+
 			int llSize = ll.size();
-			
+
 			if (llSize == 0) {
 				System.out.println(lm.toString() + " ==> Nenhum lançamento correspondente!");
 			} else if (llSize == 1) {
 				System.out.println(lm.toString() + " ==> " + ll.get(0).toString());
 			} else {
 				System.out.println(lm.toString() + " ==> <Múltiplos lançamentos encontrados>");
-				
+
 				for (Lancamento l : ll) {
 					System.out.println(l.toString());
 				}
 			}
 		}
-		
+
 		int keySetSize = keySet.size();
 		System.out.println("(" + keySetSize + " line" + (keySetSize == 1 ? "" : "s") + ")");
 		System.out.println("--");
@@ -84,11 +87,11 @@ public class ModeloAnalyseAction implements Action {
 
 	private void showUnrelatedLancamentos() throws TextGridException {
 		TextGrid grid = createGridForUnrelatedLancamentos();
-		
+
 		Collections.sort(unrelatedLancamentoList);
 
 		grid.setValues(unrelatedLancamentoList);
-		
+
 		grid.show();
 	}
 
@@ -111,41 +114,41 @@ public class ModeloAnalyseAction implements Action {
 
 	private void mountLists(ModeloAnalyseSwitches switches) {
 		DateRange lancamentoRange = getLancamentoRange(switches);
-		
+
 		List<Lancamento> lancamentoList = getLancamentoMap(lancamentoRange);
-		
+
 		unrelatedLancamentoList = new ArrayList<Lancamento>();
 		unrelatedLancamentoList.addAll(lancamentoList);
-		
+
 		lancamentoModeloMap = getLancamentoModeloMap(switches.getNomeModelo());
 
 		boolean preview = !switches.getRealizeFlag();
-		
+
 		LancamentoDAO ld = preview ? null : new LancamentoDAO();
-		
+
 		for (LancamentoModelo lm : lancamentoModeloMap.keySet()) {
 			List<Lancamento> ll = lancamentoModeloMap.get(lm);
-			
+
 			for (Lancamento l : lancamentoList) {
 				if (isRelated(lm, l)) {
 					if (!preview) {
 						l.setLancamentoModelo(lm);
-						
+
 						ld.alterar(l);
 					}
-					
+
 					ll.add(l);
 					unrelatedLancamentoList.remove(l);
 				}
 			}
 		}
-		
+
 		List<LancamentoModelo> noLancamentoFound = new ArrayList<LancamentoModelo>();
-		
+
 		for (LancamentoModelo lm : lancamentoModeloMap.keySet()) {
 			List<Lancamento> ll = lancamentoModeloMap.get(lm);
-			
-			if (ll.size()== 0) {
+
+			if (ll.size() == 0) {
 				noLancamentoFound.add(lm);
 			}
 		}
@@ -153,15 +156,15 @@ public class ModeloAnalyseAction implements Action {
 
 	private DateRange getLancamentoRange(ModeloAnalyseSwitches switches) {
 		if (switches.getLancamentoRange() == null) {
-			 DateRange dr = new DateRange();
-			 
-			 dr.setStart(switches.getDataBase());
-			 
-			 Calendar endDate = (Calendar) switches.getDataBase().clone();
-			 endDate.add(Calendar.MONTH, 1);
-			 dr.setEnd(endDate);
-			 
-			 return dr;
+			DateRange dr = new DateRange();
+
+			dr.setStart(switches.getDataBase());
+
+			Calendar endDate = (Calendar) switches.getDataBase().clone();
+			endDate.add(Calendar.MONTH, 1);
+			dr.setEnd(endDate);
+
+			return dr;
 		} else {
 			return switches.getLancamentoRange();
 		}
@@ -173,22 +176,21 @@ public class ModeloAnalyseAction implements Action {
 
 	private Map<LancamentoModelo, List<Lancamento>> getLancamentoModeloMap(String nomeModelo) {
 		LancamentoModeloDAO dao = new LancamentoModeloDAO();
-		
+
 		List<LancamentoModelo> listaLancamentoModelo = dao.listarPorModelo(nomeModelo);
-		
-		
+
 		Map<LancamentoModelo, List<Lancamento>> lancamentoModeloMap = new HashMap<LancamentoModelo, List<Lancamento>>();
-		
+
 		for (LancamentoModelo lancamentoModelo : listaLancamentoModelo) {
 			lancamentoModeloMap.put(lancamentoModelo, new ArrayList<Lancamento>());
 		}
-		
+
 		return lancamentoModeloMap;
 	}
 
 	private List<Lancamento> getLancamentoMap(DateRange lancamentoRange) {
 		LancamentoDAO dao = new LancamentoDAO();
-		
+
 		return dao.listarSemModeloPorData(lancamentoRange.getStart(), lancamentoRange.getEnd());
 	}
 
@@ -196,17 +198,17 @@ public class ModeloAnalyseAction implements Action {
 		if (!(param instanceof ModeloAnalyseSwitches)) {
 			throw new ModeloAnalyseException("Parametro deve ser um ModeloAnalyseSwitches.");
 		}
-		
+
 		ModeloAnalyseSwitches switches = (ModeloAnalyseSwitches) param;
-		
-		if (switches.getNomeModelo() ==  null) {
+
+		if (switches.getNomeModelo() == null) {
 			throw new ModeloAnalyseException("Nome do modelo deve ser informado.");
 		}
-		
+
 		if (switches.getDataBase() == null) {
 			throw new ModeloAnalyseException("Data base deve ser informada.");
 		}
-		
+
 		return switches;
 	}
 
