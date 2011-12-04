@@ -25,8 +25,11 @@ public class Extrato {
 	@JoinColumn(name = "BancoID")
 	private Conta banco;
 
+	private boolean isTransfer;
+
 	private String original;
 
+	
 	public Integer getId() {
 		return id;
 	}
@@ -41,6 +44,19 @@ public class Extrato {
 
 	public void setBanco(Conta banco) {
 		this.banco = banco;
+	}
+
+	/**
+	 * Indica se a linha é uma linha de transferência ou não.
+	 * 
+	 * @return
+	 */
+	public boolean isTransfer() {
+		return isTransfer;
+	}
+
+	public void setTransfer(boolean isTransfer) {
+		this.isTransfer = isTransfer;
 	}
 
 	/**

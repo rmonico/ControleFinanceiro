@@ -76,7 +76,8 @@ ALTER SEQUENCE conta_id_seq OWNED BY conta.id;
 CREATE TABLE extrato (
     id integer NOT NULL,
     bancoid integer NOT NULL,
-    original text NOT NULL
+    original text NOT NULL,
+    istransfer boolean DEFAULT false NOT NULL
 );
 
 
