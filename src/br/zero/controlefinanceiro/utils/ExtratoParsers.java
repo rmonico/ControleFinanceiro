@@ -83,16 +83,29 @@ public class ExtratoParsers {
 	private static ExtratoParser createSantanderParser() {
 		ExtratoParser santanderParser = new ExtratoParser() {
 
+			private boolean isTransferLine;
+
 			@Override
 			public void parse(String line) {
-				// TODO Auto-generated method stub
+				String[] fields = line.split("\t");
+
+				if (fields.length < 3) {
+					isTransferLine = false;
+					return;
+				}
 				
+				if ("SALDO ANTERIOR".equals(fields[2])) {
+					isTransferLine = false;
+					return;
+				}
+				
+				isTransferLine = true;
+
 			}
 
 			@Override
 			public boolean isTransferLine() {
-				// TODO Auto-generated method stub
-				return false;
+				return isTransferLine;
 			}
 
 			@Override
@@ -106,7 +119,7 @@ public class ExtratoParsers {
 		return santanderParser;
 	}
 
-	{
+	public static void registerParsers() {
 		ContaDAO.registerExtratoParser("itau", ExtratoParsers.ITAU_EXTRATO_PARSER);
 		ContaDAO.registerExtratoParser("santander", ExtratoParsers.SANTANDER_EXTRATO_PARSER);
 	}
