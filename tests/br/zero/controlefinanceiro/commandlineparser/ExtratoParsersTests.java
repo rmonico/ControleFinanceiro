@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.zero.controlefinanceiro.model.ExtratoParser;
-import br.zero.controlefinanceiro.model.ExtratoParsers;
+import br.zero.controlefinanceiro.utils.ExtratoParsers;
 
 public class ExtratoParsersTests {
 

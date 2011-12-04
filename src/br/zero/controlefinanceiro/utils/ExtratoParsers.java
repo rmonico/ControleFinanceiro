@@ -1,9 +1,12 @@
-package br.zero.controlefinanceiro.model;
+package br.zero.controlefinanceiro.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+
+import br.zero.controlefinanceiro.model.ContaDAO;
+import br.zero.controlefinanceiro.model.ExtratoParser;
 
 /**
  * Apenas instancia os parsers de extrato para que possam ser utilizados.
