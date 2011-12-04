@@ -37,6 +37,7 @@ public class ExtratoListAction implements Action {
 
 		TextGridFormattedColumn.createFormattedColumn(grid, "id", TextGridFormattedColumn.ID_FORMATTER, TextGridColumnAlignment.RIGHT, "getId");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Conta", ControleFinanceiroFormatters.CONTA_FORMATTER, TextGridColumnAlignment.LEFT, "getBanco");
+		TextGridFormattedColumn.createFormattedColumn(grid, "Transfer?", TextGridFormattedColumn.BOOLEAN_FORMATTER, TextGridColumnAlignment.CENTER, "isTransfer");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Original", TextGridFormattedColumn.STRING_FORMATTER, TextGridColumnAlignment.LEFT, "getOriginal");
 
 		return grid;
