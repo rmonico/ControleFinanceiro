@@ -43,6 +43,10 @@ public class ModeloAnalyseAction implements Action {
 	public void run(Object param) throws ModeloAnalyseException, TextGridException {
 		ModeloAnalyseSwitches switches = checkParamValid(param);
 		
+		String modeMessage = switches.getRealizeFlag() ? "Modo de Gravação Ativo" : "Modo de Simulação Ativo (use --realize para gravar).";
+		
+		System.out.println(modeMessage);
+		
 		mountLists(switches);
 		
 		showUnrelatedLancamentos();
