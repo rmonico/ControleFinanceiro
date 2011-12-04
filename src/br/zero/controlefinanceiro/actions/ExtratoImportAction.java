@@ -60,24 +60,26 @@ public class ExtratoImportAction implements Action {
 		while ((line = file.readLine()) != null) {
 			ep.parse(line);
 			
+			String message;
+			
 			if (!ep.isTransferLine()) {
-				String message = "[ FAIL ] \"" + line + "\"";
+				message = "[ FAIL ] \"" + line + "\"";
 				if (ep.getThrewException() != null) {
 					message += " ==> " + ep.getThrewException().getMessage();
 				}
-				
-				System.out.println(message);
-				continue;
+			} else {
+				message = "[  OK  ] \"" + line + "\"";
 			}
 			
 			Extrato extrato = new Extrato();
 
 			extrato.setBanco(conta);
 			extrato.setOriginal(line);
+			extrato.setTransfer(ep.isTransferLine());
 
 			dao.inserir(extrato);
 			
-			System.out.println("[  OK  ] \"" + line + "\"");
+			System.out.println(message);
 		}
 	}
 
