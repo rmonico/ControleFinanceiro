@@ -12,6 +12,7 @@ import java.util.GregorianCalendar;
  * 
  */
 public class ExtratoParsers {
+	
 	public static final ExtratoParser ITAU_EXTRATO_PARSER = createItauParser();
 	public static final ExtratoParser SANTANDER_EXTRATO_PARSER = createSantanderParser();
 	
@@ -109,4 +110,10 @@ public class ExtratoParsers {
 		
 		return santanderParser;
 	}
+
+	{
+		ContaDAO.registerExtratoParser("itau", ExtratoParsers.ITAU_EXTRATO_PARSER);
+		ContaDAO.registerExtratoParser("santander", ExtratoParsers.SANTANDER_EXTRATO_PARSER);
+	}
+	
 }
