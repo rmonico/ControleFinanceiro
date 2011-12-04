@@ -29,9 +29,6 @@ public class Extrato {
 	@JoinColumn(name = "BancoID")
 	private Conta banco;
 
-	@Temporal(TemporalType.DATE)
-	private Calendar data;
-
 	private String original;
 
 	public Integer getId() {
@@ -48,14 +45,6 @@ public class Extrato {
 
 	public void setBanco(Conta banco) {
 		this.banco = banco;
-	}
-
-	public Calendar getData() {
-		return data;
-	}
-
-	public void setData(Calendar data) {
-		this.data = data;
 	}
 
 	/**
