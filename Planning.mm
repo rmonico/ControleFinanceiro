@@ -180,7 +180,7 @@
   </body>
 </html></richcontent>
 </node>
-<node CREATED="1322271284140" ID="ID_1921731818" MODIFIED="1323021747675" TEXT="jfin extrato analyse">
+<node CREATED="1322271284140" ID="ID_1921731818" MODIFIED="1323041500713" TEXT="jfin extrato analyse">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -190,7 +190,7 @@
       - Recebe como par&#226;metro uma data de in&#237;cio e fim (padr&#227;o da data fim: hoje)
     </p>
     <p>
-      - Tem como finalidade lan&#231;ar dados previamente importados para a tabela de extrato para a tabela de lancamentos
+      - Tem como finalidade lan&#231;ar dados previamente importados da tabela de extrato para a tabela de lancamentos
     </p>
     <p>
       
@@ -207,8 +207,42 @@
     <p>
       - Fazer isso em uma classe java que devera receber o nome do banco como par&#226;metro, passa-lo a uma factory para devolver o objeto com o conhecimento sobre o formato da linha no extrato (a classe tamb&#233;m dever&#225; receber a linha do extrato)
     </p>
+    <p>
+      
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      - Terminar de fazer a an&#225;lise manualmente
+    </p>
+    <p>
+      - Transa&#231;&#245;es do domingo passar para a segunda
+    </p>
+    <p>
+      - Criar tabela de importa&#231;&#245;es para manter o arquivo original
+    </p>
+    <p>
+      - Fazer uma tabela a parte para manter as string pelas quais uma conta pode ser referida no extrato.
+    </p>
+    <p>
+      - Colocar um indice &#250;nico na FK de lancamento para extrato (uma linha do extrato s&#243; pode ser referida por um lancamento)
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      - Linha no lan&#231;amento sem extrato: excluir linha do lan&#231;amento
+    </p>
+    <p>
+      - linha do extrato sem lancamento correspondente: inserir no lancamento
+    </p>
+    <p>
+      - linha do extrato com lancamento correspondente: atualiza o extratoid do lancamento
+    </p>
   </body>
-</html></richcontent>
+</html>
+</richcontent>
 </node>
 </node>
 <node CREATED="1322738893562" FOLDED="true" ID="ID_1250441849" MODIFIED="1323005949789" POSITION="right" TEXT="Milestone 4">
