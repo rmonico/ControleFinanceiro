@@ -74,7 +74,6 @@ public class ExtratoImportAction implements Action {
 
 			extrato.setBanco(conta);
 			extrato.setOriginal(line);
-			extrato.setData(ep.getData());
 
 			dao.inserir(extrato);
 			
