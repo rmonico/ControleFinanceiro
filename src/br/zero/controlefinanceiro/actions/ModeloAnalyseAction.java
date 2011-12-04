@@ -117,6 +117,8 @@ public class ModeloAnalyseAction implements Action {
 
 		boolean preview = !switches.getRealizeFlag();
 		
+		LancamentoDAO ld = preview ? null : new LancamentoDAO();
+		
 		for (LancamentoModelo lm : lancamentoModeloMap.keySet()) {
 			List<Lancamento> ll = lancamentoModeloMap.get(lm);
 			
@@ -124,6 +126,8 @@ public class ModeloAnalyseAction implements Action {
 				if (isRelated(lm, l)) {
 					if (!preview) {
 						l.setLancamentoModelo(lm);
+						
+						ld.alterar(l);
 					}
 					
 					ll.add(l);
