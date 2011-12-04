@@ -12,7 +12,7 @@ import org.junit.Test;
 import br.zero.controlefinanceiro.model.ExtratoParser;
 import br.zero.controlefinanceiro.utils.ExtratoParsers;
 
-public class ItauExtratoParsersTests {
+public class ExtratoParsersTests {
 
 	private ExtratoParser parser;
 	@Before
