@@ -113,7 +113,7 @@
   </body>
 </html></richcontent>
 </node>
-<node BACKGROUND_COLOR="#99ff99" CREATED="1322270952879" ID="ID_170195965" MODIFIED="1322781929127" TEXT="jfin modelo analyse - Conclu&#xed;do parcialmente">
+<node BACKGROUND_COLOR="#99ff99" CREATED="1322270952879" ID="ID_170195965" MODIFIED="1323017675984" TEXT="jfin modelo analyse">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -137,14 +137,9 @@
     <p>
       - Criar um switch boolean para apenas diferenciar entre uma simula&#231;&#227;o e realiza&#231;&#227;o do modelo no banco de dados.
     </p>
-    <p>
-      
-    </p>
-    <p>
-      - Ainda falta fazer a parte persistir os objetos alterados no banco
-    </p>
   </body>
-</html></richcontent>
+</html>
+</richcontent>
 </node>
 <node BACKGROUND_COLOR="#99ff99" CREATED="1322778310655" ID="ID_532456165" MODIFIED="1322781904886" TEXT="jfin extrato ls">
 <richcontent TYPE="NOTE"><html>
@@ -216,7 +211,7 @@
 </html></richcontent>
 </node>
 </node>
-<node CREATED="1322738893562" FOLDED="true" ID="ID_1250441849" MODIFIED="1322875305886" POSITION="right" TEXT="Milestone 4">
+<node CREATED="1322738893562" FOLDED="true" ID="ID_1250441849" MODIFIED="1323005949789" POSITION="right" TEXT="Milestone 4">
 <node CREATED="1322738416483" ID="ID_1354654228" MODIFIED="1322738431230" TEXT="Extens&#xe3;o do modelo simulate">
 <richcontent TYPE="NOTE"><html>
   <head>
