@@ -59,4 +59,24 @@ public class ContaDAO extends CustomDAO<Conta> {
 
 		return results;
 	}
+	
+	public Conta resolveExtratoLine(Conta banco, String line) {
+		List<Conta> contaList = listarTodos();
+		
+		for (Conta conta : contaList) {
+			List<String> referenciaList = getReferenciaExtratoList(banco, conta);
+			
+			if (referenciaList == null) {
+				continue;
+			}
+			
+			for (String referencia : referenciaList) {
+				if (line.matches(referencia)) {
+					return conta;
+				}
+			}
+		}
+		
+		return null;
+	}
 }
