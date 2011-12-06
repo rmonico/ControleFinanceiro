@@ -63,7 +63,11 @@ public class ExtratoImportAction implements Action {
 
 		List<ExtratoLancamento> lancamentoList = new ArrayList<ExtratoLancamento>();
 		
+		StringBuilder conteudo = new StringBuilder();
+		
 		while ((line = file.readLine()) != null) {
+			conteudo.append(line + "\n");
+			
 			ep.parse(line);
 			
 			String message;
@@ -89,6 +93,8 @@ public class ExtratoImportAction implements Action {
 			
 			System.out.println(message);
 		}
+
+		arquivo.setConteudo(conteudo.toString());
 		
 		persistEverything(arquivo, lancamentoList);
 	}
