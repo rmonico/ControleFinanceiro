@@ -138,8 +138,7 @@
       - Criar um switch boolean para apenas diferenciar entre uma simula&#231;&#227;o e realiza&#231;&#227;o do modelo no banco de dados.
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 <node BACKGROUND_COLOR="#99ff99" CREATED="1322778310655" ID="ID_532456165" MODIFIED="1322781904886" TEXT="jfin extrato ls">
 <richcontent TYPE="NOTE"><html>
@@ -180,7 +179,7 @@
   </body>
 </html></richcontent>
 </node>
-<node CREATED="1322271284140" ID="ID_1921731818" MODIFIED="1323041500713" TEXT="jfin extrato analyse">
+<node CREATED="1322271284140" ID="ID_1921731818" MODIFIED="1323131229195" TEXT="jfin extrato analyse">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -245,7 +244,7 @@
 </richcontent>
 </node>
 </node>
-<node CREATED="1322738893562" FOLDED="true" ID="ID_1250441849" MODIFIED="1323005949789" POSITION="right" TEXT="Milestone 4">
+<node CREATED="1322738893562" ID="ID_1250441849" MODIFIED="1323131175329" POSITION="right" TEXT="Milestone 4">
 <node CREATED="1322738416483" ID="ID_1354654228" MODIFIED="1322738431230" TEXT="Extens&#xe3;o do modelo simulate">
 <richcontent TYPE="NOTE"><html>
   <head>
@@ -287,6 +286,19 @@
     </p>
   </body>
 </html></richcontent>
+</node>
+<node CREATED="1323131189291" ID="ID_526244665" MODIFIED="1323131222855" TEXT="Testar campos money">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      Ver se os campos money do postgres tem problema de arredondamento de ponto flutuante
+    </p>
+  </body>
+</html>
+</richcontent>
 </node>
 </node>
 <node CREATED="1322272082887" FOLDED="true" ID="ID_1707116991" MODIFIED="1322738954405" POSITION="right" TEXT="Funcionalidades futuras">
