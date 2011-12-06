@@ -221,7 +221,7 @@
 </node>
 <node BACKGROUND_COLOR="#99ff99" CREATED="1323182420467" ID="ID_1672761856" MODIFIED="1323185948318" TEXT="Atualiza&#xe7;&#xe3;o da importa&#xe7;&#xe3;o de extrato"/>
 </node>
-<node CREATED="1322271284140" ID="ID_1921731818" MODIFIED="1323181991587" TEXT="jfin extrato analyse">
+<node CREATED="1322271284140" ID="ID_1921731818" MODIFIED="1323187720260" TEXT="jfin extrato analyse">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -255,9 +255,6 @@
       
     </p>
     <p>
-      - Terminar de fazer a an&#225;lise manualmente
-    </p>
-    <p>
       - Transa&#231;&#245;es do domingo passar para a segunda
     </p>
     <p>
@@ -268,9 +265,6 @@
     </p>
     <p>
       &#160;&#160;- Criar linhas nesta tabela com conta=null para indicar que a linha deve ser ignorada (&#250;til para linhas de saldo, por exemplo)
-    </p>
-    <p>
-      - Colocar um indice &#250;nico na FK de lancamento para extrato (uma linha do extrato s&#243; pode ser referida por um lancamento)
     </p>
     <p>
       
