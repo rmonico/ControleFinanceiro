@@ -5,8 +5,9 @@
 		<class>br.zero.controlefinanceiro.model.Lancamento</class>
 		<class>br.zero.controlefinanceiro.model.modelo.LancamentoModelo</class>
 		<class>br.zero.controlefinanceiro.model.modelo.Modelo</class>
-		<class>br.zero.controlefinanceiro.model.extrato.ExtratoLancamento</class>
 		<class>br.zero.controlefinanceiro.model.extrato.Arquivo</class>
+		<class>br.zero.controlefinanceiro.model.extrato.ExtratoLancamento</class>
+		<class>br.zero.controlefinanceiro.model.extrato.ReferenciaExtrato</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql:desenvolvimento"/>
 			<property name="javax.persistence.jdbc.user" value="controlefinanceiro"/>
