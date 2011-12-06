@@ -321,7 +321,7 @@
 </html>
 </richcontent>
 </node>
-<node CREATED="1323182526624" ID="ID_1557372692" MODIFIED="1323185993131" TEXT="Altera&#xe7;&#xf5;es no Modelo de Dados">
+<node BACKGROUND_COLOR="#99ff99" CREATED="1323182526624" ID="ID_1557372692" MODIFIED="1323187244190" TEXT="Altera&#xe7;&#xf5;es no Modelo de Dados">
 <richcontent TYPE="NOTE"><html>
   <head>
     
