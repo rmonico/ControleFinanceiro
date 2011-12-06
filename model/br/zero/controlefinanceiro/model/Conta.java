@@ -21,7 +21,6 @@ public class Conta implements Serializable {
 	private Integer id;
 	private String nome;
 	private Boolean contabilizavel;
-	private String extrato;
 	private String observacao;
 
 	public Integer getId() {
@@ -46,19 +45,6 @@ public class Conta implements Serializable {
 
 	public void setContabilizavel(Boolean contabilizavel) {
 		this.contabilizavel = contabilizavel;
-	}
-
-	/**
-	 * Indica a forma como esta conta deverá aparecer no extrato.
-	 * 
-	 * @return
-	 */
-	public String getExtrato() {
-		return extrato;
-	}
-
-	public void setExtrato(String extrato) {
-		this.extrato = extrato;
 	}
 
 	public String getObservacao() {
