@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import br.zero.controlefinanceiro.model.extrato.Extrato;
 import br.zero.controlefinanceiro.model.modelo.LancamentoModelo;
 import br.zero.customdao.EntitySetup;
 

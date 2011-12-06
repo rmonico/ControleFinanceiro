@@ -8,9 +8,9 @@ import java.io.IOException;
 import br.zero.controlefinanceiro.commandlineparser.ExtratoImportSwitches;
 import br.zero.controlefinanceiro.model.Conta;
 import br.zero.controlefinanceiro.model.ContaDAO;
-import br.zero.controlefinanceiro.model.Extrato;
-import br.zero.controlefinanceiro.model.ExtratoDAO;
 import br.zero.controlefinanceiro.model.ExtratoParser;
+import br.zero.controlefinanceiro.model.extrato.Extrato;
+import br.zero.controlefinanceiro.model.extrato.ExtratoDAO;
 import br.zero.tinycontroller.Action;
 
 public class ExtratoImportAction implements Action {

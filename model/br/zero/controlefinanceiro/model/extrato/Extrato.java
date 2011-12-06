@@ -1,4 +1,4 @@
-package br.zero.controlefinanceiro.model;
+package br.zero.controlefinanceiro.model.extrato;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import br.zero.controlefinanceiro.model.Conta;
 import br.zero.customdao.EntitySetup;
 
 @Entity
