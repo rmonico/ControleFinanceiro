@@ -18,8 +18,8 @@ import br.zero.customdao.EntitySetup;
 public class ExtratoLancamento {
 
 	@Id
-	@SequenceGenerator(name = "CONTROLEFINANCEIRO.EXTRATO_ID_SEQ", sequenceName = "CONTROLEFINANCEIRO.EXTRATO_ID_SEQ", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "CONTROLEFINANCEIRO.EXTRATO_ID_SEQ")
+	@SequenceGenerator(name = "CONTROLEFINANCEIRO_EXTRATO.LANCAMENTO_ID_SEQ", sequenceName = "CONTROLEFINANCEIRO_EXTRATO.LANCAMENTO_ID_SEQ", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "CONTROLEFINANCEIRO_EXTRATO.LANCAMENTO_ID_SEQ")
 	private Integer id;
 
 	@ManyToOne
