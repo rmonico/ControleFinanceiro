@@ -179,7 +179,7 @@
   </body>
 </html></richcontent>
 </node>
-<node CREATED="1322271284140" ID="ID_1921731818" MODIFIED="1323131229195" TEXT="jfin extrato analyse">
+<node CREATED="1322271284140" ID="ID_1921731818" MODIFIED="1323133015340" TEXT="jfin extrato analyse">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -223,6 +223,12 @@
     </p>
     <p>
       - Fazer uma tabela a parte para manter as string pelas quais uma conta pode ser referida no extrato.
+    </p>
+    <p>
+      &#160;&#160;- Criar uma conta &quot;catch all&quot;, para quando uma linha do extrato n&#227;o bater com nenhuma das strings acima (isto justifica uma a&#231;&#227;o de update do lan&#231;amento)
+    </p>
+    <p>
+      &#160;&#160;- Criar linhas nesta tabela com conta=null para indicar que a linha deve ser ignorada (&#250;til para linhas de saldo, por exemplo)
     </p>
     <p>
       - Colocar um indice &#250;nico na FK de lancamento para extrato (uma linha do extrato s&#243; pode ser referida por um lancamento)
@@ -301,7 +307,7 @@
 </richcontent>
 </node>
 </node>
-<node CREATED="1322272082887" FOLDED="true" ID="ID_1707116991" MODIFIED="1322738954405" POSITION="right" TEXT="Funcionalidades futuras">
+<node CREATED="1322272082887" ID="ID_1707116991" MODIFIED="1323133247856" POSITION="right" TEXT="Funcionalidades futuras">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -339,6 +345,19 @@
     </p>
   </body>
 </html></richcontent>
+</node>
+<node CREATED="1323133250802" ID="ID_1456365686" MODIFIED="1323133271318" TEXT="Contas aninhadas">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      Permitir que uma conta tenha subcontas
+    </p>
+  </body>
+</html>
+</richcontent>
 </node>
 </node>
 <node CREATED="1322272446879" FOLDED="true" ID="ID_1717968237" MODIFIED="1322738953629" POSITION="right" TEXT="Funcionalidades n&#xe3;o-essenciais">
