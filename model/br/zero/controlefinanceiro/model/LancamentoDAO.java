@@ -84,4 +84,24 @@ public class LancamentoDAO extends CustomDAO<Lancamento> {
 		return results;
 	}
 
+	public List<Lancamento> listarSemExtrato() {
+		StringBuilder listarSemExtratoQuery = new StringBuilder();
+
+		listarSemExtratoQuery.append("select\n");
+		listarSemExtratoQuery.append("  lancamento\n");
+		listarSemExtratoQuery.append("\n");
+		listarSemExtratoQuery.append("from\n");
+		listarSemExtratoQuery.append("  Lancamento lancamento\n");
+		listarSemExtratoQuery.append("\n");
+		listarSemExtratoQuery.append("where\n");
+		listarSemExtratoQuery.append("  extrato is null\n");
+
+		Query q = getEntityManager().createQuery(listarSemExtratoQuery.toString());
+
+		@SuppressWarnings("unchecked")
+		List<Lancamento> results = q.getResultList();
+
+		return results;
+	}
+
 }
