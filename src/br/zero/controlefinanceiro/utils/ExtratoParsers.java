@@ -3,6 +3,7 @@ package br.zero.controlefinanceiro.utils;
 import java.text.ParseException;
 
 import br.zero.controlefinanceiro.model.ContaDAO;
+import br.zero.controlefinanceiro.model.ExtratoLine;
 import br.zero.controlefinanceiro.model.ExtratoParser;
 
 /**
@@ -20,8 +21,8 @@ public class ExtratoParsers {
 		ExtratoParser itauParser = new ExtratoParser() {
 
 			private boolean isTransferLine;
-//			private Calendar data;
 			private ParseException threwException;
+			private ExtratoLine extratoLine;
 
 			@Override
 			public void parse(String line) {
@@ -43,22 +44,34 @@ public class ExtratoParsers {
 					return;
 				}
 
-//				String dataStr = fields[0];
-//
-//				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM");
-//
-//				data = GregorianCalendar.getInstance();
-//
-//				try {
-//					data.setTime(sdf.parse(dataStr));
-//				} catch (ParseException e) {
-//					threwException = e;
-//					isTransferLine = false;
-//				}
-//
-//				data.set(Calendar.YEAR, GregorianCalendar.getInstance().get(Calendar.YEAR));
+				ConcreteExtratoLine el = new ConcreteExtratoLine();
+
+				el.setReferencia("");
+
+				extratoLine = el;
+
+				// String dataStr = fields[0];
+				//
+				// SimpleDateFormat sdf = new SimpleDateFormat("dd/MM");
+				//
+				// data = GregorianCalendar.getInstance();
+				//
+				// try {
+				// data.setTime(sdf.parse(dataStr));
+				// } catch (ParseException e) {
+				// threwException = e;
+				// isTransferLine = false;
+				// }
+				//
+				// data.set(Calendar.YEAR,
+				// GregorianCalendar.getInstance().get(Calendar.YEAR));
 
 				isTransferLine = true;
+			}
+
+			@Override
+			public ExtratoLine getLine() {
+				return extratoLine;
 			}
 
 			@Override
@@ -66,15 +79,11 @@ public class ExtratoParsers {
 				return threwException;
 			}
 
-//			@Override
-//			public Calendar getData() {
-//				return isTransferLine ? data : null;
-//			}
-
 			@Override
 			public boolean isTransferLine() {
 				return isTransferLine;
 			}
+
 		};
 
 		return itauParser;
@@ -84,6 +93,7 @@ public class ExtratoParsers {
 		ExtratoParser santanderParser = new ExtratoParser() {
 
 			private boolean isTransferLine;
+			private ConcreteExtratoLine extratoLine;
 
 			@Override
 			public void parse(String line) {
@@ -93,14 +103,25 @@ public class ExtratoParsers {
 					isTransferLine = false;
 					return;
 				}
-				
+
 				if ("SALDO ANTERIOR".equals(fields[2])) {
 					isTransferLine = false;
 					return;
 				}
-				
+
+				ConcreteExtratoLine el = new ConcreteExtratoLine();
+
+				el.setReferencia("");
+
+				extratoLine = el;
+
 				isTransferLine = true;
 
+			}
+
+			@Override
+			public ExtratoLine getLine() {
+				return extratoLine;
 			}
 
 			@Override
