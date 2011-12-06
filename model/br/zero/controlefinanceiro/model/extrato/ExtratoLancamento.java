@@ -25,6 +25,10 @@ public class ExtratoLancamento {
 	@ManyToOne
 	@JoinColumn(name = "BancoID")
 	private Conta banco;
+		
+	@ManyToOne
+	@JoinColumn(name = "ArquivoID")
+	private Arquivo arquivo;
 
 	private boolean isTransfer;
 
@@ -45,6 +49,14 @@ public class ExtratoLancamento {
 
 	public void setBanco(Conta banco) {
 		this.banco = banco;
+	}
+
+	public Arquivo getArquivo() {
+		return arquivo;
+	}
+
+	public void setArquivo(Arquivo arquivo) {
+		this.arquivo = arquivo;
 	}
 
 	/**
