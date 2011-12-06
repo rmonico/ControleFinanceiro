@@ -43,6 +43,8 @@ public class ContaDAO extends CustomDAO<Conta> {
 		listaReferenciaExtratoList.append("where\n");
 		listaReferenciaExtratoList.append("  banco = :banco\n");
 		listaReferenciaExtratoList.append("  and conta = :conta\n");
+		listaReferenciaExtratoList.append("order by\n");
+		listaReferenciaExtratoList.append("  re.n\n");
 
 		Query q = getEntityManager().createQuery(listaReferenciaExtratoList.toString());
 
