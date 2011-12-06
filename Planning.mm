@@ -155,7 +155,7 @@
   </body>
 </html></richcontent>
 </node>
-<node BACKGROUND_COLOR="#99ff99" CREATED="1322270725708" ID="ID_623657749" MODIFIED="1323021745947" TEXT="jfin extrato import">
+<node BACKGROUND_COLOR="#99ff99" CREATED="1322270725708" ID="ID_623657749" MODIFIED="1323182398215" TEXT="jfin extrato import - Parcial">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -178,8 +178,50 @@
     </p>
   </body>
 </html></richcontent>
+<node BACKGROUND_COLOR="#99ff99" CREATED="1323182444054" ID="ID_1629006429" MODIFIED="1323183856760" TEXT="Altera&#xe7;&#xf5;es no Banco de Dados">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      ArquivoExtrato
+    </p>
+    <p>
+      - id: int (PK)
+    </p>
+    <p>
+      - arquivo: text (lan&#231;ar o arquivo original aqui)
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      Adicionar coluna ArquivoExtratoID ao Extrato (FK -&gt; ArquivoExtrato)
+    </p>
+  </body>
+</html>
+</richcontent>
 </node>
-<node CREATED="1322271284140" ID="ID_1921731818" MODIFIED="1323133015340" TEXT="jfin extrato analyse">
+<node BACKGROUND_COLOR="#99ff99" CREATED="1323182306524" ID="ID_1007960337" MODIFIED="1323185084704" TEXT="Altera&#xe7;&#xe3;o no Modelo">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      - Cria&#231;&#227;o das novas entidades de ArquivoExtrato
+    </p>
+    <p>
+      - ArquivoExtratoDAO
+    </p>
+  </body>
+</html>
+</richcontent>
+</node>
+<node CREATED="1323182420467" ID="ID_1672761856" MODIFIED="1323182429648" TEXT="Atualiza&#xe7;&#xe3;o da importa&#xe7;&#xe3;o de extrato"/>
+</node>
+<node CREATED="1322271284140" ID="ID_1921731818" MODIFIED="1323181991587" TEXT="jfin extrato analyse">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -219,9 +261,6 @@
       - Transa&#231;&#245;es do domingo passar para a segunda
     </p>
     <p>
-      - Criar tabela de importa&#231;&#245;es para manter o arquivo original
-    </p>
-    <p>
       - Fazer uma tabela a parte para manter as string pelas quais uma conta pode ser referida no extrato.
     </p>
     <p>
@@ -248,9 +287,63 @@
   </body>
 </html>
 </richcontent>
+<node CREATED="1323181709546" ID="ID_252868032" MODIFIED="1323182639078" TEXT="Altera&#xe7;&#xf5;es no Banco de Dados">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      LinhaExtrato
+    </p>
+    <p>
+      &#160;- id: int (PK)
+    </p>
+    <p>
+      &#160;- ContaID: Conta
+    </p>
+    <p>
+      &#160;- BancoID: Conta&#160;(not null)
+    </p>
+    <p>
+      &#160;- extrato: string (not null)
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      - Colocar um indice &#250;nico na FK de lancamento para extrato (uma linha do extrato s&#243; pode ser referida por um lancamento)
+    </p>
+  </body>
+</html>
+</richcontent>
+</node>
+<node CREATED="1323182526624" ID="ID_1557372692" MODIFIED="1323182898231" TEXT="Altera&#xe7;&#xf5;es no Modelo de Dados">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      - Criar Entidade para a LinhaExtrato (sem DAO)
+    </p>
+    <p>
+      - Na Conta, criar:
+    </p>
+    <p>
+      public List&lt;String&gt; getLinhaExtrato(Conta banco);
+    </p>
+  </body>
+</html>
+</richcontent>
+</node>
+<node BACKGROUND_COLOR="#99ff99" CREATED="1323182240989" ID="ID_1089707737" MODIFIED="1323182258185" TEXT="Cria&#xe7;&#xe3;o das Classes de Action e Switches"/>
 </node>
 </node>
-<node CREATED="1322738893562" ID="ID_1250441849" MODIFIED="1323131175329" POSITION="right" TEXT="Milestone 4">
+<node CREATED="1322738893562" FOLDED="true" ID="ID_1250441849" MODIFIED="1323182292069" POSITION="right" TEXT="Milestone 4">
 <node CREATED="1322738416483" ID="ID_1354654228" MODIFIED="1322738431230" TEXT="Extens&#xe3;o do modelo simulate">
 <richcontent TYPE="NOTE"><html>
   <head>
@@ -303,11 +396,10 @@
       Ver se os campos money do postgres tem problema de arredondamento de ponto flutuante
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 </node>
-<node CREATED="1322272082887" ID="ID_1707116991" MODIFIED="1323133247856" POSITION="right" TEXT="Funcionalidades futuras">
+<node CREATED="1322272082887" FOLDED="true" ID="ID_1707116991" MODIFIED="1323182293757" POSITION="right" TEXT="Funcionalidades futuras">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -356,8 +448,7 @@
       Permitir que uma conta tenha subcontas
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 </node>
 <node CREATED="1322272446879" FOLDED="true" ID="ID_1717968237" MODIFIED="1322738953629" POSITION="right" TEXT="Funcionalidades n&#xe3;o-essenciais">
