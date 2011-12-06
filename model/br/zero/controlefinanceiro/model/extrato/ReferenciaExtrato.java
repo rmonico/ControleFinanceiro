@@ -30,8 +30,9 @@ public class ReferenciaExtrato {
 	@JoinColumn(name = "ContaID")
 	private Conta conta;
 
+	private Integer n;
+
 	private String referencia;
-	
 
 	public Integer getId() {
 		return id;
@@ -55,6 +56,19 @@ public class ReferenciaExtrato {
 
 	public void setConta(Conta conta) {
 		this.conta = conta;
+	}
+
+	/**
+	 * Indica a ordem em que esta referência deverá ser testada.
+	 * 
+	 * @return
+	 */
+	public Integer getN() {
+		return n;
+	}
+
+	public void setN(Integer n) {
+		this.n = n;
 	}
 
 	public String getReferencia() {
