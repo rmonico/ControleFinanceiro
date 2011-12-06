@@ -4,11 +4,15 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.zero.controlefinanceiro.commandlineparser.ExtratoImportSwitches;
 import br.zero.controlefinanceiro.model.Conta;
 import br.zero.controlefinanceiro.model.ContaDAO;
 import br.zero.controlefinanceiro.model.ExtratoParser;
+import br.zero.controlefinanceiro.model.extrato.Arquivo;
+import br.zero.controlefinanceiro.model.extrato.ArquivoDAO;
 import br.zero.controlefinanceiro.model.extrato.ExtratoLancamento;
 import br.zero.controlefinanceiro.model.extrato.ExtratoLancamentoDAO;
 import br.zero.tinycontroller.Action;
@@ -47,8 +51,6 @@ public class ExtratoImportAction implements Action {
 	}
 
 	private void doImport(BufferedReader file, Conta conta) throws IOException, ExtratoImportException {
-		ExtratoLancamentoDAO dao = new ExtratoLancamentoDAO();
-
 		String line;
 		
 		ExtratoParser ep = conta.getParser();
@@ -56,7 +58,11 @@ public class ExtratoImportAction implements Action {
 		if (ep == null) {
 			throw new ExtratoImportException("Conta \"" + conta.getNome() + "\" não possui um parser de extrato registrado.");
 		}
+		
+		Arquivo arquivo = new Arquivo();
 
+		List<ExtratoLancamento> lancamentoList = new ArrayList<ExtratoLancamento>();
+		
 		while ((line = file.readLine()) != null) {
 			ep.parse(line);
 			
@@ -71,15 +77,32 @@ public class ExtratoImportAction implements Action {
 				message = "[  OK  ] \"" + line + "\"";
 			}
 			
-			ExtratoLancamento extrato = new ExtratoLancamento();
+			ExtratoLancamento lancamento = new ExtratoLancamento();
 
-			extrato.setBanco(conta);
-			extrato.setOriginal(line);
-			extrato.setTransfer(ep.isTransferLine());
+			lancamento.setBanco(conta);
+			lancamento.setOriginal(line);
+			lancamento.setTransfer(ep.isTransferLine());
+			lancamento.setArquivo(arquivo);
 
-			dao.inserir(extrato);
+			lancamentoList.add(lancamento);
+			
 			
 			System.out.println(message);
+		}
+		
+		persistEverything(arquivo, lancamentoList);
+	}
+
+	private void persistEverything(Arquivo arquivo, List<ExtratoLancamento> lancamentoList) {
+		ArquivoDAO arquivoDAO = new ArquivoDAO();
+		
+		arquivoDAO.inserir(arquivo);
+
+		
+		ExtratoLancamentoDAO lancamentoDAO = new ExtratoLancamentoDAO();
+
+		for (ExtratoLancamento el : lancamentoList) {
+			lancamentoDAO.inserir(el);
 		}
 	}
 
