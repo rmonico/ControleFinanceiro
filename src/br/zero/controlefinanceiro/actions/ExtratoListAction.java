@@ -3,8 +3,8 @@ package br.zero.controlefinanceiro.actions;
 import java.util.List;
 
 import br.zero.controlefinanceiro.commandlineparser.ExtratoListSwitches;
-import br.zero.controlefinanceiro.model.extrato.Extrato;
-import br.zero.controlefinanceiro.model.extrato.ExtratoDAO;
+import br.zero.controlefinanceiro.model.extrato.ExtratoLancamento;
+import br.zero.controlefinanceiro.model.extrato.ExtratoLancamentoDAO;
 import br.zero.controlefinanceiro.utils.ControleFinanceiroFormatters;
 import br.zero.textgrid.TextGrid;
 import br.zero.textgrid.TextGridColumnAlignment;
@@ -33,7 +33,7 @@ public class ExtratoListAction implements Action {
 		TextGrid grid = new TextGrid();
 
 		grid.getData().setHeaderSeparatorChar('=');
-		grid.getData().setTitle("Extrato \"" + switches.getNomeConta() + "\"");
+		grid.getData().setTitle("ExtratoLancamento \"" + switches.getNomeConta() + "\"");
 
 		TextGridFormattedColumn.createFormattedColumn(grid, "id", TextGridFormattedColumn.ID_FORMATTER, TextGridColumnAlignment.RIGHT, "getId");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Conta", ControleFinanceiroFormatters.CONTA_FORMATTER, TextGridColumnAlignment.LEFT, "getBanco");
@@ -47,9 +47,9 @@ public class ExtratoListAction implements Action {
 	public void run(Object param) throws ExtratoListException, TextGridException {
 		switches = checkParamValid(param);
 		
-		ExtratoDAO dao = new ExtratoDAO();
+		ExtratoLancamentoDAO dao = new ExtratoLancamentoDAO();
 
-		List<Extrato> extratoList = dao.listarPorConta(switches.getNomeConta());
+		List<ExtratoLancamento> extratoList = dao.listarPorConta(switches.getNomeConta());
 
 		TextGrid grid = createGrid();
 

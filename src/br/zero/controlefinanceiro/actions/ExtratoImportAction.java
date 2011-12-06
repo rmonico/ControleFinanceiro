@@ -9,8 +9,8 @@ import br.zero.controlefinanceiro.commandlineparser.ExtratoImportSwitches;
 import br.zero.controlefinanceiro.model.Conta;
 import br.zero.controlefinanceiro.model.ContaDAO;
 import br.zero.controlefinanceiro.model.ExtratoParser;
-import br.zero.controlefinanceiro.model.extrato.Extrato;
-import br.zero.controlefinanceiro.model.extrato.ExtratoDAO;
+import br.zero.controlefinanceiro.model.extrato.ExtratoLancamento;
+import br.zero.controlefinanceiro.model.extrato.ExtratoLancamentoDAO;
 import br.zero.tinycontroller.Action;
 
 public class ExtratoImportAction implements Action {
@@ -47,7 +47,7 @@ public class ExtratoImportAction implements Action {
 	}
 
 	private void doImport(BufferedReader file, Conta conta) throws IOException, ExtratoImportException {
-		ExtratoDAO dao = new ExtratoDAO();
+		ExtratoLancamentoDAO dao = new ExtratoLancamentoDAO();
 
 		String line;
 		
@@ -71,7 +71,7 @@ public class ExtratoImportAction implements Action {
 				message = "[  OK  ] \"" + line + "\"";
 			}
 			
-			Extrato extrato = new Extrato();
+			ExtratoLancamento extrato = new ExtratoLancamento();
 
 			extrato.setBanco(conta);
 			extrato.setOriginal(line);

@@ -13,9 +13,9 @@ import br.zero.controlefinanceiro.model.Conta;
 import br.zero.customdao.EntitySetup;
 
 @Entity
-@Table(name = "extrato", schema = "controlefinanceiro")
-@EntitySetup(findAllQuery = "select e from Extrato e order by e.data, e.id", findByIdQuery = "select e from Extrato e where e.id=:id", idFieldName = "id")
-public class Extrato {
+@Table(name = "lancamento", schema = "controlefinanceiro_extrato")
+@EntitySetup(findAllQuery = "select e from ExtratoLancamento e order by e.data, e.id", findByIdQuery = "select e from ExtratoLancamento e where e.id=:id", idFieldName = "id")
+public class ExtratoLancamento {
 
 	@Id
 	@SequenceGenerator(name = "CONTROLEFINANCEIRO.EXTRATO_ID_SEQ", sequenceName = "CONTROLEFINANCEIRO.EXTRATO_ID_SEQ", allocationSize = 1)

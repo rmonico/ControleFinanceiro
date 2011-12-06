@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import br.zero.controlefinanceiro.model.extrato.Extrato;
+import br.zero.controlefinanceiro.model.extrato.ExtratoLancamento;
 import br.zero.controlefinanceiro.model.modelo.LancamentoModelo;
 import br.zero.customdao.EntitySetup;
 
@@ -39,7 +39,7 @@ public class Lancamento implements Comparable<Lancamento> {
 
 	@ManyToOne
 	@JoinColumn(name = "ExtratoID")
-	private Extrato extrato;
+	private ExtratoLancamento extrato;
 
 	@ManyToOne
 	@JoinColumn(name = "ContaOrigemID")
@@ -85,11 +85,11 @@ public class Lancamento implements Comparable<Lancamento> {
 		this.n = n;
 	}
 
-	public Extrato getExtrato() {
+	public ExtratoLancamento getExtrato() {
 		return extrato;
 	}
 
-	public void setExtrato(Extrato extrato) {
+	public void setExtrato(ExtratoLancamento extrato) {
 		this.extrato = extrato;
 	}
 
