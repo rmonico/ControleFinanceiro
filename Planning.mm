@@ -155,7 +155,7 @@
   </body>
 </html></richcontent>
 </node>
-<node BACKGROUND_COLOR="#99ff99" CREATED="1322270725708" ID="ID_623657749" MODIFIED="1323182398215" TEXT="jfin extrato import - Parcial">
+<node BACKGROUND_COLOR="#99ff99" CREATED="1322270725708" FOLDED="true" ID="ID_623657749" MODIFIED="1323185954525" TEXT="jfin extrato import ">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -219,7 +219,7 @@
 </html>
 </richcontent>
 </node>
-<node CREATED="1323182420467" ID="ID_1672761856" MODIFIED="1323182429648" TEXT="Atualiza&#xe7;&#xe3;o da importa&#xe7;&#xe3;o de extrato"/>
+<node BACKGROUND_COLOR="#99ff99" CREATED="1323182420467" ID="ID_1672761856" MODIFIED="1323185948318" TEXT="Atualiza&#xe7;&#xe3;o da importa&#xe7;&#xe3;o de extrato"/>
 </node>
 <node CREATED="1322271284140" ID="ID_1921731818" MODIFIED="1323181991587" TEXT="jfin extrato analyse">
 <richcontent TYPE="NOTE"><html>
@@ -287,14 +287,14 @@
   </body>
 </html>
 </richcontent>
-<node CREATED="1323181709546" ID="ID_252868032" MODIFIED="1323182639078" TEXT="Altera&#xe7;&#xf5;es no Banco de Dados">
+<node BACKGROUND_COLOR="#99ff99" CREATED="1323181709546" ID="ID_252868032" MODIFIED="1323186526367" TEXT="Altera&#xe7;&#xf5;es no Banco de Dados">
 <richcontent TYPE="NOTE"><html>
   <head>
     
   </head>
   <body>
     <p>
-      LinhaExtrato
+      ReferenciaExtrato
     </p>
     <p>
       &#160;- id: int (PK)
@@ -306,7 +306,7 @@
       &#160;- BancoID: Conta&#160;(not null)
     </p>
     <p>
-      &#160;- extrato: string (not null)
+      &#160;- referencia: string (not null)
     </p>
     <p>
       
@@ -321,26 +321,26 @@
 </html>
 </richcontent>
 </node>
-<node CREATED="1323182526624" ID="ID_1557372692" MODIFIED="1323182898231" TEXT="Altera&#xe7;&#xf5;es no Modelo de Dados">
+<node CREATED="1323182526624" ID="ID_1557372692" MODIFIED="1323185993131" TEXT="Altera&#xe7;&#xf5;es no Modelo de Dados">
 <richcontent TYPE="NOTE"><html>
   <head>
     
   </head>
   <body>
     <p>
-      - Criar Entidade para a LinhaExtrato (sem DAO)
+      - Criar Entidade para a ReferenciaExtrato (sem DAO)
     </p>
     <p>
       - Na Conta, criar:
     </p>
     <p>
-      public List&lt;String&gt; getLinhaExtrato(Conta banco);
+      public List&lt;String&gt; getReferenciaExtratoList(Conta banco);
     </p>
   </body>
 </html>
 </richcontent>
 </node>
-<node BACKGROUND_COLOR="#99ff99" CREATED="1323182240989" ID="ID_1089707737" MODIFIED="1323182258185" TEXT="Cria&#xe7;&#xe3;o das Classes de Action e Switches"/>
+<node CREATED="1323182240989" ID="ID_1089707737" MODIFIED="1323186006796" TEXT="Codifica&#xe7;&#xe3;o da Action"/>
 </node>
 </node>
 <node CREATED="1322738893562" FOLDED="true" ID="ID_1250441849" MODIFIED="1323182292069" POSITION="right" TEXT="Milestone 4">
