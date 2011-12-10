@@ -88,13 +88,13 @@ public class LancamentoDAO extends CustomDAO<Lancamento> {
 		StringBuilder listarSemExtratoQuery = new StringBuilder();
 
 		listarSemExtratoQuery.append("select\n");
-		listarSemExtratoQuery.append("  lancamento\n");
+		listarSemExtratoQuery.append("  l\n");
 		listarSemExtratoQuery.append("\n");
 		listarSemExtratoQuery.append("from\n");
-		listarSemExtratoQuery.append("  Lancamento lancamento\n");
+		listarSemExtratoQuery.append("  Lancamento l\n");
 		listarSemExtratoQuery.append("\n");
 		listarSemExtratoQuery.append("where\n");
-		listarSemExtratoQuery.append("  extrato is null\n");
+		listarSemExtratoQuery.append("  l.extrato is null\n");
 
 		Query q = getEntityManager().createQuery(listarSemExtratoQuery.toString());
 
