@@ -32,4 +32,24 @@ public class ExtratoLancamentoDAO extends CustomDAO<ExtratoLancamento> {
 		return results;
 	}
 
+	public List<ExtratoLancamento> listarOrfaos() {
+		StringBuilder listarOrfaos = new StringBuilder();
+
+		listarOrfaos.append("select\n");
+		listarOrfaos.append("  e\n");
+		listarOrfaos.append("\n");
+		listarOrfaos.append("from\n");
+		listarOrfaos.append("  ExtratoLancamento e\n");
+		listarOrfaos.append("\n");
+		listarOrfaos.append("where\n");
+		listarOrfaos.append("  e.id not in (select l.extrato.id from Lancamento l)\n");
+
+		Query q = getEntityManager().createQuery(listarOrfaos.toString());
+
+		@SuppressWarnings("unchecked")
+		List<ExtratoLancamento> results = q.getResultList();
+
+		return results;
+	}
+
 }
