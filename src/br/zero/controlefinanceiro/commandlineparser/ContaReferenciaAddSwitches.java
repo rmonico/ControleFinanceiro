@@ -10,7 +10,7 @@ public class ContaReferenciaAddSwitches extends ContaReferenciaListSwitches {
 		return regex;
 	}
 
-	@CommandLineSwitch(param = {"-regex"})
+	@CommandLineSwitch(param = {"-ref"})
 	public void setRegex(String regex) {
 		this.regex = regex;
 	}
