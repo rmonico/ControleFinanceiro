@@ -57,9 +57,15 @@ public enum Command {
 	@CommandLineSwitchParam(name = "lancmodelo-rm")
 	LANCAMENTOMODELO_REMOVE,
 
-	@CommandLineSwitchParam(name = "extrato")
-	EXTRATO,
-	
+	@CommandLineSwitchParam(name = "extrato-ls")
+	EXTRATO_LIST,
+
+	@CommandLineSwitchParam(name = "extrato-import")
+	EXTRATO_IMPORT,
+
+	@CommandLineSwitchParam(name = "extrato-analyse")
+	EXTRATO_ANALYSE,
+
 	@CommandLineSwitchParam(name = "ctaref")
 	CONTA_REFERENCIA,
 	

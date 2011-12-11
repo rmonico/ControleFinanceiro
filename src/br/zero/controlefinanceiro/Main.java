@@ -26,7 +26,6 @@ import br.zero.controlefinanceiro.actions.ModeloSimulateAction;
 import br.zero.controlefinanceiro.commandlineparser.Command;
 import br.zero.controlefinanceiro.commandlineparser.CommandLineLoader;
 import br.zero.controlefinanceiro.commandlineparser.CommandLineSwitches;
-import br.zero.controlefinanceiro.commandlineparser.ExtratoCommand;
 import br.zero.controlefinanceiro.utils.ExtratoParsers;
 import br.zero.tinycontroller.TinyController;
 import br.zero.tinycontroller.TinyControllerException;
@@ -90,9 +89,9 @@ public class Main {
 		controller.registerAction(LancamentoModeloAddAction.class, switches.getLancamentoModeloAddSwitches(), Command.LANCAMENTOMODELO_ADD);
 		controller.registerAction(LancamentoModeloRemoveAction.class, switches.getLancamentoModeloRemoveSwitches(), Command.LANCAMENTOMODELO_REMOVE);
 
-		controller.registerAction(ExtratoListAction.class, switches.getExtratoSubSwitches(ExtratoCommand.LIST), Command.EXTRATO, ExtratoCommand.LIST);
-		controller.registerAction(ExtratoImportAction.class, switches.getExtratoSubSwitches(ExtratoCommand.IMPORT), Command.EXTRATO, ExtratoCommand.IMPORT);
-		controller.registerAction(ExtratoAnalyseAction.class, switches.getExtratoSubSwitches(ExtratoCommand.ANALYSE), Command.EXTRATO, ExtratoCommand.ANALYSE);
+		controller.registerAction(ExtratoListAction.class, switches.getExtratoListSwitches(), Command.EXTRATO_LIST);
+		controller.registerAction(ExtratoImportAction.class, switches.getExtratoImportSwitches(), Command.EXTRATO_IMPORT);
+		controller.registerAction(ExtratoAnalyseAction.class, switches.getExtratoAnalyseSwitches(), Command.EXTRATO_ANALYSE);
 
 		controller.registerAction(HelpAction.class, switches.getHelpSwitches(), Command.HELP);
 

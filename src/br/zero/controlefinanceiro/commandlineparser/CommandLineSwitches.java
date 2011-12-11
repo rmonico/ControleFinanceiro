@@ -29,7 +29,10 @@ public class CommandLineSwitches {
 	private LancamentoModeloAddSwitches lancamentoModeloAddSwitches;
 	private LancamentoModeloRemoveSwitches lancamentoModeloRemoveSwitches;
 
-	private ExtratoSwitches extratoSwitches;
+	private ExtratoListSwitches extratoListSwitches;
+	private ExtratoImportSwitches extratoImportSwitches;
+	private ExtratoAnalyseSwitches extratoAnalyseSwitches;
+
 	private HelpSwitches helpSwitches;
 	private ContaReferenciaSwitches contaReferenciaSwitches;
 
@@ -55,7 +58,9 @@ public class CommandLineSwitches {
 			@SubCommandLine(value = "LANCAMENTOMODELO_LIST", subCommandLineClass = LancamentoModeloListSwitches.class, propertyName = "setLancamentoModeloListSwitches"),
 			@SubCommandLine(value = "LANCAMENTOMODELO_ADD", subCommandLineClass = LancamentoModeloAddSwitches.class, propertyName = "setLancamentoModeloAddSwitches"),
 			@SubCommandLine(value = "LANCAMENTOMODELO_REMOVE", subCommandLineClass = LancamentoModeloRemoveSwitches.class, propertyName = "setLancamentoModeloRemoveSwitches"),
-			@SubCommandLine(value = "EXTRATO", subCommandLineClass = ExtratoSwitches.class, propertyName = "setExtratoSwitches"),
+			@SubCommandLine(value = "EXTRATO_LIST", subCommandLineClass = ExtratoListSwitches.class, propertyName = "setExtratoListSwitches"),
+			@SubCommandLine(value = "EXTRATO_IMPORT", subCommandLineClass = ExtratoImportSwitches.class, propertyName = "setExtratoImportSwitches"),
+			@SubCommandLine(value = "EXTRATO_ANALYSE", subCommandLineClass = ExtratoAnalyseSwitches.class, propertyName = "setExtratoAnalyseSwitches"),
 			@SubCommandLine(value = "CONTA_REFERENCIA", subCommandLineClass = ContaReferenciaSwitches.class, propertyName = "setContaReferenceSwitches"),
 			@SubCommandLine(value = "HELP", subCommandLineClass = HelpSwitches.class, propertyName = "setHelpSwitches") })
 	public void setEntity(Command entity) {
@@ -74,14 +79,6 @@ public class CommandLineSwitches {
 		return backupSwitches;
 	}
 
-	public void setExtratoSwitches(ExtratoSwitches value) {
-		extratoSwitches = value;
-	}
-	
-	public ExtratoSwitches getExtratoSwitches() {
-		return extratoSwitches;
-	}
-	
 	public void setContaReferenceSwitches(ContaReferenciaSwitches value) {
 		contaReferenciaSwitches = value;
 	}
@@ -103,37 +100,11 @@ public class CommandLineSwitches {
 		case BACKUP: {
 			return null;
 		}
-		case EXTRATO: {
-			return extratoSwitches.getCommand();
-		}
 		case HELP: {
 			return null;
 		}
 
 		default: {
-			return null;
-		}
-		}
-	}
-
-	public Object getExtratoSubSwitches(ExtratoCommand command) {
-		if (!entity.equals(Command.EXTRATO)) {
-			return null;
-		}
-		
-		switch (command) {
-		case LIST: {
-			return extratoSwitches.getListSwitches();
-		}
-		case IMPORT: {
-			return extratoSwitches.getImportSwitches();
-		}
-		case ANALYSE: {
-			return extratoSwitches.getAnalyseSwitches();
-		}
-		default: {
-			assert false : "Comando de lançamento modelo não implementado!";
-
 			return null;
 		}
 		}
@@ -267,6 +238,29 @@ public class CommandLineSwitches {
 		this.lancamentoModeloRemoveSwitches = lancamentoModeloRemoveSwitches;
 	}
 
+	public ExtratoListSwitches getExtratoListSwitches() {
+		return extratoListSwitches;
+	}
+
+	public void setExtratoListSwitches(ExtratoListSwitches extratoListSwitches) {
+		this.extratoListSwitches = extratoListSwitches;
+	}
+
+	public ExtratoImportSwitches getExtratoImportSwitches() {
+		return extratoImportSwitches;
+	}
+
+	public void setExtratoImportSwitches(ExtratoImportSwitches extratoImportSwitches) {
+		this.extratoImportSwitches = extratoImportSwitches;
+	}
+
+	public ExtratoAnalyseSwitches getExtratoAnalyseSwitches() {
+		return extratoAnalyseSwitches;
+	}
+
+	public void setExtratoAnalyseSwitches(ExtratoAnalyseSwitches extratoAnalyseSwitches) {
+		this.extratoAnalyseSwitches = extratoAnalyseSwitches;
+	}
 
 	
 }
