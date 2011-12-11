@@ -51,21 +51,23 @@ public class ExtratoAnalyseAction implements Action {
 
 		for (ExtratoLancamento linhaExtrato : extratoLancamentoOrfao) {
 			StringBuilder status = new StringBuilder();
-			
+
 			status.append(linhaExtrato.getOriginal());
-			
+
 			parser.parse(linhaExtrato.getOriginal());
 
 			ExtratoLine line = parser.getLine();
 
 			Conta contaExtrato = contaDAO.resolveExtratoLine(banco, line.getReferencia());
-			
-			 if (contaExtrato == null) {
-				 // TODO O catch all deve ser implementado aqui!
-				 status.append("  ==> Referência não resolvida!");
-				 
-				 continue;
-			 }
+
+			if (contaExtrato == null) {
+				// TODO O catch all deve ser implementado aqui!
+				status.append("  ==> Referência não resolvida!");
+
+				continue;
+			}
+
+			boolean extratoLineMatched = false;
 
 			for (Lancamento lancamentoSemExtrato : lancamentoSemExtratoList) {
 				Conta contaOrigemEsperada;
@@ -82,9 +84,20 @@ public class ExtratoAnalyseAction implements Action {
 				}
 
 				if (extratoLineMatch(lancamentoSemExtrato, line, contaOrigemEsperada, contaDestinoEsperada)) {
+					extratoLineMatched = true;
 					lancamentoSemExtrato.setExtrato(linhaExtrato);
 
-					lancamentoDAO.alterar(lancamentoSemExtrato);
+					if (switches.getRealize()) {
+						lancamentoDAO.alterar(lancamentoSemExtrato);
+					}
+					
+					status.append("  ==> " + lancamentoSemExtrato);
+
+					break;
+				}
+
+				if (!extratoLineMatched) {
+					status.append("  ==> Sem lançamento correspondente.");
 				}
 			}
 		}
