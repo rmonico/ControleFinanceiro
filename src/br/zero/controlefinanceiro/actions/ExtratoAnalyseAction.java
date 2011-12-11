@@ -52,17 +52,21 @@ public class ExtratoAnalyseAction implements Action {
 		for (ExtratoLancamento linhaExtrato : extratoLancamentoOrfao) {
 			StringBuilder status = new StringBuilder();
 
-			status.append(linhaExtrato.getOriginal());
-
 			parser.parse(linhaExtrato.getOriginal());
 
 			ExtratoLine line = parser.getLine();
 
+			status.append(line.getReferencia());
+
 			Conta contaExtrato = contaDAO.resolveExtratoLine(banco, line.getReferencia());
 
 			if (contaExtrato == null) {
-				// TODO O catch all deve ser implementado aqui!
+				// TODO O catch all deve ser implementado aqui! Ver direito,
+				// pois no caso de linhas de saldo a referência não deve ser
+				// resolvida mesmo
 				status.append("  ==> Referência não resolvida!");
+
+				System.out.println(status);
 
 				continue;
 			}
@@ -90,16 +94,19 @@ public class ExtratoAnalyseAction implements Action {
 					if (switches.getRealize()) {
 						lancamentoDAO.alterar(lancamentoSemExtrato);
 					}
-					
+
 					status.append("  ==> " + lancamentoSemExtrato);
 
 					break;
 				}
 
-				if (!extratoLineMatched) {
-					status.append("  ==> Sem lançamento correspondente.");
-				}
 			}
+
+			if (!extratoLineMatched) {
+				status.append("  ==> Sem lançamento correspondente.");
+			}
+
+			System.out.println(status);
 		}
 	}
 
@@ -143,7 +150,7 @@ public class ExtratoAnalyseAction implements Action {
 		ExtratoAnalyseSwitches switches = (ExtratoAnalyseSwitches) param;
 
 		if (switches.getNomeBanco() == null) {
-			throw new ExtratoAnalyseException("");
+			throw new ExtratoAnalyseException("Nome do banco deve ser informado.");
 		}
 
 		return switches;
