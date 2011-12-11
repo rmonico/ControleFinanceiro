@@ -17,7 +17,7 @@ public class ContaReferenciaSwitchesTests extends CustomParserTests {
 
 	@Test
 	public void doListTest() throws ParserException {
-		doContaReferenciaLoad(new String[] { "ctaref-ls", "conta", "banco" }, Command.CONTAREFERENCIA_LIST);
+		doContaReferenciaLoad(new String[] { "ctaref-ls", "conta", "-bco", "banco" }, Command.CONTAREFERENCIA_LIST);
 
 		assertNotNull("switches", switches.getContaReferenciaListSwitches());
 
@@ -29,7 +29,7 @@ public class ContaReferenciaSwitchesTests extends CustomParserTests {
 
 	@Test
 	public void doAddTest() throws ParserException {
-		doContaReferenciaLoad(new String[] { "ctaref-add", "conta", "banco", "regex" }, Command.CONTAREFERENCIA_ADD);
+		doContaReferenciaLoad(new String[] { "ctaref-add", "conta", "-bco", "banco", "-regex", "regex" }, Command.CONTAREFERENCIA_ADD);
 
 		assertNotNull("switches", switches.getContaReferenciaAddSwitches());
 

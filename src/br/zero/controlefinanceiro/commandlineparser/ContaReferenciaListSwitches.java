@@ -20,7 +20,7 @@ public class ContaReferenciaListSwitches {
 		return nomeBanco;
 	}
 
-	@CommandLineSwitch(index = 2)
+	@CommandLineSwitch(param = { "-bco", "--banco" })
 	public void setNomeBanco(String nomeBanco) {
 		this.nomeBanco = nomeBanco;
 	}
