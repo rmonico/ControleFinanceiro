@@ -200,8 +200,7 @@
       Adicionar coluna ArquivoExtratoID ao Extrato (FK -&gt; ArquivoExtrato)
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 <node BACKGROUND_COLOR="#99ff99" CREATED="1323182306524" ID="ID_1007960337" MODIFIED="1323185084704" TEXT="Altera&#xe7;&#xe3;o no Modelo">
 <richcontent TYPE="NOTE"><html>
@@ -216,12 +215,11 @@
       - ArquivoExtratoDAO
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 <node BACKGROUND_COLOR="#99ff99" CREATED="1323182420467" ID="ID_1672761856" MODIFIED="1323185948318" TEXT="Atualiza&#xe7;&#xe3;o da importa&#xe7;&#xe3;o de extrato"/>
 </node>
-<node CREATED="1322271284140" ID="ID_1921731818" MODIFIED="1323187720260" TEXT="jfin extrato analyse">
+<node CREATED="1322271284140" ID="ID_1921731818" MODIFIED="1323572195478" TEXT="jfin extrato analyse">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -312,8 +310,7 @@
       - Colocar um indice &#250;nico na FK de lancamento para extrato (uma linha do extrato s&#243; pode ser referida por um lancamento)
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 <node BACKGROUND_COLOR="#99ff99" CREATED="1323182526624" ID="ID_1557372692" MODIFIED="1323187244190" TEXT="Altera&#xe7;&#xf5;es no Modelo de Dados">
 <richcontent TYPE="NOTE"><html>
@@ -331,14 +328,31 @@
       public List&lt;String&gt; getReferenciaExtratoList(Conta banco);
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 <node CREATED="1323182240989" ID="ID_1089707737" MODIFIED="1323186006796" TEXT="Codifica&#xe7;&#xe3;o da Action"/>
 </node>
 </node>
-<node CREATED="1322738893562" FOLDED="true" ID="ID_1250441849" MODIFIED="1323182292069" POSITION="right" TEXT="Milestone 4">
-<node CREATED="1322738416483" ID="ID_1354654228" MODIFIED="1322738431230" TEXT="Extens&#xe3;o do modelo simulate">
+<node CREATED="1322738893562" FOLDED="true" ID="ID_1250441849" MODIFIED="1323572285927" POSITION="right" TEXT="Milestone 4">
+<node CREATED="1323572186166" ID="ID_1588496469" MODIFIED="1323572273411" TEXT="jfin ref add">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      Recebe: conta, banco e regex
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      Adiciona a linha em controlefinanceiro_extrato.referenciaextrato
+    </p>
+  </body>
+</html></richcontent>
+</node>
+<node CREATED="1322738416483" ID="ID_1354654228" MODIFIED="1323572272409" TEXT="Extens&#xe3;o do modelo simulate">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -351,9 +365,10 @@
       &#160;&#160;- Pode ser criado um parser de arrays para isso
     </p>
   </body>
-</html></richcontent>
+</html>
+</richcontent>
 </node>
-<node CREATED="1322738576183" ID="ID_1153208439" MODIFIED="1322738610579" TEXT="modelo simulate: corre&#xe7;&#xe3;o de bug">
+<node CREATED="1322738576183" ID="ID_1153208439" MODIFIED="1323572271920" TEXT="modelo simulate: corre&#xe7;&#xe3;o de bug">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -366,9 +381,10 @@
       - so mostrar nas listagens lancamentos com um m&#234;s ou menos de idade
     </p>
   </body>
-</html></richcontent>
+</html>
+</richcontent>
 </node>
-<node CREATED="1322738611754" ID="ID_1966233343" MODIFIED="1322738620103" TEXT="Filtro de Saldos">
+<node CREATED="1322738611754" ID="ID_1966233343" MODIFIED="1323572271705" TEXT="Filtro de Saldos">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -378,9 +394,10 @@
       - Nas listagens mostrar o saldo apenas para contas contabiliz&#225;veis.
     </p>
   </body>
-</html></richcontent>
+</html>
+</richcontent>
 </node>
-<node CREATED="1323131189291" ID="ID_526244665" MODIFIED="1323131222855" TEXT="Testar campos money">
+<node CREATED="1323131189291" ID="ID_526244665" MODIFIED="1323572271191" TEXT="Testar campos money">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -390,7 +407,8 @@
       Ver se os campos money do postgres tem problema de arredondamento de ponto flutuante
     </p>
   </body>
-</html></richcontent>
+</html>
+</richcontent>
 </node>
 </node>
 <node CREATED="1322272082887" FOLDED="true" ID="ID_1707116991" MODIFIED="1323182293757" POSITION="right" TEXT="Funcionalidades futuras">
