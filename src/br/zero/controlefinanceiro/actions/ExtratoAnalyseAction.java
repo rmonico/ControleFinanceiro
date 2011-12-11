@@ -50,8 +50,7 @@ public class ExtratoAnalyseAction implements Action {
 		}
 
 		for (ExtratoLancamento linhaExtrato : extratoLancamentoOrfao) {
-			for (int i = 0; i < lancamentoSemExtratoList.size(); i++) {
-				Lancamento lancamentoSemExtrato = lancamentoSemExtratoList.get(i);
+			for (Lancamento lancamentoSemExtrato : lancamentoSemExtratoList) {
 
 				parser.parse(linhaExtrato.getOriginal());
 
