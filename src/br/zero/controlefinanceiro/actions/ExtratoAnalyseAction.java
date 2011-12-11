@@ -39,7 +39,14 @@ public class ExtratoAnalyseAction implements Action {
 
 		List<Lancamento> lancamentoSemExtratoList = getLancamentoSemExtratoList();
 
-		List<ExtratoLancamento> extratoLancamentoOrfao = getExtratoLancamentoOrfao();
+		List<ExtratoLancamento> extratoLancamentoOrfao = getExtratoLancamentoOrfao(banco);
+		
+		if (extratoLancamentoOrfao.size() == 0) {
+			System.out.println();
+			System.out.println("Nenhum item de extrato órfão encontrado para o banco \"" + banco.getNome() + "\".");
+			
+			return;
+		}
 
 		ContaDAO contaDAO = new ContaDAO();
 
@@ -130,10 +137,10 @@ public class ExtratoAnalyseAction implements Action {
 		return conta;
 	}
 
-	private List<ExtratoLancamento> getExtratoLancamentoOrfao() {
+	private List<ExtratoLancamento> getExtratoLancamentoOrfao(Conta banco) {
 		ExtratoLancamentoDAO dao = new ExtratoLancamentoDAO();
 
-		return dao.listarOrfaos();
+		return dao.listarOrfaos(banco);
 	}
 
 	private List<Lancamento> getLancamentoSemExtratoList() {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import br.zero.controlefinanceiro.model.Conta;
 import br.zero.customdao.CustomDAO;
 import br.zero.customdao.DAOSetup;
 
@@ -32,7 +33,7 @@ public class ExtratoLancamentoDAO extends CustomDAO<ExtratoLancamento> {
 		return results;
 	}
 
-	public List<ExtratoLancamento> listarOrfaos() {
+	public List<ExtratoLancamento> listarOrfaos(Conta banco) {
 		StringBuilder listarOrfaos = new StringBuilder();
 
 		listarOrfaos.append("select\n");
@@ -43,8 +44,11 @@ public class ExtratoLancamentoDAO extends CustomDAO<ExtratoLancamento> {
 		listarOrfaos.append("\n");
 		listarOrfaos.append("where\n");
 		listarOrfaos.append("  e.id not in (select l.extrato.id from Lancamento l)\n");
+		listarOrfaos.append("  and e.banco = :banco\n");
 
 		Query q = getEntityManager().createQuery(listarOrfaos.toString());
+		
+		q.setParameter("banco", banco);
 
 		@SuppressWarnings("unchecked")
 		List<ExtratoLancamento> results = q.getResultList();
