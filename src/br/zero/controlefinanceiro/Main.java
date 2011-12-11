@@ -27,7 +27,6 @@ import br.zero.controlefinanceiro.commandlineparser.Command;
 import br.zero.controlefinanceiro.commandlineparser.CommandLineLoader;
 import br.zero.controlefinanceiro.commandlineparser.CommandLineSwitches;
 import br.zero.controlefinanceiro.commandlineparser.ExtratoCommand;
-import br.zero.controlefinanceiro.commandlineparser.LancamentoModeloCommand;
 import br.zero.controlefinanceiro.utils.ExtratoParsers;
 import br.zero.tinycontroller.TinyController;
 import br.zero.tinycontroller.TinyControllerException;
@@ -87,9 +86,9 @@ public class Main {
 		controller.registerAction(ModeloCloneAction.class, switches.getModeloCloneSwitches(), Command.MODELO_CLONE);
 		controller.registerAction(ModeloAnalyseAction.class, switches.getModeloAnalyseSwitches(), Command.MODELO_ANALYSE);
 
-		controller.registerAction(LancamentoModeloListAction.class, switches.getLancamentoModeloSubSwitches(LancamentoModeloCommand.LIST), Command.LANCAMENTO_MODELO, LancamentoModeloCommand.LIST);
-		controller.registerAction(LancamentoModeloAddAction.class, switches.getLancamentoModeloSubSwitches(LancamentoModeloCommand.ADD), Command.LANCAMENTO_MODELO, LancamentoModeloCommand.ADD);
-		controller.registerAction(LancamentoModeloRemoveAction.class, switches.getLancamentoModeloSubSwitches(LancamentoModeloCommand.REMOVE), Command.LANCAMENTO_MODELO, LancamentoModeloCommand.REMOVE);
+		controller.registerAction(LancamentoModeloListAction.class, switches.getLancamentoModeloListSwitches(), Command.LANCAMENTOMODELO_LIST);
+		controller.registerAction(LancamentoModeloAddAction.class, switches.getLancamentoModeloAddSwitches(), Command.LANCAMENTOMODELO_ADD);
+		controller.registerAction(LancamentoModeloRemoveAction.class, switches.getLancamentoModeloRemoveSwitches(), Command.LANCAMENTOMODELO_REMOVE);
 
 		controller.registerAction(ExtratoListAction.class, switches.getExtratoSubSwitches(ExtratoCommand.LIST), Command.EXTRATO, ExtratoCommand.LIST);
 		controller.registerAction(ExtratoImportAction.class, switches.getExtratoSubSwitches(ExtratoCommand.IMPORT), Command.EXTRATO, ExtratoCommand.IMPORT);

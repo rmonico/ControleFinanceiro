@@ -48,8 +48,14 @@ public enum Command {
 	@CommandLineSwitchParam(name="modelo-analyse")
 	MODELO_ANALYSE,
 
-	@CommandLineSwitchParam(name = "lancmodelo")
-	LANCAMENTO_MODELO,
+	@CommandLineSwitchParam(name = "lancmodelo-ls")
+	LANCAMENTOMODELO_LIST,
+
+	@CommandLineSwitchParam(name = "lancmodelo-add")
+	LANCAMENTOMODELO_ADD,
+
+	@CommandLineSwitchParam(name = "lancmodelo-rm")
+	LANCAMENTOMODELO_REMOVE,
 
 	@CommandLineSwitchParam(name = "extrato")
 	EXTRATO,

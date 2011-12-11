@@ -25,7 +25,10 @@ public class CommandLineSwitches {
 	private ModeloCloneSwitches modeloCloneSwitches;
 	private ModeloAnalyseSwitches modeloAnalyseSwitches;
 
-	private LancamentoModeloSwitches lancamentoModeloSwitches;
+	private LancamentoModeloListSwitches lancamentoModeloListSwitches;
+	private LancamentoModeloAddSwitches lancamentoModeloAddSwitches;
+	private LancamentoModeloRemoveSwitches lancamentoModeloRemoveSwitches;
+
 	private ExtratoSwitches extratoSwitches;
 	private HelpSwitches helpSwitches;
 	private ContaReferenciaSwitches contaReferenciaSwitches;
@@ -49,7 +52,9 @@ public class CommandLineSwitches {
 			@SubCommandLine(value = "MODELO_REMOVE", subCommandLineClass = ModeloRemoveSwitches.class, propertyName = "setModeloRemoveSwitches"), 
 			@SubCommandLine(value = "MODELO_CLONE", subCommandLineClass = ModeloCloneSwitches.class, propertyName = "setModeloCloneSwitches"), 
 			@SubCommandLine(value = "MODELO_ANALYSE", subCommandLineClass = ModeloAnalyseSwitches.class, propertyName = "setModeloAnalyseSwitches"), 
-			@SubCommandLine(value = "LANCAMENTO_MODELO", subCommandLineClass = LancamentoModeloSwitches.class, propertyName = "setLancamentoModeloSwitches"),
+			@SubCommandLine(value = "LANCAMENTOMODELO_LIST", subCommandLineClass = LancamentoModeloListSwitches.class, propertyName = "setLancamentoModeloListSwitches"),
+			@SubCommandLine(value = "LANCAMENTOMODELO_ADD", subCommandLineClass = LancamentoModeloListSwitches.class, propertyName = "setLancamentoModeloAddSwitches"),
+			@SubCommandLine(value = "LANCAMENTOMODELO_REMOVE", subCommandLineClass = LancamentoModeloListSwitches.class, propertyName = "setLancamentoModeloRemoveSwitches"),
 			@SubCommandLine(value = "EXTRATO", subCommandLineClass = ExtratoSwitches.class, propertyName = "setExtratoSwitches"),
 			@SubCommandLine(value = "CONTA_REFERENCIA", subCommandLineClass = ContaReferenciaSwitches.class, propertyName = "setContaReferenceSwitches"),
 			@SubCommandLine(value = "HELP", subCommandLineClass = HelpSwitches.class, propertyName = "setHelpSwitches") })
@@ -69,14 +74,6 @@ public class CommandLineSwitches {
 		return backupSwitches;
 	}
 
-	public void setLancamentoModeloSwitches(LancamentoModeloSwitches value) {
-		lancamentoModeloSwitches = value;
-	}
-
-	public LancamentoModeloSwitches getLancamentoModeloSwitches() {
-		return lancamentoModeloSwitches;
-	}
-	
 	public void setExtratoSwitches(ExtratoSwitches value) {
 		extratoSwitches = value;
 	}
@@ -106,9 +103,6 @@ public class CommandLineSwitches {
 		case BACKUP: {
 			return null;
 		}
-		case LANCAMENTO_MODELO: {
-			return lancamentoModeloSwitches.getCommand();
-		}
 		case EXTRATO: {
 			return extratoSwitches.getCommand();
 		}
@@ -117,29 +111,6 @@ public class CommandLineSwitches {
 		}
 
 		default: {
-			return null;
-		}
-		}
-	}
-
-	public Object getLancamentoModeloSubSwitches(LancamentoModeloCommand command) {
-		if (!entity.equals(Command.LANCAMENTO_MODELO)) {
-			return null;
-		}
-
-		switch (command) {
-		case ADD: {
-			return lancamentoModeloSwitches.getAddSwitches();
-		}
-		case LIST: {
-			return lancamentoModeloSwitches.getListSwitches();
-		}
-		case REMOVE: {
-			return lancamentoModeloSwitches.getRemoveSwitches();
-		}
-		default: {
-			assert false : "Comando de lançamento modelo não implementado!";
-
 			return null;
 		}
 		}
@@ -270,6 +241,30 @@ public class CommandLineSwitches {
 
 	public void setModeloAnalyseSwitches(ModeloAnalyseSwitches modeloAnalyseSwitches) {
 		this.modeloAnalyseSwitches = modeloAnalyseSwitches;
+	}
+
+	public LancamentoModeloListSwitches getLancamentoModeloListSwitches() {
+		return lancamentoModeloListSwitches;
+	}
+
+	public void setLancamentoModeloListSwitches(LancamentoModeloListSwitches lancamentoModeloListSwitches) {
+		this.lancamentoModeloListSwitches = lancamentoModeloListSwitches;
+	}
+
+	public LancamentoModeloAddSwitches getLancamentoModeloAddSwitches() {
+		return lancamentoModeloAddSwitches;
+	}
+
+	public void setLancamentoModeloAddSwitches(LancamentoModeloAddSwitches lancamentoModeloAddSwitches) {
+		this.lancamentoModeloAddSwitches = lancamentoModeloAddSwitches;
+	}
+
+	public LancamentoModeloRemoveSwitches getLancamentoModeloRemoveSwitches() {
+		return lancamentoModeloRemoveSwitches;
+	}
+
+	public void setLancamentoModeloRemoveSwitches(LancamentoModeloRemoveSwitches lancamentoModeloRemoveSwitches) {
+		this.lancamentoModeloRemoveSwitches = lancamentoModeloRemoveSwitches;
 	}
 
 
