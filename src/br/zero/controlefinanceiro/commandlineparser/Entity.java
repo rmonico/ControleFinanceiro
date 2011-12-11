@@ -21,6 +21,9 @@ public enum Entity {
 	@CommandLineSwitchParam(name = "extrato")
 	EXTRATO,
 	
+	@CommandLineSwitchParam(name = "ctaref")
+	CONTA_REFERENCIA,
+	
 	@CommandLineSwitchParam(name = "help")
 	HELP
 }

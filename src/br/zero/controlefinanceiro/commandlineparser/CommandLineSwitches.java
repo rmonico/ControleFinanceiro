@@ -13,7 +13,9 @@ public class CommandLineSwitches {
 	private LancamentoModeloSwitches lancamentoModeloSwitches;
 	private ExtratoSwitches extratoSwitches;
 	private HelpSwitches helpSwitches;
+	private ContaReferenciaSwitches contaReferenciaSwitches;
 
+	// TODO Centralizar comandos e subcomandos todos aqui
 	/**
 	 * Argumento principal da linha de comando.
 	 */
@@ -24,6 +26,7 @@ public class CommandLineSwitches {
 			@SubCommandLine(value = "MODELO", subCommandLineClass = ModeloSwitches.class, propertyName = "setModeloSwitches"), 
 			@SubCommandLine(value = "LANCAMENTO_MODELO", subCommandLineClass = LancamentoModeloSwitches.class, propertyName = "setLancamentoModeloSwitches"),
 			@SubCommandLine(value = "EXTRATO", subCommandLineClass = ExtratoSwitches.class, propertyName = "setExtratoSwitches"),
+			@SubCommandLine(value = "CONTA_REFERENCIA", subCommandLineClass = ContaReferenciaSwitches.class, propertyName = "setContaReferenceSwitches"),
 			@SubCommandLine(value = "HELP", subCommandLineClass = HelpSwitches.class, propertyName = "setHelpSwitches") })
 	public void setEntity(Entity entity) {
 		this.entity = entity;
@@ -79,6 +82,14 @@ public class CommandLineSwitches {
 	
 	public ExtratoSwitches getExtratoSwitches() {
 		return extratoSwitches;
+	}
+	
+	public void setContaReferenceSwitches(ContaReferenciaSwitches value) {
+		contaReferenciaSwitches = value;
+	}
+	
+	public ContaReferenciaSwitches getContaReferenceSwitches() {
+		return contaReferenciaSwitches;
 	}
 
 	public void setHelpSwitches(HelpSwitches value) {
