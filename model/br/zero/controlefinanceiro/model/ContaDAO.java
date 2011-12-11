@@ -31,6 +31,7 @@ public class ContaDAO extends CustomDAO<Conta> {
 		return extratoParsers.get(conta.getNome());
 	}
 	
+	// TODO Mudar isto para um campo na conta
 	public List<String> getReferenciaExtratoList(Conta banco, Conta conta) {
 		StringBuilder listaReferenciaExtratoList = new StringBuilder();
 
