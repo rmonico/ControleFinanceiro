@@ -15,22 +15,22 @@ import br.zero.customdao.DAOSetup;
 public class ContaDAO extends CustomDAO<Conta> {
 
 	private static Map<String, ExtratoParser> extratoParsers = new HashMap<String, ExtratoParser>();
-	
+
 	public Conta getByNome(String nomeConta) {
 		Query q = getEntityManager().createQuery("select c from Conta c where c.nome = :nome");
 		q.setParameter("nome", nomeConta);
 
 		return (Conta) q.getSingleResult();
 	}
-	
+
 	public static void registerExtratoParser(String parserName, ExtratoParser extratoParser) {
 		extratoParsers.put(parserName, extratoParser);
 	}
-	
+
 	static ExtratoParser getParser(Conta conta) {
 		return extratoParsers.get(conta.getNome());
 	}
-	
+
 	// TODO Mudar isto para um campo na conta
 	public List<String> getReferenciaExtratoList(Conta banco, Conta conta) {
 		StringBuilder listaReferenciaExtratoList = new StringBuilder();
@@ -55,31 +55,31 @@ public class ContaDAO extends CustomDAO<Conta> {
 		@SuppressWarnings("unchecked")
 		List<ReferenciaExtrato> referencias = q.getResultList();
 		List<String> results = new ArrayList<String>();
-		
+
 		for (ReferenciaExtrato re : referencias) {
 			results.add(re.getReferencia());
 		}
 
 		return results;
 	}
-	
+
 	public Conta resolveExtratoLine(Conta banco, String line) {
 		List<Conta> contaList = listarTodos();
-		
+
 		for (Conta conta : contaList) {
 			List<String> referenciaList = getReferenciaExtratoList(banco, conta);
-			
-			if (referenciaList == null) {
+
+			if ((referenciaList == null) || (referenciaList.size() == 0)) {
 				continue;
 			}
-			
+
 			for (String referencia : referenciaList) {
 				if (line.matches(referencia)) {
 					return conta;
 				}
 			}
 		}
-		
+
 		return null;
 	}
 }
