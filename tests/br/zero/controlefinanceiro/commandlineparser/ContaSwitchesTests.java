@@ -9,83 +9,71 @@ import org.junit.Test;
 import br.zero.commandlineparser.ParserException;
 
 public class ContaSwitchesTests extends CustomParserTests {
-	
-	private ContaSwitches contaSwitches;
-
-	protected void doContaLoad(String[] args, ContaCommand contaCommand) throws ParserException {
-		doLoad(args);
-		
-		assertEquals("Entidade", Command.CONTA, switches.getEntity());
-		
-		contaSwitches = switches.getContaSwitches();
-		
-		assertEquals("Comando da conta", contaCommand, contaSwitches.getCommand());
-	}
-	
-	private ContaListSwitches doContaListLoad(String[] args) throws ParserException {
-		doContaLoad(args, ContaCommand.LIST);
-		
-		assertNotNull(contaSwitches.getListSwitches());
-		assertNull(contaSwitches.getAddSwitches());
-		assertNull(contaSwitches.getRemoveSwitches());
-		
-		return contaSwitches.getListSwitches();
-	}
 
 	@Test
 	public void doContaListTest() throws ParserException {
-		ContaListSwitches contaListSwitches = doContaListLoad(new String[] {"conta", "ls"});
-		
+		doLoad(new String[] { "conta-ls" });
+
+		assertEquals("Comando", switches.getEntity(), Command.CONTA_LIST);
+
+		assertNotNull(switches.getContaListSwitches());
+
+		ContaListSwitches contaListSwitches = switches.getContaListSwitches();
+
 		assertNull("filtro de nome", contaListSwitches.getFiltroNome());
 	}
-	
+
 	@Test
 	public void doContaListTest2() throws ParserException {
-		ContaListSwitches contaListSwitches = doContaListLoad(new String[] {"conta", "ls", "nome para filtrar"});
-		
+		doLoad(new String[] { "conta-ls", "nome para filtrar" });
+
+		assertEquals("Comando", switches.getEntity(), Command.CONTA_LIST);
+
+		assertNotNull(switches.getContaListSwitches());
+
+		ContaListSwitches contaListSwitches = switches.getContaListSwitches();
+			
 		assertEquals("filtro de nome", "nome para filtrar", contaListSwitches.getFiltroNome());
 	}
-	
-	private ContaAddSwitches doContaAddLoad(String[] args) throws ParserException {
-		doContaLoad(args, ContaCommand.ADD);
-		
-		assertNull(contaSwitches.getListSwitches());
-		assertNotNull(contaSwitches.getAddSwitches());
-		assertNull(contaSwitches.getRemoveSwitches());
 
-		return contaSwitches.getAddSwitches();
-	}
-	
 	@Test
 	public void doContaAddTest() throws ParserException {
-		ContaAddSwitches contaAddSwitches = doContaAddLoad(new String[] {"conta", "add", "nova conta"});
+		doLoad(new String[] { "conta-add", "nova conta" });
 		
+		assertEquals("Comando", switches.getEntity(), Command.CONTA_ADD);
+
+		assertNotNull(switches.getContaAddSwitches());
+
+		ContaAddSwitches contaAddSwitches = switches.getContaAddSwitches();
+			
 		assertEquals("nome da nova conta", "nova conta", contaAddSwitches.getNome());
 		assertNull("conta sem observacao", contaAddSwitches.getObservacao());
 	}
 
 	@Test
 	public void doContaAddTest2() throws ParserException {
-		ContaAddSwitches contaAddSwitches = doContaAddLoad(new String[] {"conta", "add", "nova conta", "Observação da nova conta"});
-		
+		doLoad(new String[] { "conta-add", "nova conta", "-obs", "Observação da nova conta" });
+
+		assertEquals("Comando", switches.getEntity(), Command.CONTA_ADD);
+
+		assertNotNull(switches.getContaAddSwitches());
+
+		ContaAddSwitches contaAddSwitches = switches.getContaAddSwitches();
+			
 		assertEquals("Nome", "nova conta", contaAddSwitches.getNome());
 		assertEquals("Observacao", "Observação da nova conta", contaAddSwitches.getObservacao());
 	}
-	
-	private ContaRemoveSwitches doContaRemoveLoad(String[] args) throws ParserException {
-		doContaLoad(args, ContaCommand.REMOVE);
-		
-		assertNull(contaSwitches.getListSwitches());
-		assertNull(contaSwitches.getAddSwitches());
-		assertNotNull(contaSwitches.getRemoveSwitches());
 
-		return contaSwitches.getRemoveSwitches();
-	}
-	
 	@Test
 	public void doContaRemoveTest() throws ParserException {
-		ContaRemoveSwitches contaRemoveSwitches = doContaRemoveLoad(new String[] {"conta", "rm", "nome conta"});
-		
+		doLoad(new String[] { "conta-rm", "nome conta" });
+
+		assertEquals("Comando", switches.getEntity(), Command.CONTA_REMOVE);
+
+		assertNotNull(switches.getContaRemoveSwitches());
+
+		ContaRemoveSwitches contaRemoveSwitches = switches.getContaRemoveSwitches(); 
+			
 		assertEquals("Nome da conta a ser removida", "nome conta", contaRemoveSwitches.getContaNome());
 	}
 }
