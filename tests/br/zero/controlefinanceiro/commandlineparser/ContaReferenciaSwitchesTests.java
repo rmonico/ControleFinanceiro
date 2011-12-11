@@ -8,7 +8,7 @@ import org.junit.Test;
 import br.zero.commandlineparser.ParserException;
 
 public class ContaReferenciaSwitchesTests extends CustomParserTests {
-	
+
 	private void doContaReferenciaLoad(String[] args, Command command) throws ParserException {
 		doLoad(args);
 
@@ -24,8 +24,20 @@ public class ContaReferenciaSwitchesTests extends CustomParserTests {
 		ContaReferenciaListSwitches listSwitches = switches.getContaReferenciaListSwitches();
 
 		assertEquals("Nome da conta", "conta", listSwitches.getNomeConta());
-		assertEquals("Nome do banco", "conta", listSwitches.getNomeBanco());
+		assertEquals("Nome do banco", "banco", listSwitches.getNomeBanco());
 	}
 
+	@Test
+	public void doAddTest() throws ParserException {
+		doContaReferenciaLoad(new String[] { "ctaref-add", "conta", "banco", "regex" }, Command.CONTAREFERENCIA_ADD);
+
+		assertNotNull("switches", switches.getContaReferenciaAddSwitches());
+
+		ContaReferenciaAddSwitches addSwitches = switches.getContaReferenciaAddSwitches();
+
+		assertEquals("Nome da conta", "conta", addSwitches.getNomeConta());
+		assertEquals("Nome do banco", "banco", addSwitches.getNomeBanco());
+		assertEquals("Regex", "regex", addSwitches.getRegex());
+	}
 
 }
