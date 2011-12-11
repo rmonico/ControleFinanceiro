@@ -34,6 +34,7 @@ public class CommandLineSwitches {
 	private ExtratoAnalyseSwitches extratoAnalyseSwitches;
 
 	private ContaReferenciaListSwitches contaReferenciaListSwitches;
+	private ContaReferenciaAddSwitches contaReferenciaAddSwitches;
 
 	private HelpSwitches helpSwitches;
 
@@ -63,8 +64,8 @@ public class CommandLineSwitches {
 			@SubCommandLine(value = "EXTRATO_LIST", subCommandLineClass = ExtratoListSwitches.class, propertyName = "setExtratoListSwitches"), 
 			@SubCommandLine(value = "EXTRATO_IMPORT", subCommandLineClass = ExtratoImportSwitches.class, propertyName = "setExtratoImportSwitches"),
 			@SubCommandLine(value = "EXTRATO_ANALYSE", subCommandLineClass = ExtratoAnalyseSwitches.class, propertyName = "setExtratoAnalyseSwitches"),
-			@SubCommandLine(value = "CONTAREFERENCIA_LIST", subCommandLineClass = ContaReferenciaListSwitches.class, propertyName = "setContaReferenceListSwitches"),
-//			@SubCommandLine(value = "CONTAREFERENCIA_ADD", subCommandLineClass = ContaReferenciaAddSwitches.class, propertyName = "setContaReferenceAddSwitches"),
+			@SubCommandLine(value = "CONTAREFERENCIA_LIST", subCommandLineClass = ContaReferenciaListSwitches.class, propertyName = "setContaReferenciaListSwitches"),
+			@SubCommandLine(value = "CONTAREFERENCIA_ADD", subCommandLineClass = ContaReferenciaAddSwitches.class, propertyName = "setContaReferenciaAddSwitches"),
 			@SubCommandLine(value = "HELP", subCommandLineClass = HelpSwitches.class, propertyName = "setHelpSwitches") })
 	public void setCommand(Command command) {
 		this.command = command;
@@ -248,6 +249,14 @@ public class CommandLineSwitches {
 
 	public ContaReferenciaListSwitches getContaReferenciaListSwitches() {
 		return contaReferenciaListSwitches;
+	}
+
+	public ContaReferenciaAddSwitches getContaReferenciaAddSwitches() {
+		return contaReferenciaAddSwitches;
+	}
+
+	public void setContaReferenciaAddSwitches(ContaReferenciaAddSwitches contaReferenciaAddSwitches) {
+		this.contaReferenciaAddSwitches = contaReferenciaAddSwitches;
 	}
 
 }

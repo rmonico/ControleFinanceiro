@@ -4,6 +4,8 @@ import br.zero.commandlineparser.ParserException;
 import br.zero.controlefinanceiro.actions.BackupAction;
 import br.zero.controlefinanceiro.actions.ContaAddAction;
 import br.zero.controlefinanceiro.actions.ContaListAction;
+import br.zero.controlefinanceiro.actions.ContaReferenciaAddAction;
+import br.zero.controlefinanceiro.actions.ContaReferenciaListAction;
 import br.zero.controlefinanceiro.actions.ContaRemoveAction;
 import br.zero.controlefinanceiro.actions.ExtratoAnalyseAction;
 import br.zero.controlefinanceiro.actions.ExtratoImportAction;
@@ -92,6 +94,9 @@ public class Main {
 		controller.registerAction(ExtratoListAction.class, switches.getExtratoListSwitches(), Command.EXTRATO_LIST);
 		controller.registerAction(ExtratoImportAction.class, switches.getExtratoImportSwitches(), Command.EXTRATO_IMPORT);
 		controller.registerAction(ExtratoAnalyseAction.class, switches.getExtratoAnalyseSwitches(), Command.EXTRATO_ANALYSE);
+
+		controller.registerAction(ContaReferenciaListAction.class, switches.getContaReferenciaListSwitches(), Command.CONTAREFERENCIA_LIST);
+		controller.registerAction(ContaReferenciaAddAction.class, switches.getContaReferenciaAddSwitches(), Command.CONTAREFERENCIA_ADD);
 
 		controller.registerAction(HelpAction.class, switches.getHelpSwitches(), Command.HELP);
 
