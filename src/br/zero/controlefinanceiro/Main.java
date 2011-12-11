@@ -23,10 +23,9 @@ import br.zero.controlefinanceiro.actions.ModeloCloneAction;
 import br.zero.controlefinanceiro.actions.ModeloListAction;
 import br.zero.controlefinanceiro.actions.ModeloRemoveAction;
 import br.zero.controlefinanceiro.actions.ModeloSimulateAction;
+import br.zero.controlefinanceiro.commandlineparser.Command;
 import br.zero.controlefinanceiro.commandlineparser.CommandLineLoader;
 import br.zero.controlefinanceiro.commandlineparser.CommandLineSwitches;
-import br.zero.controlefinanceiro.commandlineparser.ContaCommand;
-import br.zero.controlefinanceiro.commandlineparser.Command;
 import br.zero.controlefinanceiro.commandlineparser.ExtratoCommand;
 import br.zero.controlefinanceiro.commandlineparser.LancamentoCommand;
 import br.zero.controlefinanceiro.commandlineparser.LancamentoModeloCommand;
@@ -73,9 +72,9 @@ public class Main {
 
 		controller.registerAction(BackupAction.class, switches.getBackupSwitches(), Command.BACKUP);
 
-		controller.registerAction(ContaListAction.class, switches.getContaSubSwitches(ContaCommand.LIST), Command.CONTA, ContaCommand.LIST);
-		controller.registerAction(ContaAddAction.class, switches.getContaSubSwitches(ContaCommand.ADD), Command.CONTA, ContaCommand.ADD);
-		controller.registerAction(ContaRemoveAction.class, switches.getContaSubSwitches(ContaCommand.REMOVE), Command.CONTA, ContaCommand.REMOVE);
+		controller.registerAction(ContaListAction.class, switches.getContaListSwitches(), Command.CONTA_LIST);
+		controller.registerAction(ContaAddAction.class, switches.getContaAddSwitches(), Command.CONTA_ADD);
+		controller.registerAction(ContaRemoveAction.class, switches.getContaRemoveSwitches(), Command.CONTA_REMOVE);
 
 		controller.registerAction(LancamentoListAction.class, switches.getLancamentoSubSwitches(LancamentoCommand.LIST), Command.LANCAMENTO, LancamentoCommand.LIST);
 		controller.registerAction(LancamentoBalanceAction.class, switches.getLancamentoSubSwitches(LancamentoCommand.BALANCE), Command.LANCAMENTO, LancamentoCommand.BALANCE);
@@ -100,7 +99,7 @@ public class Main {
 
 		controller.registerAction(HelpAction.class, switches.getHelpSwitches(), Command.HELP);
 
-		controller.selectAction(switches.getEntity(), switches.getEntityCommand());
+		controller.selectAction(switches.getEntity());
 
 		if (!(controller.isActionFound())) {
 			System.out.println("Ação não encontrada...");

@@ -7,7 +7,11 @@ public class CommandLineSwitches {
 
 	private Command entity;
 	private BackupSwitches backupSwitches;
-	private ContaSwitches contaSwitches;
+//	private ContaSwitches contaSwitches;
+	private ContaAddSwitches contaAddSwitches;
+	private ContaRemoveSwitches contaRemoveSwitches;
+	private ContaListSwitches contaListSwitches;
+	
 	private LancamentoSwitches lancamentoSwitches;
 	private ModeloSwitches modeloSwitches;
 	private LancamentoModeloSwitches lancamentoModeloSwitches;
@@ -21,7 +25,9 @@ public class CommandLineSwitches {
 	 */
 	@CommandLineSwitch(parser = "EntityParser.parseComplexEnum", complexParser = true, index = 1, subCommandLineProperties = { 
 			@SubCommandLine(value = "BACKUP", subCommandLineClass = BackupSwitches.class, propertyName = "setBackupSwitches"), 
-			@SubCommandLine(value = "CONTA", subCommandLineClass = ContaSwitches.class, propertyName = "setContaSwitches"),
+			@SubCommandLine(value = "CONTA_LIST", subCommandLineClass = ContaListSwitches.class, propertyName = "setContaListSwitches"),
+			@SubCommandLine(value = "CONTA_ADD", subCommandLineClass = ContaAddSwitches.class, propertyName = "setContaAddSwitches"),
+			@SubCommandLine(value = "CONTA_REMOVE", subCommandLineClass = ContaRemoveSwitches.class, propertyName = "setContaRemoveSwitches"),
 			@SubCommandLine(value = "LANCAMENTO", subCommandLineClass = LancamentoSwitches.class, propertyName = "setLancamentoSwitches"), 
 			@SubCommandLine(value = "MODELO", subCommandLineClass = ModeloSwitches.class, propertyName = "setModeloSwitches"), 
 			@SubCommandLine(value = "LANCAMENTO_MODELO", subCommandLineClass = LancamentoModeloSwitches.class, propertyName = "setLancamentoModeloSwitches"),
@@ -44,13 +50,13 @@ public class CommandLineSwitches {
 		return backupSwitches;
 	}
 
-	public void setContaSwitches(ContaSwitches value) {
-		contaSwitches = value;
-	}
-
-	public ContaSwitches getContaSwitches() {
-		return contaSwitches;
-	}
+//	public void setContaSwitches(ContaSwitches value) {
+//		contaSwitches = value;
+//	}
+//
+//	public ContaSwitches getContaSwitches() {
+//		return contaSwitches;
+//	}
 
 	public void setLancamentoSwitches(LancamentoSwitches value) {
 		lancamentoSwitches = value;
@@ -105,9 +111,9 @@ public class CommandLineSwitches {
 		case BACKUP: {
 			return null;
 		}
-		case CONTA: {
-			return contaSwitches.getCommand();
-		}
+//		case CONTA: {
+//			return contaSwitches.getCommand();
+//		}
 		case LANCAMENTO: {
 			return lancamentoSwitches.getCommand();
 		}
@@ -130,27 +136,27 @@ public class CommandLineSwitches {
 		}
 	}
 
-	public Object getContaSubSwitches(ContaCommand command) {
-		if (!entity.equals(Command.CONTA)) {
-			return null;
-		}
-
-		switch (command) {
-		case LIST: {
-			return contaSwitches.getListSwitches();
-		}
-		case ADD: {
-			return contaSwitches.getAddSwitches();
-		}
-		case REMOVE: {
-			return contaSwitches.getRemoveSwitches();
-		}
-		default: {
-			assert false : "Commando de conta não implementado!";
-			return null;
-		}
-		}
-	}
+//	public Object getContaSubSwitches(ContaCommand command) {
+//		if (!entity.equals(Command.CONTA)) {
+//			return null;
+//		}
+//
+//		switch (command) {
+//		case LIST: {
+//			return contaSwitches.getListSwitches();
+//		}
+//		case ADD: {
+//			return contaSwitches.getAddSwitches();
+//		}
+//		case REMOVE: {
+//			return contaSwitches.getRemoveSwitches();
+//		}
+//		default: {
+//			assert false : "Commando de conta não implementado!";
+//			return null;
+//		}
+//		}
+//	}
 
 	public Object getLancamentoSubSwitches(LancamentoCommand command) {
 		if (!entity.equals(Command.LANCAMENTO)) {
@@ -259,4 +265,30 @@ public class CommandLineSwitches {
 		}
 	}
 
+	public ContaAddSwitches getContaAddSwitches() {
+		return contaAddSwitches;
+	}
+
+	public void setContaAddSwitches(ContaAddSwitches contaAddSwitches) {
+		this.contaAddSwitches = contaAddSwitches;
+	}
+
+	public ContaRemoveSwitches getContaRemoveSwitches() {
+		return contaRemoveSwitches;
+	}
+
+	public void setContaRemoveSwitches(ContaRemoveSwitches contaRemoveSwitches) {
+		this.contaRemoveSwitches = contaRemoveSwitches;
+	}
+
+	public ContaListSwitches getContaListSwitches() {
+		return contaListSwitches;
+	}
+
+	public void setContaListSwitches(ContaListSwitches contaListSwitches) {
+		this.contaListSwitches = contaListSwitches;
+	}
+
+
+	
 }

@@ -6,8 +6,17 @@ public enum Command {
 	@CommandLineSwitchParam(name = "backup")
 	BACKUP,
 
-	@CommandLineSwitchParam(name = "conta")
-	CONTA,
+//	@CommandLineSwitchParam(name = "conta")
+//	CONTA,
+
+	@CommandLineSwitchParam(name = "conta-ls")
+	CONTA_LIST,
+
+	@CommandLineSwitchParam(name = "conta-add")
+	CONTA_ADD,
+
+	@CommandLineSwitchParam(name = "conta-rm")
+	CONTA_REMOVE,
 
 	@CommandLineSwitchParam(name = "lanc")
 	LANCAMENTO,
