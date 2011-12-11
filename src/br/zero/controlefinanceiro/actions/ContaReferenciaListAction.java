@@ -35,7 +35,16 @@ public class ContaReferenciaListAction implements Action {
 		
 		Conta conta = contaDAO.getByNome(switches.getNomeConta());
 		
+		if (conta == null) {
+			throw new ContaReferenciaListException("Conta não encontrada: \"" + switches.getNomeConta());
+		}
+		
 		Conta banco = contaDAO.getByNome(switches.getNomeBanco());
+		
+		if (banco == null) {
+			throw new ContaReferenciaListException("Banco não encontrado: \"" + switches.getNomeBanco());
+		}
+		
 		
 		ReferenciaExtratoDAO dao = new ReferenciaExtratoDAO();
 		
