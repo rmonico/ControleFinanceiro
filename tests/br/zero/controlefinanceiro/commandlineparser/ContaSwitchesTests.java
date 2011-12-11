@@ -11,13 +11,17 @@ import br.zero.commandlineparser.ParserException;
 
 public class ContaSwitchesTests extends CustomParserTests {
 
-	@Test
-	public void doContaListTest() throws ParserException {
-		doLoad(new String[] { "conta-ls" });
+	private void doContaLoad(String[] args) throws ParserException {
+		doLoad(args);
 
 		assertEquals("Comando", switches.getEntity(), Command.CONTA_LIST);
+	}
+	
+	@Test
+	public void doContaListTest() throws ParserException {
+		doContaLoad(new String[] { "conta-ls" });
 
-		assertNotNull(switches.getContaListSwitches());
+		assertNotNull("switches", switches.getContaListSwitches());
 
 		ContaListSwitches contaListSwitches = switches.getContaListSwitches();
 
@@ -26,11 +30,9 @@ public class ContaSwitchesTests extends CustomParserTests {
 
 	@Test
 	public void doContaListTest2() throws ParserException {
-		doLoad(new String[] { "conta-ls", "nome para filtrar" });
+		doContaLoad(new String[] { "conta-ls", "nome para filtrar" });
 
-		assertEquals("Comando", switches.getEntity(), Command.CONTA_LIST);
-
-		assertNotNull(switches.getContaListSwitches());
+		assertNotNull("switches", switches.getContaListSwitches());
 
 		ContaListSwitches contaListSwitches = switches.getContaListSwitches();
 			
@@ -39,11 +41,9 @@ public class ContaSwitchesTests extends CustomParserTests {
 
 	@Test
 	public void doContaAddTest() throws ParserException {
-		doLoad(new String[] { "conta-add", "nova conta" });
+		doContaLoad(new String[] { "conta-add", "nova conta" });
 		
-		assertEquals("Comando", switches.getEntity(), Command.CONTA_ADD);
-
-		assertNotNull(switches.getContaAddSwitches());
+		assertNotNull("switches", switches.getContaAddSwitches());
 
 		ContaAddSwitches contaAddSwitches = switches.getContaAddSwitches();
 			
@@ -53,11 +53,9 @@ public class ContaSwitchesTests extends CustomParserTests {
 
 	@Test
 	public void doContaAddTest2() throws ParserException {
-		doLoad(new String[] { "conta-add", "nova conta", "-obs", "Observação da nova conta" });
+		doContaLoad(new String[] { "conta-add", "nova conta", "-obs", "Observação da nova conta" });
 
-		assertEquals("Comando", switches.getEntity(), Command.CONTA_ADD);
-
-		assertNotNull(switches.getContaAddSwitches());
+		assertNotNull("switches", switches.getContaAddSwitches());
 
 		ContaAddSwitches contaAddSwitches = switches.getContaAddSwitches();
 			
@@ -67,9 +65,7 @@ public class ContaSwitchesTests extends CustomParserTests {
 
 	@Test
 	public void doContaAddTest3() throws ParserException {
-		doLoad(new String[] { "conta-add", "nova conta", "--contabilizar" });
-
-		assertEquals("Comando", switches.getEntity(), Command.CONTA_ADD);
+		doContaLoad(new String[] { "conta-add", "nova conta", "--contabilizar" });
 
 		assertNotNull(switches.getContaAddSwitches());
 
@@ -81,11 +77,9 @@ public class ContaSwitchesTests extends CustomParserTests {
 
 	@Test
 	public void doContaRemoveTest() throws ParserException {
-		doLoad(new String[] { "conta-rm", "nome conta" });
+		doContaLoad(new String[] { "conta-rm", "nome conta" });
 
-		assertEquals("Comando", switches.getEntity(), Command.CONTA_REMOVE);
-
-		assertNotNull(switches.getContaRemoveSwitches());
+		assertNotNull("switches", switches.getContaRemoveSwitches());
 
 		ContaRemoveSwitches contaRemoveSwitches = switches.getContaRemoveSwitches(); 
 			
