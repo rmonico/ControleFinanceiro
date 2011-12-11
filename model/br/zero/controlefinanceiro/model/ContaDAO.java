@@ -42,8 +42,8 @@ public class ContaDAO extends CustomDAO<Conta> {
 		listaReferenciaExtratoList.append("  ReferenciaExtrato re\n");
 		listaReferenciaExtratoList.append("\n");
 		listaReferenciaExtratoList.append("where\n");
-		listaReferenciaExtratoList.append("  banco = :banco\n");
-		listaReferenciaExtratoList.append("  and conta = :conta\n");
+		listaReferenciaExtratoList.append("  re.banco = :banco\n");
+		listaReferenciaExtratoList.append("  and re.conta = :conta\n");
 		listaReferenciaExtratoList.append("order by\n");
 		listaReferenciaExtratoList.append("  re.n\n");
 
