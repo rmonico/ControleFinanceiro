@@ -83,8 +83,6 @@ public class ExtratoAnalyseAction implements Action {
 				}
 			}
 		}
-
-		throw new RuntimeException("Not implemented yet...");
 	}
 
 	private boolean extratoLineMatch(Lancamento lancto, ExtratoLine line, Conta contaOrigemEsperada, Conta contaDestinoEsperada) {
