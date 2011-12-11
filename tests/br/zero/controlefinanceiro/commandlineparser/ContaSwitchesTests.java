@@ -11,15 +11,15 @@ import br.zero.commandlineparser.ParserException;
 
 public class ContaSwitchesTests extends CustomParserTests {
 
-	private void doContaLoad(String[] args) throws ParserException {
+	private void doContaLoad(String[] args, Command command) throws ParserException {
 		doLoad(args);
 
-		assertEquals("Comando", switches.getEntity(), Command.CONTA_LIST);
+		assertEquals("Comando", command, switches.getEntity());
 	}
 	
 	@Test
 	public void doContaListTest() throws ParserException {
-		doContaLoad(new String[] { "conta-ls" });
+		doContaLoad(new String[] { "conta-ls" }, Command.CONTA_LIST);
 
 		assertNotNull("switches", switches.getContaListSwitches());
 
@@ -30,7 +30,7 @@ public class ContaSwitchesTests extends CustomParserTests {
 
 	@Test
 	public void doContaListTest2() throws ParserException {
-		doContaLoad(new String[] { "conta-ls", "nome para filtrar" });
+		doContaLoad(new String[] { "conta-ls", "nome para filtrar" }, Command.CONTA_LIST);
 
 		assertNotNull("switches", switches.getContaListSwitches());
 
@@ -41,7 +41,7 @@ public class ContaSwitchesTests extends CustomParserTests {
 
 	@Test
 	public void doContaAddTest() throws ParserException {
-		doContaLoad(new String[] { "conta-add", "nova conta" });
+		doContaLoad(new String[] { "conta-add", "nova conta" }, Command.CONTA_ADD);
 		
 		assertNotNull("switches", switches.getContaAddSwitches());
 
@@ -53,7 +53,7 @@ public class ContaSwitchesTests extends CustomParserTests {
 
 	@Test
 	public void doContaAddTest2() throws ParserException {
-		doContaLoad(new String[] { "conta-add", "nova conta", "-obs", "Observação da nova conta" });
+		doContaLoad(new String[] { "conta-add", "nova conta", "-obs", "Observação da nova conta" }, Command.CONTA_ADD);
 
 		assertNotNull("switches", switches.getContaAddSwitches());
 
@@ -65,7 +65,7 @@ public class ContaSwitchesTests extends CustomParserTests {
 
 	@Test
 	public void doContaAddTest3() throws ParserException {
-		doContaLoad(new String[] { "conta-add", "nova conta", "--contabilizar" });
+		doContaLoad(new String[] { "conta-add", "nova conta", "--contabilizar" }, Command.CONTA_ADD);
 
 		assertNotNull(switches.getContaAddSwitches());
 
@@ -77,7 +77,7 @@ public class ContaSwitchesTests extends CustomParserTests {
 
 	@Test
 	public void doContaRemoveTest() throws ParserException {
-		doContaLoad(new String[] { "conta-rm", "nome conta" });
+		doContaLoad(new String[] { "conta-rm", "nome conta" }, Command.CONTA_REMOVE);
 
 		assertNotNull("switches", switches.getContaRemoveSwitches());
 
