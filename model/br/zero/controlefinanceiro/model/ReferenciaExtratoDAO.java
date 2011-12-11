@@ -25,7 +25,7 @@ public class ReferenciaExtratoDAO extends CustomDAO<ReferenciaExtrato> {
 		listarPorContaEBancoQuery.append("  and re.banco = :banco\n");
 
 		Query q = getEntityManager().createQuery(listarPorContaEBancoQuery.toString());
-		
+
 		q.setParameter("conta", conta);
 		q.setParameter("banco", banco);
 
@@ -33,6 +33,35 @@ public class ReferenciaExtratoDAO extends CustomDAO<ReferenciaExtrato> {
 		List<ReferenciaExtrato> results = q.getResultList();
 
 		return results;
+	}
+
+	public int getNextNFor(Conta conta, Conta banco) {
+		StringBuilder getNextNQuery = new StringBuilder();
+
+		getNextNQuery.append("select\n");
+		getNextNQuery.append("  max(re.n)\n");
+		getNextNQuery.append("\n");
+		getNextNQuery.append("from\n");
+		getNextNQuery.append("  ReferenciaExtrato re\n");
+		getNextNQuery.append("\n");
+		getNextNQuery.append("where\n");
+		getNextNQuery.append("  re.conta = :conta\n");
+		getNextNQuery.append("  and re.banco = :banco\n");
+
+		Query q = getEntityManager().createQuery(getNextNQuery.toString());
+
+		q.setParameter("conta", conta);
+		q.setParameter("banco", banco);
+
+		Integer result = (Integer) q.getSingleResult();
+
+		if (result == null) {
+			result = 0;
+		}
+
+		result++;
+
+		return result;
 	}
 
 }
