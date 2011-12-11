@@ -53,8 +53,8 @@ public class CommandLineSwitches {
 			@SubCommandLine(value = "MODELO_CLONE", subCommandLineClass = ModeloCloneSwitches.class, propertyName = "setModeloCloneSwitches"), 
 			@SubCommandLine(value = "MODELO_ANALYSE", subCommandLineClass = ModeloAnalyseSwitches.class, propertyName = "setModeloAnalyseSwitches"), 
 			@SubCommandLine(value = "LANCAMENTOMODELO_LIST", subCommandLineClass = LancamentoModeloListSwitches.class, propertyName = "setLancamentoModeloListSwitches"),
-			@SubCommandLine(value = "LANCAMENTOMODELO_ADD", subCommandLineClass = LancamentoModeloListSwitches.class, propertyName = "setLancamentoModeloAddSwitches"),
-			@SubCommandLine(value = "LANCAMENTOMODELO_REMOVE", subCommandLineClass = LancamentoModeloListSwitches.class, propertyName = "setLancamentoModeloRemoveSwitches"),
+			@SubCommandLine(value = "LANCAMENTOMODELO_ADD", subCommandLineClass = LancamentoModeloAddSwitches.class, propertyName = "setLancamentoModeloAddSwitches"),
+			@SubCommandLine(value = "LANCAMENTOMODELO_REMOVE", subCommandLineClass = LancamentoModeloRemoveSwitches.class, propertyName = "setLancamentoModeloRemoveSwitches"),
 			@SubCommandLine(value = "EXTRATO", subCommandLineClass = ExtratoSwitches.class, propertyName = "setExtratoSwitches"),
 			@SubCommandLine(value = "CONTA_REFERENCIA", subCommandLineClass = ContaReferenciaSwitches.class, propertyName = "setContaReferenceSwitches"),
 			@SubCommandLine(value = "HELP", subCommandLineClass = HelpSwitches.class, propertyName = "setHelpSwitches") })

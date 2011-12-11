@@ -10,55 +10,41 @@ import br.zero.commandlineparser.ParserException;
 
 public class LancamentoModeloSwitchesTests extends CustomParserTests {
 
-	private LancamentoModeloSwitches lancamentoModeloSwitches;
-
-	private void doLancamentoModeloLoad(String[] args, LancamentoModeloCommand lancamentoModeloCommand) throws ParserException {
+	private void doLancamentoModeloLoad(String[] args, Command command) throws ParserException {
 		doLoad(args);
 
-		assertEquals("Entidade", Command.LANCAMENTO_MODELO, switches.getEntity());
-
-		lancamentoModeloSwitches = switches.getLancamentoModeloSwitches();
-
-		assertEquals("Comando do lancamento modelo", lancamentoModeloCommand, lancamentoModeloSwitches.getCommand());
-	}
-
-	private LancamentoModeloListSwitches doLancamentoModeloListLoad(String[] args) throws ParserException {
-		doLancamentoModeloLoad(args, LancamentoModeloCommand.LIST);
-
-		assertNotNull("Switches de lista", lancamentoModeloSwitches.getListSwitches());
-		assertNull("Switches de add", lancamentoModeloSwitches.getAddSwitches());
-		assertNull("Switches de remove", lancamentoModeloSwitches.getRemoveSwitches());
-
-		return lancamentoModeloSwitches.getListSwitches();
+		assertEquals("Command", command, switches.getEntity());
 	}
 
 	@Test
 	public void doListTest() throws ParserException {
-		LancamentoModeloListSwitches listSwitches = doLancamentoModeloListLoad(new String[] { "lancmodelo", "ls" });
+		doLancamentoModeloLoad(new String[] { "lancmodelo-ls" }, Command.LANCAMENTOMODELO_LIST);
 
+		assertNotNull(switches.getLancamentoModeloListSwitches());
+		
+		LancamentoModeloListSwitches listSwitches = switches.getLancamentoModeloListSwitches();
+			
 		assertNull("Nome do modelo", listSwitches.getModelo());
 	}
 
 	@Test
 	public void doListTest2() throws ParserException {
-		LancamentoModeloListSwitches listSwitches = doLancamentoModeloListLoad(new String[] { "lancmodelo", "ls", "modelo" });
+		doLancamentoModeloLoad(new String[] { "lancmodelo-ls", "modelo" }, Command.LANCAMENTOMODELO_LIST);
 
+		assertNotNull(switches.getLancamentoModeloListSwitches());
+		
+		LancamentoModeloListSwitches listSwitches = switches.getLancamentoModeloListSwitches();
+			
 		assertEquals("Nome do modelo", "modelo", listSwitches.getModelo());
 	}
 
-	private LancamentoModeloAddSwitches doLancamentoModeloAddLoad(String[] args) throws ParserException {
-		doLancamentoModeloLoad(args, LancamentoModeloCommand.ADD);
-
-		assertNull("Switches de lista", lancamentoModeloSwitches.getListSwitches());
-		assertNotNull("Switches de add", lancamentoModeloSwitches.getAddSwitches());
-		assertNull("Switches de remove", lancamentoModeloSwitches.getRemoveSwitches());
-
-		return lancamentoModeloSwitches.getAddSwitches();
-	}
-
 	private LancamentoModeloAddSwitches baseAddTests(String[] args) throws ParserException {
-		LancamentoModeloAddSwitches addSwitches = doLancamentoModeloAddLoad(args);
+		doLancamentoModeloLoad(args, Command.LANCAMENTOMODELO_ADD);
 
+		assertNotNull("switches", switches.getLancamentoModeloAddSwitches());
+		
+		LancamentoModeloAddSwitches addSwitches = switches.getLancamentoModeloAddSwitches();
+			
 		assertEquals("Nome", "modelo", addSwitches.getModelo());
 		assertEquals("Data", (Integer) 19, addSwitches.getDiaVencimento());
 		assertEquals("Conta origem", "conta origem", addSwitches.getContaOrigem());
@@ -70,29 +56,26 @@ public class LancamentoModeloSwitchesTests extends CustomParserTests {
 
 	@Test
 	public void doAddTest() throws ParserException {
-		LancamentoModeloAddSwitches addSwitches = baseAddTests(new String[] { "lancmodelo", "add", "modelo", "19", "conta origem", "conta destino", "1.99" });
+		LancamentoModeloAddSwitches addSwitches = baseAddTests(new String[] { "lancmodelo-add", "modelo", "19", "conta origem", "conta destino", "1.99" });
 
 		assertNull("Observacao", addSwitches.getObservacao());
 	}
 
 	@Test
 	public void doAddTest2() throws ParserException {
-		LancamentoModeloAddSwitches addSwitches = baseAddTests(new String[] { "lancmodelo", "add", "modelo", "19", "conta origem", "conta destino", "1.99", "observacao" });
+		LancamentoModeloAddSwitches addSwitches = baseAddTests(new String[] { "lancmodelo-add", "modelo", "19", "conta origem", "conta destino", "1.99", "observacao" });
 
 		assertEquals("Observacao", "observacao", addSwitches.getObservacao());
 	}
-	
+
 	@Test
 	public void doRemoveTest() throws ParserException {
-		doLancamentoModeloLoad(new String[] {"lancmodelo", "rm", "54"}, LancamentoModeloCommand.REMOVE);
-		
-		assertNull("Switches de lista", lancamentoModeloSwitches.getListSwitches());
-		assertNull("Switches de add", lancamentoModeloSwitches.getAddSwitches());
-		assertNotNull("Switches de remove", lancamentoModeloSwitches.getRemoveSwitches());
+		doLancamentoModeloLoad(new String[] { "lancmodelo-rm", "54" }, Command.LANCAMENTOMODELO_REMOVE);
 
-		
-		LancamentoModeloRemoveSwitches removeSwitches = lancamentoModeloSwitches.getRemoveSwitches();
-		
+		assertNotNull("Switches", switches.getLancamentoModeloRemoveSwitches());
+
+		LancamentoModeloRemoveSwitches removeSwitches = switches.getLancamentoModeloRemoveSwitches();
+
 		assertEquals("ID", (Integer) 54, removeSwitches.getId());
 	}
 }
