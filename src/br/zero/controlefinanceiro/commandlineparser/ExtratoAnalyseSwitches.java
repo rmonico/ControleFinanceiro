@@ -17,7 +17,7 @@ public class ExtratoAnalyseSwitches {
 	}
 	
 	
-	@CommandLineSwitch(index=2, param="--realize", defaultValue="False")
+	@CommandLineSwitch(param="--realize", defaultValue="False")
 	public void setRealize(boolean value) {
 		realize = value;
 	}
