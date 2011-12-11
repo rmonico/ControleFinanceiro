@@ -5,14 +5,14 @@ import br.zero.commandlineparser.SubCommandLine;
 
 public class CommandLineSwitches {
 
-	private Command entity;
-	
+	private Command command;
+
 	private BackupSwitches backupSwitches;
-	
+
 	private ContaAddSwitches contaAddSwitches;
 	private ContaRemoveSwitches contaRemoveSwitches;
 	private ContaListSwitches contaListSwitches;
-	
+
 	private LancamentoListSwitches lancamentoListSwitches;
 	private LancamentoBalanceSwitches lancamentoBalanceSwitches;
 	private LancamentoAddSwitches lancamentoAddSwitches;
@@ -33,42 +33,45 @@ public class CommandLineSwitches {
 	private ExtratoImportSwitches extratoImportSwitches;
 	private ExtratoAnalyseSwitches extratoAnalyseSwitches;
 
+	private ContaReferenciaListSwitches contaReferenciaListSwitches;
+
 	private HelpSwitches helpSwitches;
-	private ContaReferenciaSwitches contaReferenciaSwitches;
 
 	/**
 	 * Argumento principal da linha de comando.
 	 */
-	@CommandLineSwitch(parser = "EntityParser.parseComplexEnum", complexParser = true, index = 1, subCommandLineProperties = { 
-			@SubCommandLine(value = "BACKUP", subCommandLineClass = BackupSwitches.class, propertyName = "setBackupSwitches"), 
+	@CommandLineSwitch(parser = "EntityParser.parseComplexEnum", complexParser = true, index = 1, subCommandLineProperties = {
+			@SubCommandLine(value = "BACKUP", subCommandLineClass = BackupSwitches.class, propertyName = "setBackupSwitches"),
 			@SubCommandLine(value = "CONTA_LIST", subCommandLineClass = ContaListSwitches.class, propertyName = "setContaListSwitches"),
 			@SubCommandLine(value = "CONTA_ADD", subCommandLineClass = ContaAddSwitches.class, propertyName = "setContaAddSwitches"),
 			@SubCommandLine(value = "CONTA_REMOVE", subCommandLineClass = ContaRemoveSwitches.class, propertyName = "setContaRemoveSwitches"),
-			@SubCommandLine(value = "LANCAMENTO_LIST", subCommandLineClass = LancamentoListSwitches.class, propertyName = "setLancamentoListSwitches"), 
-			@SubCommandLine(value = "LANCAMENTO_BALANCE", subCommandLineClass = LancamentoBalanceSwitches.class, propertyName = "setLancamentoBalanceSwitches"), 
-			@SubCommandLine(value = "LANCAMENTO_ADD", subCommandLineClass = LancamentoAddSwitches.class, propertyName = "setLancamentoAddSwitches"), 
-			@SubCommandLine(value = "LANCAMENTO_ADDFULL", subCommandLineClass = LancamentoAddFullSwitches.class, propertyName = "setLancamentoAddFullSwitches"), 
-			@SubCommandLine(value = "LANCAMENTO_REMOVE", subCommandLineClass = LancamentoRemoveSwitches.class, propertyName = "setLancamentoRemoveSwitches"), 
-//			@SubCommandLine(value = "MODELO_LIST", subCommandLineClass = Object.class, propertyName = ""), 
+			@SubCommandLine(value = "LANCAMENTO_LIST", subCommandLineClass = LancamentoListSwitches.class, propertyName = "setLancamentoListSwitches"),
+			@SubCommandLine(value = "LANCAMENTO_BALANCE", subCommandLineClass = LancamentoBalanceSwitches.class, propertyName = "setLancamentoBalanceSwitches"),
+			@SubCommandLine(value = "LANCAMENTO_ADD", subCommandLineClass = LancamentoAddSwitches.class, propertyName = "setLancamentoAddSwitches"),
+			@SubCommandLine(value = "LANCAMENTO_ADDFULL", subCommandLineClass = LancamentoAddFullSwitches.class, propertyName = "setLancamentoAddFullSwitches"),
+			@SubCommandLine(value = "LANCAMENTO_REMOVE", subCommandLineClass = LancamentoRemoveSwitches.class, propertyName = "setLancamentoRemoveSwitches"),
+			// @SubCommandLine(value = "MODELO_LIST", subCommandLineClass =
+			// Object.class, propertyName = ""),
 			@SubCommandLine(value = "MODELO_ADD", subCommandLineClass = ModeloAddSwitches.class, propertyName = "setModeloAddSwitches"), 
-			@SubCommandLine(value = "MODELO_SIMULATE", subCommandLineClass = ModeloSimulateSwitches.class, propertyName = "setModeloSimulateSwitches"), 
+			@SubCommandLine(value = "MODELO_SIMULATE", subCommandLineClass = ModeloSimulateSwitches.class, propertyName = "setModeloSimulateSwitches"),
 			@SubCommandLine(value = "MODELO_REMOVE", subCommandLineClass = ModeloRemoveSwitches.class, propertyName = "setModeloRemoveSwitches"), 
-			@SubCommandLine(value = "MODELO_CLONE", subCommandLineClass = ModeloCloneSwitches.class, propertyName = "setModeloCloneSwitches"), 
+			@SubCommandLine(value = "MODELO_CLONE", subCommandLineClass = ModeloCloneSwitches.class, propertyName = "setModeloCloneSwitches"),
 			@SubCommandLine(value = "MODELO_ANALYSE", subCommandLineClass = ModeloAnalyseSwitches.class, propertyName = "setModeloAnalyseSwitches"), 
 			@SubCommandLine(value = "LANCAMENTOMODELO_LIST", subCommandLineClass = LancamentoModeloListSwitches.class, propertyName = "setLancamentoModeloListSwitches"),
-			@SubCommandLine(value = "LANCAMENTOMODELO_ADD", subCommandLineClass = LancamentoModeloAddSwitches.class, propertyName = "setLancamentoModeloAddSwitches"),
+			@SubCommandLine(value = "LANCAMENTOMODELO_ADD", subCommandLineClass = LancamentoModeloAddSwitches.class, propertyName = "setLancamentoModeloAddSwitches"), 
 			@SubCommandLine(value = "LANCAMENTOMODELO_REMOVE", subCommandLineClass = LancamentoModeloRemoveSwitches.class, propertyName = "setLancamentoModeloRemoveSwitches"),
-			@SubCommandLine(value = "EXTRATO_LIST", subCommandLineClass = ExtratoListSwitches.class, propertyName = "setExtratoListSwitches"),
+			@SubCommandLine(value = "EXTRATO_LIST", subCommandLineClass = ExtratoListSwitches.class, propertyName = "setExtratoListSwitches"), 
 			@SubCommandLine(value = "EXTRATO_IMPORT", subCommandLineClass = ExtratoImportSwitches.class, propertyName = "setExtratoImportSwitches"),
 			@SubCommandLine(value = "EXTRATO_ANALYSE", subCommandLineClass = ExtratoAnalyseSwitches.class, propertyName = "setExtratoAnalyseSwitches"),
-			@SubCommandLine(value = "CONTA_REFERENCIA", subCommandLineClass = ContaReferenciaSwitches.class, propertyName = "setContaReferenceSwitches"),
+			@SubCommandLine(value = "CONTAREFERENCIA_LIST", subCommandLineClass = ContaReferenciaListSwitches.class, propertyName = "setContaReferenceListSwitches"),
+//			@SubCommandLine(value = "CONTAREFERENCIA_ADD", subCommandLineClass = ContaReferenciaAddSwitches.class, propertyName = "setContaReferenceAddSwitches"),
 			@SubCommandLine(value = "HELP", subCommandLineClass = HelpSwitches.class, propertyName = "setHelpSwitches") })
-	public void setEntity(Command entity) {
-		this.entity = entity;
+	public void setCommand(Command command) {
+		this.command = command;
 	}
 
-	public Command getEntity() {
-		return entity;
+	public Command getCommand() {
+		return command;
 	}
 
 	public void setBackupSwitches(BackupSwitches value) {
@@ -79,35 +82,12 @@ public class CommandLineSwitches {
 		return backupSwitches;
 	}
 
-	public void setContaReferenceSwitches(ContaReferenciaSwitches value) {
-		contaReferenciaSwitches = value;
-	}
-	
-	public ContaReferenciaSwitches getContaReferenceSwitches() {
-		return contaReferenciaSwitches;
-	}
-
 	public void setHelpSwitches(HelpSwitches value) {
 		helpSwitches = value;
 	}
 
 	public HelpSwitches getHelpSwitches() {
 		return helpSwitches;
-	}
-
-	public Enum<?> getEntityCommand() {
-		switch (entity) {
-		case BACKUP: {
-			return null;
-		}
-		case HELP: {
-			return null;
-		}
-
-		default: {
-			return null;
-		}
-		}
 	}
 
 	public ContaAddSwitches getContaAddSwitches() {
@@ -262,5 +242,12 @@ public class CommandLineSwitches {
 		this.extratoAnalyseSwitches = extratoAnalyseSwitches;
 	}
 
-	
+	public void setContaReferenciaListSwitches(ContaReferenciaListSwitches contaReferenciaListSwitches) {
+		this.contaReferenciaListSwitches = contaReferenciaListSwitches;
+	}
+
+	public ContaReferenciaListSwitches getContaReferenciaListSwitches() {
+		return contaReferenciaListSwitches;
+	}
+
 }

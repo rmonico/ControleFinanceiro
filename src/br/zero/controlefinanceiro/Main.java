@@ -95,7 +95,7 @@ public class Main {
 
 		controller.registerAction(HelpAction.class, switches.getHelpSwitches(), Command.HELP);
 
-		controller.selectAction(switches.getEntity());
+		controller.selectAction(switches.getCommand());
 
 		if (!(controller.isActionFound())) {
 			System.out.println("Ação não encontrada...");

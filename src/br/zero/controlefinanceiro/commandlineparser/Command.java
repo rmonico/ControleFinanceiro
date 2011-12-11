@@ -66,8 +66,11 @@ public enum Command {
 	@CommandLineSwitchParam(name = "extrato-analyse")
 	EXTRATO_ANALYSE,
 
-	@CommandLineSwitchParam(name = "ctaref")
-	CONTA_REFERENCIA,
+	@CommandLineSwitchParam(name = "ctaref-ls")
+	CONTAREFERENCIA_LIST,
+	
+	@CommandLineSwitchParam(name = "ctaref-add")
+	CONTAREFERENCIA_ADD,
 	
 	@CommandLineSwitchParam(name = "help")
 	HELP
