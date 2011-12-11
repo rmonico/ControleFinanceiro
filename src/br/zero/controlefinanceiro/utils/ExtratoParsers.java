@@ -46,7 +46,7 @@ public class ExtratoParsers {
 
 				ConcreteExtratoLine el = new ConcreteExtratoLine();
 
-				el.setReferencia("");
+				el.setReferencia(fields[2]);
 
 				extratoLine = el;
 
