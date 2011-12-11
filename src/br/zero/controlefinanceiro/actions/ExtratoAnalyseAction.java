@@ -44,6 +44,10 @@ public class ExtratoAnalyseAction implements Action {
 		ContaDAO contaDAO = new ContaDAO();
 
 		ExtratoParser parser = banco.getParser();
+		
+		if (parser == null) {
+			throw new ExtratoAnalyseException("Nenhum parser encontrado para o banco: \"" + banco.getNome() + "\".");
+		}
 
 		for (ExtratoLancamento linhaExtrato : extratoLancamentoOrfao) {
 			for (int i = 0; i < lancamentoSemExtratoList.size(); i++) {
