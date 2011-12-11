@@ -79,4 +79,14 @@ public class ReferenciaExtrato {
 		this.referencia = referencia;
 	}
 
+	@Override
+	public String toString() {
+		String nomeConta = conta == null ? "[null]" : (conta.getNome() == null ? "[null]" : conta.getNome());
+		String nomeBanco = banco == null ? "[null]" : (banco.getNome() == null ? "[null]" : banco.getNome());
+		String nStr = n == null ? "[null]" : n.toString();
+		String referenciaStr = referencia == null ? "[null]" : referencia;
+		
+		return nomeConta + "(" + nomeBanco + "); " + nStr + "; " + referenciaStr;
+	}
+
 }
