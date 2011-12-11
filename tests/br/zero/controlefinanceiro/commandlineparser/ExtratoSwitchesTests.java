@@ -24,6 +24,17 @@ public class ExtratoSwitchesTests extends CustomParserTests {
 		ExtratoListSwitches listSwitches = switches.getExtratoListSwitches(); 
 			
 		assertEquals("Nome da conta", "conta", listSwitches.getNomeConta());
-
+	}
+	
+	@Test
+	public void doImportTest() throws ParserException {
+		doExtratoLoad(new String[] {"extrato-import", "conta", "nome arquivo"}, Command.EXTRATO_IMPORT);
+		
+		assertNotNull(switches.getExtratoImportSwitches());
+		
+		ExtratoImportSwitches importSwitches = switches.getExtratoImportSwitches(); 
+			
+		assertEquals("Nome da conta", "conta", importSwitches.getNomeConta());
+		assertEquals("Nome do arquivo", "nome arquivo", importSwitches.getNomeArquivo());
 	}
 }
