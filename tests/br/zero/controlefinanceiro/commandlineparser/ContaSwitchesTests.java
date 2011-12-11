@@ -3,6 +3,7 @@ package br.zero.controlefinanceiro.commandlineparser;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -62,6 +63,20 @@ public class ContaSwitchesTests extends CustomParserTests {
 			
 		assertEquals("Nome", "nova conta", contaAddSwitches.getNome());
 		assertEquals("Observacao", "Observação da nova conta", contaAddSwitches.getObservacao());
+	}
+
+	@Test
+	public void doContaAddTest3() throws ParserException {
+		doLoad(new String[] { "conta-add", "nova conta", "--contabilizar" });
+
+		assertEquals("Comando", switches.getEntity(), Command.CONTA_ADD);
+
+		assertNotNull(switches.getContaAddSwitches());
+
+		ContaAddSwitches contaAddSwitches = switches.getContaAddSwitches();
+			
+		assertEquals("Nome", "nova conta", contaAddSwitches.getNome());
+		assertTrue("Contabilizar", contaAddSwitches.getContabilizavel());
 	}
 
 	@Test

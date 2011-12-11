@@ -22,7 +22,7 @@ public class ContaAddSwitches {
 	}
 
 	@CommandLineSwitch(param = "--contabilizar")
-	public void setContabilizavel(Boolean contabilizavel) {
+	public void setContabilizavel(boolean contabilizavel) {
 		this.contabilizavel = contabilizavel;
 	}
 
