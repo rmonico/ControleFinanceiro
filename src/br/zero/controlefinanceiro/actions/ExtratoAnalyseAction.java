@@ -57,6 +57,11 @@ public class ExtratoAnalyseAction implements Action {
 				ExtratoLine line = parser.getLine();
 
 				Conta contaExtrato = contaDAO.resolveExtratoLine(banco, line.getReferencia());
+				
+//				TODO
+//				if (contaExtrato == null) {
+//					
+//				}
 
 				Conta contaOrigemEsperada;
 				Conta contaDestinoEsperada;
