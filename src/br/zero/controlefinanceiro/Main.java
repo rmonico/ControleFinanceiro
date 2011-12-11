@@ -26,7 +26,7 @@ import br.zero.controlefinanceiro.actions.ModeloSimulateAction;
 import br.zero.controlefinanceiro.commandlineparser.CommandLineLoader;
 import br.zero.controlefinanceiro.commandlineparser.CommandLineSwitches;
 import br.zero.controlefinanceiro.commandlineparser.ContaCommand;
-import br.zero.controlefinanceiro.commandlineparser.Entity;
+import br.zero.controlefinanceiro.commandlineparser.Command;
 import br.zero.controlefinanceiro.commandlineparser.ExtratoCommand;
 import br.zero.controlefinanceiro.commandlineparser.LancamentoCommand;
 import br.zero.controlefinanceiro.commandlineparser.LancamentoModeloCommand;
@@ -71,34 +71,34 @@ public class Main {
 	private void setupAndRunController(CommandLineSwitches switches) throws TinyControllerException {
 		TinyController controller = new TinyController();
 
-		controller.registerAction(BackupAction.class, switches.getBackupSwitches(), Entity.BACKUP);
+		controller.registerAction(BackupAction.class, switches.getBackupSwitches(), Command.BACKUP);
 
-		controller.registerAction(ContaListAction.class, switches.getContaSubSwitches(ContaCommand.LIST), Entity.CONTA, ContaCommand.LIST);
-		controller.registerAction(ContaAddAction.class, switches.getContaSubSwitches(ContaCommand.ADD), Entity.CONTA, ContaCommand.ADD);
-		controller.registerAction(ContaRemoveAction.class, switches.getContaSubSwitches(ContaCommand.REMOVE), Entity.CONTA, ContaCommand.REMOVE);
+		controller.registerAction(ContaListAction.class, switches.getContaSubSwitches(ContaCommand.LIST), Command.CONTA, ContaCommand.LIST);
+		controller.registerAction(ContaAddAction.class, switches.getContaSubSwitches(ContaCommand.ADD), Command.CONTA, ContaCommand.ADD);
+		controller.registerAction(ContaRemoveAction.class, switches.getContaSubSwitches(ContaCommand.REMOVE), Command.CONTA, ContaCommand.REMOVE);
 
-		controller.registerAction(LancamentoListAction.class, switches.getLancamentoSubSwitches(LancamentoCommand.LIST), Entity.LANCAMENTO, LancamentoCommand.LIST);
-		controller.registerAction(LancamentoBalanceAction.class, switches.getLancamentoSubSwitches(LancamentoCommand.BALANCE), Entity.LANCAMENTO, LancamentoCommand.BALANCE);
-		controller.registerAction(LancamentoAddAction.class, switches.getLancamentoSubSwitches(LancamentoCommand.ADD), Entity.LANCAMENTO, LancamentoCommand.ADD);
-		controller.registerAction(LancamentoAddFullAction.class, switches.getLancamentoSubSwitches(LancamentoCommand.ADD_FULL), Entity.LANCAMENTO, LancamentoCommand.ADD_FULL);
-		controller.registerAction(LancamentoRemoveAction.class, switches.getLancamentoSubSwitches(LancamentoCommand.REMOVE), Entity.LANCAMENTO, LancamentoCommand.REMOVE);
+		controller.registerAction(LancamentoListAction.class, switches.getLancamentoSubSwitches(LancamentoCommand.LIST), Command.LANCAMENTO, LancamentoCommand.LIST);
+		controller.registerAction(LancamentoBalanceAction.class, switches.getLancamentoSubSwitches(LancamentoCommand.BALANCE), Command.LANCAMENTO, LancamentoCommand.BALANCE);
+		controller.registerAction(LancamentoAddAction.class, switches.getLancamentoSubSwitches(LancamentoCommand.ADD), Command.LANCAMENTO, LancamentoCommand.ADD);
+		controller.registerAction(LancamentoAddFullAction.class, switches.getLancamentoSubSwitches(LancamentoCommand.ADD_FULL), Command.LANCAMENTO, LancamentoCommand.ADD_FULL);
+		controller.registerAction(LancamentoRemoveAction.class, switches.getLancamentoSubSwitches(LancamentoCommand.REMOVE), Command.LANCAMENTO, LancamentoCommand.REMOVE);
 
-		controller.registerAction(ModeloListAction.class, switches.getModeloSubSwitches(ModeloCommand.LIST), Entity.MODELO, ModeloCommand.LIST);
-		controller.registerAction(ModeloAddAction.class, switches.getModeloSubSwitches(ModeloCommand.ADD), Entity.MODELO, ModeloCommand.ADD);
-		controller.registerAction(ModeloSimulateAction.class, switches.getModeloSubSwitches(ModeloCommand.SIMULATE), Entity.MODELO, ModeloCommand.SIMULATE);
-		controller.registerAction(ModeloRemoveAction.class, switches.getModeloSubSwitches(ModeloCommand.REMOVE), Entity.MODELO, ModeloCommand.REMOVE);
-		controller.registerAction(ModeloCloneAction.class, switches.getModeloSubSwitches(ModeloCommand.CLONE), Entity.MODELO, ModeloCommand.CLONE);
-		controller.registerAction(ModeloAnalyseAction.class, switches.getModeloSubSwitches(ModeloCommand.ANALYSE), Entity.MODELO, ModeloCommand.ANALYSE);
+		controller.registerAction(ModeloListAction.class, switches.getModeloSubSwitches(ModeloCommand.LIST), Command.MODELO, ModeloCommand.LIST);
+		controller.registerAction(ModeloAddAction.class, switches.getModeloSubSwitches(ModeloCommand.ADD), Command.MODELO, ModeloCommand.ADD);
+		controller.registerAction(ModeloSimulateAction.class, switches.getModeloSubSwitches(ModeloCommand.SIMULATE), Command.MODELO, ModeloCommand.SIMULATE);
+		controller.registerAction(ModeloRemoveAction.class, switches.getModeloSubSwitches(ModeloCommand.REMOVE), Command.MODELO, ModeloCommand.REMOVE);
+		controller.registerAction(ModeloCloneAction.class, switches.getModeloSubSwitches(ModeloCommand.CLONE), Command.MODELO, ModeloCommand.CLONE);
+		controller.registerAction(ModeloAnalyseAction.class, switches.getModeloSubSwitches(ModeloCommand.ANALYSE), Command.MODELO, ModeloCommand.ANALYSE);
 
-		controller.registerAction(LancamentoModeloListAction.class, switches.getLancamentoModeloSubSwitches(LancamentoModeloCommand.LIST), Entity.LANCAMENTO_MODELO, LancamentoModeloCommand.LIST);
-		controller.registerAction(LancamentoModeloAddAction.class, switches.getLancamentoModeloSubSwitches(LancamentoModeloCommand.ADD), Entity.LANCAMENTO_MODELO, LancamentoModeloCommand.ADD);
-		controller.registerAction(LancamentoModeloRemoveAction.class, switches.getLancamentoModeloSubSwitches(LancamentoModeloCommand.REMOVE), Entity.LANCAMENTO_MODELO, LancamentoModeloCommand.REMOVE);
+		controller.registerAction(LancamentoModeloListAction.class, switches.getLancamentoModeloSubSwitches(LancamentoModeloCommand.LIST), Command.LANCAMENTO_MODELO, LancamentoModeloCommand.LIST);
+		controller.registerAction(LancamentoModeloAddAction.class, switches.getLancamentoModeloSubSwitches(LancamentoModeloCommand.ADD), Command.LANCAMENTO_MODELO, LancamentoModeloCommand.ADD);
+		controller.registerAction(LancamentoModeloRemoveAction.class, switches.getLancamentoModeloSubSwitches(LancamentoModeloCommand.REMOVE), Command.LANCAMENTO_MODELO, LancamentoModeloCommand.REMOVE);
 
-		controller.registerAction(ExtratoListAction.class, switches.getExtratoSubSwitches(ExtratoCommand.LIST), Entity.EXTRATO, ExtratoCommand.LIST);
-		controller.registerAction(ExtratoImportAction.class, switches.getExtratoSubSwitches(ExtratoCommand.IMPORT), Entity.EXTRATO, ExtratoCommand.IMPORT);
-		controller.registerAction(ExtratoAnalyseAction.class, switches.getExtratoSubSwitches(ExtratoCommand.ANALYSE), Entity.EXTRATO, ExtratoCommand.ANALYSE);
+		controller.registerAction(ExtratoListAction.class, switches.getExtratoSubSwitches(ExtratoCommand.LIST), Command.EXTRATO, ExtratoCommand.LIST);
+		controller.registerAction(ExtratoImportAction.class, switches.getExtratoSubSwitches(ExtratoCommand.IMPORT), Command.EXTRATO, ExtratoCommand.IMPORT);
+		controller.registerAction(ExtratoAnalyseAction.class, switches.getExtratoSubSwitches(ExtratoCommand.ANALYSE), Command.EXTRATO, ExtratoCommand.ANALYSE);
 
-		controller.registerAction(HelpAction.class, switches.getHelpSwitches(), Entity.HELP);
+		controller.registerAction(HelpAction.class, switches.getHelpSwitches(), Command.HELP);
 
 		controller.selectAction(switches.getEntity(), switches.getEntityCommand());
 

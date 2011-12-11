@@ -17,7 +17,7 @@ public class LancamentoSwitchesTests extends CustomParserTests {
 	private void doLancamentoLoad(String[] args, LancamentoCommand lancamentoCommand) throws ParserException {
 		doLoad(args);
 
-		assertEquals("Entidade", Entity.LANCAMENTO, switches.getEntity());
+		assertEquals("Entidade", Command.LANCAMENTO, switches.getEntity());
 
 		lancamentoSwitches = switches.getLancamentoSwitches();
 

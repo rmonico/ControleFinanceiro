@@ -26,7 +26,7 @@ public class BackupSwitchesTests extends CustomParserTests {
 	public void doBackupDDLTest() throws ParserException {
 		doLoad(new String[] {"backup", "ddlonly"});
 		
-		assertEquals("Entidade", Entity.BACKUP, switches.getEntity());
+		assertEquals("Entidade", Command.BACKUP, switches.getEntity());
 		
 		BackupSwitches backupSwitches = switches.getBackupSwitches();
 		

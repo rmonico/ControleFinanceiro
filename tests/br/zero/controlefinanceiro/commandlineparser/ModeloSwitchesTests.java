@@ -17,7 +17,7 @@ public class ModeloSwitchesTests extends CustomParserTests {
 	private void doModeloLoad(String[] args, ModeloCommand modeloCommand) throws ParserException {
 		doLoad(args);
 
-		assertEquals("Entidade", Entity.MODELO, switches.getEntity());
+		assertEquals("Entidade", Command.MODELO, switches.getEntity());
 
 		modeloSwitches = switches.getModeloSwitches();
 

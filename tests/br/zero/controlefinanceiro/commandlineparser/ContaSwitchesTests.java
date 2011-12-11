@@ -15,7 +15,7 @@ public class ContaSwitchesTests extends CustomParserTests {
 	protected void doContaLoad(String[] args, ContaCommand contaCommand) throws ParserException {
 		doLoad(args);
 		
-		assertEquals("Entidade", Entity.CONTA, switches.getEntity());
+		assertEquals("Entidade", Command.CONTA, switches.getEntity());
 		
 		contaSwitches = switches.getContaSwitches();
 		

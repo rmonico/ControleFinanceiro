@@ -3,14 +3,14 @@ package br.zero.controlefinanceiro.commandlineparser;
 import br.zero.commandlineparser.CommandLineSwitch;
 
 public class HelpSwitches {
-	private Entity entity;
+	private Command entity;
 
-	public Entity getEntity() {
+	public Command getEntity() {
 		return entity;
 	}
 
 	@CommandLineSwitch(index=1, param="EntityParser.parseEnum")
-	public void setEntity(Entity entity) {
+	public void setEntity(Command entity) {
 		this.entity = entity;
 	}
 	

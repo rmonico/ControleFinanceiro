@@ -5,7 +5,7 @@ import br.zero.commandlineparser.SubCommandLine;
 
 public class CommandLineSwitches {
 
-	private Entity entity;
+	private Command entity;
 	private BackupSwitches backupSwitches;
 	private ContaSwitches contaSwitches;
 	private LancamentoSwitches lancamentoSwitches;
@@ -28,11 +28,11 @@ public class CommandLineSwitches {
 			@SubCommandLine(value = "EXTRATO", subCommandLineClass = ExtratoSwitches.class, propertyName = "setExtratoSwitches"),
 			@SubCommandLine(value = "CONTA_REFERENCIA", subCommandLineClass = ContaReferenciaSwitches.class, propertyName = "setContaReferenceSwitches"),
 			@SubCommandLine(value = "HELP", subCommandLineClass = HelpSwitches.class, propertyName = "setHelpSwitches") })
-	public void setEntity(Entity entity) {
+	public void setEntity(Command entity) {
 		this.entity = entity;
 	}
 
-	public Entity getEntity() {
+	public Command getEntity() {
 		return entity;
 	}
 
@@ -131,7 +131,7 @@ public class CommandLineSwitches {
 	}
 
 	public Object getContaSubSwitches(ContaCommand command) {
-		if (!entity.equals(Entity.CONTA)) {
+		if (!entity.equals(Command.CONTA)) {
 			return null;
 		}
 
@@ -153,7 +153,7 @@ public class CommandLineSwitches {
 	}
 
 	public Object getLancamentoSubSwitches(LancamentoCommand command) {
-		if (!entity.equals(Entity.LANCAMENTO)) {
+		if (!entity.equals(Command.LANCAMENTO)) {
 			return null;
 		}
 
@@ -182,7 +182,7 @@ public class CommandLineSwitches {
 	}
 
 	public Object getModeloSubSwitches(ModeloCommand command) {
-		if (!entity.equals(Entity.MODELO)) {
+		if (!entity.equals(Command.MODELO)) {
 			return null;
 		}
 
@@ -214,7 +214,7 @@ public class CommandLineSwitches {
 	}
 
 	public Object getLancamentoModeloSubSwitches(LancamentoModeloCommand command) {
-		if (!entity.equals(Entity.LANCAMENTO_MODELO)) {
+		if (!entity.equals(Command.LANCAMENTO_MODELO)) {
 			return null;
 		}
 
@@ -237,7 +237,7 @@ public class CommandLineSwitches {
 	}
 
 	public Object getExtratoSubSwitches(ExtratoCommand command) {
-		if (!entity.equals(Entity.EXTRATO)) {
+		if (!entity.equals(Command.EXTRATO)) {
 			return null;
 		}
 		
