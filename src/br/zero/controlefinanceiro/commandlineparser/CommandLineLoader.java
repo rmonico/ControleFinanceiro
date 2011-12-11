@@ -32,8 +32,6 @@ public class CommandLineLoader {
 		
 		parsers.put("EntityParser", new EnumParser(Command.class));
 		parsers.put("BackupTypeParser", new EnumParser(BackupType.class));
-		parsers.put("ContaCommandParser", new EnumParser(ContaCommand.class));
-		parsers.put("LancamentoCommandParser", new EnumParser(LancamentoCommand.class));
 		parsers.put("ModeloCommandParser", new EnumParser(ModeloCommand.class));
 		parsers.put("LancamentoModeloCommandParser", new EnumParser(LancamentoModeloCommand.class)); 
 		parsers.put("ExtratoCommandParser", new EnumParser(ExtratoCommand.class)); 
