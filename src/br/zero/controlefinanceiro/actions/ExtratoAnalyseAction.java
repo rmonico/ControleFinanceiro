@@ -44,25 +44,30 @@ public class ExtratoAnalyseAction implements Action {
 		ContaDAO contaDAO = new ContaDAO();
 
 		ExtratoParser parser = banco.getParser();
-		
+
 		if (parser == null) {
 			throw new ExtratoAnalyseException("Nenhum parser encontrado para o banco: \"" + banco.getNome() + "\".");
 		}
 
 		for (ExtratoLancamento linhaExtrato : extratoLancamentoOrfao) {
+			StringBuilder status = new StringBuilder();
+			
+			status.append(linhaExtrato.getOriginal());
+			
+			parser.parse(linhaExtrato.getOriginal());
+
+			ExtratoLine line = parser.getLine();
+
+			Conta contaExtrato = contaDAO.resolveExtratoLine(banco, line.getReferencia());
+			
+			 if (contaExtrato == null) {
+				 // TODO O catch all deve ser implementado aqui!
+				 status.append("  ==> Referência não resolvida!");
+				 
+				 continue;
+			 }
+
 			for (Lancamento lancamentoSemExtrato : lancamentoSemExtratoList) {
-
-				parser.parse(linhaExtrato.getOriginal());
-
-				ExtratoLine line = parser.getLine();
-
-				Conta contaExtrato = contaDAO.resolveExtratoLine(banco, line.getReferencia());
-				
-//				TODO
-//				if (contaExtrato == null) {
-//					
-//				}
-
 				Conta contaOrigemEsperada;
 				Conta contaDestinoEsperada;
 
@@ -78,7 +83,7 @@ public class ExtratoAnalyseAction implements Action {
 
 				if (extratoLineMatch(lancamentoSemExtrato, line, contaOrigemEsperada, contaDestinoEsperada)) {
 					lancamentoSemExtrato.setExtrato(linhaExtrato);
-					
+
 					lancamentoDAO.alterar(lancamentoSemExtrato);
 				}
 			}
@@ -89,7 +94,7 @@ public class ExtratoAnalyseAction implements Action {
 		boolean origemOk = lancto.getContaOrigem().equals(contaOrigemEsperada);
 		boolean destinoOk = lancto.getContaDestino().equals(contaDestinoEsperada);
 		boolean valorOk = lancto.getValor().equals(line.getValor());
-		
+
 		return origemOk && destinoOk && valorOk;
 	}
 
@@ -107,13 +112,13 @@ public class ExtratoAnalyseAction implements Action {
 
 	private List<ExtratoLancamento> getExtratoLancamentoOrfao() {
 		ExtratoLancamentoDAO dao = new ExtratoLancamentoDAO();
-		
+
 		return dao.listarOrfaos();
 	}
 
 	private List<Lancamento> getLancamentoSemExtratoList() {
 		lancamentoDAO = new LancamentoDAO();
-		
+
 		return lancamentoDAO.listarSemExtrato();
 	}
 
@@ -122,13 +127,12 @@ public class ExtratoAnalyseAction implements Action {
 			throw new ExtratoAnalyseException("Parametro deve ser um ExtratoAnalyseSwitches.");
 		}
 
-
 		ExtratoAnalyseSwitches switches = (ExtratoAnalyseSwitches) param;
-		
+
 		if (switches.getNomeBanco() == null) {
 			throw new ExtratoAnalyseException("");
 		}
-		
+
 		return switches;
 	}
 
