@@ -30,8 +30,6 @@ public class ExtratoLancamento {
 	@JoinColumn(name = "ArquivoID")
 	private Arquivo arquivo;
 
-	private boolean isTransfer;
-
 	private String original;
 
 	
@@ -57,19 +55,6 @@ public class ExtratoLancamento {
 
 	public void setArquivo(Arquivo arquivo) {
 		this.arquivo = arquivo;
-	}
-
-	/**
-	 * Indica se a linha é uma linha de transferência ou não.
-	 * 
-	 * @return
-	 */
-	public boolean isTransfer() {
-		return isTransfer;
-	}
-
-	public void setTransfer(boolean isTransfer) {
-		this.isTransfer = isTransfer;
 	}
 
 	/**

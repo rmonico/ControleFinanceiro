@@ -85,7 +85,6 @@ public class ExtratoImportAction implements Action {
 
 			lancamento.setBanco(conta);
 			lancamento.setOriginal(line);
-			lancamento.setTransfer(ep.isTransferLine());
 			lancamento.setArquivo(arquivo);
 
 			lancamentoList.add(lancamento);
