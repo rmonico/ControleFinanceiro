@@ -72,11 +72,8 @@ public class ExtratoImportAction implements Action {
 			
 			String message;
 			
-			if (!ep.isTransferLine()) {
-				message = "[ FAIL ] \"" + line + "\"";
-				if (ep.getThrewException() != null) {
-					message += " ==> " + ep.getThrewException().getMessage();
-				}
+			if (ep.getThrewException() != null) {
+				message = "[ FAIL ] \"" + line + "\" ==> " + ep.getThrewException().getMessage();
 			} else {
 				message = "[  OK  ] \"" + line + "\"";
 			}

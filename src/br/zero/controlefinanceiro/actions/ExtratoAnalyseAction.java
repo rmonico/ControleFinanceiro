@@ -5,7 +5,7 @@ import java.util.List;
 import br.zero.controlefinanceiro.commandlineparser.ExtratoAnalyseSwitches;
 import br.zero.controlefinanceiro.model.Conta;
 import br.zero.controlefinanceiro.model.ContaDAO;
-import br.zero.controlefinanceiro.model.ExtratoLine;
+import br.zero.controlefinanceiro.model.ExtratoTransactionLine;
 import br.zero.controlefinanceiro.model.ExtratoParser;
 import br.zero.controlefinanceiro.model.Lancamento;
 import br.zero.controlefinanceiro.model.LancamentoDAO;
@@ -61,7 +61,7 @@ public class ExtratoAnalyseAction implements Action {
 
 			parser.parse(linhaExtrato.getOriginal());
 
-			ExtratoLine line = parser.getLine();
+			ExtratoTransactionLine line = parser.getLine();
 
 			status.append(line.getReferencia());
 
@@ -117,7 +117,7 @@ public class ExtratoAnalyseAction implements Action {
 		}
 	}
 
-	private boolean extratoLineMatch(Lancamento lancto, ExtratoLine line, Conta contaOrigemEsperada, Conta contaDestinoEsperada) {
+	private boolean extratoLineMatch(Lancamento lancto, ExtratoTransactionLine line, Conta contaOrigemEsperada, Conta contaDestinoEsperada) {
 		boolean origemOk = lancto.getContaOrigem().equals(contaOrigemEsperada);
 		boolean destinoOk = lancto.getContaDestino().equals(contaDestinoEsperada);
 		boolean valorOk = lancto.getValor().equals(line.getValor());

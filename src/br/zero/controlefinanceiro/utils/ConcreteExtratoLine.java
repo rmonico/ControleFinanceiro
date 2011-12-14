@@ -1,8 +1,8 @@
 package br.zero.controlefinanceiro.utils;
 
-import br.zero.controlefinanceiro.model.ExtratoLine;
+import br.zero.controlefinanceiro.model.ExtratoTransactionLine;
 
-public class ConcreteExtratoLine implements ExtratoLine {
+public class ConcreteExtratoLine implements ExtratoTransactionLine {
 
 	private String referencia;
 	private Double valor;
