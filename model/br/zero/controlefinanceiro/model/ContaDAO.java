@@ -14,7 +14,7 @@ import br.zero.customdao.DAOSetup;
 @DAOSetup(persistenceUnitName = "ControleFinanceiro", entityClass = Conta.class)
 public class ContaDAO extends CustomDAO<Conta> {
 
-	private static Map<String, ExtratoParser> extratoParsers = new HashMap<String, ExtratoParser>();
+	private static Map<String, ExtratoLineParser> extratoParsers = new HashMap<String, ExtratoLineParser>();
 
 	public Conta getByNome(String nomeConta) {
 		Query q = getEntityManager().createQuery("select c from Conta c where c.nome = :nome");
@@ -23,11 +23,11 @@ public class ContaDAO extends CustomDAO<Conta> {
 		return (Conta) q.getSingleResult();
 	}
 
-	public static void registerExtratoParser(String parserName, ExtratoParser extratoParser) {
+	public static void registerExtratoParser(String parserName, ExtratoLineParser extratoParser) {
 		extratoParsers.put(parserName, extratoParser);
 	}
 
-	static ExtratoParser getParser(Conta conta) {
+	static ExtratoLineParser getParser(Conta conta) {
 		return extratoParsers.get(conta.getNome());
 	}
 

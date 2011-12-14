@@ -6,7 +6,7 @@ import br.zero.controlefinanceiro.commandlineparser.ExtratoAnalyseSwitches;
 import br.zero.controlefinanceiro.model.Conta;
 import br.zero.controlefinanceiro.model.ContaDAO;
 import br.zero.controlefinanceiro.model.ExtratoTransactionLine;
-import br.zero.controlefinanceiro.model.ExtratoParser;
+import br.zero.controlefinanceiro.model.ExtratoLineParser;
 import br.zero.controlefinanceiro.model.Lancamento;
 import br.zero.controlefinanceiro.model.LancamentoDAO;
 import br.zero.controlefinanceiro.model.extrato.ExtratoLancamento;
@@ -50,7 +50,7 @@ public class ExtratoAnalyseAction implements Action {
 
 		ContaDAO contaDAO = new ContaDAO();
 
-		ExtratoParser parser = banco.getParser();
+		ExtratoLineParser parser = banco.getParser();
 
 		if (parser == null) {
 			throw new ExtratoAnalyseException("Nenhum parser encontrado para o banco: \"" + banco.getNome() + "\".");

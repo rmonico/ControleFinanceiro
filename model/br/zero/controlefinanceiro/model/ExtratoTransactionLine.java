@@ -1,6 +1,6 @@
 package br.zero.controlefinanceiro.model;
 
-public interface ExtratoTransactionLine {
+public interface ExtratoTransactionLine extends ExtratoLine {
 	String getReferencia();
 
 	Double getValor();

@@ -5,7 +5,7 @@ import java.text.ParseException;
 import br.zero.controlefinanceiro.model.ContaDAO;
 import br.zero.controlefinanceiro.model.ExtratoTransactionLine;
 import br.zero.controlefinanceiro.model.ExtratoTransactionLine;
-import br.zero.controlefinanceiro.model.ExtratoParser;
+import br.zero.controlefinanceiro.model.ExtratoLineParser;
 
 /**
  * Apenas instancia os parsers de extrato para que possam ser utilizados.
@@ -15,11 +15,11 @@ import br.zero.controlefinanceiro.model.ExtratoParser;
  */
 public class ExtratoParsers {
 
-	public static final ExtratoParser ITAU_EXTRATO_PARSER = createItauParser();
-	public static final ExtratoParser SANTANDER_EXTRATO_PARSER = createSantanderParser();
+	public static final ExtratoLineParser ITAU_EXTRATO_PARSER = createItauParser();
+	public static final ExtratoLineParser SANTANDER_EXTRATO_PARSER = createSantanderParser();
 
-	private static ExtratoParser createItauParser() {
-		ExtratoParser itauParser = new ExtratoParser() {
+	private static ExtratoLineParser createItauParser() {
+		ExtratoLineParser itauParser = new ExtratoLineParser() {
 
 			private ParseException threwException;
 			private ExtratoTransactionLine extratoLine;
@@ -76,8 +76,8 @@ public class ExtratoParsers {
 		return itauParser;
 	}
 
-	private static ExtratoParser createSantanderParser() {
-		ExtratoParser santanderParser = new ExtratoParser() {
+	private static ExtratoLineParser createSantanderParser() {
+		ExtratoLineParser santanderParser = new ExtratoLineParser() {
 
 			private ConcreteExtratoLine extratoLine;
 

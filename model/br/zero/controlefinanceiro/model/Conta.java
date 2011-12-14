@@ -55,7 +55,7 @@ public class Conta implements Serializable {
 		this.observacao = observacao;
 	}
 	
-	public ExtratoParser getParser() {
+	public ExtratoLineParser getParser() {
 		return ContaDAO.getParser(this);
 	}
 

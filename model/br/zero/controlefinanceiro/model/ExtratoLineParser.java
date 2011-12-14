@@ -1,6 +1,6 @@
 package br.zero.controlefinanceiro.model;
 
-public interface ExtratoParser {
+public interface ExtratoLineParser {
 
 	void parse(String line);
 

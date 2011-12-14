@@ -10,7 +10,7 @@ import java.util.List;
 import br.zero.controlefinanceiro.commandlineparser.ExtratoImportSwitches;
 import br.zero.controlefinanceiro.model.Conta;
 import br.zero.controlefinanceiro.model.ContaDAO;
-import br.zero.controlefinanceiro.model.ExtratoParser;
+import br.zero.controlefinanceiro.model.ExtratoLineParser;
 import br.zero.controlefinanceiro.model.extrato.Arquivo;
 import br.zero.controlefinanceiro.model.extrato.ArquivoDAO;
 import br.zero.controlefinanceiro.model.extrato.ExtratoLancamento;
@@ -53,7 +53,7 @@ public class ExtratoImportAction implements Action {
 	private void doImport(BufferedReader file, Conta conta) throws IOException, ExtratoImportException {
 		String line;
 		
-		ExtratoParser ep = conta.getParser();
+		ExtratoLineParser ep = conta.getParser();
 		
 		if (ep == null) {
 			throw new ExtratoImportException("Conta \"" + conta.getNome() + "\" não possui um parser de extrato registrado.");

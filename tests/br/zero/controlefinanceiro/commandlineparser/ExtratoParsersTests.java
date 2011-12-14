@@ -1,28 +1,39 @@
 package br.zero.controlefinanceiro.commandlineparser;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import br.zero.controlefinanceiro.model.ExtratoParser;
+import br.zero.controlefinanceiro.model.ExtratoLine;
+import br.zero.controlefinanceiro.model.ExtratoLineParser;
+import br.zero.controlefinanceiro.model.ExtratoTransactionLine;
 import br.zero.controlefinanceiro.utils.ExtratoParsers;
 
 public class ExtratoParsersTests {
 
-	private ExtratoParser parser;
+	private ExtratoLineParser parser;
 	
-	private ExtratoParser getItauParser() {
+	private ExtratoLineParser getItauParser() {
 		return ExtratoParsers.ITAU_EXTRATO_PARSER;
 	}
 	
 	@Test
-	public void doItauExtratoParserInvalidLineTests() {
-//		parser = getItauParser();
-//		
-//		parser.parse("14/11\t\t\tSALDO ANTERIOR\t\t\t\t2.395,90\t");
-//
-//		assertFalse("linha válida", parser.isTransferLine());
+	public void doItauExtratoParserTest() {
+		parser = getItauParser();
+		
+		parser.parse("01/09			IOF		1,85-		352,31-	");
+
+		ExtratoLine el = parser.getLine();
+		
+		assertNotNull("linha do extrato não-nula", el);
+		
+		assertTrue("Implementa ExtratoTransactionLine", el instanceof ExtratoTransactionLine);
+		
+		ExtratoTransactionLine line = (ExtratoTransactionLine) el;
+		
+		assertEquals("linha válida", "IOF", line.getReferencia());
 	}
 
 	@Test
@@ -47,7 +58,7 @@ public class ExtratoParsersTests {
 	}
 	
 	
-	private ExtratoParser getSantanderParser() {
+	private ExtratoLineParser getSantanderParser() {
 		return ExtratoParsers.SANTANDER_EXTRATO_PARSER;
 	}
 
