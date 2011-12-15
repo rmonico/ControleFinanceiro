@@ -13,6 +13,7 @@ import br.zero.controlefinanceiro.model.LancamentoDAO;
 import br.zero.controlefinanceiro.model.extrato.ExtratoLancamento;
 import br.zero.controlefinanceiro.model.extrato.ExtratoLancamentoDAO;
 import br.zero.controlefinanceiro.utils.ControleFinanceiroException;
+import br.zero.controlefinanceiro.utils.ExtratoLineParserException;
 import br.zero.tinycontroller.Action;
 
 public class ExtratoAnalyseAction implements Action {
@@ -54,9 +55,13 @@ public class ExtratoAnalyseAction implements Action {
 		ExtratoLineParser parser = banco.getParser();
 
 		if (parser == null) {
-			throw new ExtratoAnalyseException("Nenhum parser encontrado para o banco: \"" + banco.getNome() + "\".");
+			throw new ExtratoAnalyseException("Nenhum parser registrado para o banco: \"" + banco.getNome() + "\".");
 		}
 
+		makeSync(switches, banco, lancamentoSemExtratoList, extratoLancamentoOrfao, contaDAO, parser);
+	}
+
+	private void makeSync(ExtratoAnalyseSwitches switches, Conta banco, List<Lancamento> lancamentoSemExtratoList, List<ExtratoLancamento> extratoLancamentoOrfao, ContaDAO contaDAO, ExtratoLineParser parser) throws ExtratoLineParserException {
 		for (ExtratoLancamento linhaExtrato : extratoLancamentoOrfao) {
 			StringBuilder status = new StringBuilder();
 
