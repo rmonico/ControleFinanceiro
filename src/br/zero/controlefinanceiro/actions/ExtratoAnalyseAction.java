@@ -140,6 +140,8 @@ public class ExtratoAnalyseAction implements Action {
 				analyseResult = showUnknownLine();
 			}
 
+			analyseResult.setOriginal(line.getOriginal());
+
 			statuses.add(analyseResult);
 		}
 
@@ -158,8 +160,6 @@ public class ExtratoAnalyseAction implements Action {
 	private ExtratoLineAnalyseResult syncTransactionLine(List<Lancamento> lancamentoSemExtratoList, ContaDAO contaDAO, ExtratoLancamento linhaExtrato, ExtratoTransactionLine line) {
 		ExtratoLineAnalyseResult result = new ExtratoLineAnalyseResult();
 		result.setTipo('T');
-
-		result.setOriginal(line.getOriginal());
 
 		Conta contaExtrato = contaDAO.resolveExtratoLine(banco, line.getReferencia());
 
@@ -221,10 +221,10 @@ public class ExtratoAnalyseAction implements Action {
 		grid.getData().setHeaderSeparatorChar('=');
 		grid.getData().setTitle("Sincronização de Extrato banco \"" + banco.getNome() + "\"");
 
-		TextGridFormattedColumn.createFormattedColumn(grid, "Tipo", TextGridFormattedColumn.STRING_FORMATTER, TextGridColumnAlignment.RIGHT, "getTipo");
-		TextGridFormattedColumn.createFormattedColumn(grid, "Original", TextGridFormattedColumn.STRING_FORMATTER, TextGridColumnAlignment.RIGHT, "getOriginal");
-		TextGridFormattedColumn.createFormattedColumn(grid, "Conta", ControleFinanceiroFormatters.CONTA_FORMATTER, TextGridColumnAlignment.RIGHT, "getConta");
-		TextGridFormattedColumn.createFormattedColumn(grid, "Lancamento", ControleFinanceiroFormatters.CONTA_FORMATTER, TextGridColumnAlignment.RIGHT, "getContaOrigem");
+		TextGridFormattedColumn.createFormattedColumn(grid, "Tipo", TextGridFormattedColumn.STRING_FORMATTER, TextGridColumnAlignment.CENTER, "getTipo");
+		TextGridFormattedColumn.createFormattedColumn(grid, "Original", TextGridFormattedColumn.STRING_FORMATTER, TextGridColumnAlignment.LEFT, "getOriginal");
+		TextGridFormattedColumn.createFormattedColumn(grid, "Conta", ControleFinanceiroFormatters.CONTA_FORMATTER, TextGridColumnAlignment.LEFT, "getConta");
+		TextGridFormattedColumn.createFormattedColumn(grid, "Lancamento", ControleFinanceiroFormatters.LANCAMENTO_FORMATTER, TextGridColumnAlignment.LEFT, "getLancamento");
 
 		return grid;
 	}

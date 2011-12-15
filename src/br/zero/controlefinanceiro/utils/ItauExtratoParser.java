@@ -25,7 +25,6 @@ public class ItauExtratoParser implements ExtratoLineParser {
 		
 		if (saldoReferenciaList.contains(referencia)) {
 			extratoLine = parseBalanceLine(fields);
-			return;
 		} else {
 			extratoLine = parseTransactionLine(fields);
 		}
