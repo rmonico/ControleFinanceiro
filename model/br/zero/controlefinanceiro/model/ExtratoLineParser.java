@@ -7,6 +7,4 @@ public interface ExtratoLineParser {
 	void parse(String line) throws ExtratoLineParserException;
 
 	ExtratoLine getLine();
-	
-	Exception getThrewException();
 }

@@ -31,9 +31,4 @@ public class SantanderExtratoParser implements ExtratoLineParser {
 		return extratoLine;
 	}
 
-	@Override
-	public Exception getThrewException() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

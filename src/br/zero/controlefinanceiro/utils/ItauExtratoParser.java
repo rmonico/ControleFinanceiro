@@ -10,7 +10,7 @@ import br.zero.controlefinanceiro.model.ExtratoTransactionLine;
 
 public class ItauExtratoParser implements ExtratoLineParser {
 
-	private ExtratoLine extratoLine;
+	private AbstractExtratoLine extratoLine;
 	private static List<String> saldoReferenciaList = createSaldoReferenciaList();
 
 	@Override
@@ -29,6 +29,8 @@ public class ItauExtratoParser implements ExtratoLineParser {
 		} else {
 			extratoLine = parseTransactionLine(fields);
 		}
+		
+		extratoLine.setOriginal(line);
 	}
 
 	private static List<String> createSaldoReferenciaList() {
@@ -37,13 +39,13 @@ public class ItauExtratoParser implements ExtratoLineParser {
 		return saldoReferenciaList;
 	}
 
-	private ExtratoBalanceLine parseBalanceLine(String[] fields) {
+	private AbstractExtratoLine parseBalanceLine(String[] fields) {
 		ConcreteExtratoBalanceLine ebl = new ConcreteExtratoBalanceLine();
 
 		return ebl;
 	}
 
-	private ExtratoTransactionLine parseTransactionLine(String[] fields) {
+	private AbstractExtratoLine parseTransactionLine(String[] fields) {
 		ConcreteExtratoTransactionLine etl = new ConcreteExtratoTransactionLine();
 
 		etl.setReferencia(fields[3]);
@@ -70,11 +72,6 @@ public class ItauExtratoParser implements ExtratoLineParser {
 	@Override
 	public ExtratoLine getLine() {
 		return extratoLine;
-	}
-
-	@Override
-	public Exception getThrewException() {
-		return null;
 	}
 
 }

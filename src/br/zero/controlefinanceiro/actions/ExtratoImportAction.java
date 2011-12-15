@@ -76,15 +76,7 @@ public class ExtratoImportAction implements Action {
 			try {
 				ep.parse(line);
 			} catch (ExtratoLineParserException e) {
-				throw new ExtratoImportException(e);
-			}
-			
-			String message;
-			
-			if (ep.getThrewException() != null) {
-				message = "[ FAIL ] \"" + line + "\" ==> " + ep.getThrewException().getMessage();
-			} else {
-				message = "[  OK  ] \"" + line + "\"";
+				System.out.println("[ FAIL ] \"" + line + "\" ==> " + e.getMessage());
 			}
 			
 			ExtratoLancamento lancamento = new ExtratoLancamento();
@@ -96,7 +88,7 @@ public class ExtratoImportAction implements Action {
 			lancamentoList.add(lancamento);
 			
 			
-			System.out.println(message);
+			System.out.println("[  OK  ] \"" + line + "\"");
 		}
 
 		arquivo.setConteudo(conteudo.toString());
