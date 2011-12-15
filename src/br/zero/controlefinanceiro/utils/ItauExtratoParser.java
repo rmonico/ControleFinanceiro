@@ -10,6 +10,7 @@ public class ItauExtratoParser implements ExtratoLineParser {
 
 	private AbstractExtratoLine extratoLine;
 	private static List<String> saldoReferenciaList = createSaldoReferenciaList();
+	private static List<String> ignorarReferenciaList = createIgnorarReferenciaList();
 
 	@Override
 	public void parse(String line) throws ExtratoLineParserException {
@@ -20,26 +21,38 @@ public class ItauExtratoParser implements ExtratoLineParser {
 		}
 
 		String referencia = fields[3];
-		
+
 		if (saldoReferenciaList.contains(referencia)) {
-			extratoLine = parseBalanceLine(fields);
+			extratoLine = parseBalanceLine();
+		} else if (ignorarReferenciaList.contains(referencia)) {
+			extratoLine = parseIgnoredLine();
 		} else {
 			extratoLine = parseTransactionLine(fields);
 		}
-		
+
 		extratoLine.setOriginal(line);
 	}
 
-	private static List<String> createSaldoReferenciaList() {
-		saldoReferenciaList = Arrays.asList(new String[] {"SALDO INICIAL", "SALDO ANTERIOR", "S A L D O", "SDO CTA/APL AUTOMATICAS", "SALDO FINAL", "SALDO FINAL DISPONIVEL", "(-) SALDO A LIBERAR" });
-		
-		return saldoReferenciaList;
+	private static List<String> createIgnorarReferenciaList() {
+		List<String> list = Arrays.asList(new String[] { "RES APLIC AUT MAIS", "APL APLIC AUT MAIS" });
+
+		return list;
 	}
 
-	private AbstractExtratoLine parseBalanceLine(String[] fields) {
+	private static List<String> createSaldoReferenciaList() {
+		List<String> list = Arrays.asList(new String[] { "SALDO INICIAL", "SALDO ANTERIOR", "S A L D O", "SDO CTA/APL AUTOMATICAS", "SALDO FINAL", "SALDO FINAL DISPONIVEL", "(-) SALDO A LIBERAR" });
+
+		return list;
+	}
+
+	private AbstractExtratoLine parseBalanceLine() {
 		ConcreteExtratoBalanceLine ebl = new ConcreteExtratoBalanceLine();
 
 		return ebl;
+	}
+
+	private AbstractExtratoLine parseIgnoredLine() {
+		return new UnknownExtratoLine();
 	}
 
 	private AbstractExtratoLine parseTransactionLine(String[] fields) {
