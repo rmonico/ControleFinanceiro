@@ -15,6 +15,7 @@ import br.zero.controlefinanceiro.model.extrato.Arquivo;
 import br.zero.controlefinanceiro.model.extrato.ArquivoDAO;
 import br.zero.controlefinanceiro.model.extrato.ExtratoLancamento;
 import br.zero.controlefinanceiro.model.extrato.ExtratoLancamentoDAO;
+import br.zero.controlefinanceiro.utils.ExtratoLineParserException;
 import br.zero.tinycontroller.Action;
 
 public class ExtratoImportAction implements Action {
@@ -25,6 +26,10 @@ public class ExtratoImportAction implements Action {
 
 		public ExtratoImportException(String message) {
 			super(message);
+		}
+
+		public ExtratoImportException(Exception e) {
+			super(e);
 		}
 
 		/**
@@ -68,7 +73,11 @@ public class ExtratoImportAction implements Action {
 		while ((line = file.readLine()) != null) {
 			conteudo.append(line + "\n");
 			
-			ep.parse(line);
+			try {
+				ep.parse(line);
+			} catch (ExtratoLineParserException e) {
+				throw new ExtratoImportException(e);
+			}
 			
 			String message;
 			
