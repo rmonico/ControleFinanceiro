@@ -164,8 +164,7 @@ public class ExtratoAnalyseAction implements Action {
 		Conta contaExtrato = contaDAO.resolveExtratoLine(banco, line.getReferencia());
 
 		if (contaExtrato == null) {
-			// TODO O catch all deve ser implementado aqui!
-			// TODO A resolução de referências na linha de comando deve ser
+			// TODO A resolução de referências por linha de comando deve ser
 			// implementada aqui!
 			return result;
 		}
