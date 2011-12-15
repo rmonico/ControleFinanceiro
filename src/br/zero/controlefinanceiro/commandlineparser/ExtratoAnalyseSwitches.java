@@ -1,11 +1,14 @@
 package br.zero.controlefinanceiro.commandlineparser;
 
+import java.util.List;
+
 import br.zero.commandlineparser.CommandLineSwitch;
 
 public class ExtratoAnalyseSwitches {
 
 	private String nomeBanco;
 	private boolean realize;
+	private List<ManualReference> manualRefs;
 
 	@CommandLineSwitch(index = 1)
 	public void setNomeBanco(String nomeBanco) {
@@ -25,5 +28,14 @@ public class ExtratoAnalyseSwitches {
 	public boolean getRealize() {
 		return realize;
 	}
+	
+	@CommandLineSwitch(param="--refs")
+	public List<ManualReference> setManualRefList(List<ManualReference> value) {
+		return manualRefs;
+	}
 
+	public List<ManualReference> getManualRefList() {
+		return manualRefs;
+	}
+	
 }

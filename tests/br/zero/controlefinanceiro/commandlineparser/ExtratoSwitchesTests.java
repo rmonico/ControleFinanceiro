@@ -50,6 +50,8 @@ public class ExtratoSwitchesTests extends CustomParserTests {
 
 		assertEquals("Nome do banco", "conta", analyseSwitches.getNomeBanco());
 		assertFalse("Flag realize", analyseSwitches.getRealize());
+		assertNotNull("Referências manuais - null", analyseSwitches.getManualRefList());
+		assertEquals("Referências manuais - size", 0, analyseSwitches.getManualRefList().size());
 	}
 
 	@Test
@@ -62,5 +64,26 @@ public class ExtratoSwitchesTests extends CustomParserTests {
 
 		assertEquals("Nome do banco", "conta", analyseSwitches.getNomeBanco());
 		assertTrue("Flag realize", analyseSwitches.getRealize());
+		assertNotNull("Referências manuais - null", analyseSwitches.getManualRefList());
+		assertEquals("Referências manuais - size", 0, analyseSwitches.getManualRefList().size());
+	}
+
+	@Test
+	public void doAnalyseTest3() throws ParserException {
+		doExtratoLoad(new String[] { "extrato-analyse", "conta", "--refs", "regex1", "conta1", "regex2", "conta2"}, Command.EXTRATO_ANALYSE);
+
+		assertNotNull(switches.getExtratoAnalyseSwitches());
+
+		ExtratoAnalyseSwitches analyseSwitches = switches.getExtratoAnalyseSwitches();
+
+		assertEquals("Nome do banco", "conta", analyseSwitches.getNomeBanco());
+		assertFalse("Flag realize", analyseSwitches.getRealize());
+		assertNotNull("Referências manuais - null", analyseSwitches.getManualRefList());
+		assertEquals("Referências manuais - size", 2, analyseSwitches.getManualRefList().size());
+		assertEquals("Referência 0 - regex", "regex1", analyseSwitches.getManualRefList().get(0).getRegex());
+		assertEquals("Referência 0 - conta", "conta1", analyseSwitches.getManualRefList().get(0).getNomeConta());
+
+		assertEquals("Referência 1 - regex", "regex2", analyseSwitches.getManualRefList().get(1).getRegex());
+		assertEquals("Referência 1 - regex", "conta2", analyseSwitches.getManualRefList().get(1).getNomeConta());
 	}
 }
