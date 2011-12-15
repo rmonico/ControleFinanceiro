@@ -9,6 +9,7 @@ import org.junit.Test;
 import br.zero.controlefinanceiro.model.ExtratoLine;
 import br.zero.controlefinanceiro.model.ExtratoLineParser;
 import br.zero.controlefinanceiro.model.ExtratoTransactionLine;
+import br.zero.controlefinanceiro.utils.ExtratoLineParserException;
 import br.zero.controlefinanceiro.utils.ExtratoParsers;
 
 public class ExtratoParsersTests {
@@ -20,7 +21,7 @@ public class ExtratoParsersTests {
 	}
 	
 	@Test
-	public void doItauExtratoParserTest() {
+	public void doItauExtratoParserTest() throws ExtratoLineParserException {
 		parser = getItauParser();
 		
 		parser.parse("01/09			IOF		1,85-		352,31-	");
