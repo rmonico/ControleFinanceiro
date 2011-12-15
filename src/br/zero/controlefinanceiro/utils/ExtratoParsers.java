@@ -17,47 +17,7 @@ import br.zero.controlefinanceiro.model.ExtratoTransactionLine;
 public class ExtratoParsers {
 
 	public static final ExtratoLineParser ITAU_EXTRATO_PARSER = new ItauExtratoParser();
-	public static final ExtratoLineParser SANTANDER_EXTRATO_PARSER = createSantanderParser();
-
-	private static ExtratoLineParser createSantanderParser() {
-		ExtratoLineParser santanderParser = new ExtratoLineParser() {
-
-			private ConcreteExtratoTransactionLine extratoLine;
-
-			@Override
-			public void parse(String line) {
-				String[] fields = line.split("\t");
-
-				ConcreteExtratoTransactionLine el = new ConcreteExtratoTransactionLine();
-
-				if (fields.length < 3) {
-					return;
-				}
-
-				if ("SALDO ANTERIOR".equals(fields[2])) {
-					return;
-				}
-
-				el.setReferencia("");
-
-				extratoLine = el;
-			}
-
-			@Override
-			public ExtratoLine getLine() {
-				return extratoLine;
-			}
-
-			@Override
-			public Exception getThrewException() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-		};
-
-		return santanderParser;
-	}
+	public static final ExtratoLineParser SANTANDER_EXTRATO_PARSER = new SantanderExtratoParser();
 
 	public static void registerParsers() {
 		ContaDAO.registerExtratoParser("itau", ExtratoParsers.ITAU_EXTRATO_PARSER);
