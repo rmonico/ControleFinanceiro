@@ -16,75 +16,8 @@ import br.zero.controlefinanceiro.model.ExtratoTransactionLine;
  */
 public class ExtratoParsers {
 
-	public static final ExtratoLineParser ITAU_EXTRATO_PARSER = createItauParser();
+	public static final ExtratoLineParser ITAU_EXTRATO_PARSER = new ItauExtratoParser();
 	public static final ExtratoLineParser SANTANDER_EXTRATO_PARSER = createSantanderParser();
-
-	private static ExtratoLineParser createItauParser() {
-		ExtratoLineParser itauParser = new ExtratoLineParser() {
-
-			private ParseException threwException;
-			private ExtratoLine extratoLine;
-
-			@Override
-			public void parse(String line) {
-				String[] fields = line.split("\t");
-
-				if (fields.length < 4) {
-					return;
-				}
-
-				if (("SALDO ANTERIOR".equals(fields[3])) || ("S A L D O".equals(fields[3])) || ("SDO CTA/APL AUTOMATICAS".equals(fields[3]))) {
-					extratoLine = parseBalanceLine(fields);
-					return;
-				} else {
-					extratoLine = parseTransactionLine(fields);
-				}
-			}
-
-			private ExtratoBalanceLine parseBalanceLine(String[] fields) {
-				ConcreteExtratoBalanceLine ebl = new ConcreteExtratoBalanceLine();
-				
-				return ebl;
-			}
-
-			private ExtratoTransactionLine parseTransactionLine(String[] fields) {
-				ConcreteExtratoTransactionLine etl = new ConcreteExtratoTransactionLine();
-				
-				etl.setReferencia(fields[3]);
-				
-				// String dataStr = fields[0];
-				//
-				// SimpleDateFormat sdf = new SimpleDateFormat("dd/MM");
-				//
-				// data = GregorianCalendar.getInstance();
-				//
-				// try {
-				// data.setTime(sdf.parse(dataStr));
-				// } catch (ParseException e) {
-				// threwException = e;
-				// isTransferLine = false;
-				// }
-				//
-				// data.set(Calendar.YEAR,
-				// GregorianCalendar.getInstance().get(Calendar.YEAR));
-
-				return etl;
-			}
-
-			@Override
-			public ExtratoLine getLine() {
-				return extratoLine;
-			}
-
-			@Override
-			public Exception getThrewException() {
-				return threwException;
-			}
-
-		};
-
-		return itauParser;
-	}
 
 	private static ExtratoLineParser createSantanderParser() {
 		ExtratoLineParser santanderParser = new ExtratoLineParser() {
