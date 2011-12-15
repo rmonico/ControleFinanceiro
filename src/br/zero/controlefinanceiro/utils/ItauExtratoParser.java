@@ -3,10 +3,8 @@ package br.zero.controlefinanceiro.utils;
 import java.util.Arrays;
 import java.util.List;
 
-import br.zero.controlefinanceiro.model.ExtratoBalanceLine;
 import br.zero.controlefinanceiro.model.ExtratoLine;
 import br.zero.controlefinanceiro.model.ExtratoLineParser;
-import br.zero.controlefinanceiro.model.ExtratoTransactionLine;
 
 public class ItauExtratoParser implements ExtratoLineParser {
 
@@ -33,7 +31,7 @@ public class ItauExtratoParser implements ExtratoLineParser {
 	}
 
 	private static List<String> createSaldoReferenciaList() {
-		saldoReferenciaList = Arrays.asList(new String[] {"SALDO INICIAL", "SALDO ANTERIOR", "S A L D O" });
+		saldoReferenciaList = Arrays.asList(new String[] {"SALDO INICIAL", "SALDO ANTERIOR", "S A L D O", "SALDO FINAL" });
 		
 		return saldoReferenciaList;
 	}
