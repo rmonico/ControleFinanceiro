@@ -11,4 +11,8 @@ public class ControleFinanceiroException extends Exception {
 		super(message);
 	}
 
+	public ControleFinanceiroException(Exception e) {
+		super(e);
+	}
+
 }
