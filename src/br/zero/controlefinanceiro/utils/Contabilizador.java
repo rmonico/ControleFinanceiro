@@ -38,35 +38,34 @@ public class Contabilizador {
 		saldos = new HashMap<Conta, Double>();
 
 		for (Contabilizavel lancamento : lancamentoList) {
-			Conta contaOrigem = lancamento.getContaOrigem();
-
-			Double saldoOrigem = saldos.get(contaOrigem);
-
-			if (saldoOrigem == null) {
-				saldoOrigem = 0.0;
-			}
-
-			saldoOrigem -= lancamento.getValor();
-
-			saldos.put(contaOrigem, saldoOrigem);
+			Double saldoOrigem = updateSaldo(lancamento.getContaOrigem(), -lancamento.getValor());
 
 			lancamento.setSaldoOrigem(saldoOrigem);
-
-			Conta contaDestino = lancamento.getContaDestino();
-
-			Double saldoDestino = saldos.get(contaDestino);
-
-			if (saldoDestino == null) {
-				saldoDestino = 0.0;
-			}
-
-			saldoDestino += lancamento.getValor();
-
-			saldos.put(contaDestino, saldoDestino);
+			
+			
+			Double saldoDestino = updateSaldo(lancamento.getContaDestino(), lancamento.getValor());
 
 			lancamento.setSaldoDestino(saldoDestino);
 		}
 
+	}
+
+	private Double updateSaldo(Conta conta, Double valor) {
+		if (!conta.getContabilizavel()) {
+			return null;
+		}
+
+		Double saldo = saldos.get(conta);
+
+		if (saldo == null) {
+			saldo = 0.0;
+		}
+
+		saldo += valor;
+
+		saldos.put(conta, saldo);
+		
+		return saldo;
 	}
 
 	public Map<Conta, Double> getSaldosPorConta() {
