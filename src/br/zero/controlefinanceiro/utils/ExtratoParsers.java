@@ -1,12 +1,7 @@
 package br.zero.controlefinanceiro.utils;
 
-import java.text.ParseException;
-
 import br.zero.controlefinanceiro.model.ContaDAO;
-import br.zero.controlefinanceiro.model.ExtratoBalanceLine;
-import br.zero.controlefinanceiro.model.ExtratoLine;
 import br.zero.controlefinanceiro.model.ExtratoLineParser;
-import br.zero.controlefinanceiro.model.ExtratoTransactionLine;
 
 /**
  * Apenas instancia os parsers de extrato para que possam ser utilizados.
