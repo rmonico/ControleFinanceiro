@@ -3,9 +3,10 @@ package br.zero.controlefinanceiro.utils;
 import java.text.ParseException;
 
 import br.zero.controlefinanceiro.model.ContaDAO;
-import br.zero.controlefinanceiro.model.ExtratoTransactionLine;
-import br.zero.controlefinanceiro.model.ExtratoTransactionLine;
+import br.zero.controlefinanceiro.model.ExtratoBalanceLine;
+import br.zero.controlefinanceiro.model.ExtratoLine;
 import br.zero.controlefinanceiro.model.ExtratoLineParser;
+import br.zero.controlefinanceiro.model.ExtratoTransactionLine;
 
 /**
  * Apenas instancia os parsers de extrato para que possam ser utilizados.
@@ -22,28 +23,35 @@ public class ExtratoParsers {
 		ExtratoLineParser itauParser = new ExtratoLineParser() {
 
 			private ParseException threwException;
-			private ExtratoTransactionLine extratoLine;
+			private ExtratoLine extratoLine;
 
 			@Override
 			public void parse(String line) {
 				String[] fields = line.split("\t");
 
-				ConcreteExtratoLine extratoLine = new ConcreteExtratoLine();
-
 				if (fields.length < 4) {
 					return;
 				}
 
-				if ("SALDO ANTERIOR".equals(fields[3])) {
+				if (("SALDO ANTERIOR".equals(fields[3])) || ("S A L D O".equals(fields[3])) || ("SDO CTA/APL AUTOMATICAS".equals(fields[3]))) {
+					extratoLine = parseBalanceLine(fields);
 					return;
-				} else if ("S A L D O".equals(fields[3])) {
-					return;
-				} else if ("SDO CTA/APL AUTOMATICAS".equals(fields[3])) {
-					return;
+				} else {
+					extratoLine = parseTransactionLine(fields);
 				}
+			}
 
-				extratoLine.setReferencia(fields[3]);
+			private ExtratoBalanceLine parseBalanceLine(String[] fields) {
+				ConcreteExtratoBalanceLine ebl = new ConcreteExtratoBalanceLine();
+				
+				return ebl;
+			}
 
+			private ExtratoTransactionLine parseTransactionLine(String[] fields) {
+				ConcreteExtratoTransactionLine etl = new ConcreteExtratoTransactionLine();
+				
+				etl.setReferencia(fields[3]);
+				
 				// String dataStr = fields[0];
 				//
 				// SimpleDateFormat sdf = new SimpleDateFormat("dd/MM");
@@ -59,10 +67,12 @@ public class ExtratoParsers {
 				//
 				// data.set(Calendar.YEAR,
 				// GregorianCalendar.getInstance().get(Calendar.YEAR));
+
+				return etl;
 			}
 
 			@Override
-			public ExtratoTransactionLine getLine() {
+			public ExtratoLine getLine() {
 				return extratoLine;
 			}
 
@@ -79,13 +89,13 @@ public class ExtratoParsers {
 	private static ExtratoLineParser createSantanderParser() {
 		ExtratoLineParser santanderParser = new ExtratoLineParser() {
 
-			private ConcreteExtratoLine extratoLine;
+			private ConcreteExtratoTransactionLine extratoLine;
 
 			@Override
 			public void parse(String line) {
 				String[] fields = line.split("\t");
 
-				ConcreteExtratoLine el = new ConcreteExtratoLine();
+				ConcreteExtratoTransactionLine el = new ConcreteExtratoTransactionLine();
 
 				if (fields.length < 3) {
 					return;
@@ -101,7 +111,7 @@ public class ExtratoParsers {
 			}
 
 			@Override
-			public ExtratoTransactionLine getLine() {
+			public ExtratoLine getLine() {
 				return extratoLine;
 			}
 
