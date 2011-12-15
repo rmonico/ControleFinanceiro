@@ -14,7 +14,7 @@ public class ItauExtratoParser implements ExtratoLineParser {
 		String[] fields = line.split("\t");
 
 		if (fields.length < 4) {
-			throw new ExtratoLineParserException("");
+			throw new ExtratoLineParserException("\"" + line + "\" não é uma linha válida do extrato do itau!");
 		}
 
 		if (("SALDO ANTERIOR".equals(fields[3])) || ("S A L D O".equals(fields[3])) || ("SDO CTA/APL AUTOMATICAS".equals(fields[3]))) {
