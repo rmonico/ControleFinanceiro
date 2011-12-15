@@ -1,5 +1,8 @@
 package br.zero.controlefinanceiro.utils;
 
+import java.util.Arrays;
+import java.util.List;
+
 import br.zero.controlefinanceiro.model.ExtratoBalanceLine;
 import br.zero.controlefinanceiro.model.ExtratoLine;
 import br.zero.controlefinanceiro.model.ExtratoLineParser;
@@ -8,6 +11,7 @@ import br.zero.controlefinanceiro.model.ExtratoTransactionLine;
 public class ItauExtratoParser implements ExtratoLineParser {
 
 	private ExtratoLine extratoLine;
+	private static List<String> saldoReferenciaList = createSaldoReferenciaList();
 
 	@Override
 	public void parse(String line) throws ExtratoLineParserException {
@@ -17,12 +21,20 @@ public class ItauExtratoParser implements ExtratoLineParser {
 			throw new ExtratoLineParserException("\"" + line + "\" não é uma linha válida do extrato do itau!");
 		}
 
-		if (("SALDO ANTERIOR".equals(fields[3])) || ("S A L D O".equals(fields[3])) || ("SDO CTA/APL AUTOMATICAS".equals(fields[3]))) {
+		String referencia = fields[3];
+		
+		if (saldoReferenciaList.contains(referencia)) {
 			extratoLine = parseBalanceLine(fields);
 			return;
 		} else {
 			extratoLine = parseTransactionLine(fields);
 		}
+	}
+
+	private static List<String> createSaldoReferenciaList() {
+		saldoReferenciaList = Arrays.asList(new String[] {"SALDO INICIAL", "SALDO ANTERIOR", "S A L D O" });
+		
+		return saldoReferenciaList;
 	}
 
 	private ExtratoBalanceLine parseBalanceLine(String[] fields) {
