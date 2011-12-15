@@ -4,7 +4,7 @@ public interface ExtratoLineParser {
 
 	void parse(String line);
 
-	ExtratoTransactionLine getLine();
+	ExtratoLine getLine();
 	
 	Exception getThrewException();
 }

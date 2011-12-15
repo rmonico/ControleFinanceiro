@@ -5,8 +5,9 @@ import java.util.List;
 import br.zero.controlefinanceiro.commandlineparser.ExtratoAnalyseSwitches;
 import br.zero.controlefinanceiro.model.Conta;
 import br.zero.controlefinanceiro.model.ContaDAO;
-import br.zero.controlefinanceiro.model.ExtratoTransactionLine;
+import br.zero.controlefinanceiro.model.ExtratoLine;
 import br.zero.controlefinanceiro.model.ExtratoLineParser;
+import br.zero.controlefinanceiro.model.ExtratoTransactionLine;
 import br.zero.controlefinanceiro.model.Lancamento;
 import br.zero.controlefinanceiro.model.LancamentoDAO;
 import br.zero.controlefinanceiro.model.extrato.ExtratoLancamento;
@@ -61,7 +62,13 @@ public class ExtratoAnalyseAction implements Action {
 
 			parser.parse(linhaExtrato.getOriginal());
 
-			ExtratoTransactionLine line = parser.getLine();
+			ExtratoLine l = parser.getLine();
+			
+			if (!(l instanceof ExtratoTransactionLine)) {
+				continue;
+			}
+			
+			ExtratoTransactionLine line = (ExtratoTransactionLine) l;
 
 			status.append(line.getReferencia());
 
