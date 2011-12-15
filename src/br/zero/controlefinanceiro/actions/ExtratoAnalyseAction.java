@@ -169,6 +169,8 @@ public class ExtratoAnalyseAction implements Action {
 			// implementada aqui!
 			return result;
 		}
+		
+		result.setConta(contaExtrato);
 
 		for (Lancamento lancamentoSemExtrato : lancamentoSemExtratoList) {
 			if (lancamentoSemExtrato.getExtrato() != null) {
