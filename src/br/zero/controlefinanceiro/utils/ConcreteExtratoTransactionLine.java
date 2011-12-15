@@ -2,7 +2,7 @@ package br.zero.controlefinanceiro.utils;
 
 import br.zero.controlefinanceiro.model.ExtratoTransactionLine;
 
-public class ConcreteExtratoTransactionLine implements ExtratoTransactionLine {
+public class ConcreteExtratoTransactionLine extends AbstractExtratoLine implements ExtratoTransactionLine {
 
 	private String referencia;
 	private Double valor;
