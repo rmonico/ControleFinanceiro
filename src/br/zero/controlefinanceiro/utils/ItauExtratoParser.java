@@ -31,7 +31,7 @@ public class ItauExtratoParser implements ExtratoLineParser {
 	}
 
 	private static List<String> createSaldoReferenciaList() {
-		saldoReferenciaList = Arrays.asList(new String[] {"SALDO INICIAL", "SALDO ANTERIOR", "S A L D O", "SALDO FINAL" });
+		saldoReferenciaList = Arrays.asList(new String[] {"SALDO INICIAL", "SALDO ANTERIOR", "S A L D O", "SDO CTA/APL AUTOMATICAS", "SALDO FINAL", "SALDO FINAL DISPONIVEL", "(-) SALDO A LIBERAR" });
 		
 		return saldoReferenciaList;
 	}
