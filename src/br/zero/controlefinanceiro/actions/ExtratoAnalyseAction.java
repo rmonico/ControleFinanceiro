@@ -26,6 +26,16 @@ import br.zero.tinycontroller.Action;
 
 public class ExtratoAnalyseAction implements Action {
 
+	public enum ContaStatus {
+		NOT_FOUND, OK
+
+	}
+
+	public enum LancamentoStatus {
+		DONT_APPLY, FOUND, NEW
+
+	}
+
 	public class InternalManualReference {
 		private Conta conta;
 		private String regex;
@@ -54,6 +64,8 @@ public class ExtratoAnalyseAction implements Action {
 		private String original;
 		private Conta conta;
 		private Lancamento lancamento;
+		private LancamentoStatus status;
+		private ContaStatus contaStatus;
 
 		public Character getTipo() {
 			return tipo;
@@ -85,6 +97,22 @@ public class ExtratoAnalyseAction implements Action {
 
 		public void setLancamento(Lancamento lancamento) {
 			this.lancamento = lancamento;
+		}
+
+		public LancamentoStatus getStatus() {
+			return status;
+		}
+
+		public void setLancamentoStatus(LancamentoStatus lancamentoStatus) {
+			this.status = lancamentoStatus;
+		}
+
+		public ContaStatus getContaStatus() {
+			return contaStatus;
+		}
+
+		public void setContaStatus(ContaStatus contaStatus) {
+			this.contaStatus = contaStatus;
 		}
 
 	}
@@ -202,6 +230,7 @@ public class ExtratoAnalyseAction implements Action {
 	private ExtratoLineAnalyseResult syncBalanceLine() {
 		ExtratoLineAnalyseResult result = new ExtratoLineAnalyseResult();
 		result.setTipo('B');
+		result.setLancamentoStatus(LancamentoStatus.DONT_APPLY);
 
 		return result;
 	}
@@ -214,8 +243,11 @@ public class ExtratoAnalyseAction implements Action {
 		Conta contaExtrato = resolveReference(contaDAO, line.getReferencia());
 
 		if (contaExtrato == null) {
+			result.setContaStatus(ContaStatus.NOT_FOUND);
 			return result;
 		}
+		
+		result.setContaStatus(ContaStatus.OK);
 
 		result.setConta(contaExtrato);
 
@@ -234,6 +266,8 @@ public class ExtratoAnalyseAction implements Action {
 			}
 
 			if (extratoLineMatch(lancamentoSemExtrato, line, contaOrigemEsperada, contaDestinoEsperada)) {
+				result.setLancamentoStatus(LancamentoStatus.FOUND);
+
 				lancamentoSemExtrato.setExtrato(linhaExtrato);
 
 				if (switches.getRealize()) {
@@ -242,10 +276,41 @@ public class ExtratoAnalyseAction implements Action {
 
 				result.setLancamento(lancamentoSemExtrato);
 
-				break;
+				return result;
 			}
 
 		}
+		
+		// Nenhum lançamento correspondente encontrado
+		result.setLancamentoStatus(LancamentoStatus.NEW);
+		
+		Lancamento novoLancamento = new Lancamento();
+		
+		result.setLancamento(novoLancamento);
+		
+		novoLancamento.setData(line.getData());
+		// Calcular depois. O cálculo será complicado, deverá levar em conta os N's pré-existentes no banco e os gerados aqui.
+		novoLancamento.setN(-1);
+		
+		Conta contaOrigemEsperada;
+		Conta contaDestinoEsperada;
+
+		if (line.getValor() > 0) {
+			// Dinheiro saiu da conta
+			contaOrigemEsperada = banco;
+			contaDestinoEsperada = contaExtrato;
+		} else {
+			// Dinheiro entrou na conta
+			contaOrigemEsperada = contaExtrato;
+			contaDestinoEsperada = banco;
+		}
+
+		novoLancamento.setContaOrigem(contaOrigemEsperada);
+		novoLancamento.setContaDestino(contaDestinoEsperada);
+		
+		novoLancamento.setValor(line.getValor());
+		
+		novoLancamento.setExtrato(linhaExtrato);
 		
 		return result;
 	}
