@@ -17,7 +17,7 @@ public class ItauExtratoParser implements ExtratoLineParser {
 		String[] fields = line.split("\t");
 
 		if (fields.length < 4) {
-			throw new ExtratoLineParserException("\"" + line + "\" não é uma linha válida do extrato do itau!");
+			throwInvalidLineException(line);
 		}
 
 		String referencia = fields[3];
@@ -27,10 +27,14 @@ public class ItauExtratoParser implements ExtratoLineParser {
 		} else if (ignorarReferenciaList.contains(referencia)) {
 			extratoLine = parseIgnoredLine();
 		} else {
-			extratoLine = parseTransactionLine(fields);
+			extratoLine = parseTransactionLine(fields, line);
 		}
 
 		extratoLine.setOriginal(line);
+	}
+
+	private void throwInvalidLineException(String line) throws ExtratoLineParserException {
+		throw new ExtratoLineParserException("\"" + line + "\" não é uma linha válida do extrato do itau!");
 	}
 
 	private static List<String> createIgnorarReferenciaList() {
@@ -55,7 +59,11 @@ public class ItauExtratoParser implements ExtratoLineParser {
 		return new UnknownExtratoLine();
 	}
 
-	private AbstractExtratoLine parseTransactionLine(String[] fields) {
+	private AbstractExtratoLine parseTransactionLine(String[] fields, String line) throws ExtratoLineParserException {
+		if (fields.length < 6) {
+			throwInvalidLineException(line);
+		}
+
 		ConcreteExtratoTransactionLine etl = new ConcreteExtratoTransactionLine();
 
 		etl.setReferencia(fields[3]);
@@ -76,7 +84,38 @@ public class ItauExtratoParser implements ExtratoLineParser {
 		// data.set(Calendar.YEAR,
 		// GregorianCalendar.getInstance().get(Calendar.YEAR));
 
+		Double valor = parseValor(fields[5]);
+
+		etl.setValor(valor);
+
 		return etl;
+	}
+
+	private Double parseValor(String str) {
+		StringBuilder sb = new StringBuilder();
+		
+		for (char ch : str.toCharArray()) {
+			switch (ch) {
+			case '.': {
+				continue;
+			}
+			case ',': {
+				sb.append('.');
+				break;
+			}
+			case '-' : {
+				sb.insert(0, '-');
+				break;
+			}
+			default: {
+				sb.append(ch);
+			}
+			}
+		}
+		
+		Double valor = Double.parseDouble(sb.toString());
+		
+		return valor;
 	}
 
 	@Override
