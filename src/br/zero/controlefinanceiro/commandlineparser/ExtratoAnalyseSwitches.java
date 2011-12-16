@@ -30,8 +30,8 @@ public class ExtratoAnalyseSwitches {
 	}
 
 	@CommandLineSwitch(param = "--refs", complexParser = true, parser = "ManualReferencesParser.parse")
-	public List<ManualReference> setManualRefList(List<ManualReference> value) {
-		return manualRefs;
+	public void setManualRefList(List<ManualReference> value) {
+		manualRefs = value;
 	}
 
 	public List<ManualReference> getManualRefList() {

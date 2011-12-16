@@ -70,7 +70,7 @@ public class ExtratoSwitchesTests extends CustomParserTests {
 
 	@Test
 	public void doAnalyseTest3() throws ParserException {
-		doExtratoLoad(new String[] { "extrato-analyse", "conta", "--refs", "regex1", "conta1", "regex2", "conta2"}, Command.EXTRATO_ANALYSE);
+		doExtratoLoad(new String[] { "extrato-analyse", "conta", "--refs", "conta1", "regex1", "conta2", "regex2"}, Command.EXTRATO_ANALYSE);
 
 		assertNotNull(switches.getExtratoAnalyseSwitches());
 

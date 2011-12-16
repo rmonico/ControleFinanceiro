@@ -39,6 +39,8 @@ public class CommandLineLoader {
 		
 		UtilsParser monthDateParser = new UtilsParser(new SimpleDateFormat("MMM/yyyy"));
 		parsers.put("MonthDateParser", monthDateParser);
+		
+		parsers.put("ManualReferencesParser", new ManualReferencesParser());
 
 		parser.parse();
 		

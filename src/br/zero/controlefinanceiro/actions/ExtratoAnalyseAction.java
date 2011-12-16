@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.zero.controlefinanceiro.commandlineparser.ExtratoAnalyseSwitches;
+import br.zero.controlefinanceiro.commandlineparser.ManualReference;
 import br.zero.controlefinanceiro.model.Conta;
 import br.zero.controlefinanceiro.model.ContaDAO;
 import br.zero.controlefinanceiro.model.ExtratoBalanceLine;
@@ -24,6 +25,28 @@ import br.zero.textgrid.TextGridFormattedColumn;
 import br.zero.tinycontroller.Action;
 
 public class ExtratoAnalyseAction implements Action {
+
+	public class InternalManualReference {
+		private Conta conta;
+		private String regex;
+
+		public Conta getConta() {
+			return conta;
+		}
+
+		public void setConta(Conta conta) {
+			this.conta = conta;
+		}
+
+		public String getRegex() {
+			return regex;
+		}
+
+		public void setRegex(String regex) {
+			this.regex = regex;
+		}
+
+	}
 
 	public class ExtratoLineAnalyseResult {
 
@@ -69,6 +92,7 @@ public class ExtratoAnalyseAction implements Action {
 	private LancamentoDAO lancamentoDAO;
 	private Conta banco;
 	private ExtratoAnalyseSwitches switches;
+	private List<InternalManualReference> manualRefList;
 
 	private class ExtratoAnalyseException extends ControleFinanceiroException {
 
@@ -90,6 +114,8 @@ public class ExtratoAnalyseAction implements Action {
 	@Override
 	public void run(Object param) throws ExtratoAnalyseException {
 		switches = checkParamValid(param);
+
+		manualRefList = makeManualRefList();
 
 		banco = getConta(switches.getNomeBanco());
 
@@ -115,6 +141,29 @@ public class ExtratoAnalyseAction implements Action {
 		} catch (Exception e) {
 			throw new ExtratoAnalyseException(e);
 		}
+	}
+
+	private List<InternalManualReference> makeManualRefList() throws ExtratoAnalyseException {
+		List<InternalManualReference> mrl = new ArrayList<InternalManualReference>();
+		
+		ContaDAO dao = new ContaDAO();
+		
+		for (ManualReference mr : switches.getManualRefList()) {
+			InternalManualReference imr = new InternalManualReference();
+			
+			Conta conta = dao.getByNome(mr.getNomeConta());
+			
+			if (conta == null) {
+				throw new ExtratoAnalyseException("Referências manuais: conta " + mr.getNomeConta() + "não encontrada.");
+			}
+			
+			imr.setConta(conta);
+			imr.setRegex(mr.getRegex());
+			
+			mrl.add(imr);
+		}
+		
+		return mrl;
 	}
 
 	private void makeSync(List<Lancamento> lancamentoSemExtratoList, List<ExtratoLancamento> extratoLancamentoOrfao, ExtratoLineParser parser) throws ExtratoLineParserException, TextGridException {
@@ -161,14 +210,13 @@ public class ExtratoAnalyseAction implements Action {
 		ExtratoLineAnalyseResult result = new ExtratoLineAnalyseResult();
 		result.setTipo('T');
 
-		Conta contaExtrato = contaDAO.resolveExtratoLine(banco, line.getReferencia());
+		
+		Conta contaExtrato = resolveReference(contaDAO, line.getReferencia());
 
 		if (contaExtrato == null) {
-			// TODO A resolução de referências por linha de comando deve ser
-			// implementada aqui!
 			return result;
 		}
-		
+
 		result.setConta(contaExtrato);
 
 		for (Lancamento lancamentoSemExtrato : lancamentoSemExtratoList) {
@@ -206,6 +254,22 @@ public class ExtratoAnalyseAction implements Action {
 		}
 
 		return result;
+	}
+
+	private Conta resolveReference(ContaDAO contaDAO, String referencia) {
+		Conta conta = contaDAO.resolveExtratoLine(banco, referencia);
+		
+		if (conta != null) {
+			return conta;
+		}
+		
+		for (InternalManualReference imr : manualRefList) {
+			if (referencia.matches(imr.getRegex())) {
+				return imr.getConta();
+			}
+		}
+		
+		return null;
 	}
 
 	private ExtratoLineAnalyseResult showUnknownLine() {
