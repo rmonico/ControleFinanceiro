@@ -220,12 +220,6 @@ public class ExtratoAnalyseAction implements Action {
 		result.setConta(contaExtrato);
 
 		for (Lancamento lancamentoSemExtrato : lancamentoSemExtratoList) {
-			if (lancamentoSemExtrato.getExtrato() != null) {
-				// Ignora estas linhas. Elas podem ocorrer pois os itens da
-				// lista lancamentoSemExtratoList são alterados neste loop
-				continue;
-			}
-
 			Conta contaOrigemEsperada;
 			Conta contaDestinoEsperada;
 
@@ -252,7 +246,7 @@ public class ExtratoAnalyseAction implements Action {
 			}
 
 		}
-
+		
 		return result;
 	}
 
@@ -297,7 +291,7 @@ public class ExtratoAnalyseAction implements Action {
 	private boolean extratoLineMatch(Lancamento lancto, ExtratoTransactionLine line, Conta contaOrigemEsperada, Conta contaDestinoEsperada) {
 		boolean origemOk = lancto.getContaOrigem().equals(contaOrigemEsperada);
 		boolean destinoOk = lancto.getContaDestino().equals(contaDestinoEsperada);
-		boolean valorOk = lancto.getValor().equals(line.getValor());
+		boolean valorOk = lancto.getValor().equals(Math.abs(line.getValor()));
 
 		return origemOk && destinoOk && valorOk;
 	}
