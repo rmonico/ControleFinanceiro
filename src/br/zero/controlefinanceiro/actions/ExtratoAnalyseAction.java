@@ -305,7 +305,7 @@ public class ExtratoAnalyseAction implements Action {
 
 	private void addLancamentosNaoResolvidos(Calendar data, List<Lancamento> lancamentoOrfaoList, List<ExtratoLineAnalyseResult> statuses) {
 		for (Lancamento lancamento : lancamentoOrfaoList) {
-			if (lancamento.getData().equals(data)) {
+			if ((lancamento.getData().equals(data)) && (lancamento.getExtrato() == null)) {
 				ExtratoLineAnalyseResult r = new ExtratoLineAnalyseResult();
 				
 				r.setLinhaStatus(StatusLinha.DONT_APPLY);
@@ -404,19 +404,19 @@ public class ExtratoAnalyseAction implements Action {
 		Conta contaDestinoEsperada;
 
 		if (line.getValor() > 0) {
-			// Dinheiro saiu da conta
-			contaOrigemEsperada = banco;
-			contaDestinoEsperada = contaExtrato;
-		} else {
-			// Dinheiro entrou na conta
+			// Dinheiro entrou da conta
 			contaOrigemEsperada = contaExtrato;
 			contaDestinoEsperada = banco;
+		} else {
+			// Dinheiro saiu na conta
+			contaOrigemEsperada = banco;
+			contaDestinoEsperada = contaExtrato;
 		}
 
 		novoLancamento.setContaOrigem(contaOrigemEsperada);
 		novoLancamento.setContaDestino(contaDestinoEsperada);
 
-		novoLancamento.setValor(line.getValor());
+		novoLancamento.setValor(Math.abs(line.getValor()));
 
 		novoLancamento.setExtrato(line.getOrigem());
 
