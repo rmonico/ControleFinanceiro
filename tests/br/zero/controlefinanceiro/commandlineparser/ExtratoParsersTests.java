@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 
 import org.junit.Test;
 
+import br.zero.controlefinanceiro.model.ExtratoBalanceLine;
 import br.zero.controlefinanceiro.model.ExtratoLine;
 import br.zero.controlefinanceiro.model.ExtratoLineParser;
 import br.zero.controlefinanceiro.model.ExtratoTransactionLine;
@@ -23,7 +24,7 @@ public class ExtratoParsersTests {
 	}
 
 	@Test
-	public void doItauExtratoParserTransactionLineTest() throws ExtratoLineParserException {
+	public void doItauExtratoTransactionLineParserTest() throws ExtratoLineParserException {
 		parser = getItauParser();
 
 		parser.parse("01/09			IOF		1,85-		352,31-	");
@@ -40,8 +41,20 @@ public class ExtratoParsersTests {
 		assertEquals("data", "01/Sep/2011", sdf.format(line.getData().getTime()));
 
 		assertEquals("referência", "IOF", line.getReferencia());
-		
+
 		assertEquals("valor", -1.85, line.getValor(), 0.0);
 	}
 
+	@Test
+	public void doItauExtratoBalanceLineParserTest() throws ExtratoLineParserException {
+		parser = getItauParser();
+
+		parser.parse("01/09			SALDO INICIAL				350,46-	");
+		
+		ExtratoLine el = parser.getLine();
+
+		assertNotNull("linha do extrato não-nula", el);
+
+		assertTrue("interface implementada", el instanceof ExtratoBalanceLine);
+	}
 }
