@@ -1,5 +1,6 @@
 package br.zero.controlefinanceiro.model;
 
+import br.zero.controlefinanceiro.abstractextratoparser.ExtratoLineParser;
 import br.zero.customdao.EntitySetup;
 
 import java.io.Serializable;

@@ -1,6 +1,6 @@
 package br.zero.controlefinanceiro.utils;
 
-import br.zero.controlefinanceiro.model.ExtratoLancamentoUnknown;
+import br.zero.controlefinanceiro.abstractextratoparser.ExtratoLancamentoUnknown;
 
 public class ConcreteExtratoLancamentoUnknown extends AbstractParsedExtratoLancamento implements ExtratoLancamentoUnknown {
 

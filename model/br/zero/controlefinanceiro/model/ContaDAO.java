@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.persistence.Query;
 
+import br.zero.controlefinanceiro.abstractextratoparser.ExtratoLineParser;
 import br.zero.controlefinanceiro.model.extrato.ReferenciaExtrato;
 import br.zero.customdao.CustomDAO;
 import br.zero.customdao.DAOSetup;

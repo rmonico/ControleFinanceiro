@@ -2,7 +2,7 @@ package br.zero.controlefinanceiro.utils;
 
 import java.util.Calendar;
 
-import br.zero.controlefinanceiro.model.ExtratoLancamentoTransaction;
+import br.zero.controlefinanceiro.abstractextratoparser.ExtratoLancamentoTransaction;
 
 public class ConcreteExtratoLancamentoTransaction extends AbstractParsedExtratoLancamento implements ExtratoLancamentoTransaction {
 

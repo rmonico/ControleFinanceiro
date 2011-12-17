@@ -1,4 +1,4 @@
-package br.zero.controlefinanceiro.model;
+package br.zero.controlefinanceiro.abstractextratoparser;
 
 public interface ExtratoLancamentoUnknown extends ParsedExtratoLancamento {
 

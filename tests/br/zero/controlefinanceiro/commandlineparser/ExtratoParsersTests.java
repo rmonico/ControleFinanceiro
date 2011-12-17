@@ -8,11 +8,11 @@ import java.text.SimpleDateFormat;
 
 import org.junit.Test;
 
-import br.zero.controlefinanceiro.model.ExtratoLancamentoBalance;
-import br.zero.controlefinanceiro.model.ParsedExtratoLancamento;
-import br.zero.controlefinanceiro.model.ExtratoLineParser;
-import br.zero.controlefinanceiro.model.ExtratoLancamentoTransaction;
-import br.zero.controlefinanceiro.model.ExtratoLancamentoUnknown;
+import br.zero.controlefinanceiro.abstractextratoparser.ExtratoLancamentoBalance;
+import br.zero.controlefinanceiro.abstractextratoparser.ExtratoLancamentoTransaction;
+import br.zero.controlefinanceiro.abstractextratoparser.ExtratoLancamentoUnknown;
+import br.zero.controlefinanceiro.abstractextratoparser.ExtratoLineParser;
+import br.zero.controlefinanceiro.abstractextratoparser.ParsedExtratoLancamento;
 import br.zero.controlefinanceiro.utils.ExtratoLineParserException;
 import br.zero.controlefinanceiro.utils.ExtratoParsers;
 
