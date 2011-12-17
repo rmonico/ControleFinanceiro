@@ -1,9 +1,14 @@
 package br.zero.controlefinanceiro.utils;
 
+
 public class ExtratoLineParserException extends Exception {
 
 	public ExtratoLineParserException(String message) {
 		super(message);
+	}
+
+	public ExtratoLineParserException(Exception e) {
+		super(e);
 	}
 
 	/**

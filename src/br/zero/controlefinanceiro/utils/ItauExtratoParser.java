@@ -1,6 +1,10 @@
 package br.zero.controlefinanceiro.utils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import br.zero.controlefinanceiro.model.ExtratoLine;
@@ -68,21 +72,14 @@ public class ItauExtratoParser implements ExtratoLineParser {
 
 		etl.setReferencia(fields[3]);
 
-		// String dataStr = fields[0];
-		//
-		// SimpleDateFormat sdf = new SimpleDateFormat("dd/MM");
-		//
-		// data = GregorianCalendar.getInstance();
-		//
-		// try {
-		// data.setTime(sdf.parse(dataStr));
-		// } catch (ParseException e) {
-		// threwException = e;
-		// isTransferLine = false;
-		// }
-		//
-		// data.set(Calendar.YEAR,
-		// GregorianCalendar.getInstance().get(Calendar.YEAR));
+		Calendar data;
+		try {
+			data = parseData(fields[0]);
+		} catch (ParseException e) {
+			throw new ExtratoLineParserException(e);
+		}
+
+		etl.setData(data);
 
 		Double valor = parseValor(fields[5]);
 
@@ -91,9 +88,21 @@ public class ItauExtratoParser implements ExtratoLineParser {
 		return etl;
 	}
 
+	private Calendar parseData(String dataStr) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM");
+
+		Calendar data = GregorianCalendar.getInstance();
+
+		data.setTime(sdf.parse(dataStr));
+
+		data.set(Calendar.YEAR, GregorianCalendar.getInstance().get(Calendar.YEAR));
+
+		return data;
+	}
+
 	private Double parseValor(String str) {
 		StringBuilder sb = new StringBuilder();
-		
+
 		for (char ch : str.toCharArray()) {
 			switch (ch) {
 			case '.': {
@@ -103,7 +112,7 @@ public class ItauExtratoParser implements ExtratoLineParser {
 				sb.append('.');
 				break;
 			}
-			case '-' : {
+			case '-': {
 				sb.insert(0, '-');
 				break;
 			}
@@ -112,9 +121,9 @@ public class ItauExtratoParser implements ExtratoLineParser {
 			}
 			}
 		}
-		
+
 		Double valor = Double.parseDouble(sb.toString());
-		
+
 		return valor;
 	}
 
