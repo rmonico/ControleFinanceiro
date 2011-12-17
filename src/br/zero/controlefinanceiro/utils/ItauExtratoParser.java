@@ -7,8 +7,9 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import br.zero.controlefinanceiro.model.ParsedExtratoLancamento;
 import br.zero.controlefinanceiro.model.ExtratoLineParser;
+import br.zero.controlefinanceiro.model.ParsedExtratoLancamento;
+import br.zero.controlefinanceiro.model.extrato.ExtratoLancamento;
 
 public class ItauExtratoParser implements ExtratoLineParser {
 
@@ -17,11 +18,11 @@ public class ItauExtratoParser implements ExtratoLineParser {
 	private static List<String> ignorarReferenciaList = createIgnorarReferenciaList();
 
 	@Override
-	public void parse(String line) throws ExtratoLineParserException {
-		String[] fields = line.split("\t");
+	public void parse(ExtratoLancamento lancamento) throws ExtratoLineParserException {
+		String[] fields = lancamento.getOriginal().split("\t");
 
 		if (fields.length < 4) {
-			throwInvalidLineException(line);
+			throwInvalidLineException(lancamento.getOriginal());
 		}
 
 		String referencia = fields[3];
@@ -31,10 +32,10 @@ public class ItauExtratoParser implements ExtratoLineParser {
 		} else if (ignorarReferenciaList.contains(referencia)) {
 			extratoLine = parseIgnoredLine();
 		} else {
-			extratoLine = parseTransactionLine(fields, line);
+			extratoLine = parseTransactionLine(fields, lancamento.getOriginal());
 		}
 
-		extratoLine.setOriginal(line);
+		extratoLine.setOrigem(lancamento);
 	}
 
 	private void throwInvalidLineException(String line) throws ExtratoLineParserException {
