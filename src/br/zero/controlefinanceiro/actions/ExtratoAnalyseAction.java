@@ -22,6 +22,7 @@ import br.zero.textgrid.TextGrid;
 import br.zero.textgrid.TextGridColumnAlignment;
 import br.zero.textgrid.TextGridException;
 import br.zero.textgrid.TextGridFormattedColumn;
+import br.zero.textgrid.formatters.ToStringFormatter;
 import br.zero.tinycontroller.Action;
 
 public class ExtratoAnalyseAction implements Action {
@@ -381,11 +382,11 @@ public class ExtratoAnalyseAction implements Action {
 		grid.getData().setHeaderSeparatorChar('=');
 		grid.getData().setTitle("Sincronização de Extrato banco \"" + banco.getNome() + "\"");
 
-		TextGridFormattedColumn.createFormattedColumn(grid, "", TextGridFormattedColumn.TOSTRING_FORMATTER, TextGridColumnAlignment.CENTER, "getStatusLinha");
+		TextGridFormattedColumn.createFormattedColumn(grid, "", new ToStringFormatter(""), TextGridColumnAlignment.CENTER, "getStatusLinha");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Original", TextGridFormattedColumn.STRING_FORMATTER, TextGridColumnAlignment.LEFT, "getOriginal");
-		TextGridFormattedColumn.createFormattedColumn(grid, "", TextGridFormattedColumn.TOSTRING_FORMATTER, TextGridColumnAlignment.CENTER, "getContaStatus");
+		TextGridFormattedColumn.createFormattedColumn(grid, "", new ToStringFormatter(""), TextGridColumnAlignment.CENTER, "getContaStatus");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Conta", ControleFinanceiroFormatters.CONTA_FORMATTER, TextGridColumnAlignment.LEFT, "getConta");
-		TextGridFormattedColumn.createFormattedColumn(grid, "", TextGridFormattedColumn.TOSTRING_FORMATTER, TextGridColumnAlignment.CENTER, "getLancamentoStatus");
+		TextGridFormattedColumn.createFormattedColumn(grid, "", new ToStringFormatter(""), TextGridColumnAlignment.CENTER, "getLancamentoStatus");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Lancamento", ControleFinanceiroFormatters.LANCAMENTO_FORMATTER, TextGridColumnAlignment.LEFT, "getLancamento");
 
 		return grid;
