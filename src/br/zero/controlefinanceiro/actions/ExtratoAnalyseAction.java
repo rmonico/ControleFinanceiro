@@ -8,12 +8,13 @@ import br.zero.controlefinanceiro.commandlineparser.ExtratoAnalyseSwitches;
 import br.zero.controlefinanceiro.commandlineparser.ManualReference;
 import br.zero.controlefinanceiro.model.Conta;
 import br.zero.controlefinanceiro.model.ContaDAO;
-import br.zero.controlefinanceiro.model.ExtratoBalanceLine;
+import br.zero.controlefinanceiro.model.ExtratoLancamentoBalance;
 import br.zero.controlefinanceiro.model.ParsedExtratoLancamento;
 import br.zero.controlefinanceiro.model.ExtratoLineParser;
-import br.zero.controlefinanceiro.model.ExtratoTransactionLine;
+import br.zero.controlefinanceiro.model.ExtratoLancamentoTransaction;
 import br.zero.controlefinanceiro.model.Lancamento;
 import br.zero.controlefinanceiro.model.LancamentoDAO;
+import br.zero.controlefinanceiro.model.ExtratoLancamentoUnknown;
 import br.zero.controlefinanceiro.model.extrato.ExtratoLancamento;
 import br.zero.controlefinanceiro.model.extrato.ExtratoLancamentoDAO;
 import br.zero.controlefinanceiro.utils.ControleFinanceiroException;
@@ -196,15 +197,20 @@ public class ExtratoAnalyseAction implements Action {
 			return;
 		}
 
-		ExtratoLineParser parser = banco.getParser();
-
-		if (parser == null) {
-			throw new ExtratoAnalyseException("Nenhum parser registrado para o banco: \"" + banco.getNome() + "\".");
+		TextGrid grid = createGrid();
+		List<ExtratoLineAnalyseResult> statuses;
+		
+		try {
+			statuses= makeSync(lancamentoSemExtratoList, extratoLancamentoOrfao);
+		} catch (ExtratoLineParserException e) {
+			throw new ExtratoAnalyseException(e);
 		}
+		
+		grid.setValues(statuses);
 
 		try {
-			makeSync(lancamentoSemExtratoList, extratoLancamentoOrfao, parser);
-		} catch (Exception e) {
+			grid.show();
+		} catch (TextGridException e) {
 			throw new ExtratoAnalyseException(e);
 		}
 	}
@@ -232,40 +238,54 @@ public class ExtratoAnalyseAction implements Action {
 		return mrl;
 	}
 
-	private void makeSync(List<Lancamento> lancamentoSemExtratoList, List<ExtratoLancamento> extratoLancamentoOrfao, ExtratoLineParser parser) throws ExtratoLineParserException, TextGridException {
-		TextGrid grid = createGrid();
-
+	private List<ExtratoLineAnalyseResult> makeSync(List<Lancamento> lancamentoSemExtratoList, List<ExtratoLancamento> extratoLancamentoOrfao) throws ExtratoLineParserException, ExtratoAnalyseException {
+		List<ParsedExtratoLancamento> extratoLines = new ArrayList<ParsedExtratoLancamento>();
+		
+		makeParser(extratoLancamentoOrfao, extratoLines);
+		
 		List<ExtratoLineAnalyseResult> statuses = new ArrayList<ExtratoLineAnalyseResult>();
 
 		ContaDAO contaDAO = new ContaDAO();
 		
 //		Calendar dataAnterior = null;
-
-		for (ExtratoLancamento linhaExtrato : extratoLancamentoOrfao) {
-			parser.parse(linhaExtrato.getOriginal());
-
-			ParsedExtratoLancamento line = parser.getLine();
-
+		
+		for (ParsedExtratoLancamento extrato : extratoLines) {
 			ExtratoLineAnalyseResult analyseResult;
 
-			if (line instanceof ExtratoBalanceLine) {
+			ExtratoLancamento origem = extrato.getOrigem();
+			
+			if (origem instanceof ExtratoLancamentoBalance) {
 				analyseResult = syncBalanceLine();
-			} else if (line instanceof ExtratoTransactionLine) {
-				analyseResult = syncTransactionLine(lancamentoSemExtratoList, contaDAO, linhaExtrato, (ExtratoTransactionLine) line);
-			} else {
+			} else if (origem instanceof ExtratoLancamentoTransaction) {
+				analyseResult = syncTransactionLine(lancamentoSemExtratoList, contaDAO, (ExtratoLancamentoTransaction) extrato);
+			} else if (origem instanceof ExtratoLancamentoUnknown) {
 				analyseResult = syncUnknownLine();
+			} else {
+				throw new ExtratoAnalyseException("Classe de linha desconhecida (\"" + origem.getClass() + "\")");
 			}
 
-			analyseResult.setOriginal(line.getOriginal());
+			analyseResult.setOriginal(extrato.getOrigem().getOriginal());
 
 			statuses.add(analyseResult);
-			
-//			if (data)
 		}
 
-		grid.setValues(statuses);
+		return statuses;
+	}
 
-		grid.show();
+	private void makeParser(List<ExtratoLancamento> extratoLancamentoOrfao, List<ParsedExtratoLancamento> extratoLines) throws ExtratoLineParserException, ExtratoAnalyseException {
+		ExtratoLineParser parser = banco.getParser();
+
+		if (parser == null) {
+			throw new ExtratoAnalyseException("Nenhum parser registrado para o banco: \"" + banco.getNome() + "\".");
+		}
+
+		for (ExtratoLancamento el : extratoLancamentoOrfao) {
+			parser.parse(el.getOriginal());
+
+			ParsedExtratoLancamento line = parser.getLine();
+			
+			extratoLines.add(line);
+		}
 	}
 
 	private ExtratoLineAnalyseResult syncBalanceLine() {
@@ -277,7 +297,7 @@ public class ExtratoAnalyseAction implements Action {
 		return result;
 	}
 
-	private ExtratoLineAnalyseResult syncTransactionLine(List<Lancamento> lancamentoSemExtratoList, ContaDAO contaDAO, ExtratoLancamento linhaExtrato, ExtratoTransactionLine line) {
+	private ExtratoLineAnalyseResult syncTransactionLine(List<Lancamento> lancamentoSemExtratoList, ContaDAO contaDAO, ExtratoLancamentoTransaction line) {
 		ExtratoLineAnalyseResult result = new ExtratoLineAnalyseResult();
 		result.setStatusLinha(StatusLinha.TRANSACTION);
 
@@ -309,7 +329,7 @@ public class ExtratoAnalyseAction implements Action {
 			if ((lancamentoSemExtrato.getExtrato() == null) && (extratoLineMatch(lancamentoSemExtrato, line, contaOrigemEsperada, contaDestinoEsperada))) {
 				result.setLancamentoStatus(LancamentoStatus.FOUND);
 
-				lancamentoSemExtrato.setExtrato(linhaExtrato);
+				lancamentoSemExtrato.setExtrato(line.getOrigem());
 
 				if (switches.getRealize()) {
 					lancamentoDAO.alterar(lancamentoSemExtrato);
@@ -352,7 +372,7 @@ public class ExtratoAnalyseAction implements Action {
 
 		novoLancamento.setValor(line.getValor());
 
-		novoLancamento.setExtrato(linhaExtrato);
+		novoLancamento.setExtrato(line.getOrigem());
 
 		if (switches.getRealize()) {
 			lancamentoDAO.inserir(novoLancamento);
@@ -403,7 +423,7 @@ public class ExtratoAnalyseAction implements Action {
 		return grid;
 	}
 
-	private boolean extratoLineMatch(Lancamento lancto, ExtratoTransactionLine line, Conta contaOrigemEsperada, Conta contaDestinoEsperada) {
+	private boolean extratoLineMatch(Lancamento lancto, ExtratoLancamentoTransaction line, Conta contaOrigemEsperada, Conta contaDestinoEsperada) {
 		Calendar dataEsperada = line.getData();
 		boolean dataOk = lancto.getData().equals(dataEsperada);
 		boolean origemOk = lancto.getContaOrigem().equals(contaOrigemEsperada);
