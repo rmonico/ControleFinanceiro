@@ -1,17 +1,18 @@
 package br.zero.controlefinanceiro.utils;
 
 import br.zero.controlefinanceiro.model.ParsedExtratoLancamento;
+import br.zero.controlefinanceiro.model.extrato.ExtratoLancamento;
 
 public class AbstractExtratoLine implements ParsedExtratoLancamento {
 
-	private String original;
-	
-	@Override
-	public String getOriginal() {
-		return original;
+	private ExtratoLancamento origem;
+
+	public ExtratoLancamento getOrigem() {
+		return origem;
 	}
 
-	public void setOriginal(String value) {
-		original = value;
+	public void setOrigem(ExtratoLancamento origem) {
+		this.origem = origem;
 	}
+
 }

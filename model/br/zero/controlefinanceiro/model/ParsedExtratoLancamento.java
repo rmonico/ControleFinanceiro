@@ -1,6 +1,7 @@
 package br.zero.controlefinanceiro.model;
 
-public interface ParsedExtratoLancamento {
-	String getOriginal();
+import br.zero.controlefinanceiro.model.extrato.ExtratoLancamento;
 
+public interface ParsedExtratoLancamento {
+	ExtratoLancamento getOrigem();
 }
