@@ -33,8 +33,6 @@ public class ItauExtratoParser implements ExtratoLineParser {
 		} else {
 			extratoLine = parseTransactionLine(fields, line);
 		}
-
-		extratoLine.setOriginal(line);
 	}
 
 	private void throwInvalidLineException(String line) throws ExtratoLineParserException {
