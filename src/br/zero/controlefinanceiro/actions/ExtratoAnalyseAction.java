@@ -1,6 +1,7 @@
 package br.zero.controlefinanceiro.actions;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import br.zero.controlefinanceiro.commandlineparser.ExtratoAnalyseSwitches;
@@ -43,7 +44,7 @@ public class ExtratoAnalyseAction implements Action {
 	}
 
 	public enum ContaStatus {
-		NOT_FOUND("!"), OK(" ");
+		NOT_FOUND("!"), DONT_APPLY("-"), OK(" ");
 
 		private String toString;
 
@@ -60,13 +61,13 @@ public class ExtratoAnalyseAction implements Action {
 
 	public enum LancamentoStatus {
 		DONT_APPLY("-"), FOUND("U"), NEW("*");
-		
+
 		private String toString;
 
 		private LancamentoStatus(String toString) {
 			this.toString = toString;
 		}
-		
+
 		@Override
 		public String toString() {
 			return toString;
@@ -256,7 +257,9 @@ public class ExtratoAnalyseAction implements Action {
 
 			analyseResult.setOriginal(line.getOriginal());
 
-			statuses.add(analyseResult);
+			if (line instanceof ExtratoTransactionLine) {
+				statuses.add(analyseResult);
+			}
 		}
 
 		grid.setValues(statuses);
@@ -267,6 +270,7 @@ public class ExtratoAnalyseAction implements Action {
 	private ExtratoLineAnalyseResult syncBalanceLine() {
 		ExtratoLineAnalyseResult result = new ExtratoLineAnalyseResult();
 		result.setStatusLinha(StatusLinha.BALANCE);
+		result.setContaStatus(ContaStatus.DONT_APPLY);
 		result.setLancamentoStatus(LancamentoStatus.DONT_APPLY);
 
 		return result;
@@ -348,7 +352,7 @@ public class ExtratoAnalyseAction implements Action {
 		novoLancamento.setValor(line.getValor());
 
 		novoLancamento.setExtrato(linhaExtrato);
-		
+
 		if (switches.getRealize()) {
 			lancamentoDAO.inserir(novoLancamento);
 		}
@@ -376,6 +380,8 @@ public class ExtratoAnalyseAction implements Action {
 		ExtratoLineAnalyseResult result = new ExtratoLineAnalyseResult();
 
 		result.setStatusLinha(StatusLinha.UNKNOWN);
+		result.setContaStatus(ContaStatus.DONT_APPLY);
+		result.setLancamentoStatus(LancamentoStatus.DONT_APPLY);
 
 		return result;
 	}
@@ -397,11 +403,13 @@ public class ExtratoAnalyseAction implements Action {
 	}
 
 	private boolean extratoLineMatch(Lancamento lancto, ExtratoTransactionLine line, Conta contaOrigemEsperada, Conta contaDestinoEsperada) {
+		Calendar dataEsperada = line.getData();
+		boolean dataOk = lancto.getData().equals(dataEsperada);
 		boolean origemOk = lancto.getContaOrigem().equals(contaOrigemEsperada);
 		boolean destinoOk = lancto.getContaDestino().equals(contaDestinoEsperada);
 		boolean valorOk = lancto.getValor().equals(Math.abs(line.getValor()));
 
-		return origemOk && destinoOk && valorOk;
+		return dataOk && origemOk && destinoOk && valorOk;
 	}
 
 	private Conta getConta(String nomeConta) throws ExtratoAnalyseException {
