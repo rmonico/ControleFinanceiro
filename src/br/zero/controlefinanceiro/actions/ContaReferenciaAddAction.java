@@ -3,8 +3,8 @@ package br.zero.controlefinanceiro.actions;
 import br.zero.controlefinanceiro.commandlineparser.ContaReferenciaAddSwitches;
 import br.zero.controlefinanceiro.model.Conta;
 import br.zero.controlefinanceiro.model.ContaDAO;
-import br.zero.controlefinanceiro.model.ReferenciaExtratoDAO;
 import br.zero.controlefinanceiro.model.extrato.ReferenciaExtrato;
+import br.zero.controlefinanceiro.model.extrato.ReferenciaExtratoDAO;
 import br.zero.tinycontroller.Action;
 
 public class ContaReferenciaAddAction implements Action {

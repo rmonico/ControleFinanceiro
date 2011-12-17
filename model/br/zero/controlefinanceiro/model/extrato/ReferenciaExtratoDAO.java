@@ -1,10 +1,11 @@
-package br.zero.controlefinanceiro.model;
+package br.zero.controlefinanceiro.model.extrato;
 
 import java.util.List;
 
 import javax.persistence.Query;
 
-import br.zero.controlefinanceiro.model.extrato.ReferenciaExtrato;
+import br.zero.controlefinanceiro.model.Conta;
+import br.zero.controlefinanceiro.model.Lancamento;
 import br.zero.customdao.CustomDAO;
 import br.zero.customdao.DAOSetup;
 
