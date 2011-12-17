@@ -2,7 +2,7 @@ package br.zero.controlefinanceiro.model;
 
 import java.util.Calendar;
 
-public interface ExtratoTransactionLine extends ParsedExtratoLancamento {
+public interface ExtratoLancamentoTransaction extends ParsedExtratoLancamento {
 	String getReferencia();
 
 	Double getValor();

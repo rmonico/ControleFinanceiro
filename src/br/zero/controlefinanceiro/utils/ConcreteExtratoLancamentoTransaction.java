@@ -2,9 +2,9 @@ package br.zero.controlefinanceiro.utils;
 
 import java.util.Calendar;
 
-import br.zero.controlefinanceiro.model.ExtratoTransactionLine;
+import br.zero.controlefinanceiro.model.ExtratoLancamentoTransaction;
 
-public class ConcreteExtratoTransactionLine extends AbstractExtratoLine implements ExtratoTransactionLine {
+public class ConcreteExtratoLancamentoTransaction extends AbstractParsedExtratoLancamento implements ExtratoLancamentoTransaction {
 
 	private String referencia;
 	private Double valor;

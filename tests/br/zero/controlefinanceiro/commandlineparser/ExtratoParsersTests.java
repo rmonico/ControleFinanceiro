@@ -8,11 +8,11 @@ import java.text.SimpleDateFormat;
 
 import org.junit.Test;
 
-import br.zero.controlefinanceiro.model.ExtratoBalanceLine;
+import br.zero.controlefinanceiro.model.ExtratoLancamentoBalance;
 import br.zero.controlefinanceiro.model.ParsedExtratoLancamento;
 import br.zero.controlefinanceiro.model.ExtratoLineParser;
-import br.zero.controlefinanceiro.model.ExtratoTransactionLine;
-import br.zero.controlefinanceiro.model.UnknownExtratoLine;
+import br.zero.controlefinanceiro.model.ExtratoLancamentoTransaction;
+import br.zero.controlefinanceiro.model.ExtratoLancamentoUnknown;
 import br.zero.controlefinanceiro.utils.ExtratoLineParserException;
 import br.zero.controlefinanceiro.utils.ExtratoParsers;
 
@@ -34,9 +34,9 @@ public class ExtratoParsersTests {
 
 		assertNotNull("linha do extrato não-nula", el);
 
-		assertTrue("interface implementada", el instanceof ExtratoTransactionLine);
+		assertTrue("interface implementada", el instanceof ExtratoLancamentoTransaction);
 
-		ExtratoTransactionLine line = (ExtratoTransactionLine) el;
+		ExtratoLancamentoTransaction line = (ExtratoLancamentoTransaction) el;
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
 		assertEquals("data", "01/Sep/2011", sdf.format(line.getData().getTime()));
@@ -56,7 +56,7 @@ public class ExtratoParsersTests {
 
 		assertNotNull("linha do extrato não-nula", el);
 
-		assertTrue("interface implementada", el instanceof ExtratoBalanceLine);
+		assertTrue("interface implementada", el instanceof ExtratoLancamentoBalance);
 	}
 
 	@Test
@@ -69,6 +69,6 @@ public class ExtratoParsersTests {
 
 		assertNotNull("linha do extrato não-nula", el);
 
-		assertTrue("interface implementada", el instanceof UnknownExtratoLine);
+		assertTrue("interface implementada", el instanceof ExtratoLancamentoUnknown);
 	}
 }

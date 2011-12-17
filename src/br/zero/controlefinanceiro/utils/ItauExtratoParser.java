@@ -9,10 +9,11 @@ import java.util.List;
 
 import br.zero.controlefinanceiro.model.ParsedExtratoLancamento;
 import br.zero.controlefinanceiro.model.ExtratoLineParser;
+import br.zero.controlefinanceiro.model.extrato.ExtratoLancamento;
 
 public class ItauExtratoParser implements ExtratoLineParser {
 
-	private AbstractExtratoLine extratoLine;
+	private AbstractParsedExtratoLancamento extratoLine;
 	private static List<String> saldoReferenciaList = createSaldoReferenciaList();
 	private static List<String> ignorarReferenciaList = createIgnorarReferenciaList();
 
@@ -34,6 +35,13 @@ public class ItauExtratoParser implements ExtratoLineParser {
 			extratoLine = parseTransactionLine(fields, line);
 		}
 	}
+	
+	@Override
+	public void parse(ExtratoLancamento line) throws ExtratoLineParserException {
+		parse(line.getOriginal());
+		
+		extratoLine.setOrigem(line);
+	}
 
 	private void throwInvalidLineException(String line) throws ExtratoLineParserException {
 		throw new ExtratoLineParserException("\"" + line + "\" não é uma linha válida do extrato do itau!");
@@ -51,22 +59,22 @@ public class ItauExtratoParser implements ExtratoLineParser {
 		return list;
 	}
 
-	private AbstractExtratoLine parseBalanceLine() {
-		ConcreteExtratoBalanceLine ebl = new ConcreteExtratoBalanceLine();
+	private AbstractParsedExtratoLancamento parseBalanceLine() {
+		ConcreteExtratoLancamentoBalance ebl = new ConcreteExtratoLancamentoBalance();
 
 		return ebl;
 	}
 
-	private AbstractExtratoLine parseIgnoredLine() {
-		return new ConcreteUnknownExtratoLine();
+	private AbstractParsedExtratoLancamento parseIgnoredLine() {
+		return new ConcreteExtratoLancamentoUnknown();
 	}
 
-	private AbstractExtratoLine parseTransactionLine(String[] fields, String line) throws ExtratoLineParserException {
+	private AbstractParsedExtratoLancamento parseTransactionLine(String[] fields, String line) throws ExtratoLineParserException {
 		if (fields.length < 6) {
 			throwInvalidLineException(line);
 		}
 
-		ConcreteExtratoTransactionLine etl = new ConcreteExtratoTransactionLine();
+		ConcreteExtratoLancamentoTransaction etl = new ConcreteExtratoLancamentoTransaction();
 
 		etl.setReferencia(fields[3]);
 
