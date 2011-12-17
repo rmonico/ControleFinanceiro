@@ -59,7 +59,7 @@ public class ExtratoAnalyseAction implements Action {
 	}
 
 	public enum LancamentoStatus {
-		DONT_APPLY("-"), FOUND(" "), NEW("*");
+		DONT_APPLY("-"), FOUND("U"), NEW("*");
 		
 		private String toString;
 
@@ -348,6 +348,10 @@ public class ExtratoAnalyseAction implements Action {
 		novoLancamento.setValor(line.getValor());
 
 		novoLancamento.setExtrato(linhaExtrato);
+		
+		if (switches.getRealize()) {
+			lancamentoDAO.inserir(novoLancamento);
+		}
 
 		return result;
 	}
