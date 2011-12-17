@@ -1,6 +1,7 @@
 package br.zero.controlefinanceiro;
 
 import br.zero.commandlineparser.ParserException;
+import br.zero.controlefinanceiro.abstractextratoparser.ExtratoParsers;
 import br.zero.controlefinanceiro.actions.BackupAction;
 import br.zero.controlefinanceiro.actions.ContaAddAction;
 import br.zero.controlefinanceiro.actions.ContaListAction;
@@ -28,7 +29,6 @@ import br.zero.controlefinanceiro.actions.ModeloSimulateAction;
 import br.zero.controlefinanceiro.commandlineparser.Command;
 import br.zero.controlefinanceiro.commandlineparser.CommandLineLoader;
 import br.zero.controlefinanceiro.commandlineparser.CommandLineSwitches;
-import br.zero.controlefinanceiro.utils.ExtratoParsers;
 import br.zero.tinycontroller.TinyController;
 import br.zero.tinycontroller.TinyControllerException;
 

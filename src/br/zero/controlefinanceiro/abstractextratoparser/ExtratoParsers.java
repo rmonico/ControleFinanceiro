@@ -1,7 +1,8 @@
-package br.zero.controlefinanceiro.utils;
+package br.zero.controlefinanceiro.abstractextratoparser;
 
-import br.zero.controlefinanceiro.abstractextratoparser.ExtratoLineParser;
 import br.zero.controlefinanceiro.model.ContaDAO;
+import br.zero.controlefinanceiro.utils.ItauExtratoParser;
+import br.zero.controlefinanceiro.utils.SantanderExtratoParser;
 
 /**
  * Apenas instancia os parsers de extrato para que possam ser utilizados.
