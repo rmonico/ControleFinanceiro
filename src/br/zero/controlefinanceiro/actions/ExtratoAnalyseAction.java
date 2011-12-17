@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import br.zero.controlefinanceiro.abstractextratoparser.DatedExtratoLancamento;
 import br.zero.controlefinanceiro.abstractextratoparser.ExtratoLancamentoBalance;
 import br.zero.controlefinanceiro.abstractextratoparser.ExtratoLancamentoTransaction;
 import br.zero.controlefinanceiro.abstractextratoparser.ExtratoLancamentoUnknown;
@@ -31,7 +32,7 @@ import br.zero.tinycontroller.Action;
 public class ExtratoAnalyseAction implements Action {
 
 	public enum StatusLinha {
-		BALANCE("B"), TRANSACTION("T"), UNKNOWN("?");
+		BALANCE("B"), TRANSACTION("T"), UNKNOWN("?"), DONT_APPLY("-");
 
 		private String toString;
 
@@ -111,7 +112,7 @@ public class ExtratoAnalyseAction implements Action {
 			return statusLinha;
 		}
 
-		public void setStatusLinha(StatusLinha statusLinha) {
+		public void setLinhaStatus(StatusLinha statusLinha) {
 			this.statusLinha = statusLinha;
 		}
 
@@ -200,13 +201,13 @@ public class ExtratoAnalyseAction implements Action {
 
 		TextGrid grid = createGrid();
 		List<ExtratoLineAnalyseResult> statuses;
-		
+
 		try {
-			statuses= makeSync(lancamentoSemExtratoList, extratoLancamentoOrfao);
+			statuses = makeSync(lancamentoSemExtratoList, extratoLancamentoOrfao);
 		} catch (ExtratoLineParserException e) {
 			throw new ExtratoAnalyseException(e);
 		}
-		
+
 		grid.setValues(statuses);
 
 		try {
@@ -241,16 +242,16 @@ public class ExtratoAnalyseAction implements Action {
 
 	private List<ExtratoLineAnalyseResult> makeSync(List<Lancamento> lancamentoSemExtratoList, List<ExtratoLancamento> extratoLancamentoOrfao) throws ExtratoLineParserException, ExtratoAnalyseException {
 		List<ParsedExtratoLancamento> extratoLines = new ArrayList<ParsedExtratoLancamento>();
-		
+
 		makeParser(extratoLancamentoOrfao, extratoLines);
-		
+
 		List<ExtratoLineAnalyseResult> statuses = new ArrayList<ExtratoLineAnalyseResult>();
 
 		ContaDAO contaDAO = new ContaDAO();
-		
-//		Calendar dataAnterior = null;
-		
-		for (ParsedExtratoLancamento extrato : extratoLines) {
+
+		for (int i = 0; i < extratoLines.size(); i++) {
+			ParsedExtratoLancamento extrato = extratoLines.get(i);
+
 			ExtratoLineAnalyseResult analyseResult;
 
 			if (extrato instanceof ExtratoLancamentoBalance) {
@@ -266,9 +267,57 @@ public class ExtratoAnalyseAction implements Action {
 			analyseResult.setOriginal(extrato.getOrigem().getOriginal());
 
 			statuses.add(analyseResult);
+
+			checkLancamentosNaoResolvidos(extratoLines, lancamentoSemExtratoList, i, statuses);
 		}
 
 		return statuses;
+	}
+
+	private void checkLancamentosNaoResolvidos(List<ParsedExtratoLancamento> extratoLines, List<Lancamento> lancamentoOrfaoList, int i, List<ExtratoLineAnalyseResult> statuses) {
+		ParsedExtratoLancamento extrato = extratoLines.get(i);
+
+		if (i != extratoLines.size() - 1) {
+			Calendar data;
+			if (extrato instanceof DatedExtratoLancamento) {
+				data = ((DatedExtratoLancamento) extrato).getData();
+			} else {
+				return;
+			}
+
+			ParsedExtratoLancamento proximo = null;
+
+			Calendar dataProximo = null;
+			for (int j = i + 1; j < extratoLines.size(); j++) {
+				proximo = extratoLines.get(j);
+
+				if (proximo instanceof DatedExtratoLancamento) {
+					dataProximo = ((DatedExtratoLancamento) proximo).getData();
+					break;
+				}
+			}
+			
+			if ((dataProximo == null) || (!data.equals(dataProximo))) {
+				addLancamentosNaoResolvidos(data, lancamentoOrfaoList, statuses);
+			}
+		}
+	}
+
+	private void addLancamentosNaoResolvidos(Calendar data, List<Lancamento> lancamentoOrfaoList, List<ExtratoLineAnalyseResult> statuses) {
+		for (Lancamento lancamento : lancamentoOrfaoList) {
+			if (lancamento.getData().equals(data)) {
+				ExtratoLineAnalyseResult r = new ExtratoLineAnalyseResult();
+				
+				r.setLinhaStatus(StatusLinha.DONT_APPLY);
+				r.setContaStatus(ContaStatus.DONT_APPLY);
+				r.setLancamentoStatus(LancamentoStatus.NOT_RELATED);
+				r.setLancamento(lancamento);
+				
+				statuses.add(r);
+			}
+			
+		}
+		
 	}
 
 	private void makeParser(List<ExtratoLancamento> extratoLancamentoOrfao, List<ParsedExtratoLancamento> extratoLines) throws ExtratoLineParserException, ExtratoAnalyseException {
@@ -287,7 +336,7 @@ public class ExtratoAnalyseAction implements Action {
 
 	private ExtratoLineAnalyseResult syncBalanceLine() {
 		ExtratoLineAnalyseResult result = new ExtratoLineAnalyseResult();
-		result.setStatusLinha(StatusLinha.BALANCE);
+		result.setLinhaStatus(StatusLinha.BALANCE);
 		result.setContaStatus(ContaStatus.DONT_APPLY);
 		result.setLancamentoStatus(LancamentoStatus.DONT_APPLY);
 
@@ -296,11 +345,11 @@ public class ExtratoAnalyseAction implements Action {
 
 	private ExtratoLineAnalyseResult syncTransactionLine(List<Lancamento> lancamentoSemExtratoList, ContaDAO contaDAO, ExtratoLancamentoTransaction line) {
 		ExtratoLineAnalyseResult result = new ExtratoLineAnalyseResult();
-		result.setStatusLinha(StatusLinha.TRANSACTION);
+		result.setLinhaStatus(StatusLinha.TRANSACTION);
 
 		Conta contaExtrato = resolveReference(contaDAO, line.getReferencia());
 
-		if (contaExtrato == null) {
+		if (contaExtrato == null) { 
 			result.setContaStatus(ContaStatus.NOT_FOUND);
 			return result;
 		}
@@ -397,7 +446,7 @@ public class ExtratoAnalyseAction implements Action {
 	private ExtratoLineAnalyseResult syncUnknownLine() {
 		ExtratoLineAnalyseResult result = new ExtratoLineAnalyseResult();
 
-		result.setStatusLinha(StatusLinha.UNKNOWN);
+		result.setLinhaStatus(StatusLinha.UNKNOWN);
 		result.setContaStatus(ContaStatus.DONT_APPLY);
 		result.setLancamentoStatus(LancamentoStatus.DONT_APPLY);
 
@@ -451,7 +500,7 @@ public class ExtratoAnalyseAction implements Action {
 	private List<Lancamento> getLancamentoSemExtratoList() {
 		lancamentoDAO = new LancamentoDAO();
 
-		return lancamentoDAO.listarSemExtrato();
+		return lancamentoDAO.listarSemExtrato(banco);
 	}
 
 	private ExtratoAnalyseSwitches checkParamValid(Object param) throws ExtratoAnalyseException {

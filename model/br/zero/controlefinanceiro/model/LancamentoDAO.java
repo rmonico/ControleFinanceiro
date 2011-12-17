@@ -84,7 +84,7 @@ public class LancamentoDAO extends CustomDAO<Lancamento> {
 		return results;
 	}
 
-	public List<Lancamento> listarSemExtrato() {
+	public List<Lancamento> listarSemExtrato(Conta banco) {
 		StringBuilder listarSemExtratoQuery = new StringBuilder();
 
 		listarSemExtratoQuery.append("select\n");
@@ -94,9 +94,12 @@ public class LancamentoDAO extends CustomDAO<Lancamento> {
 		listarSemExtratoQuery.append("  Lancamento l\n");
 		listarSemExtratoQuery.append("\n");
 		listarSemExtratoQuery.append("where\n");
-		listarSemExtratoQuery.append("  l.extrato is null\n");
+		listarSemExtratoQuery.append("  l.contaOrigem = :banco\n");
+		listarSemExtratoQuery.append("  or l.contaDestino = :banco\n");
 
 		Query q = getEntityManager().createQuery(listarSemExtratoQuery.toString());
+		
+		q.setParameter("banco", banco);
 
 		@SuppressWarnings("unchecked")
 		List<Lancamento> results = q.getResultList();
