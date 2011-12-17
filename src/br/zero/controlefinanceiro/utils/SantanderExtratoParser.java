@@ -1,6 +1,6 @@
 package br.zero.controlefinanceiro.utils;
 
-import br.zero.controlefinanceiro.model.ExtratoLine;
+import br.zero.controlefinanceiro.model.ParsedExtratoLancamento;
 import br.zero.controlefinanceiro.model.ExtratoLineParser;
 
 public class SantanderExtratoParser implements ExtratoLineParser {
@@ -27,7 +27,7 @@ public class SantanderExtratoParser implements ExtratoLineParser {
 	}
 
 	@Override
-	public ExtratoLine getLine() {
+	public ParsedExtratoLancamento getLine() {
 		return extratoLine;
 	}
 

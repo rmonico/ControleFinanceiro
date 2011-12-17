@@ -9,7 +9,7 @@ import br.zero.controlefinanceiro.commandlineparser.ManualReference;
 import br.zero.controlefinanceiro.model.Conta;
 import br.zero.controlefinanceiro.model.ContaDAO;
 import br.zero.controlefinanceiro.model.ExtratoBalanceLine;
-import br.zero.controlefinanceiro.model.ExtratoLine;
+import br.zero.controlefinanceiro.model.ParsedExtratoLancamento;
 import br.zero.controlefinanceiro.model.ExtratoLineParser;
 import br.zero.controlefinanceiro.model.ExtratoTransactionLine;
 import br.zero.controlefinanceiro.model.Lancamento;
@@ -60,7 +60,7 @@ public class ExtratoAnalyseAction implements Action {
 	}
 
 	public enum LancamentoStatus {
-		DONT_APPLY("-"), FOUND("U"), NEW("*");
+		DONT_APPLY("-"), FOUND("U"), NOT_RELATED("?"), NEW("*");
 
 		private String toString;
 
@@ -238,12 +238,13 @@ public class ExtratoAnalyseAction implements Action {
 		List<ExtratoLineAnalyseResult> statuses = new ArrayList<ExtratoLineAnalyseResult>();
 
 		ContaDAO contaDAO = new ContaDAO();
+		
+//		Calendar dataAnterior = null;
 
 		for (ExtratoLancamento linhaExtrato : extratoLancamentoOrfao) {
-
 			parser.parse(linhaExtrato.getOriginal());
 
-			ExtratoLine line = parser.getLine();
+			ParsedExtratoLancamento line = parser.getLine();
 
 			ExtratoLineAnalyseResult analyseResult;
 
@@ -258,6 +259,8 @@ public class ExtratoAnalyseAction implements Action {
 			analyseResult.setOriginal(line.getOriginal());
 
 			statuses.add(analyseResult);
+			
+//			if (data)
 		}
 
 		grid.setValues(statuses);

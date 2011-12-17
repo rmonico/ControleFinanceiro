@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import org.junit.Test;
 
 import br.zero.controlefinanceiro.model.ExtratoBalanceLine;
-import br.zero.controlefinanceiro.model.ExtratoLine;
+import br.zero.controlefinanceiro.model.ParsedExtratoLancamento;
 import br.zero.controlefinanceiro.model.ExtratoLineParser;
 import br.zero.controlefinanceiro.model.ExtratoTransactionLine;
 import br.zero.controlefinanceiro.model.UnknownExtratoLine;
@@ -30,7 +30,7 @@ public class ExtratoParsersTests {
 
 		parser.parse("01/09			IOF		1,85-		352,31-	");
 
-		ExtratoLine el = parser.getLine();
+		ParsedExtratoLancamento el = parser.getLine();
 
 		assertNotNull("linha do extrato não-nula", el);
 
@@ -52,7 +52,7 @@ public class ExtratoParsersTests {
 
 		parser.parse("01/09			SALDO INICIAL				350,46-	");
 
-		ExtratoLine el = parser.getLine();
+		ParsedExtratoLancamento el = parser.getLine();
 
 		assertNotNull("linha do extrato não-nula", el);
 
@@ -65,7 +65,7 @@ public class ExtratoParsersTests {
 
 		parser.parse("29/09			APL APLIC AUT MAIS		107,94-		150,00	");
 
-		ExtratoLine el = parser.getLine();
+		ParsedExtratoLancamento el = parser.getLine();
 
 		assertNotNull("linha do extrato não-nula", el);
 

@@ -7,7 +7,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import br.zero.controlefinanceiro.model.ExtratoLine;
+import br.zero.controlefinanceiro.model.ParsedExtratoLancamento;
 import br.zero.controlefinanceiro.model.ExtratoLineParser;
 
 public class ItauExtratoParser implements ExtratoLineParser {
@@ -128,7 +128,7 @@ public class ItauExtratoParser implements ExtratoLineParser {
 	}
 
 	@Override
-	public ExtratoLine getLine() {
+	public ParsedExtratoLancamento getLine() {
 		return extratoLine;
 	}
 
