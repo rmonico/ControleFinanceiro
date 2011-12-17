@@ -28,9 +28,7 @@ public class ExtratoParsersTests {
 	public void doItauExtratoTransactionLineParserTest() throws ExtratoLineParserException {
 		parser = getItauParser();
 
-		parser.parse("01/09			IOF		1,85-		352,31-	");
-
-		ParsedExtratoLancamento el = parser.getLine();
+		ParsedExtratoLancamento el = parser.parse("01/09			IOF		1,85-		352,31-	");
 
 		assertNotNull("linha do extrato não-nula", el);
 
@@ -50,9 +48,7 @@ public class ExtratoParsersTests {
 	public void doItauExtratoBalanceLineParserTest() throws ExtratoLineParserException {
 		parser = getItauParser();
 
-		parser.parse("01/09			SALDO INICIAL				350,46-	");
-
-		ParsedExtratoLancamento el = parser.getLine();
+		ParsedExtratoLancamento el = parser.parse("01/09			SALDO INICIAL				350,46-	");
 
 		assertNotNull("linha do extrato não-nula", el);
 
@@ -63,9 +59,7 @@ public class ExtratoParsersTests {
 	public void doItauExtratoUnknownLineParserTest() throws ExtratoLineParserException {
 		parser = getItauParser();
 
-		parser.parse("29/09			APL APLIC AUT MAIS		107,94-		150,00	");
-
-		ParsedExtratoLancamento el = parser.getLine();
+		ParsedExtratoLancamento el = parser.parse("29/09			APL APLIC AUT MAIS		107,94-		150,00	");
 
 		assertNotNull("linha do extrato não-nula", el);
 

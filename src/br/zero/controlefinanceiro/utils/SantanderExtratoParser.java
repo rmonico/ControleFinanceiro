@@ -7,19 +7,13 @@ import br.zero.controlefinanceiro.model.extrato.ExtratoLancamento;
 public class SantanderExtratoParser implements ExtratoLineParser {
 
 	@Override
-	public void parse(String line) throws ExtratoLineParserException {
+	public ParsedExtratoLancamento parse(String line) throws ExtratoLineParserException {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override
-	public void parse(ExtratoLancamento line) throws ExtratoLineParserException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public ParsedExtratoLancamento getLine() {
+	public ParsedExtratoLancamento parse(ExtratoLancamento line) throws ExtratoLineParserException {
 		// TODO Auto-generated method stub
 		return null;
 	}

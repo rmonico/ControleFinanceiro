@@ -5,8 +5,6 @@ import br.zero.controlefinanceiro.utils.ExtratoLineParserException;
 
 public interface ExtratoLineParser {
 
-	void parse(String line) throws ExtratoLineParserException;
-	void parse(ExtratoLancamento line) throws ExtratoLineParserException;
-	
-	ParsedExtratoLancamento getLine();
+	ParsedExtratoLancamento parse(String line) throws ExtratoLineParserException;
+	ParsedExtratoLancamento parse(ExtratoLancamento line) throws ExtratoLineParserException;
 }

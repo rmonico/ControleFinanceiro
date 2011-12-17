@@ -13,12 +13,11 @@ import br.zero.controlefinanceiro.model.extrato.ExtratoLancamento;
 
 public class ItauExtratoParser implements ExtratoLineParser {
 
-	private AbstractParsedExtratoLancamento extratoLine;
 	private static List<String> saldoReferenciaList = createSaldoReferenciaList();
 	private static List<String> ignorarReferenciaList = createIgnorarReferenciaList();
 
 	@Override
-	public void parse(String line) throws ExtratoLineParserException {
+	public ParsedExtratoLancamento parse(String line) throws ExtratoLineParserException {
 		String[] fields = line.split("\t");
 
 		if (fields.length < 4) {
@@ -27,6 +26,8 @@ public class ItauExtratoParser implements ExtratoLineParser {
 
 		String referencia = fields[3];
 
+		ParsedExtratoLancamento extratoLine;
+		
 		if (saldoReferenciaList.contains(referencia)) {
 			extratoLine = parseBalanceLine();
 		} else if (ignorarReferenciaList.contains(referencia)) {
@@ -34,13 +35,17 @@ public class ItauExtratoParser implements ExtratoLineParser {
 		} else {
 			extratoLine = parseTransactionLine(fields, line);
 		}
+		
+		return extratoLine;
 	}
 	
 	@Override
-	public void parse(ExtratoLancamento line) throws ExtratoLineParserException {
-		parse(line.getOriginal());
+	public ParsedExtratoLancamento parse(ExtratoLancamento line) throws ExtratoLineParserException {
+		AbstractParsedExtratoLancamento extratoLine = (AbstractParsedExtratoLancamento) parse(line.getOriginal());
 		
 		extratoLine.setOrigem(line);
+		
+		return extratoLine;
 	}
 
 	private void throwInvalidLineException(String line) throws ExtratoLineParserException {
@@ -131,11 +136,6 @@ public class ItauExtratoParser implements ExtratoLineParser {
 		Double valor = Double.parseDouble(sb.toString());
 
 		return valor;
-	}
-
-	@Override
-	public ParsedExtratoLancamento getLine() {
-		return extratoLine;
 	}
 
 }

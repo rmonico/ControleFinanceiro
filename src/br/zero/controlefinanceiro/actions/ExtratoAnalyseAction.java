@@ -252,16 +252,14 @@ public class ExtratoAnalyseAction implements Action {
 		for (ParsedExtratoLancamento extrato : extratoLines) {
 			ExtratoLineAnalyseResult analyseResult;
 
-			ExtratoLancamento origem = extrato.getOrigem();
-			
-			if (origem instanceof ExtratoLancamentoBalance) {
+			if (extrato instanceof ExtratoLancamentoBalance) {
 				analyseResult = syncBalanceLine();
-			} else if (origem instanceof ExtratoLancamentoTransaction) {
+			} else if (extrato instanceof ExtratoLancamentoTransaction) {
 				analyseResult = syncTransactionLine(lancamentoSemExtratoList, contaDAO, (ExtratoLancamentoTransaction) extrato);
-			} else if (origem instanceof ExtratoLancamentoUnknown) {
+			} else if (extrato instanceof ExtratoLancamentoUnknown) {
 				analyseResult = syncUnknownLine();
 			} else {
-				throw new ExtratoAnalyseException("Classe de linha desconhecida (\"" + origem.getClass() + "\")");
+				throw new ExtratoAnalyseException("Classe de linha desconhecida (\"" + extrato + "\")");
 			}
 
 			analyseResult.setOriginal(extrato.getOrigem().getOriginal());
@@ -280,10 +278,8 @@ public class ExtratoAnalyseAction implements Action {
 		}
 
 		for (ExtratoLancamento el : extratoLancamentoOrfao) {
-			parser.parse(el.getOriginal());
+			ParsedExtratoLancamento line = parser.parse(el);
 
-			ParsedExtratoLancamento line = parser.getLine();
-			
 			extratoLines.add(line);
 		}
 	}
