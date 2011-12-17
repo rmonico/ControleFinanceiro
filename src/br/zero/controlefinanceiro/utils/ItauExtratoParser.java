@@ -29,11 +29,11 @@ public class ItauExtratoParser implements ExtratoLineParser {
 		ParsedExtratoLancamento extratoLine;
 		
 		if (saldoReferenciaList.contains(referencia)) {
-			extratoLine = parseBalanceLine();
+			extratoLine = parseBalanceLine(fields);
 		} else if (ignorarReferenciaList.contains(referencia)) {
 			extratoLine = parseIgnoredLine();
 		} else {
-			extratoLine = parseTransactionLine(fields, line);
+			extratoLine = parseTransactionLine(fields);
 		}
 		
 		return extratoLine;
@@ -64,8 +64,17 @@ public class ItauExtratoParser implements ExtratoLineParser {
 		return list;
 	}
 
-	private AbstractParsedExtratoLancamento parseBalanceLine() {
+	private AbstractParsedExtratoLancamento parseBalanceLine(String[] fields) throws ExtratoLineParserException {
 		ConcreteExtratoLancamentoBalance ebl = new ConcreteExtratoLancamentoBalance();
+		
+		Calendar data;
+		try {
+			data = parseData(fields[0]);
+		} catch (ParseException e) {
+			throw new ExtratoLineParserException(e);
+		}
+
+		ebl.setData(data);
 
 		return ebl;
 	}
@@ -74,9 +83,9 @@ public class ItauExtratoParser implements ExtratoLineParser {
 		return new ConcreteExtratoLancamentoUnknown();
 	}
 
-	private AbstractParsedExtratoLancamento parseTransactionLine(String[] fields, String line) throws ExtratoLineParserException {
+	private AbstractParsedExtratoLancamento parseTransactionLine(String[] fields) throws ExtratoLineParserException {
 		if (fields.length < 6) {
-			throwInvalidLineException(line);
+			throwInvalidLineException(fields.toString());
 		}
 
 		ConcreteExtratoLancamentoTransaction etl = new ConcreteExtratoLancamentoTransaction();
