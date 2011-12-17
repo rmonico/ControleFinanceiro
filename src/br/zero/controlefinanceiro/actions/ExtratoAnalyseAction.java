@@ -8,6 +8,7 @@ import br.zero.controlefinanceiro.abstractextratoparser.ExtratoLancamentoBalance
 import br.zero.controlefinanceiro.abstractextratoparser.ExtratoLancamentoTransaction;
 import br.zero.controlefinanceiro.abstractextratoparser.ExtratoLancamentoUnknown;
 import br.zero.controlefinanceiro.abstractextratoparser.ExtratoLineParser;
+import br.zero.controlefinanceiro.abstractextratoparser.ExtratoParsers;
 import br.zero.controlefinanceiro.abstractextratoparser.ParsedExtratoLancamento;
 import br.zero.controlefinanceiro.commandlineparser.ExtratoAnalyseSwitches;
 import br.zero.controlefinanceiro.commandlineparser.ManualReference;
@@ -271,7 +272,7 @@ public class ExtratoAnalyseAction implements Action {
 	}
 
 	private void makeParser(List<ExtratoLancamento> extratoLancamentoOrfao, List<ParsedExtratoLancamento> extratoLines) throws ExtratoLineParserException, ExtratoAnalyseException {
-		ExtratoLineParser parser = banco.getParser();
+		ExtratoLineParser parser = ExtratoParsers.getParser(banco);
 
 		if (parser == null) {
 			throw new ExtratoAnalyseException("Nenhum parser registrado para o banco: \"" + banco.getNome() + "\".");

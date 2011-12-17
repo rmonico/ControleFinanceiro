@@ -46,13 +46,9 @@ public class Main {
 	private void run(String[] args) throws Exception {
 		CommandLineSwitches switches = parseCommandLine(args);
 
-		registerParsers();
+		ExtratoParsers.registerParsers();
 
 		setupAndRunController(switches);
-	}
-
-	private void registerParsers() {
-		ExtratoParsers.registerParsers();
 	}
 
 	private CommandLineSwitches parseCommandLine(String[] args) throws ParserException {

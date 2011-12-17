@@ -1,13 +1,10 @@
 package br.zero.controlefinanceiro.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.persistence.Query;
 
-import br.zero.controlefinanceiro.abstractextratoparser.ExtratoLineParser;
 import br.zero.controlefinanceiro.model.extrato.ReferenciaExtrato;
 import br.zero.customdao.CustomDAO;
 import br.zero.customdao.DAOSetup;
@@ -15,21 +12,11 @@ import br.zero.customdao.DAOSetup;
 @DAOSetup(persistenceUnitName = "ControleFinanceiro", entityClass = Conta.class)
 public class ContaDAO extends CustomDAO<Conta> {
 
-	private static Map<String, ExtratoLineParser> extratoParsers = new HashMap<String, ExtratoLineParser>();
-
 	public Conta getByNome(String nomeConta) {
 		Query q = getEntityManager().createQuery("select c from Conta c where c.nome = :nome");
 		q.setParameter("nome", nomeConta);
 
 		return (Conta) q.getSingleResult();
-	}
-
-	public static void registerExtratoParser(String parserName, ExtratoLineParser extratoParser) {
-		extratoParsers.put(parserName, extratoParser);
-	}
-
-	static ExtratoLineParser getParser(Conta conta) {
-		return extratoParsers.get(conta.getNome());
 	}
 
 	// TODO Mudar isto para um campo na conta

@@ -1,10 +1,15 @@
 package br.zero.controlefinanceiro.model;
 
-import br.zero.controlefinanceiro.abstractextratoparser.ExtratoLineParser;
-import br.zero.customdao.EntitySetup;
-
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+import br.zero.customdao.EntitySetup;
 
 /**
  * The persistent class for the conta database table.
@@ -56,10 +61,6 @@ public class Conta implements Serializable {
 		this.observacao = observacao;
 	}
 	
-	public ExtratoLineParser getParser() {
-		return ContaDAO.getParser(this);
-	}
-
 	@Override
 	public String toString() {
 		String idConta = (id != null) ? id.toString() : "[null]";
