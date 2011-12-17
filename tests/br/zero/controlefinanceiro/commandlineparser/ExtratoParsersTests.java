@@ -32,7 +32,7 @@ public class ExtratoParsersTests {
 
 		assertNotNull("linha do extrato não-nula", el);
 
-		assertTrue("Implementa ExtratoTransactionLine", el instanceof ExtratoTransactionLine);
+		assertTrue("interface implementada", el instanceof ExtratoTransactionLine);
 
 		ExtratoTransactionLine line = (ExtratoTransactionLine) el;
 
@@ -40,15 +40,8 @@ public class ExtratoParsersTests {
 		assertEquals("data", "01/Sep/2011", sdf.format(line.getData().getTime()));
 
 		assertEquals("referência", "IOF", line.getReferencia());
-	}
-
-	@Test
-	public void doItauExtratoParserInvalidLineTests2() {
-		// parser = getItauParser();
-		//
-		// parser.parse("16/11\t\t\tSDO CTA/APL AUTOMATICAS\t\t\t\t1.258,52\t");
-		//
-		// assertFalse("linha válida", parser.isTransferLine());
+		
+		assertEquals("valor", -1.85, line.getValor(), 0.0);
 	}
 
 }
