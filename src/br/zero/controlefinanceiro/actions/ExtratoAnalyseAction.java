@@ -26,14 +26,50 @@ import br.zero.tinycontroller.Action;
 
 public class ExtratoAnalyseAction implements Action {
 
+	public enum StatusLinha {
+		BALANCE("B"), TRANSACTION("T"), UNKNOWN("?");
+
+		private String toString;
+
+		private StatusLinha(String toString) {
+			this.toString = toString;
+		}
+
+		@Override
+		public String toString() {
+			return toString;
+		}
+	}
+
 	public enum ContaStatus {
-		NOT_FOUND, OK
+		NOT_FOUND("!"), OK(" ");
+
+		private String toString;
+
+		private ContaStatus(String toString) {
+			this.toString = toString;
+		}
+
+		@Override
+		public String toString() {
+			return toString;
+		}
 
 	}
 
 	public enum LancamentoStatus {
-		DONT_APPLY, FOUND, NEW
+		DONT_APPLY("-"), FOUND(" "), NEW("*");
+		
+		private String toString;
 
+		private LancamentoStatus(String toString) {
+			this.toString = toString;
+		}
+		
+		@Override
+		public String toString() {
+			return toString;
+		}
 	}
 
 	public class InternalManualReference {
@@ -60,19 +96,19 @@ public class ExtratoAnalyseAction implements Action {
 
 	public class ExtratoLineAnalyseResult {
 
-		private Character tipo;
+		private StatusLinha statusLinha;
 		private String original;
 		private Conta conta;
 		private Lancamento lancamento;
-		private LancamentoStatus status;
+		private LancamentoStatus lancamentoStatus;
 		private ContaStatus contaStatus;
 
-		public Character getTipo() {
-			return tipo;
+		public StatusLinha getStatusLinha() {
+			return statusLinha;
 		}
 
-		public void setTipo(Character tipo) {
-			this.tipo = tipo;
+		public void setStatusLinha(StatusLinha statusLinha) {
+			this.statusLinha = statusLinha;
 		}
 
 		public String getOriginal() {
@@ -99,12 +135,12 @@ public class ExtratoAnalyseAction implements Action {
 			this.lancamento = lancamento;
 		}
 
-		public LancamentoStatus getStatus() {
-			return status;
+		public LancamentoStatus getLancamentoStatus() {
+			return lancamentoStatus;
 		}
 
 		public void setLancamentoStatus(LancamentoStatus lancamentoStatus) {
-			this.status = lancamentoStatus;
+			this.lancamentoStatus = lancamentoStatus;
 		}
 
 		public ContaStatus getContaStatus() {
@@ -173,24 +209,24 @@ public class ExtratoAnalyseAction implements Action {
 
 	private List<InternalManualReference> makeManualRefList() throws ExtratoAnalyseException {
 		List<InternalManualReference> mrl = new ArrayList<InternalManualReference>();
-		
+
 		ContaDAO dao = new ContaDAO();
-		
+
 		for (ManualReference mr : switches.getManualRefList()) {
 			InternalManualReference imr = new InternalManualReference();
-			
+
 			Conta conta = dao.getByNome(mr.getNomeConta());
-			
+
 			if (conta == null) {
 				throw new ExtratoAnalyseException("Referências manuais: conta " + mr.getNomeConta() + "não encontrada.");
 			}
-			
+
 			imr.setConta(conta);
 			imr.setRegex(mr.getRegex());
-			
+
 			mrl.add(imr);
 		}
-		
+
 		return mrl;
 	}
 
@@ -229,7 +265,7 @@ public class ExtratoAnalyseAction implements Action {
 
 	private ExtratoLineAnalyseResult syncBalanceLine() {
 		ExtratoLineAnalyseResult result = new ExtratoLineAnalyseResult();
-		result.setTipo('B');
+		result.setStatusLinha(StatusLinha.BALANCE);
 		result.setLancamentoStatus(LancamentoStatus.DONT_APPLY);
 
 		return result;
@@ -237,16 +273,15 @@ public class ExtratoAnalyseAction implements Action {
 
 	private ExtratoLineAnalyseResult syncTransactionLine(List<Lancamento> lancamentoSemExtratoList, ContaDAO contaDAO, ExtratoLancamento linhaExtrato, ExtratoTransactionLine line) {
 		ExtratoLineAnalyseResult result = new ExtratoLineAnalyseResult();
-		result.setTipo('T');
+		result.setStatusLinha(StatusLinha.TRANSACTION);
 
-		
 		Conta contaExtrato = resolveReference(contaDAO, line.getReferencia());
 
 		if (contaExtrato == null) {
 			result.setContaStatus(ContaStatus.NOT_FOUND);
 			return result;
 		}
-		
+
 		result.setContaStatus(ContaStatus.OK);
 
 		result.setConta(contaExtrato);
@@ -280,18 +315,19 @@ public class ExtratoAnalyseAction implements Action {
 			}
 
 		}
-		
+
 		// Nenhum lançamento correspondente encontrado
 		result.setLancamentoStatus(LancamentoStatus.NEW);
-		
+
 		Lancamento novoLancamento = new Lancamento();
-		
+
 		result.setLancamento(novoLancamento);
-		
+
 		novoLancamento.setData(line.getData());
-		// Calcular depois. O cálculo será complicado, deverá levar em conta os N's pré-existentes no banco e os gerados aqui.
+		// Calcular depois. O cálculo será complicado, deverá levar em conta os
+		// N's pré-existentes no banco e os gerados aqui.
 		novoLancamento.setN(-1);
-		
+
 		Conta contaOrigemEsperada;
 		Conta contaDestinoEsperada;
 
@@ -307,34 +343,34 @@ public class ExtratoAnalyseAction implements Action {
 
 		novoLancamento.setContaOrigem(contaOrigemEsperada);
 		novoLancamento.setContaDestino(contaDestinoEsperada);
-		
+
 		novoLancamento.setValor(line.getValor());
-		
+
 		novoLancamento.setExtrato(linhaExtrato);
-		
+
 		return result;
 	}
 
 	private Conta resolveReference(ContaDAO contaDAO, String referencia) {
 		Conta conta = contaDAO.resolveExtratoLine(banco, referencia);
-		
+
 		if (conta != null) {
 			return conta;
 		}
-		
+
 		for (InternalManualReference imr : manualRefList) {
 			if (referencia.matches(imr.getRegex())) {
 				return imr.getConta();
 			}
 		}
-		
+
 		return null;
 	}
 
 	private ExtratoLineAnalyseResult showUnknownLine() {
 		ExtratoLineAnalyseResult result = new ExtratoLineAnalyseResult();
 
-		result.setTipo('?');
+		result.setStatusLinha(StatusLinha.UNKNOWN);
 
 		return result;
 	}
@@ -345,9 +381,11 @@ public class ExtratoAnalyseAction implements Action {
 		grid.getData().setHeaderSeparatorChar('=');
 		grid.getData().setTitle("Sincronização de Extrato banco \"" + banco.getNome() + "\"");
 
-		TextGridFormattedColumn.createFormattedColumn(grid, "Tipo", TextGridFormattedColumn.STRING_FORMATTER, TextGridColumnAlignment.CENTER, "getTipo");
+		TextGridFormattedColumn.createFormattedColumn(grid, "", TextGridFormattedColumn.TOSTRING_FORMATTER, TextGridColumnAlignment.CENTER, "getStatusLinha");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Original", TextGridFormattedColumn.STRING_FORMATTER, TextGridColumnAlignment.LEFT, "getOriginal");
+		TextGridFormattedColumn.createFormattedColumn(grid, "", TextGridFormattedColumn.TOSTRING_FORMATTER, TextGridColumnAlignment.CENTER, "getContaStatus");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Conta", ControleFinanceiroFormatters.CONTA_FORMATTER, TextGridColumnAlignment.LEFT, "getConta");
+		TextGridFormattedColumn.createFormattedColumn(grid, "", TextGridFormattedColumn.TOSTRING_FORMATTER, TextGridColumnAlignment.CENTER, "getLancamentoStatus");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Lancamento", ControleFinanceiroFormatters.LANCAMENTO_FORMATTER, TextGridColumnAlignment.LEFT, "getLancamento");
 
 		return grid;
