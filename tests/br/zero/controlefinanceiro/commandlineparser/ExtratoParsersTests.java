@@ -21,7 +21,7 @@ public class ExtratoParsersTests {
 	}
 	
 	@Test
-	public void doItauExtratoParserTest() throws ExtratoLineParserException {
+	public void doItauExtratoParserTransactionLineTest() throws ExtratoLineParserException {
 		parser = getItauParser();
 		
 		parser.parse("01/09			IOF		1,85-		352,31-	");
@@ -34,7 +34,7 @@ public class ExtratoParsersTests {
 		
 		ExtratoTransactionLine line = (ExtratoTransactionLine) el;
 		
-		assertEquals("linha válida", "IOF", line.getReferencia());
+		assertEquals("referência", "IOF", line.getReferencia());
 	}
 
 	@Test
