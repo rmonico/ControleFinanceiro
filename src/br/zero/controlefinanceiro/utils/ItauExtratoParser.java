@@ -60,7 +60,7 @@ public class ItauExtratoParser implements ExtratoLineParser {
 	}
 
 	private AbstractExtratoLine parseIgnoredLine() {
-		return new UnknownExtratoLine();
+		return new ConcreteUnknownExtratoLine();
 	}
 
 	private AbstractExtratoLine parseTransactionLine(String[] fields, String line) throws ExtratoLineParserException {

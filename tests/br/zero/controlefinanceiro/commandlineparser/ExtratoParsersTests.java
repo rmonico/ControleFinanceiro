@@ -12,6 +12,7 @@ import br.zero.controlefinanceiro.model.ExtratoBalanceLine;
 import br.zero.controlefinanceiro.model.ExtratoLine;
 import br.zero.controlefinanceiro.model.ExtratoLineParser;
 import br.zero.controlefinanceiro.model.ExtratoTransactionLine;
+import br.zero.controlefinanceiro.model.UnknownExtratoLine;
 import br.zero.controlefinanceiro.utils.ExtratoLineParserException;
 import br.zero.controlefinanceiro.utils.ExtratoParsers;
 
@@ -50,11 +51,24 @@ public class ExtratoParsersTests {
 		parser = getItauParser();
 
 		parser.parse("01/09			SALDO INICIAL				350,46-	");
-		
+
 		ExtratoLine el = parser.getLine();
 
 		assertNotNull("linha do extrato não-nula", el);
 
 		assertTrue("interface implementada", el instanceof ExtratoBalanceLine);
+	}
+
+	@Test
+	public void doItauExtratoUnknownLineParserTest() throws ExtratoLineParserException {
+		parser = getItauParser();
+
+		parser.parse("29/09			APL APLIC AUT MAIS		107,94-		150,00	");
+
+		ExtratoLine el = parser.getLine();
+
+		assertNotNull("linha do extrato não-nula", el);
+
+		assertTrue("interface implementada", el instanceof UnknownExtratoLine);
 	}
 }
