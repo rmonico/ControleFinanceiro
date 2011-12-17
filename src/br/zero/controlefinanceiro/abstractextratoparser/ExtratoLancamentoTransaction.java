@@ -2,7 +2,7 @@ package br.zero.controlefinanceiro.abstractextratoparser;
 
 import java.util.Calendar;
 
-public interface ExtratoLancamentoTransaction extends ParsedExtratoLancamento {
+public interface ExtratoLancamentoTransaction extends DatedExtratoLancamento {
 
 	Calendar getData();
 
