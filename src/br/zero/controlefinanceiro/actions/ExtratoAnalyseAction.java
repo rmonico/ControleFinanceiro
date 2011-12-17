@@ -257,9 +257,7 @@ public class ExtratoAnalyseAction implements Action {
 
 			analyseResult.setOriginal(line.getOriginal());
 
-			if (line instanceof ExtratoTransactionLine) {
-				statuses.add(analyseResult);
-			}
+			statuses.add(analyseResult);
 		}
 
 		grid.setValues(statuses);
@@ -305,7 +303,7 @@ public class ExtratoAnalyseAction implements Action {
 				contaDestinoEsperada = banco;
 			}
 
-			if (extratoLineMatch(lancamentoSemExtrato, line, contaOrigemEsperada, contaDestinoEsperada)) {
+			if ((lancamentoSemExtrato.getExtrato() == null) && (extratoLineMatch(lancamentoSemExtrato, line, contaOrigemEsperada, contaDestinoEsperada))) {
 				result.setLancamentoStatus(LancamentoStatus.FOUND);
 
 				lancamentoSemExtrato.setExtrato(linhaExtrato);
