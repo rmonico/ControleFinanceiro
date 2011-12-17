@@ -251,7 +251,7 @@ public class ExtratoAnalyseAction implements Action {
 			} else if (line instanceof ExtratoTransactionLine) {
 				analyseResult = syncTransactionLine(lancamentoSemExtratoList, contaDAO, linhaExtrato, (ExtratoTransactionLine) line);
 			} else {
-				analyseResult = showUnknownLine();
+				analyseResult = syncUnknownLine();
 			}
 
 			analyseResult.setOriginal(line.getOriginal());
@@ -372,7 +372,7 @@ public class ExtratoAnalyseAction implements Action {
 		return null;
 	}
 
-	private ExtratoLineAnalyseResult showUnknownLine() {
+	private ExtratoLineAnalyseResult syncUnknownLine() {
 		ExtratoLineAnalyseResult result = new ExtratoLineAnalyseResult();
 
 		result.setStatusLinha(StatusLinha.UNKNOWN);
