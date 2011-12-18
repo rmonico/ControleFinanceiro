@@ -1,6 +1,6 @@
 <map version="0.9.0">
 <!-- To view this file, download free mind mapping software FreeMind from http://freemind.sourceforge.net -->
-<node CREATED="1322269798993" ID="ID_1526915694" MODIFIED="1322272365576" TEXT="jfin - Planning">
+<node CREATED="1322269798993" ID="ID_1526915694" MODIFIED="1324252493269" TEXT="jfin - Planning">
 <node BACKGROUND_COLOR="#99ff99" CREATED="1322269815461" FOLDED="true" ID="ID_1671579002" MODIFIED="1322875338262" POSITION="right" TEXT="Milestone 1">
 <node CREATED="1322269881657" ID="ID_802172816" MODIFIED="1322269949887" TEXT="Objetivos">
 <richcontent TYPE="NOTE"><html>
@@ -58,7 +58,7 @@
 </html></richcontent>
 </node>
 </node>
-<node CREATED="1322270400623" ID="ID_674416975" MODIFIED="1324239227183" POSITION="right" TEXT="Milestone 3">
+<node CREATED="1322270400623" FOLDED="true" ID="ID_674416975" MODIFIED="1324252486520" POSITION="right" TEXT="Milestone 3">
 <node CREATED="1322270408325" ID="ID_662000060" MODIFIED="1322270930606" TEXT="Objetivos">
 <richcontent TYPE="NOTE"><html>
   <head>
@@ -298,7 +298,7 @@
 </html></richcontent>
 </node>
 </node>
-<node CREATED="1322738893562" ID="ID_1250441849" MODIFIED="1323629686293" POSITION="right" TEXT="Milestone 4">
+<node CREATED="1322738893562" ID="ID_1250441849" MODIFIED="1324252491954" POSITION="right" TEXT="Corre&#xe7;&#xf5;es">
 <node CREATED="1322738416483" ID="ID_1354654228" MODIFIED="1323629690517" TEXT="Extens&#xe3;o do modelo simulate">
 <richcontent TYPE="NOTE"><html>
   <head>
@@ -343,6 +343,35 @@
     </p>
     <p>
       &#160;&#160;- Mexer no CustomDAO para isso (est&#225; f&#225;cil, o problema &#233; que isso vai exigir que um programa
+    </p>
+  </body>
+</html></richcontent>
+</node>
+</node>
+<node CREATED="1324252493893" ID="ID_1726085239" MODIFIED="1324252576421" POSITION="right" TEXT="Melhorias">
+<node CREATED="1324252581143" ID="ID_938160062" MODIFIED="1324252601867" TEXT="extrato-analyse: id do lancto"/>
+<node CREATED="1324252602809" ID="ID_723758160" MODIFIED="1324252628136" TEXT="extrato-analyse: a&#xe7;&#xe3;o sync"/>
+<node CREATED="1324252659815" ID="ID_134672916" MODIFIED="1324252693030" TEXT="extrato-sync: par&#xe2;metro de data">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      Criar par&#226;metro para sincronizar apenas at&#233; determinada data
+    </p>
+  </body>
+</html>
+</richcontent>
+</node>
+<node CREATED="1324252693904" ID="ID_1351041782" MODIFIED="1324252731129" TEXT="extrato-sync: balan&#xe7;os">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      Considerar os balan&#231;os para lan&#231;ar confer&#234;ncias
     </p>
   </body>
 </html>
