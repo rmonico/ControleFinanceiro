@@ -58,7 +58,7 @@
 </html></richcontent>
 </node>
 </node>
-<node CREATED="1322270400623" ID="ID_674416975" MODIFIED="1322616124593" POSITION="right" TEXT="Milestone 3">
+<node CREATED="1322270400623" ID="ID_674416975" MODIFIED="1324239227183" POSITION="right" TEXT="Milestone 3">
 <node CREATED="1322270408325" ID="ID_662000060" MODIFIED="1322270930606" TEXT="Objetivos">
 <richcontent TYPE="NOTE"><html>
   <head>
@@ -237,7 +237,7 @@
   </body>
 </html></richcontent>
 </node>
-<node CREATED="1322271284140" ID="ID_1921731818" MODIFIED="1323629692510" TEXT="jfin extrato analyse">
+<node BACKGROUND_COLOR="#99ff99" CREATED="1322271284140" ID="ID_1921731818" MODIFIED="1324236134797" TEXT="jfin extrato analyse">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -295,60 +295,7 @@
       - linha do extrato com lancamento correspondente: atualiza o extratoid do lancamento
     </p>
   </body>
-</html>
-</richcontent>
-<node BACKGROUND_COLOR="#99ff99" CREATED="1323181709546" ID="ID_252868032" MODIFIED="1323186526367" TEXT="Altera&#xe7;&#xf5;es no Banco de Dados">
-<richcontent TYPE="NOTE"><html>
-  <head>
-    
-  </head>
-  <body>
-    <p>
-      ReferenciaExtrato
-    </p>
-    <p>
-      &#160;- id: int (PK)
-    </p>
-    <p>
-      &#160;- ContaID: Conta
-    </p>
-    <p>
-      &#160;- BancoID: Conta&#160;(not null)
-    </p>
-    <p>
-      &#160;- referencia: string (not null)
-    </p>
-    <p>
-      
-    </p>
-    <p>
-      
-    </p>
-    <p>
-      - Colocar um indice &#250;nico na FK de lancamento para extrato (uma linha do extrato s&#243; pode ser referida por um lancamento)
-    </p>
-  </body>
 </html></richcontent>
-</node>
-<node BACKGROUND_COLOR="#99ff99" CREATED="1323182526624" ID="ID_1557372692" MODIFIED="1323187244190" TEXT="Altera&#xe7;&#xf5;es no Modelo de Dados">
-<richcontent TYPE="NOTE"><html>
-  <head>
-    
-  </head>
-  <body>
-    <p>
-      - Criar Entidade para a ReferenciaExtrato (sem DAO)
-    </p>
-    <p>
-      - Na Conta, criar:
-    </p>
-    <p>
-      public List&lt;String&gt; getReferenciaExtratoList(Conta banco);
-    </p>
-  </body>
-</html></richcontent>
-</node>
-<node CREATED="1323182240989" ID="ID_1089707737" MODIFIED="1323186006796" TEXT="Codifica&#xe7;&#xe3;o da Action"/>
 </node>
 </node>
 <node CREATED="1322738893562" ID="ID_1250441849" MODIFIED="1323629686293" POSITION="right" TEXT="Milestone 4">
@@ -365,8 +312,7 @@
       &#160;&#160;- Pode ser criado um parser de arrays para isso
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 <node CREATED="1322738576183" ID="ID_1153208439" MODIFIED="1323572271920" TEXT="modelo simulate: corre&#xe7;&#xe3;o de bug">
 <richcontent TYPE="NOTE"><html>
@@ -383,29 +329,24 @@
   </body>
 </html></richcontent>
 </node>
-<node CREATED="1322738611754" ID="ID_1966233343" MODIFIED="1323572271705" TEXT="Filtro de Saldos">
+<node CREATED="1324236189541" ID="ID_161880305" MODIFIED="1324238003917" TEXT="Reduzir tempo de conex&#xe3;o">
 <richcontent TYPE="NOTE"><html>
   <head>
     
   </head>
   <body>
     <p>
-      - Nas listagens mostrar o saldo apenas para contas contabiliz&#225;veis.
+      Principais possibilidades para resolver este problema:
     </p>
-  </body>
-</html></richcontent>
-</node>
-<node CREATED="1323131189291" ID="ID_526244665" MODIFIED="1323572271191" TEXT="Testar campos money">
-<richcontent TYPE="NOTE"><html>
-  <head>
-    
-  </head>
-  <body>
     <p>
-      Ver se os campos money do postgres tem problema de arredondamento de ponto flutuante
+      &#160;&#160;- Fazer um programa externo que encapsule e gerencie a conex&#227;o com o banco de dados. Finalizaria a conex&#227;o mediante um timeout.
+    </p>
+    <p>
+      &#160;&#160;- Mexer no CustomDAO para isso (est&#225; f&#225;cil, o problema &#233; que isso vai exigir que um programa
     </p>
   </body>
-</html></richcontent>
+</html>
+</richcontent>
 </node>
 </node>
 <node CREATED="1322272082887" FOLDED="true" ID="ID_1707116991" MODIFIED="1323182293757" POSITION="right" TEXT="Funcionalidades futuras">
