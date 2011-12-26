@@ -22,7 +22,6 @@ import br.zero.textgrid.TextGrid;
 import br.zero.textgrid.TextGridColumnAlignment;
 import br.zero.textgrid.TextGridException;
 import br.zero.textgrid.TextGridFormattedColumn;
-import br.zero.textgrid.TextGridFormatter;
 import br.zero.tinycontroller.Action;
 
 public class ModeloSimulateAction implements Action {
@@ -40,29 +39,15 @@ public class ModeloSimulateAction implements Action {
 
 	}
 
-	private enum TipoLancamento {
-		REALIZADO(new StringBuilder("R")), PREVISTO(new StringBuilder("P"));
-
-		private StringBuilder sb;
-
-		private TipoLancamento(StringBuilder sb) {
-			this.sb = sb;
-		}
-
-		public StringBuilder getTipoLancamentoStr() {
-			return sb;
-		}
-	}
-
 	public class LancamentoSimulated extends LancamentoContabilizavel implements Comparable<LancamentoSimulated> {
-		private TipoLancamento tipo;
+		private String nomeLista;
 
-		public TipoLancamento getTipo() {
-			return tipo;
+		public String getNomeLista() {
+			return nomeLista;
 		}
 
-		public void setTipo(TipoLancamento tipo) {
-			this.tipo = tipo;
+		public void setNomeLista(String nomeLista) {
+			this.nomeLista = nomeLista;
 		}
 
 		@Override
@@ -87,13 +72,13 @@ public class ModeloSimulateAction implements Action {
 				}
 			}
 
-			if (getTipo() == null) {
+			if (getNomeLista() == null) {
 				return +1;
-			} else if (otherInstance.getTipo() == null) {
+			} else if (otherInstance.getNomeLista() == null) {
 				return -1;
 			}
 
-			int tipoComparision = getTipo().compareTo(otherInstance.getTipo());
+			int tipoComparision = getNomeLista().compareTo(otherInstance.getNomeLista());
 
 			if (tipoComparision != 0) {
 				return tipoComparision;
@@ -116,25 +101,8 @@ public class ModeloSimulateAction implements Action {
 		grid.getData().setHeaderSeparatorChar('=');
 		grid.getData().setTitle("Lista de Lançamentos");
 
-		TextGridFormatter tipoLancamentoFormatter = new TextGridFormatter() {
-			@Override
-			public StringBuilder parse(Object cellValue) throws TextGridException {
-				if (cellValue == null) {
-					return new StringBuilder("[null]");
-				}
-
-				if (!(cellValue instanceof TipoLancamento)) {
-					throw new TextGridException("tipoLancamentoFormatter: Must be used only with br.zero.controlefinanceiro.ModeloSimulateAction$TipoLancamento fields.");
-				}
-
-				TipoLancamento tipoLancamento = (TipoLancamento) cellValue;
-
-				return tipoLancamento.getTipoLancamentoStr();
-			}
-		};
-
 		TextGridFormattedColumn.createFormattedColumn(grid, "id", TextGridFormattedColumn.ID_FORMATTER, TextGridColumnAlignment.RIGHT, "getId");
-		TextGridFormattedColumn.createFormattedColumn(grid, "Tipo", tipoLancamentoFormatter, TextGridColumnAlignment.LEFT, "getTipo");
+		TextGridFormattedColumn.createFormattedColumn(grid, "Modelo", TextGridFormattedColumn.STRING_FORMATTER, TextGridColumnAlignment.LEFT, "getNomeLista");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Data", TextGridFormattedColumn.DATE_FORMATTER, TextGridColumnAlignment.CENTER, "getData");
 		TextGridFormattedColumn.createFormattedColumn(grid, "N", TextGridFormattedColumn.INTEGER_FORMATTER, TextGridColumnAlignment.LEFT, "getN");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Origem", ControleFinanceiroFormatters.CONTA_FORMATTER, TextGridColumnAlignment.RIGHT, "getContaOrigem");
@@ -230,7 +198,7 @@ public class ModeloSimulateAction implements Action {
 			@Override
 			public LancamentoSimulated pack(LancamentoModelo lm) {
 				LancamentoSimulated lfl = new LancamentoSimulated();
-				lfl.setTipo(TipoLancamento.PREVISTO);
+				lfl.setNomeLista(lm.getModelo().getNome());
 				lfl.setLancamentoModeloBase(lm, dataBase);
 
 				return lfl;
@@ -248,7 +216,7 @@ public class ModeloSimulateAction implements Action {
 			@Override
 			public LancamentoSimulated pack(Lancamento lancamento) {
 				LancamentoSimulated lfl = new LancamentoSimulated();
-				lfl.setTipo(TipoLancamento.REALIZADO);
+				lfl.setNomeLista("[Realizado]");
 				lfl.setLancamentoBase(lancamento);
 
 				return lfl;
