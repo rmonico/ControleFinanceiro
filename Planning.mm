@@ -308,8 +308,7 @@
       Cadastrados na ordem em que devem ser atacados
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 <node CREATED="1324252814195" ID="ID_242129029" MODIFIED="1324253148231" TEXT="extrato-analyse: lanctos em feriados">
 <richcontent TYPE="NOTE"><html>
   <head>
@@ -320,8 +319,7 @@
       Considerar os lan&#231;amentos em feriados e finais de semana como sendo no pr&#243;ximo dia &#250;til (fazer uma tabela para isso)
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 <node CREATED="1324252659815" ID="ID_134672916" MODIFIED="1324253143245" TEXT="extrato-sync: par&#xe2;metro de data">
 <richcontent TYPE="NOTE"><html>
@@ -348,25 +346,23 @@
       - so mostrar nas listagens lancamentos com um m&#234;s ou menos de idade
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 </node>
 <node CREATED="1324252493893" ID="ID_1726085239" MODIFIED="1324253246865" POSITION="right" TEXT="Melhorias">
 <node CREATED="1324252581143" ID="ID_938160062" MODIFIED="1324252601867" TEXT="extrato-analyse: id do lancto"/>
 <node CREATED="1324252602809" ID="ID_723758160" MODIFIED="1324252628136" TEXT="extrato-analyse: a&#xe7;&#xe3;o sync"/>
-<node CREATED="1324252693904" ID="ID_1351041782" MODIFIED="1324254037570" TEXT="extrato-sync: balan&#xe7;os">
+<node CREATED="1324252693904" ID="ID_1351041782" MODIFIED="1324254926952" TEXT="extrato-sync: balan&#xe7;os">
 <richcontent TYPE="NOTE"><html>
   <head>
     
   </head>
   <body>
     <p>
-      Considerar os balan&#231;os, lan&#231;ar confer&#234;ncias baseado neles
+      Considerar os balan&#231;os, lan&#231;ar confer&#234;ncias baseado neles caso o saldo da conta na data em quest&#227;o n&#227;o bater
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 <node CREATED="1324236189541" ID="ID_161880305" MODIFIED="1324238003917" TEXT="Reduzir tempo de conex&#xe3;o">
 <richcontent TYPE="NOTE"><html>
@@ -412,8 +408,7 @@
       Ao sincronizar/gerar um lan&#231;amento na sincroniza&#231;&#227;o do extrato acrescentar a refer&#234;ncia do extrato na observa&#231;&#227;o (colocar antes algo como: [EXTRATO] IOF, por exemplo)
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 <node CREATED="1324254266194" ID="ID_1482016609" MODIFIED="1324254353345" TEXT="nova a&#xe7;&#xe3;o: conta-check">
 <richcontent TYPE="NOTE"><html>
@@ -425,8 +420,7 @@
       Criar uma nova a&#231;&#227;o para confer&#234;ncia de conta, dever&#225; receber como par&#226;metros a conta, data e valor. Dever&#225; lan&#231;ar uma nova confer&#234;ncia na data. Caso j&#225; exista, dever&#225; atualizar a confer&#234;ncia existente
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 </node>
 <node CREATED="1322272082887" FOLDED="true" ID="ID_1707116991" MODIFIED="1323182293757" POSITION="right" TEXT="Funcionalidades futuras">
