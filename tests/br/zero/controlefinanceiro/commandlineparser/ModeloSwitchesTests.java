@@ -70,6 +70,7 @@ public class ModeloSwitchesTests extends CustomParserTests {
 
 		assertNotNull("Switches", switches.getModeloSimulateSwitches());
 
+		
 		ModeloSimulateSwitches simulateSwitches = switches.getModeloSimulateSwitches();
 
 		ModeloSimulate ms = simulateSwitches.getModelo().get(0);

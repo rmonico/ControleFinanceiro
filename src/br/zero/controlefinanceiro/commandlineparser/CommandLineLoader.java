@@ -42,6 +42,8 @@ public class CommandLineLoader {
 		
 		parsers.put("ManualReferencesParser", new ManualReferencesParser());
 
+		parsers.put("ModeloSimulateParser", new ModeloSimulateParser());
+		
 		parser.parse();
 		
 		if (!parser.getErrors().isEmpty()) {

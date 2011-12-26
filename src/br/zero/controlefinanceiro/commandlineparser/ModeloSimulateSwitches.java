@@ -12,7 +12,7 @@ public class ModeloSimulateSwitches {
 		return modelo;
 	}
 
-	@CommandLineSwitch(parser = "", complexParser = true)
+	@CommandLineSwitch(index = 1, parser = "ModeloSimulateParser.parse", complexParser = true)
 	public void setModelo(List<ModeloSimulate> modelo) {
 		this.modelo = modelo;
 	}
