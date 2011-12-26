@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import br.zero.controlefinanceiro.commandlineparser.ModeloSimulate;
 import br.zero.controlefinanceiro.commandlineparser.ModeloSimulateSwitches;
 import br.zero.controlefinanceiro.model.Conta;
 import br.zero.controlefinanceiro.model.Lancamento;
@@ -153,8 +154,14 @@ public class ModeloSimulateAction implements Action {
 		Contabilizador contabilizador = new Contabilizador();
 
 		List<LancamentoSimulated> lancamentoContabilizavelList = getLancamentoSimulatedList(contabilizador);
-		
-		List<LancamentoSimulated> lancamentoModeloContabilizavelList = getLancamentoModeloSimulatedList(contabilizador, switches.getNomeModelo(), switches.getDataBase());
+
+		List<LancamentoSimulated> lancamentoModeloContabilizavelList = new ArrayList<LancamentoSimulated>();
+
+		for (ModeloSimulate ms : switches.getModelo()) {
+			List<LancamentoSimulated> list = getLancamentoModeloSimulatedList(contabilizador, ms.getNomeModelo(), ms.getDataBase());
+
+			lancamentoModeloContabilizavelList.addAll(list);
+		}
 
 		List<LancamentoSimulated> list = createFinalList(lancamentoContabilizavelList, lancamentoModeloContabilizavelList);
 
@@ -184,7 +191,7 @@ public class ModeloSimulateAction implements Action {
 		Collections.sort(list);
 
 		calcNs(list);
-		
+
 		return list;
 	}
 
@@ -192,7 +199,7 @@ public class ModeloSimulateAction implements Action {
 		List<LancamentoModelo> lancamentoModeloList = getLancamentoModeloList(nomeModelo);
 
 		List<LancamentoSimulated> lancamentoModeloContabilizavelList = packListLancamentoModelo(contabilizador, dataBase, lancamentoModeloList);
-		
+
 		return lancamentoModeloContabilizavelList;
 	}
 
@@ -200,7 +207,7 @@ public class ModeloSimulateAction implements Action {
 		List<Lancamento> lancamentoList = getLancamentoList();
 
 		List<LancamentoSimulated> lancamentoSimulatedList = packListLancamento(contabilizador, lancamentoList);
-		
+
 		return lancamentoSimulatedList;
 	}
 
@@ -272,14 +279,20 @@ public class ModeloSimulateAction implements Action {
 
 		ModeloSimulateSwitches switches = (ModeloSimulateSwitches) param;
 
-		if (switches.getNomeModelo() == null) {
-			throw new ModeloSimulateException("Nome do Modelo deve ser informado.");
+		if (switches.getModelo().size() == 0) {
+			throw new ModeloSimulateException("Pelo menos um modelo deve ser informado.");
 		}
 
-		if (switches.getDataBase() == null) {
-			throw new ModeloSimulateException("Data base deve ser informada.");
-		}
+		for (ModeloSimulate ms : switches.getModelo()) {
+			if (ms.getNomeModelo() == null) {
+				throw new ModeloSimulateException("Nome do Modelo deve ser informado.");
+			}
 
+			if (ms.getDataBase() == null) {
+				throw new ModeloSimulateException("Data base deve ser informada.");
+			}
+		}
+		
 		return switches;
 	}
 
