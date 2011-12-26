@@ -49,7 +49,7 @@ public class ModeloSwitchesTests extends CustomParserTests {
 
 	@Test
 	public void doSimulateTest() throws ParserException {
-		doModeloLoad(new String[] { "modelo-simulate", "nome modelo", "nov/2011" }, Command.MODELO_SIMULATE);
+		doModeloLoad(new String[] { "modelo-simulate", "nome modelo", "01/Nov/2011" }, Command.MODELO_SIMULATE);
 
 		assertNotNull("Switches", switches.getModeloSimulateSwitches());
 
@@ -66,7 +66,7 @@ public class ModeloSwitchesTests extends CustomParserTests {
 
 	@Test
 	public void doSimulateTest2() throws ParserException {
-		doModeloLoad(new String[] { "modelo-simulate", "nome modelo", "nov/2011", "nome modelo 2", "dec/2011" }, Command.MODELO_SIMULATE);
+		doModeloLoad(new String[] { "modelo-simulate", "nome modelo", "01/Nov/2011", "nome modelo 2", "01/Dec/2011" }, Command.MODELO_SIMULATE);
 
 		assertNotNull("Switches", switches.getModeloSimulateSwitches());
 
