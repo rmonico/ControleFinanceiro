@@ -10,23 +10,6 @@ public class ManualReferencesParser {
 
 	private String error;
 
-	// private static class ManualRefsComplexParserReturn implements
-	// ComplexParserReturn {
-	//
-	// @Override
-	// public Object getComplexSwitchValue() {
-	// // TODO Auto-generated method stub
-	// return null;
-	// }
-	//
-	// @Override
-	// public Object getSubObjectValue() {
-	// // TODO Auto-generated method stub
-	// return null;
-	// }
-	//
-	// }
-
 	@CommandLineArgumentParserMethod(messageMethod = "getError")
 	public ComplexParserReturn parse(ComplexParserParameter parameter) {
 
