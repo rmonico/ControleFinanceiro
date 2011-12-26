@@ -1,30 +1,20 @@
 package br.zero.controlefinanceiro.commandlineparser;
 
-import java.util.Calendar;
+import java.util.List;
 
 import br.zero.commandlineparser.CommandLineSwitch;
 
 public class ModeloSimulateSwitches {
 
-	private String nomeModelo;
-	private Calendar dataBase;
+	private List<ModeloSimulate> modelo;
 
-	public String getNomeModelo() {
-		return nomeModelo;
+	public List<ModeloSimulate> getModelo() {
+		return modelo;
 	}
 
-	@CommandLineSwitch(index = 1)
-	public void setNomeModelo(String nomeModelo) {
-		this.nomeModelo = nomeModelo;
-	}
-
-	public Calendar getDataBase() {
-		return dataBase;
-	}
-
-	@CommandLineSwitch(index = 2, parser="MonthDateParser.parseCalendar")
-	public void setDataBase(Calendar dataBase) {
-		this.dataBase = dataBase;
+	@CommandLineSwitch(parser = "", complexParser = true)
+	public void setModelo(List<ModeloSimulate> modelo) {
+		this.modelo = modelo;
 	}
 
 }

@@ -54,12 +54,38 @@ public class ModeloSwitchesTests extends CustomParserTests {
 		assertNotNull("Switches", switches.getModeloSimulateSwitches());
 
 		ModeloSimulateSwitches simulateSwitches = switches.getModeloSimulateSwitches();
+		
+		ModeloSimulate ms = simulateSwitches.getModelo().get(0);
 
-		assertEquals("Nome do modelo", "nome modelo", simulateSwitches.getNomeModelo());
+		assertEquals("Nome do modelo", "nome modelo", ms.getNomeModelo());
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
 
-		assertEquals("Data base", "01/Nov/2011", sdf.format(simulateSwitches.getDataBase().getTime()));
+		assertEquals("Data base", "01/Nov/2011", sdf.format(ms.getDataBase().getTime()));
+	}
+
+	@Test
+	public void doSimulateTest2() throws ParserException {
+		doModeloLoad(new String[] { "modelo-simulate", "nome modelo", "nov/2011", "nome modelo 2", "dec/2011" }, Command.MODELO_SIMULATE);
+
+		assertNotNull("Switches", switches.getModeloSimulateSwitches());
+
+		ModeloSimulateSwitches simulateSwitches = switches.getModeloSimulateSwitches();
+
+		ModeloSimulate ms = simulateSwitches.getModelo().get(0);
+
+		assertEquals("Nome do modelo", "nome modelo", ms.getNomeModelo());
+
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
+
+		assertEquals("Data base", "01/Nov/2011", sdf.format(ms.getDataBase().getTime()));
+
+		
+		ms = simulateSwitches.getModelo().get(1);
+		
+		assertEquals("Nome do modelo", "nome modelo 2", ms.getNomeModelo());
+
+		assertEquals("Data base", "01/Dec/2011", sdf.format(ms.getDataBase().getTime()));
 	}
 
 	@Test
