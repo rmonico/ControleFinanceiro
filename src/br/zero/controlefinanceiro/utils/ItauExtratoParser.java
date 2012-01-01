@@ -120,6 +120,11 @@ public class ItauExtratoParser implements ExtratoLineParser {
 		data.setTime(sdf.parse(dataStr));
 
 		data.set(Calendar.YEAR, GregorianCalendar.getInstance().get(Calendar.YEAR));
+		
+		// Se a data for ficar no futuro, voltar um ano
+		if (GregorianCalendar.getInstance().compareTo(data) < 0) {
+			data.add(Calendar.YEAR, -1);
+		}
 
 		return data;
 	}
