@@ -96,6 +96,10 @@ public class LancamentoDAO extends CustomDAO<Lancamento> {
 		listarSemExtratoQuery.append("where\n");
 		listarSemExtratoQuery.append("  l.contaOrigem = :banco\n");
 		listarSemExtratoQuery.append("  or l.contaDestino = :banco\n");
+		listarSemExtratoQuery.append("\n");
+		listarSemExtratoQuery.append("order by\n");
+		listarSemExtratoQuery.append("  l.data\n");
+		listarSemExtratoQuery.append("  , l.n\n");
 
 		Query q = getEntityManager().createQuery(listarSemExtratoQuery.toString());
 		

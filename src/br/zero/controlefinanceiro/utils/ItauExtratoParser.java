@@ -90,13 +90,28 @@ public class ItauExtratoParser implements ExtratoLineParser {
 
 		ConcreteExtratoLancamentoTransaction etl = new ConcreteExtratoLancamentoTransaction();
 
-		etl.setReferencia(fields[3]);
+		String referencia = fields[3];
+		etl.setReferencia(referencia);
 
-		Calendar data;
-		try {
-			data = parseData(fields[0]);
-		} catch (ParseException e) {
-			throw new ExtratoLineParserException(e);
+		Calendar data = null;
+		int referenciaLength = referencia.length();
+		if ((!referencia.startsWith("TAR MAXICONTA MENS")) && (referenciaLength > 5)) {
+			String dataStr = referencia.substring(referenciaLength - 5);
+			try {
+				data = parseData(dataStr);
+			} catch (ParseException e) {
+				// Não deu certo fazer o parsing com a referência, deixar que
+				// logo em seguida será feito com o campo específico
+				data = null;
+			}
+		}
+
+		if (data == null) {
+			try {
+				data = parseData(fields[0]);
+			} catch (ParseException e) {
+				throw new ExtratoLineParserException(e);
+			}
 		}
 
 		etl.setData(data);
@@ -120,7 +135,7 @@ public class ItauExtratoParser implements ExtratoLineParser {
 		data.setTime(sdf.parse(dataStr));
 
 		data.set(Calendar.YEAR, GregorianCalendar.getInstance().get(Calendar.YEAR));
-		
+
 		// Se a data for ficar no futuro, voltar um ano
 		if (GregorianCalendar.getInstance().compareTo(data) < 0) {
 			data.add(Calendar.YEAR, -1);

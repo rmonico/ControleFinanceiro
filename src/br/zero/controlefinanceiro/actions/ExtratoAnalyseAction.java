@@ -155,6 +155,10 @@ public class ExtratoAnalyseAction implements Action {
 		public void setContaStatus(ContaStatus contaStatus) {
 			this.contaStatus = contaStatus;
 		}
+		
+		public Calendar getOriginalDate() {
+			
+		}
 
 	}
 
@@ -264,6 +268,7 @@ public class ExtratoAnalyseAction implements Action {
 				throw new ExtratoAnalyseException("Classe de linha desconhecida (\"" + extrato + "\")");
 			}
 
+			// TODO Mudar o setOriginal para setExtrato
 			analyseResult.setOriginal(extrato.getOrigem().getOriginal());
 
 			statuses.add(analyseResult);
@@ -460,6 +465,7 @@ public class ExtratoAnalyseAction implements Action {
 		grid.getData().setTitle("Sincronização de Extrato banco \"" + banco.getNome() + "\"");
 
 		TextGridFormattedColumn.createFormattedColumn(grid, "", new ToStringFormatter(""), TextGridColumnAlignment.CENTER, "getStatusLinha");
+		TextGridFormattedColumn.createFormattedColumn(grid, "Date", TextGridFormattedColumn.DATE_FORMATTER, TextGridColumnAlignment.LEFT, "getParsedDate");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Original", TextGridFormattedColumn.STRING_FORMATTER, TextGridColumnAlignment.LEFT, "getOriginal");
 		TextGridFormattedColumn.createFormattedColumn(grid, "", new ToStringFormatter(""), TextGridColumnAlignment.CENTER, "getContaStatus");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Conta", ControleFinanceiroFormatters.CONTA_FORMATTER, TextGridColumnAlignment.LEFT, "getConta");
@@ -470,8 +476,13 @@ public class ExtratoAnalyseAction implements Action {
 	}
 
 	private boolean extratoLineMatch(Lancamento lancto, ExtratoLancamentoTransaction line, Conta contaOrigemEsperada, Conta contaDestinoEsperada) {
-		Calendar dataEsperada = line.getData();
-		boolean dataOk = lancto.getData().equals(dataEsperada);
+		Calendar menorDataEsperada = line.getData();
+//		Regras dos três dias. Por enquanto não vou utilizar.
+//		Calendar maiorDataEsperada = (Calendar) line.getData().clone();
+//		maiorDataEsperada.add(Calendar.DAY_OF_MONTH, 3);
+//
+//		boolean dataOk = ((lancto.getData().compareTo(maiorDataEsperada) <= 0) && (lancto.getData().compareTo(menorDataEsperada) >= 0));
+		boolean dataOk = lancto.getData().equals(menorDataEsperada);
 		boolean origemOk = lancto.getContaOrigem().equals(contaOrigemEsperada);
 		boolean destinoOk = lancto.getContaDestino().equals(contaDestinoEsperada);
 		boolean valorOk = lancto.getValor().equals(Math.abs(line.getValor()));
