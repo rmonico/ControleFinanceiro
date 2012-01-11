@@ -27,7 +27,7 @@
 <node BACKGROUND_COLOR="#99ff99" CREATED="1322269973722" ID="ID_1540285104" MODIFIED="1322269993883" TEXT="Ok (F3)"/>
 <node CREATED="1322269975090" ID="ID_716897189" MODIFIED="1322270304082" TEXT="Pendente (F1)"/>
 </node>
-<node BACKGROUND_COLOR="#99ff99" CREATED="1322270133624" FOLDED="true" ID="ID_209304459" MODIFIED="1322875335983" POSITION="right" TEXT="Milestone 2">
+<node BACKGROUND_COLOR="#99ff99" CREATED="1322270133624" ID="ID_209304459" MODIFIED="1326277144696" POSITION="right" TEXT="Milestone 2">
 <node CREATED="1322270137269" ID="ID_1707435879" MODIFIED="1322270160278" TEXT="Objetivos">
 <richcontent TYPE="NOTE"><html>
   <head>
@@ -58,7 +58,7 @@
 </html></richcontent>
 </node>
 </node>
-<node CREATED="1322270400623" FOLDED="true" ID="ID_674416975" MODIFIED="1324252486520" POSITION="right" TEXT="Milestone 3">
+<node BACKGROUND_COLOR="#99ff99" CREATED="1322270400623" ID="ID_674416975" MODIFIED="1326277299435" POSITION="right" TEXT="Milestone 3">
 <node CREATED="1322270408325" ID="ID_662000060" MODIFIED="1322270930606" TEXT="Objetivos">
 <richcontent TYPE="NOTE"><html>
   <head>
@@ -155,7 +155,7 @@
   </body>
 </html></richcontent>
 </node>
-<node BACKGROUND_COLOR="#99ff99" CREATED="1322270725708" FOLDED="true" ID="ID_623657749" MODIFIED="1323185954525" TEXT="jfin extrato import ">
+<node BACKGROUND_COLOR="#99ff99" CREATED="1322270725708" FOLDED="true" ID="ID_623657749" MODIFIED="1326277296129" TEXT="jfin extrato import ">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -298,7 +298,78 @@
 </html></richcontent>
 </node>
 </node>
-<node CREATED="1322738893562" ID="ID_1250441849" MODIFIED="1324253162280" POSITION="right" TEXT="Corre&#xe7;&#xf5;es">
+<node CREATED="1326277118690" ID="ID_1858757040" MODIFIED="1326277129501" POSITION="right" TEXT="Milestone 4.1">
+<node CREATED="1326277137957" ID="ID_296700627" MODIFIED="1326277166720" TEXT="Objetivos">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      Simula&#231;&#227;o dos modelos completa
+    </p>
+  </body>
+</html>
+</richcontent>
+</node>
+<node CREATED="1326277180145" ID="ID_250398468" MODIFIED="1326277754285" TEXT="lancmodelo-ls: Ordenar lista por dia de vencto"/>
+<node CREATED="1326277175167" ID="ID_847596701" MODIFIED="1326277207981" TEXT="lancmodelo-ls: Contabilizar saldo"/>
+<node CREATED="1326277220509" ID="ID_1321478390" MODIFIED="1326277280403" TEXT="lancmodelo-ls: Criar campos de porcentual">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      Criar campos de porcentual em rela&#231;&#227;o ao total de despesas ou receitas (no caso de dinheiro que entra) e porcentuais acumulados
+    </p>
+  </body>
+</html>
+</richcontent>
+</node>
+</node>
+<node CREATED="1326277132680" ID="ID_1176934154" MODIFIED="1326277323932" POSITION="right" TEXT="Milestone 4.2">
+<node CREATED="1326277305110" ID="ID_1431346685" MODIFIED="1326277326287" TEXT="Objetivos">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      Sincroniza&#231;&#227;o do extrato funcional
+    </p>
+  </body>
+</html>
+</richcontent>
+</node>
+<node CREATED="1326277327650" ID="ID_64718160" MODIFIED="1326277365793" TEXT="Abstrair regras">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      A partir da planilha de sincroniza&#231;&#227;o manual, abstrair regras.
+    </p>
+  </body>
+</html>
+</richcontent>
+</node>
+<node CREATED="1326277374326" ID="ID_1293980155" MODIFIED="1326277417427" TEXT="Ordernar lista">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      Ordenar a lista pela data que o parser atribui.
+    </p>
+  </body>
+</html>
+</richcontent>
+</node>
+</node>
+<node CREATED="1322738893562" ID="ID_1250441849" MODIFIED="1326277128953" POSITION="right" TEXT="Corre&#xe7;&#xf5;es">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -308,7 +379,8 @@
       Cadastrados na ordem em que devem ser atacados
     </p>
   </body>
-</html></richcontent>
+</html>
+</richcontent>
 <node CREATED="1324252814195" ID="ID_242129029" MODIFIED="1324253148231" TEXT="extrato-analyse: lanctos em feriados">
 <richcontent TYPE="NOTE"><html>
   <head>
@@ -333,7 +405,7 @@
   </body>
 </html></richcontent>
 </node>
-<node CREATED="1322738576183" ID="ID_1153208439" MODIFIED="1324252971596" TEXT="modelo simulate: corre&#xe7;&#xe3;o de bug">
+<node CREATED="1322738576183" ID="ID_1153208439" MODIFIED="1326277716096" TEXT="modelo simulate: corre&#xe7;&#xe3;o de bug">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -343,10 +415,49 @@
       - simula&#231;&#227;o de modelo: n&#227;o mostrar os lan&#231;amentos do modelo que j&#225; tiverem algum lan&#231;amento correspondente
     </p>
     <p>
-      - so mostrar nas listagens lancamentos com um m&#234;s ou menos de idade
+      - so mostrar nas listagens lancamentos com um m&#234;s ou menos de idade (criar par&#226;metro de data para isso)
+    </p>
+  </body>
+</html>
+</richcontent>
+</node>
+</node>
+<node CREATED="1326277431201" ID="ID_513442912" MODIFIED="1326277486784" POSITION="right" TEXT="Milestone 5">
+<node CREATED="1326277444694" ID="ID_1463337530" MODIFIED="1326277482198" TEXT="Objetivos">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      Finalizar a primeira vers&#227;o funcional do freelook e migrar o sistema para web.
     </p>
   </body>
 </html></richcontent>
+</node>
+</node>
+<node CREATED="1326277497865" ID="ID_1202848612" MODIFIED="1326277500553" POSITION="right" TEXT="Milestone 6">
+<node CREATED="1326277501404" ID="ID_133246500" MODIFIED="1326277626870" TEXT="Objetivos">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      Fazer an&#225;lise do balan&#231;o:
+    </p>
+    <p>
+      &#160;&#160;- Propor um lan&#231;amento de confer&#234;ncia quando o balan&#231;o n&#227;o bater com o saldo da conta
+    </p>
+    <p>
+      &#160;- Mostrar um status especial quando o balan&#231;o do extrato bater com o saldo da conta, ou quando j&#225; houver um lancto de confer&#234;ncia que estiver ok
+    </p>
+    <p>
+      &#160;&#160;- Criar a&#231;&#227;o de balan&#231;o, dever&#225; receber um saldo, uma conta e, opcionalmente, uma data.
+    </p>
+  </body>
+</html>
+</richcontent>
 </node>
 </node>
 <node CREATED="1324252493893" ID="ID_1726085239" MODIFIED="1324253246865" POSITION="right" TEXT="Melhorias">
@@ -422,8 +533,21 @@
   </body>
 </html></richcontent>
 </node>
+<node CREATED="1326277629987" ID="ID_1203878710" MODIFIED="1326277651743" TEXT="lanc-add: mostrar saldo">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      Mostrar o saldo da conta ap&#243;s uma inclus&#227;o de novo lan&#231;amento
+    </p>
+  </body>
+</html>
+</richcontent>
 </node>
-<node CREATED="1322272082887" FOLDED="true" ID="ID_1707116991" MODIFIED="1323182293757" POSITION="right" TEXT="Funcionalidades futuras">
+</node>
+<node CREATED="1322272082887" FOLDED="true" ID="ID_1707116991" MODIFIED="1326277128364" POSITION="right" TEXT="Funcionalidades futuras">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -433,7 +557,8 @@
       Fazer modelos derivados. Ao criar um modelo, ele podera ser marcado como derivado de outro para herdar seus lancamentos
     </p>
   </body>
-</html></richcontent>
+</html>
+</richcontent>
 <node CREATED="1322738319787" ID="ID_964412691" MODIFIED="1322738324271" TEXT="modelos derivados"/>
 <node CREATED="1322738326482" ID="ID_1080856909" MODIFIED="1322738385788" TEXT="Listagem de lan&#xe7;amentos previstos">
 <richcontent TYPE="NOTE"><html>
