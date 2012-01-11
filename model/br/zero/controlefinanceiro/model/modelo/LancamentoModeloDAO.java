@@ -11,7 +11,7 @@ import br.zero.customdao.DAOSetup;
 public class LancamentoModeloDAO extends CustomDAO<LancamentoModelo> {
 
 	public List<LancamentoModelo> listarPorModelo(String nomeModelo) {
-		Query q = getEntityManager().createQuery("select lm from LancamentoModelo lm where lm.modelo.nome = :nomeModelo");
+		Query q = getEntityManager().createQuery("select lm from LancamentoModelo lm where lm.modelo.nome = :nomeModelo order by lm.diaVencimento");
 		q.setParameter("nomeModelo", nomeModelo);
 
 		@SuppressWarnings("unchecked")

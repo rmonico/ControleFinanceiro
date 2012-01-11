@@ -312,7 +312,7 @@
 </html>
 </richcontent>
 </node>
-<node CREATED="1326277180145" ID="ID_250398468" MODIFIED="1326277754285" TEXT="lancmodelo-ls: Ordenar lista por dia de vencto"/>
+<node BACKGROUND_COLOR="#99ff99" CREATED="1326277180145" ID="ID_250398468" MODIFIED="1326277952213" TEXT="lancmodelo-ls: Ordenar lista por dia de vencto"/>
 <node CREATED="1326277175167" ID="ID_847596701" MODIFIED="1326277207981" TEXT="lancmodelo-ls: Contabilizar saldo"/>
 <node CREATED="1326277220509" ID="ID_1321478390" MODIFIED="1326277280403" TEXT="lancmodelo-ls: Criar campos de porcentual">
 <richcontent TYPE="NOTE"><html>
