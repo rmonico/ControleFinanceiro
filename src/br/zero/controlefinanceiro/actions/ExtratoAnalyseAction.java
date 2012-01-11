@@ -102,7 +102,7 @@ public class ExtratoAnalyseAction implements Action {
 	public class ExtratoLineAnalyseResult {
 
 		private StatusLinha statusLinha;
-		private String original;
+		private DatedExtratoLancamento extratoLancamento;
 		private Conta conta;
 		private Lancamento lancamento;
 		private LancamentoStatus lancamentoStatus;
@@ -116,12 +116,12 @@ public class ExtratoAnalyseAction implements Action {
 			this.statusLinha = statusLinha;
 		}
 
-		public String getOriginal() {
-			return original;
+		public DatedExtratoLancamento getExtrato() {
+			return extratoLancamento;
 		}
 
-		public void setOriginal(String original) {
-			this.original = original;
+		public void setExtrato(DatedExtratoLancamento extrato) {
+			this.extratoLancamento = extrato;
 		}
 
 		public Conta getConta() {
@@ -155,9 +155,21 @@ public class ExtratoAnalyseAction implements Action {
 		public void setContaStatus(ContaStatus contaStatus) {
 			this.contaStatus = contaStatus;
 		}
-		
+
 		public Calendar getOriginalDate() {
-			
+			if (extratoLancamento == null) {
+				return null;
+			} else {
+				return extratoLancamento.getData();
+			}
+		}
+
+		public String getLinhaOriginal() {
+			if (extratoLancamento == null) {
+				return null;
+			} else {
+				return extratoLancamento.getOrigem().getOriginal();
+			}
 		}
 
 	}
@@ -260,16 +272,16 @@ public class ExtratoAnalyseAction implements Action {
 
 			if (extrato instanceof ExtratoLancamentoBalance) {
 				analyseResult = syncBalanceLine();
+				analyseResult.setExtrato((ExtratoLancamentoBalance) extrato);
 			} else if (extrato instanceof ExtratoLancamentoTransaction) {
 				analyseResult = syncTransactionLine(lancamentoSemExtratoList, contaDAO, (ExtratoLancamentoTransaction) extrato);
+				analyseResult.setExtrato((ExtratoLancamentoTransaction) extrato);
 			} else if (extrato instanceof ExtratoLancamentoUnknown) {
 				analyseResult = syncUnknownLine();
+				analyseResult.setExtrato(null);
 			} else {
 				throw new ExtratoAnalyseException("Classe de linha desconhecida (\"" + extrato + "\")");
 			}
-
-			// TODO Mudar o setOriginal para setExtrato
-			analyseResult.setOriginal(extrato.getOrigem().getOriginal());
 
 			statuses.add(analyseResult);
 
@@ -301,7 +313,7 @@ public class ExtratoAnalyseAction implements Action {
 					break;
 				}
 			}
-			
+
 			if ((dataProximo == null) || (!data.equals(dataProximo))) {
 				addLancamentosNaoResolvidos(data, lancamentoOrfaoList, statuses);
 			}
@@ -312,17 +324,17 @@ public class ExtratoAnalyseAction implements Action {
 		for (Lancamento lancamento : lancamentoOrfaoList) {
 			if ((lancamento.getData().equals(data)) && (lancamento.getExtrato() == null)) {
 				ExtratoLineAnalyseResult r = new ExtratoLineAnalyseResult();
-				
+
 				r.setLinhaStatus(StatusLinha.DONT_APPLY);
 				r.setContaStatus(ContaStatus.DONT_APPLY);
 				r.setLancamentoStatus(LancamentoStatus.NOT_RELATED);
 				r.setLancamento(lancamento);
-				
+
 				statuses.add(r);
 			}
-			
+
 		}
-		
+
 	}
 
 	private void makeParser(List<ExtratoLancamento> extratoLancamentoOrfao, List<ParsedExtratoLancamento> extratoLines) throws ExtratoLineParserException, ExtratoAnalyseException {
@@ -354,7 +366,7 @@ public class ExtratoAnalyseAction implements Action {
 
 		Conta contaExtrato = resolveReference(contaDAO, line.getReferencia());
 
-		if (contaExtrato == null) { 
+		if (contaExtrato == null) {
 			result.setContaStatus(ContaStatus.NOT_FOUND);
 			return result;
 		}
@@ -465,8 +477,8 @@ public class ExtratoAnalyseAction implements Action {
 		grid.getData().setTitle("Sincronização de Extrato banco \"" + banco.getNome() + "\"");
 
 		TextGridFormattedColumn.createFormattedColumn(grid, "", new ToStringFormatter(""), TextGridColumnAlignment.CENTER, "getStatusLinha");
-		TextGridFormattedColumn.createFormattedColumn(grid, "Date", TextGridFormattedColumn.DATE_FORMATTER, TextGridColumnAlignment.LEFT, "getParsedDate");
-		TextGridFormattedColumn.createFormattedColumn(grid, "Original", TextGridFormattedColumn.STRING_FORMATTER, TextGridColumnAlignment.LEFT, "getOriginal");
+		TextGridFormattedColumn.createFormattedColumn(grid, "Date", TextGridFormattedColumn.DATE_FORMATTER, TextGridColumnAlignment.LEFT, "getOriginalDate");
+		TextGridFormattedColumn.createFormattedColumn(grid, "Original", TextGridFormattedColumn.STRING_FORMATTER, TextGridColumnAlignment.LEFT, "getLinhaOriginal");
 		TextGridFormattedColumn.createFormattedColumn(grid, "", new ToStringFormatter(""), TextGridColumnAlignment.CENTER, "getContaStatus");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Conta", ControleFinanceiroFormatters.CONTA_FORMATTER, TextGridColumnAlignment.LEFT, "getConta");
 		TextGridFormattedColumn.createFormattedColumn(grid, "", new ToStringFormatter(""), TextGridColumnAlignment.CENTER, "getLancamentoStatus");
@@ -477,11 +489,12 @@ public class ExtratoAnalyseAction implements Action {
 
 	private boolean extratoLineMatch(Lancamento lancto, ExtratoLancamentoTransaction line, Conta contaOrigemEsperada, Conta contaDestinoEsperada) {
 		Calendar menorDataEsperada = line.getData();
-//		Regras dos três dias. Por enquanto não vou utilizar.
-//		Calendar maiorDataEsperada = (Calendar) line.getData().clone();
-//		maiorDataEsperada.add(Calendar.DAY_OF_MONTH, 3);
-//
-//		boolean dataOk = ((lancto.getData().compareTo(maiorDataEsperada) <= 0) && (lancto.getData().compareTo(menorDataEsperada) >= 0));
+		// Regras dos três dias. Por enquanto não vou utilizar.
+		// Calendar maiorDataEsperada = (Calendar) line.getData().clone();
+		// maiorDataEsperada.add(Calendar.DAY_OF_MONTH, 3);
+		//
+		// boolean dataOk = ((lancto.getData().compareTo(maiorDataEsperada) <=
+		// 0) && (lancto.getData().compareTo(menorDataEsperada) >= 0));
 		boolean dataOk = lancto.getData().equals(menorDataEsperada);
 		boolean origemOk = lancto.getContaOrigem().equals(contaOrigemEsperada);
 		boolean destinoOk = lancto.getContaDestino().equals(contaDestinoEsperada);
