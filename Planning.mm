@@ -309,11 +309,10 @@
       Simula&#231;&#227;o dos modelos completa
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 <node BACKGROUND_COLOR="#99ff99" CREATED="1326277180145" ID="ID_250398468" MODIFIED="1326277952213" TEXT="lancmodelo-ls: Ordenar lista por dia de vencto"/>
-<node CREATED="1326277175167" ID="ID_847596701" MODIFIED="1326277207981" TEXT="lancmodelo-ls: Contabilizar saldo"/>
+<node BACKGROUND_COLOR="#99ff99" CREATED="1326277175167" ID="ID_847596701" MODIFIED="1326452749141" TEXT="lancmodelo-ls: Contabilizar saldo"/>
 <node CREATED="1326277220509" ID="ID_1321478390" MODIFIED="1326277280403" TEXT="lancmodelo-ls: Criar campos de porcentual">
 <richcontent TYPE="NOTE"><html>
   <head>
@@ -324,8 +323,7 @@
       Criar campos de porcentual em rela&#231;&#227;o ao total de despesas ou receitas (no caso de dinheiro que entra) e porcentuais acumulados
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 </node>
 <node CREATED="1326277132680" FOLDED="true" ID="ID_1176934154" MODIFIED="1326278600125" POSITION="right" TEXT="Milestone 4.2">
@@ -339,8 +337,7 @@
       Sincroniza&#231;&#227;o do extrato funcional
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 <node CREATED="1326277327650" ID="ID_64718160" MODIFIED="1326277365793" TEXT="Abstrair regras">
 <richcontent TYPE="NOTE"><html>
@@ -352,8 +349,7 @@
       A partir da planilha de sincroniza&#231;&#227;o manual, abstrair regras.
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 <node CREATED="1326277374326" ID="ID_1293980155" MODIFIED="1326277417427" TEXT="Ordernar lista">
 <richcontent TYPE="NOTE"><html>
@@ -365,8 +361,7 @@
       Ordenar a lista pela data que o parser atribui.
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 </node>
 <node CREATED="1322738893562" FOLDED="true" ID="ID_1250441849" MODIFIED="1326278601024" POSITION="right" TEXT="Corre&#xe7;&#xf5;es">
@@ -379,8 +374,7 @@
       Cadastrados na ordem em que devem ser atacados
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 <node CREATED="1324252814195" ID="ID_242129029" MODIFIED="1324253148231" TEXT="extrato-analyse: lanctos em feriados">
 <richcontent TYPE="NOTE"><html>
   <head>
@@ -418,8 +412,7 @@
       - so mostrar nas listagens lancamentos com um m&#234;s ou menos de idade (criar par&#226;metro de data para isso)
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 </node>
 <node CREATED="1326277431201" FOLDED="true" ID="ID_513442912" MODIFIED="1326278602181" POSITION="right" TEXT="Milestone 5">
@@ -456,8 +449,7 @@
       &#160;&#160;- Criar a&#231;&#227;o de balan&#231;o, dever&#225; receber um saldo, uma conta e, opcionalmente, uma data.
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 </node>
 <node CREATED="1324252493893" FOLDED="true" ID="ID_1726085239" MODIFIED="1326278603972" POSITION="right" TEXT="Melhorias">
@@ -543,8 +535,7 @@
       Mostrar o saldo da conta ap&#243;s uma inclus&#227;o de novo lan&#231;amento
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 </node>
 <node CREATED="1322272082887" FOLDED="true" ID="ID_1707116991" MODIFIED="1326277128364" POSITION="right" TEXT="Funcionalidades futuras">
@@ -557,8 +548,7 @@
       Fazer modelos derivados. Ao criar um modelo, ele podera ser marcado como derivado de outro para herdar seus lancamentos
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 <node CREATED="1322738319787" ID="ID_964412691" MODIFIED="1322738324271" TEXT="modelos derivados"/>
 <node CREATED="1322738326482" ID="ID_1080856909" MODIFIED="1322738385788" TEXT="Listagem de lan&#xe7;amentos previstos">
 <richcontent TYPE="NOTE"><html>
