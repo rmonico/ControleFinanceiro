@@ -171,6 +171,8 @@ public class LancamentoModeloListAction implements Action {
 		TextGridFormattedColumn.createFormattedColumn(grid, "Conta Destino", ControleFinanceiroFormatters.CONTA_FORMATTER, TextGridColumnAlignment.LEFT, "getContaDestino");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Valor", TextGridFormattedColumn.MONEY_FORMATTER, TextGridColumnAlignment.RIGHT, "getValor");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Observação", TextGridFormattedColumn.STRING_FORMATTER, TextGridColumnAlignment.LEFT, "getObservacao");
+		TextGridFormattedColumn.createFormattedColumn(grid, "Porcentual", TextGridFormattedColumn.PERCENT_FORMATTER, TextGridColumnAlignment.RIGHT, "getPorcentual");
+		TextGridFormattedColumn.createFormattedColumn(grid, "Acumulado", TextGridFormattedColumn.PERCENT_FORMATTER, TextGridColumnAlignment.RIGHT, "getPorcentualAcumulado");
 	}
 
 	@Override
@@ -196,7 +198,7 @@ public class LancamentoModeloListAction implements Action {
 
 		TextGrid grid = getGrid();
 
-		grid.setValues(lancamentoModeloList);
+		grid.setValues(lancamentoContabilizavelList);
 
 		grid.show();
 
