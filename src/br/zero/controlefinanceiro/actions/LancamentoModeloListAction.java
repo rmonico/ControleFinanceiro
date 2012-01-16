@@ -28,8 +28,10 @@ public class LancamentoModeloListAction implements Action {
 		private LancamentoModelo lancamento;
 		private Double saldoOrigem;
 		private Double saldoDestino;
-		private Double porcentual;
-		private Double porcentualAcumulado;
+		private Double porcentualReceita;
+		private Double porcentualDespesa;
+		private Double porcentualReceitaAcumulado;
+		private Double porcentualDespesaAcumulado;
 
 		@Override
 		public Double getValor() {
@@ -85,17 +87,17 @@ public class LancamentoModeloListAction implements Action {
 		}
 
 		/**
-		 * Devolve o porcentual deste lançamento em relação ao total dos
-		 * lançamentos.
+		 * Devolve o porcentual deste lançamento em relação ao total das
+		 * receitas.
 		 * 
 		 * @return
 		 */
-		public Double getPorcentual() {
-			return porcentual;
+		public Double getPorcentualReceita() {
+			return porcentualReceita;
 		}
 
-		public void setPorcentual(Double porcentual) {
-			this.porcentual = porcentual;
+		public void setPorcentualReceita(Double porcentual) {
+			this.porcentualReceita = porcentual;
 		}
 
 		/**
@@ -103,13 +105,41 @@ public class LancamentoModeloListAction implements Action {
 		 * 
 		 * @return
 		 */
-		public Double getPorcentualAcumulado() {
-			return porcentualAcumulado;
+		public Double getPorcentualReceitaAcumulado() {
+			return porcentualReceitaAcumulado;
 		}
 
-		public void setPorcentualAcumulado(Double porcentualAcumulado) {
-			this.porcentualAcumulado = porcentualAcumulado;
+		public void setPorcentualReceitaAcumulado(Double porcentualAcumulado) {
+			this.porcentualReceitaAcumulado = porcentualAcumulado;
 		}
+
+		/**
+		 * Devolve o porcentual deste lançamento em relação ao total das
+		 * despesas.
+		 * 
+		 * @return
+		 */
+		public Double getPorcentualDespesa() {
+			return porcentualDespesa;
+		}
+
+		public void setPorcentualDespesa(Double porcentual) {
+			this.porcentualDespesa = porcentual;
+		}
+
+		/**
+		 * O porcentual acima, acumulado.
+		 * 
+		 * @return
+		 */
+		public Double getPorcentualDespesaAcumulado() {
+			return porcentualDespesaAcumulado;
+		}
+
+		public void setPorcentualDespesaAcumulado(Double porcentualAcumulado) {
+			this.porcentualDespesaAcumulado = porcentualAcumulado;
+		}
+
 	}
 
 	public class LancamentoModeloPacker implements Packer<LancamentoModeloContabilizavel, LancamentoModelo> {
@@ -171,8 +201,10 @@ public class LancamentoModeloListAction implements Action {
 		TextGridFormattedColumn.createFormattedColumn(grid, "Conta Destino", ControleFinanceiroFormatters.CONTA_FORMATTER, TextGridColumnAlignment.LEFT, "getContaDestino");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Valor", TextGridFormattedColumn.MONEY_FORMATTER, TextGridColumnAlignment.RIGHT, "getValor");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Observação", TextGridFormattedColumn.STRING_FORMATTER, TextGridColumnAlignment.LEFT, "getObservacao");
-		TextGridFormattedColumn.createFormattedColumn(grid, "Porcentual", TextGridFormattedColumn.PERCENT_FORMATTER, TextGridColumnAlignment.RIGHT, "getPorcentual");
-		TextGridFormattedColumn.createFormattedColumn(grid, "Acumulado", TextGridFormattedColumn.PERCENT_FORMATTER, TextGridColumnAlignment.RIGHT, "getPorcentualAcumulado");
+		TextGridFormattedColumn.createFormattedColumn(grid, "% Receita", TextGridFormattedColumn.PERCENT_FORMATTER, TextGridColumnAlignment.RIGHT, "getPorcentualReceita");
+		TextGridFormattedColumn.createFormattedColumn(grid, "Acumulado", TextGridFormattedColumn.PERCENT_FORMATTER, TextGridColumnAlignment.RIGHT, "getPorcentualReceitaAcumulado");
+		TextGridFormattedColumn.createFormattedColumn(grid, "% Despesa", TextGridFormattedColumn.PERCENT_FORMATTER, TextGridColumnAlignment.RIGHT, "getPorcentualDespesa");
+		TextGridFormattedColumn.createFormattedColumn(grid, "Acumulado", TextGridFormattedColumn.PERCENT_FORMATTER, TextGridColumnAlignment.RIGHT, "getPorcentualDespesaAcumulado");
 	}
 
 	@Override
@@ -212,28 +244,49 @@ public class LancamentoModeloListAction implements Action {
 	}
 
 	private void calcStatistics(List<LancamentoModeloContabilizavel> lancamentoContabilizavelList) {
-		Double totalLancamentos = calcTotalLancamentos(lancamentoContabilizavelList);
+		Double totalReceitas = 0.0;
+		Double totalDespesas = 0.0;
+		
+		calcTotalLancamentos(lancamentoContabilizavelList, totalReceitas, totalDespesas);
 
-		Double porcentualAcumulado = 0.0;
+		Double porcentualReceitaAcumulado = 0.0;
+		Double porcentualDespesaAcumulado = 0.0;
+		
 		for (LancamentoModeloContabilizavel lm : lancamentoContabilizavelList) {
-			Double porcentual = lm.getValor() / totalLancamentos;
-			
-			lm.setPorcentual(porcentual);
-			
-			porcentualAcumulado += porcentual;
-			
-			lm.setPorcentualAcumulado(porcentualAcumulado);
+
+			if (lm.getContaOrigem().getContabilizavel()) {
+				Double porcentual = lm.getValor() / totalReceitas;
+
+				lm.setPorcentualReceita(porcentual);
+
+				porcentualReceitaAcumulado += porcentual;
+
+				lm.setPorcentualReceitaAcumulado(porcentualReceitaAcumulado);
+			}
+
+			if (lm.getContaDestino().getContabilizavel()) {
+				Double porcentual = lm.getValor() / totalDespesas;
+
+				lm.setPorcentualDespesa(porcentual);
+
+				porcentualDespesaAcumulado += porcentual;
+
+				lm.setPorcentualDespesaAcumulado(porcentualDespesaAcumulado);
+			}
+
 		}
 	}
 
-	private Double calcTotalLancamentos(List<LancamentoModeloContabilizavel> lancamentoContabilizavelList) {
-		Double total = 0.0;
-
+	private void calcTotalLancamentos(List<LancamentoModeloContabilizavel> lancamentoContabilizavelList, Double totalReceitas, Double totalDespesas) {
 		for (LancamentoModeloContabilizavel lm : lancamentoContabilizavelList) {
-			total += lm.getValor();
+			if (lm.getContaOrigem().getContabilizavel()) {
+				totalDespesas += lm.getValor();
+			}
+			
+			if (lm.getContaDestino().getContabilizavel()) {
+				totalReceitas += lm.getValor();
+			}
 		}
-
-		return total;
 	}
 
 	private List<LancamentoModelo> getLancamentosPorModelo(LancamentoModeloListSwitches switches) {
