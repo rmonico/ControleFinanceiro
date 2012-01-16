@@ -26,35 +26,42 @@ public class LancamentoModeloListAction implements Action {
 	public class LancamentoModeloContabilizavel implements Contabilizavel {
 
 		private LancamentoModelo lancamento;
+		private Double saldoOrigem;
+		private Double saldoDestino;
+		private Double porcentual;
+		private Double porcentualAcumulado;
 
 		@Override
 		public Double getValor() {
-			// TODO Auto-generated method stub
-			return null;
+			return lancamento.getValor();
 		}
 
 		@Override
 		public Conta getContaOrigem() {
-			// TODO Auto-generated method stub
-			return null;
+			return lancamento.getContaOrigem();
 		}
 
 		@Override
 		public void setSaldoOrigem(Double saldo) {
-			// TODO Auto-generated method stub
+			saldoOrigem = saldo;
+		}
 
+		public Double getSaldoOrigem() {
+			return saldoOrigem;
 		}
 
 		@Override
 		public Conta getContaDestino() {
-			// TODO Auto-generated method stub
-			return null;
+			return lancamento.getContaDestino();
 		}
 
 		@Override
 		public void setSaldoDestino(Double saldo) {
-			// TODO Auto-generated method stub
+			saldoDestino = saldo;
+		}
 
+		public Double getSaldoDestino() {
+			return saldoDestino;
 		}
 
 		public void setLancamentoModeloBase(LancamentoModelo lancamento, Calendar database) {
@@ -77,6 +84,31 @@ public class LancamentoModeloListAction implements Action {
 			return lancamento.getObservacao();
 		}
 
+		/**
+		 * Devolve o porcentual deste lançamento em relação ao total dos
+		 * lançamentos.
+		 * 
+		 * @return
+		 */
+		public Double getPorcentual() {
+			return porcentual;
+		}
+
+		public void setPorcentual(Double porcentual) {
+			this.porcentual = porcentual;
+		}
+		
+		/**
+		 * O porcentual acima, acumulado.
+		 * @return
+		 */
+		public Double getPorcentualAcumulado() {
+			return porcentualAcumulado;
+		}
+		
+		public void setPorcentualAcumulado(Double porcentualAcumulado) {
+			this.porcentualAcumulado = porcentualAcumulado;
+		}
 	}
 
 	public class LancamentoModeloPacker implements Packer<LancamentoModeloContabilizavel, LancamentoModelo> {
