@@ -97,15 +97,16 @@ public class LancamentoModeloListAction implements Action {
 		public void setPorcentual(Double porcentual) {
 			this.porcentual = porcentual;
 		}
-		
+
 		/**
 		 * O porcentual acima, acumulado.
+		 * 
 		 * @return
 		 */
 		public Double getPorcentualAcumulado() {
 			return porcentualAcumulado;
 		}
-		
+
 		public void setPorcentualAcumulado(Double porcentualAcumulado) {
 			this.porcentualAcumulado = porcentualAcumulado;
 		}
@@ -189,6 +190,8 @@ public class LancamentoModeloListAction implements Action {
 
 		contabilizador.contabilizar();
 
+		calcStatistics(lancamentoContabilizavelList);
+
 		Map<Conta, Double> saldos = contabilizador.getSaldosPorConta();
 
 		TextGrid grid = getGrid();
@@ -204,6 +207,31 @@ public class LancamentoModeloListAction implements Action {
 		for (Conta conta : saldos.keySet()) {
 			System.out.println("===> " + conta.getNome() + ": " + saldos.get(conta));
 		}
+	}
+
+	private void calcStatistics(List<LancamentoModeloContabilizavel> lancamentoContabilizavelList) {
+		Double totalLancamentos = calcTotalLancamentos(lancamentoContabilizavelList);
+
+		Double porcentualAcumulado = 0.0;
+		for (LancamentoModeloContabilizavel lm : lancamentoContabilizavelList) {
+			Double porcentual = lm.getValor() / totalLancamentos;
+			
+			lm.setPorcentual(porcentual);
+			
+			porcentualAcumulado += porcentual;
+			
+			lm.setPorcentualAcumulado(porcentualAcumulado);
+		}
+	}
+
+	private Double calcTotalLancamentos(List<LancamentoModeloContabilizavel> lancamentoContabilizavelList) {
+		Double total = 0.0;
+
+		for (LancamentoModeloContabilizavel lm : lancamentoContabilizavelList) {
+			total += lm.getValor();
+		}
+
+		return total;
 	}
 
 	private List<LancamentoModelo> getLancamentosPorModelo(LancamentoModeloListSwitches switches) {
