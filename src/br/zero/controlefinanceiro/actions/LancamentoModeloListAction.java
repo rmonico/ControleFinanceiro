@@ -9,10 +9,11 @@ import br.zero.controlefinanceiro.commandlineparser.LancamentoModeloListSwitches
 import br.zero.controlefinanceiro.model.Conta;
 import br.zero.controlefinanceiro.model.modelo.LancamentoModelo;
 import br.zero.controlefinanceiro.model.modelo.LancamentoModeloDAO;
+import br.zero.controlefinanceiro.model.modelo.Modelo;
 import br.zero.controlefinanceiro.utils.Contabilizador;
+import br.zero.controlefinanceiro.utils.Contabilizavel;
 import br.zero.controlefinanceiro.utils.ControleFinanceiroException;
 import br.zero.controlefinanceiro.utils.ControleFinanceiroFormatters;
-import br.zero.controlefinanceiro.utils.LancamentoContabilizavel;
 import br.zero.controlefinanceiro.utils.Packer;
 import br.zero.textgrid.TextGrid;
 import br.zero.textgrid.TextGridColumnAlignment;
@@ -22,24 +23,80 @@ import br.zero.tinycontroller.Action;
 
 public class LancamentoModeloListAction implements Action {
 
-	public class LancamentoModeloPacker implements Packer<LancamentoContabilizavel, LancamentoModelo> {
+	public class LancamentoModeloContabilizavel implements Contabilizavel {
+
+		private LancamentoModelo lancamento;
+
+		@Override
+		public Double getValor() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public Conta getContaOrigem() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public void setSaldoOrigem(Double saldo) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public Conta getContaDestino() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public void setSaldoDestino(Double saldo) {
+			// TODO Auto-generated method stub
+
+		}
+
+		public void setLancamentoModeloBase(LancamentoModelo lancamento, Calendar database) {
+			this.lancamento = lancamento;
+		}
+
+		public Integer getId() {
+			return lancamento.getId();
+		}
+
+		public Modelo getModelo() {
+			return lancamento.getModelo();
+		}
+
+		public Integer getDiaVencimento() {
+			return lancamento.getDiaVencimento();
+		}
+
+		public String getObservacao() {
+			return lancamento.getObservacao();
+		}
+
+	}
+
+	public class LancamentoModeloPacker implements Packer<LancamentoModeloContabilizavel, LancamentoModelo> {
 
 		private Calendar database = getDatabase();
 
 		@Override
-		public LancamentoContabilizavel pack(LancamentoModelo p) {
-			LancamentoContabilizavel lc = new LancamentoContabilizavel();
-			
+		public LancamentoModeloContabilizavel pack(LancamentoModelo p) {
+			LancamentoModeloContabilizavel lc = new LancamentoModeloContabilizavel();
+
 			lc.setLancamentoModeloBase(p, database);
-			
+
 			return lc;
 		}
 
 		private Calendar getDatabase() {
 			Calendar database = GregorianCalendar.getInstance();
-			
+
 			database.set(Calendar.DAY_OF_MONTH, 1);
-			
+
 			return database;
 		}
 
@@ -59,15 +116,15 @@ public class LancamentoModeloListAction implements Action {
 	}
 
 	private static TextGrid grid = null;
-	
+
 	public static TextGrid getGrid() {
 		if (grid == null) {
 			createGrid();
 		}
-		
+
 		return grid;
 	}
-	
+
 	private static void createGrid() {
 		LancamentoModeloListAction.grid = new TextGrid();
 
@@ -87,14 +144,14 @@ public class LancamentoModeloListAction implements Action {
 	public void run(Object param) throws TextGridException, LancamentoModeloListException {
 
 		LancamentoModeloListSwitches switches = checkParamValid(param);
-		
+
 		List<LancamentoModelo> lancamentoModeloList = getLancamentosPorModelo(switches);
-		
+
 		Contabilizador contabilizador = new Contabilizador();
 
-		Packer<LancamentoContabilizavel, LancamentoModelo> packager = new LancamentoModeloPacker();
-		
-		List<LancamentoContabilizavel> lancamentoContabilizavelList = contabilizador.packageList(lancamentoModeloList, packager);
+		Packer<LancamentoModeloContabilizavel, LancamentoModelo> packager = new LancamentoModeloPacker();
+
+		List<LancamentoModeloContabilizavel> lancamentoContabilizavelList = contabilizador.packageList(lancamentoModeloList, packager);
 
 		contabilizador.setList(lancamentoContabilizavelList);
 
@@ -102,11 +159,10 @@ public class LancamentoModeloListAction implements Action {
 
 		Map<Conta, Double> saldos = contabilizador.getSaldosPorConta();
 
-		
 		TextGrid grid = getGrid();
 
 		grid.setValues(lancamentoModeloList);
-		
+
 		grid.show();
 
 		System.out.println();
@@ -122,13 +178,13 @@ public class LancamentoModeloListAction implements Action {
 		LancamentoModeloDAO dao = new LancamentoModeloDAO();
 
 		List<LancamentoModelo> lancamentoModeloList;
-		
+
 		if (switches.getModelo() == null) {
 			lancamentoModeloList = dao.listarTodos();
 		} else {
 			lancamentoModeloList = dao.listarPorModelo(switches.getModelo());
 		}
-		
+
 		return lancamentoModeloList;
 	}
 
