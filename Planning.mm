@@ -298,7 +298,7 @@
 </html></richcontent>
 </node>
 </node>
-<node CREATED="1326277118690" ID="ID_1858757040" MODIFIED="1326277129501" POSITION="right" TEXT="Milestone 4.1">
+<node BACKGROUND_COLOR="#99ff99" CREATED="1326277118690" ID="ID_1858757040" MODIFIED="1326797306436" POSITION="right" TEXT="Milestone 4.1">
 <node CREATED="1326277137957" ID="ID_296700627" MODIFIED="1326277166720" TEXT="Objetivos">
 <richcontent TYPE="NOTE"><html>
   <head>
@@ -313,7 +313,7 @@
 </node>
 <node BACKGROUND_COLOR="#99ff99" CREATED="1326277180145" ID="ID_250398468" MODIFIED="1326277952213" TEXT="lancmodelo-ls: Ordenar lista por dia de vencto"/>
 <node BACKGROUND_COLOR="#99ff99" CREATED="1326277175167" ID="ID_847596701" MODIFIED="1326452749141" TEXT="lancmodelo-ls: Contabilizar saldo"/>
-<node CREATED="1326277220509" ID="ID_1321478390" MODIFIED="1326277280403" TEXT="lancmodelo-ls: Criar campos de porcentual">
+<node BACKGROUND_COLOR="#99ff99" CREATED="1326277220509" ID="ID_1321478390" MODIFIED="1326797297071" TEXT="lancmodelo-ls: Criar campos de porcentual">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -452,7 +452,7 @@
 </html></richcontent>
 </node>
 </node>
-<node CREATED="1324252493893" FOLDED="true" ID="ID_1726085239" MODIFIED="1326278603972" POSITION="right" TEXT="Melhorias">
+<node CREATED="1324252493893" FOLDED="true" ID="ID_1726085239" MODIFIED="1326797418627" POSITION="right" TEXT="Melhorias">
 <node CREATED="1324252581143" ID="ID_938160062" MODIFIED="1324252601867" TEXT="extrato-analyse: id do lancto"/>
 <node CREATED="1324252602809" ID="ID_723758160" MODIFIED="1324252628136" TEXT="extrato-analyse: a&#xe7;&#xe3;o sync"/>
 <node CREATED="1324252693904" ID="ID_1351041782" MODIFIED="1324254926952" TEXT="extrato-sync: balan&#xe7;os">
@@ -536,6 +536,19 @@
     </p>
   </body>
 </html></richcontent>
+</node>
+<node CREATED="1326797327237" ID="ID_696808698" MODIFIED="1326797415665" TEXT="lancmodelo-ls: Ordena&#xe7;&#xe3;o por porcentual">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      Receber um par&#226;metro que indique que a lista deve ser ordenada pelo porcentual de receita/despesa de cada lan&#231;amento ou pelo dia de vencimento (padr&#227;o).
+    </p>
+  </body>
+</html>
+</richcontent>
 </node>
 </node>
 <node CREATED="1322272082887" FOLDED="true" ID="ID_1707116991" MODIFIED="1326277128364" POSITION="right" TEXT="Funcionalidades futuras">
