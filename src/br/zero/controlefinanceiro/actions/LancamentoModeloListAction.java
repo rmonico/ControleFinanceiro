@@ -207,6 +207,9 @@ public class LancamentoModeloListAction implements Action {
 		TextGridFormattedColumn.createFormattedColumn(grid, "Acumulado", TextGridFormattedColumn.PERCENT_FORMATTER, TextGridColumnAlignment.RIGHT, "getPorcentualDespesaAcumulado");
 	}
 
+	private Double totalReceitas;
+	private Double totalDespesas;
+
 	@Override
 	public void run(Object param) throws TextGridException, LancamentoModeloListException {
 
@@ -223,6 +226,8 @@ public class LancamentoModeloListAction implements Action {
 		contabilizador.setList(lancamentoContabilizavelList);
 
 		contabilizador.contabilizar();
+		
+		calcTotalLancamentos(lancamentoContabilizavelList);
 
 		calcStatistics(lancamentoContabilizavelList);
 
@@ -244,27 +249,12 @@ public class LancamentoModeloListAction implements Action {
 	}
 
 	private void calcStatistics(List<LancamentoModeloContabilizavel> lancamentoContabilizavelList) {
-		Double totalReceitas = 0.0;
-		Double totalDespesas = 0.0;
-		
-		calcTotalLancamentos(lancamentoContabilizavelList, totalReceitas, totalDespesas);
-
 		Double porcentualReceitaAcumulado = 0.0;
 		Double porcentualDespesaAcumulado = 0.0;
 		
 		for (LancamentoModeloContabilizavel lm : lancamentoContabilizavelList) {
 
 			if (lm.getContaOrigem().getContabilizavel()) {
-				Double porcentual = lm.getValor() / totalReceitas;
-
-				lm.setPorcentualReceita(porcentual);
-
-				porcentualReceitaAcumulado += porcentual;
-
-				lm.setPorcentualReceitaAcumulado(porcentualReceitaAcumulado);
-			}
-
-			if (lm.getContaDestino().getContabilizavel()) {
 				Double porcentual = lm.getValor() / totalDespesas;
 
 				lm.setPorcentualDespesa(porcentual);
@@ -274,10 +264,23 @@ public class LancamentoModeloListAction implements Action {
 				lm.setPorcentualDespesaAcumulado(porcentualDespesaAcumulado);
 			}
 
+			if (lm.getContaDestino().getContabilizavel()) {
+				Double porcentual = lm.getValor() / totalReceitas;
+
+				lm.setPorcentualReceita(porcentual);
+
+				porcentualReceitaAcumulado += porcentual;
+
+				lm.setPorcentualReceitaAcumulado(porcentualReceitaAcumulado);
+			}
+
 		}
 	}
 
-	private void calcTotalLancamentos(List<LancamentoModeloContabilizavel> lancamentoContabilizavelList, Double totalReceitas, Double totalDespesas) {
+	private void calcTotalLancamentos(List<LancamentoModeloContabilizavel> lancamentoContabilizavelList) {
+		totalDespesas = 0.0;
+		totalReceitas = 0.0;
+		
 		for (LancamentoModeloContabilizavel lm : lancamentoContabilizavelList) {
 			if (lm.getContaOrigem().getContabilizavel()) {
 				totalDespesas += lm.getValor();
