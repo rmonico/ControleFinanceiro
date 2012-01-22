@@ -361,7 +361,8 @@
       Ordenar a lista pela data que o parser atribui.
     </p>
   </body>
-</html></richcontent>
+</html>
+</richcontent>
 </node>
 </node>
 <node CREATED="1322738893562" FOLDED="true" ID="ID_1250441849" MODIFIED="1326278601024" POSITION="right" TEXT="Corre&#xe7;&#xf5;es">
