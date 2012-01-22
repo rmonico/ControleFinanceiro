@@ -298,7 +298,7 @@
 </html></richcontent>
 </node>
 </node>
-<node BACKGROUND_COLOR="#99ff99" CREATED="1326277118690" ID="ID_1858757040" MODIFIED="1326797306436" POSITION="right" TEXT="Milestone 4.1">
+<node BACKGROUND_COLOR="#99ff99" CREATED="1326277118690" FOLDED="true" ID="ID_1858757040" MODIFIED="1326798659333" POSITION="right" TEXT="Milestone 4.1">
 <node CREATED="1326277137957" ID="ID_296700627" MODIFIED="1326277166720" TEXT="Objetivos">
 <richcontent TYPE="NOTE"><html>
   <head>
@@ -326,7 +326,7 @@
 </html></richcontent>
 </node>
 </node>
-<node CREATED="1326277132680" FOLDED="true" ID="ID_1176934154" MODIFIED="1326680049770" POSITION="right" TEXT="Milestone 4.2">
+<node CREATED="1326277132680" ID="ID_1176934154" MODIFIED="1326797467921" POSITION="right" TEXT="Milestone 4.2">
 <node CREATED="1326277305110" ID="ID_1431346685" MODIFIED="1326277326287" TEXT="Objetivos">
 <richcontent TYPE="NOTE"><html>
   <head>
@@ -351,7 +351,7 @@
   </body>
 </html></richcontent>
 </node>
-<node CREATED="1326277374326" ID="ID_1293980155" MODIFIED="1326277417427" TEXT="Ordernar lista">
+<node CREATED="1326277374326" ID="ID_1293980155" MODIFIED="1327247864913" TEXT="Ordernar lista">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -361,7 +361,8 @@
       Ordenar a lista pela data que o parser atribui.
     </p>
   </body>
-</html></richcontent>
+</html>
+</richcontent>
 </node>
 </node>
 <node CREATED="1322738893562" FOLDED="true" ID="ID_1250441849" MODIFIED="1326278601024" POSITION="right" TEXT="Corre&#xe7;&#xf5;es">
