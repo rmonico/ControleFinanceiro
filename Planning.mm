@@ -361,8 +361,7 @@
       Ordenar a lista pela data que o parser atribui.
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 </node>
 <node CREATED="1322738893562" FOLDED="true" ID="ID_1250441849" MODIFIED="1326278601024" POSITION="right" TEXT="Corre&#xe7;&#xf5;es">
@@ -453,7 +452,7 @@
 </html></richcontent>
 </node>
 </node>
-<node CREATED="1324252493893" FOLDED="true" ID="ID_1726085239" MODIFIED="1326797418627" POSITION="right" TEXT="Melhorias">
+<node CREATED="1324252493893" ID="ID_1726085239" MODIFIED="1327395765686" POSITION="right" TEXT="Melhorias">
 <node CREATED="1324252581143" ID="ID_938160062" MODIFIED="1324252601867" TEXT="extrato-analyse: id do lancto"/>
 <node CREATED="1324252602809" ID="ID_723758160" MODIFIED="1324252628136" TEXT="extrato-analyse: a&#xe7;&#xe3;o sync"/>
 <node CREATED="1324252693904" ID="ID_1351041782" MODIFIED="1324254926952" TEXT="extrato-sync: balan&#xe7;os">
@@ -549,6 +548,19 @@
     </p>
   </body>
 </html></richcontent>
+</node>
+<node CREATED="1327395767458" ID="ID_1659212835" MODIFIED="1327395822831" TEXT="extrato-ls: Mostrar data">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      Mostrar a data que o parser devolver para o lan&#231;amento, ao inv&#233;s de mostrar apenas a data que est&#225; na linha do extrato.
+    </p>
+  </body>
+</html>
+</richcontent>
 </node>
 </node>
 <node CREATED="1322272082887" FOLDED="true" ID="ID_1707116991" MODIFIED="1326277128364" POSITION="right" TEXT="Funcionalidades futuras">
