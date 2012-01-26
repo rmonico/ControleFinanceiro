@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="ControleFinanceiro" default="deploy" basedir=".">
+	<description>
+		ControleFinanceiro Build and Deploy File
+    </description>
+
+	<property name="workspaceLibrary" location="../library" />
+	<property name="lib" location="lib" />
+	
+	<target name="UpdateUtils">
+		<copy file="${workspaceLibrary}/utils/Utils.jar" toFile="${lib}/Utils.jar" />
+	</target>
+
+</project>
