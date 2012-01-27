@@ -506,7 +506,6 @@ public class ExtratoAnalyseAction implements Action {
 		//
 		// boolean dataOk = ((lancto.getData().compareTo(maiorDataEsperada) <=
 		// 0) && (lancto.getData().compareTo(menorDataEsperada) >= 0));
-		// TODO Comparar apenas a porção de data dos Calendar's envolvidos
 		
 		Comparator<Calendar> comparator = new TimeIgnoringComparator();
 		
