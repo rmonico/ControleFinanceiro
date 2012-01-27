@@ -167,7 +167,7 @@ public class ExtratoAnalyseAction implements Action {
 
 		public String getLinhaOriginal() {
 			if (extratoLancamento == null) {
-				return "Ignored";
+				return null;
 			} else {
 				return extratoLancamento.getOrigem().getOriginal();
 			}
@@ -278,13 +278,14 @@ public class ExtratoAnalyseAction implements Action {
 				analyseResult = syncTransactionLine(lancamentoSemExtratoList, contaDAO, (ExtratoLancamentoTransaction) extrato);
 				analyseResult.setExtrato((ExtratoLancamentoTransaction) extrato);
 			} else if (extrato instanceof ExtratoLancamentoUnknown) {
-				analyseResult = syncUnknownLine();
-				analyseResult.setExtrato(null);
+				analyseResult = null;
 			} else {
 				throw new ExtratoAnalyseException("Classe de linha desconhecida (\"" + extrato + "\")");
 			}
 
-			statuses.add(analyseResult);
+			if (analyseResult != null) {
+				statuses.add(analyseResult);
+			}
 
 			checkLancamentosNaoResolvidos(extratoLines, lancamentoSemExtratoList, i, statuses);
 		}
@@ -461,16 +462,6 @@ public class ExtratoAnalyseAction implements Action {
 		return null;
 	}
 
-	private ExtratoLineAnalyseResult syncUnknownLine() {
-		ExtratoLineAnalyseResult result = new ExtratoLineAnalyseResult();
-
-		result.setLinhaStatus(StatusLinha.UNKNOWN);
-		result.setContaStatus(ContaStatus.DONT_APPLY);
-		result.setLancamentoStatus(LancamentoStatus.DONT_APPLY);
-
-		return result;
-	}
-
 	private TextGrid createGrid() {
 		TextGrid grid = new TextGrid();
 
@@ -487,16 +478,16 @@ public class ExtratoAnalyseAction implements Action {
 
 		return grid;
 	}
-	
+
 	public class TimeIgnoringComparator implements Comparator<Calendar> {
-		  public int compare(Calendar c1, Calendar c2) {
-		    if (c1.get(Calendar.YEAR) != c2.get(Calendar.YEAR)) 
-		        return c1.get(Calendar.YEAR) - c2.get(Calendar.YEAR);
-		    if (c1.get(Calendar.MONTH) != c2.get(Calendar.MONTH)) 
-		        return c1.get(Calendar.MONTH) - c2.get(Calendar.MONTH);
-		    return c1.get(Calendar.DAY_OF_MONTH) - c2.get(Calendar.DAY_OF_MONTH);
-		  }
+		public int compare(Calendar c1, Calendar c2) {
+			if (c1.get(Calendar.YEAR) != c2.get(Calendar.YEAR))
+				return c1.get(Calendar.YEAR) - c2.get(Calendar.YEAR);
+			if (c1.get(Calendar.MONTH) != c2.get(Calendar.MONTH))
+				return c1.get(Calendar.MONTH) - c2.get(Calendar.MONTH);
+			return c1.get(Calendar.DAY_OF_MONTH) - c2.get(Calendar.DAY_OF_MONTH);
 		}
+	}
 
 	private boolean extratoLineMatch(Lancamento lancto, ExtratoLancamentoTransaction line, Conta contaOrigemEsperada, Conta contaDestinoEsperada) {
 		Calendar menorDataEsperada = line.getData();
@@ -506,11 +497,11 @@ public class ExtratoAnalyseAction implements Action {
 		//
 		// boolean dataOk = ((lancto.getData().compareTo(maiorDataEsperada) <=
 		// 0) && (lancto.getData().compareTo(menorDataEsperada) >= 0));
-		
+
 		Comparator<Calendar> comparator = new TimeIgnoringComparator();
-		
+
 		boolean dataOk = comparator.compare(lancto.getData(), menorDataEsperada) == 0;
-		
+
 		boolean origemOk = lancto.getContaOrigem().equals(contaOrigemEsperada);
 		boolean destinoOk = lancto.getContaDestino().equals(contaDestinoEsperada);
 		boolean valorOk = lancto.getValor().equals(Math.abs(line.getValor()));
