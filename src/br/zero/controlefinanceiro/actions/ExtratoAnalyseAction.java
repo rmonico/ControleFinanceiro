@@ -166,7 +166,7 @@ public class ExtratoAnalyseAction implements Action {
 
 		public String getLinhaOriginal() {
 			if (extratoLancamento == null) {
-				return null;
+				return "Ignored";
 			} else {
 				return extratoLancamento.getOrigem().getOriginal();
 			}
