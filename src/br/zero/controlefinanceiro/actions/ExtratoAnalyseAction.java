@@ -2,6 +2,7 @@ package br.zero.controlefinanceiro.actions;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.List;
 
 import br.zero.controlefinanceiro.abstractextratoparser.DatedExtratoLancamento;
@@ -486,6 +487,16 @@ public class ExtratoAnalyseAction implements Action {
 
 		return grid;
 	}
+	
+	public class TimeIgnoringComparator implements Comparator<Calendar> {
+		  public int compare(Calendar c1, Calendar c2) {
+		    if (c1.get(Calendar.YEAR) != c2.get(Calendar.YEAR)) 
+		        return c1.get(Calendar.YEAR) - c2.get(Calendar.YEAR);
+		    if (c1.get(Calendar.MONTH) != c2.get(Calendar.MONTH)) 
+		        return c1.get(Calendar.MONTH) - c2.get(Calendar.MONTH);
+		    return c1.get(Calendar.DAY_OF_MONTH) - c2.get(Calendar.DAY_OF_MONTH);
+		  }
+		}
 
 	private boolean extratoLineMatch(Lancamento lancto, ExtratoLancamentoTransaction line, Conta contaOrigemEsperada, Conta contaDestinoEsperada) {
 		Calendar menorDataEsperada = line.getData();
@@ -495,7 +506,12 @@ public class ExtratoAnalyseAction implements Action {
 		//
 		// boolean dataOk = ((lancto.getData().compareTo(maiorDataEsperada) <=
 		// 0) && (lancto.getData().compareTo(menorDataEsperada) >= 0));
-		boolean dataOk = lancto.getData().equals(menorDataEsperada);
+		// TODO Comparar apenas a porção de data dos Calendar's envolvidos
+		
+		Comparator<Calendar> comparator = new TimeIgnoringComparator();
+		
+		boolean dataOk = comparator.compare(lancto.getData(), menorDataEsperada) == 0;
+		
 		boolean origemOk = lancto.getContaOrigem().equals(contaOrigemEsperada);
 		boolean destinoOk = lancto.getContaDestino().equals(contaDestinoEsperada);
 		boolean valorOk = lancto.getValor().equals(Math.abs(line.getValor()));
