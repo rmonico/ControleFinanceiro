@@ -452,7 +452,7 @@
 </html></richcontent>
 </node>
 </node>
-<node CREATED="1324252493893" FOLDED="true" ID="ID_1726085239" MODIFIED="1326797418627" POSITION="right" TEXT="Melhorias">
+<node CREATED="1324252493893" ID="ID_1726085239" MODIFIED="1327918699216" POSITION="right" TEXT="Melhorias">
 <node CREATED="1324252581143" ID="ID_938160062" MODIFIED="1324252601867" TEXT="extrato-analyse: id do lancto"/>
 <node CREATED="1324252602809" ID="ID_723758160" MODIFIED="1324252628136" TEXT="extrato-analyse: a&#xe7;&#xe3;o sync"/>
 <node CREATED="1324252693904" ID="ID_1351041782" MODIFIED="1324254926952" TEXT="extrato-sync: balan&#xe7;os">
@@ -545,6 +545,18 @@
   <body>
     <p>
       Receber um par&#226;metro que indique que a lista deve ser ordenada pelo porcentual de receita/despesa de cada lan&#231;amento ou pelo dia de vencimento (padr&#227;o).
+    </p>
+  </body>
+</html></richcontent>
+</node>
+<node CREATED="1327918700471" ID="ID_122078373" MODIFIED="1327918776740" TEXT="extrato-sync: mostrar resolu&#xe7;&#xe3;o da conta">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      Criar uma coluna para mostrar se a refer&#234;ncia do extrato foi resolvida atrav&#233;s das refer&#234;ncias automaticas existentes no banco de dados ou se foi pelas refer&#234;ncias informadas pela linha de comando.
     </p>
   </body>
 </html>
