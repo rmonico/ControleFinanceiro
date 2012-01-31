@@ -491,13 +491,13 @@ public class ExtratoAnalyseAction implements Action {
 //		TextGridFormattedColumn.createFormattedColumn(grid, "Extrato", TextGridFormattedColumn.INTEGER_FORMATTER, TextGridColumnAlignment.RIGHT, "getExtratoID");
 //		TextGridFormattedColumn.createFormattedColumn(grid, "Lancto", TextGridFormattedColumn.INTEGER_FORMATTER, TextGridColumnAlignment.RIGHT, "getLancamentoID");
 
-		TextGridFormattedColumn.createFormattedColumn(grid, "ID", TextGridFormattedColumn.ID_FORMATTER, TextGridColumnAlignment.RIGHT, "getExtratoID");
+//		TextGridFormattedColumn.createFormattedColumn(grid, "ID", TextGridFormattedColumn.ID_FORMATTER, TextGridColumnAlignment.RIGHT, "getExtratoID");
 		TextGridFormattedColumn.createFormattedColumn(grid, "", new ToStringFormatter(""), TextGridColumnAlignment.CENTER, "getStatusLinha");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Date", TextGridFormattedColumn.DATE_FORMATTER, TextGridColumnAlignment.LEFT, "getOriginalDate");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Original", TextGridFormattedColumn.STRING_FORMATTER, TextGridColumnAlignment.LEFT, "getLinhaOriginal");
 		TextGridFormattedColumn.createFormattedColumn(grid, "", new ToStringFormatter(""), TextGridColumnAlignment.CENTER, "getContaStatus");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Conta", ControleFinanceiroFormatters.CONTA_FORMATTER, TextGridColumnAlignment.LEFT, "getConta");
-		TextGridFormattedColumn.createFormattedColumn(grid, "ID", TextGridFormattedColumn.ID_FORMATTER, TextGridColumnAlignment.RIGHT, "getLancamentoID");
+//		TextGridFormattedColumn.createFormattedColumn(grid, "ID", TextGridFormattedColumn.ID_FORMATTER, TextGridColumnAlignment.RIGHT, "getLancamentoID");
 		TextGridFormattedColumn.createFormattedColumn(grid, "", new ToStringFormatter(""), TextGridColumnAlignment.CENTER, "getLancamentoStatus");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Lancamento", ControleFinanceiroFormatters.LANCAMENTO_FORMATTER, TextGridColumnAlignment.LEFT, "getLancamento");
 
