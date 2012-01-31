@@ -2,13 +2,13 @@ package br.zero.controlefinanceiro.actions;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 import br.zero.controlefinanceiro.abstractextratoparser.DatedExtratoLancamento;
 import br.zero.controlefinanceiro.abstractextratoparser.ExtratoLancamentoBalance;
 import br.zero.controlefinanceiro.abstractextratoparser.ExtratoLancamentoTransaction;
-import br.zero.controlefinanceiro.abstractextratoparser.ExtratoLancamentoUnknown;
 import br.zero.controlefinanceiro.abstractextratoparser.ExtratoLineParser;
 import br.zero.controlefinanceiro.abstractextratoparser.ExtratoParsers;
 import br.zero.controlefinanceiro.abstractextratoparser.ParsedExtratoLancamento;
@@ -20,6 +20,7 @@ import br.zero.controlefinanceiro.model.Lancamento;
 import br.zero.controlefinanceiro.model.LancamentoDAO;
 import br.zero.controlefinanceiro.model.extrato.ExtratoLancamento;
 import br.zero.controlefinanceiro.model.extrato.ExtratoLancamentoDAO;
+import br.zero.controlefinanceiro.utils.AbstractParsedExtratoLancamento;
 import br.zero.controlefinanceiro.utils.ControleFinanceiroException;
 import br.zero.controlefinanceiro.utils.ControleFinanceiroFormatters;
 import br.zero.controlefinanceiro.utils.ExtratoLineParserException;
@@ -108,6 +109,22 @@ public class ExtratoAnalyseAction implements Action {
 		private Lancamento lancamento;
 		private LancamentoStatus lancamentoStatus;
 		private ContaStatus contaStatus;
+
+		public Integer getExtratoID() {
+			if (extratoLancamento instanceof AbstractParsedExtratoLancamento) {
+				return ((AbstractParsedExtratoLancamento) extratoLancamento).getOrigem().getId();
+			} else {
+				return null;
+			}
+		}
+
+		public Integer getLancamentoID() {
+			if (lancamento == null) {
+				return null;
+			} else {
+				return lancamento.getId();
+			}
+		}
 
 		public StatusLinha getStatusLinha() {
 			return statusLinha;
@@ -258,7 +275,7 @@ public class ExtratoAnalyseAction implements Action {
 	}
 
 	private List<ExtratoLineAnalyseResult> makeSync(List<Lancamento> lancamentoSemExtratoList, List<ExtratoLancamento> extratoLancamentoOrfao) throws ExtratoLineParserException, ExtratoAnalyseException {
-		List<ParsedExtratoLancamento> extratoLines = new ArrayList<ParsedExtratoLancamento>();
+		List<DatedExtratoLancamento> extratoLines = new ArrayList<DatedExtratoLancamento>();
 
 		makeParser(extratoLancamentoOrfao, extratoLines);
 
@@ -272,13 +289,14 @@ public class ExtratoAnalyseAction implements Action {
 			ExtratoLineAnalyseResult analyseResult;
 
 			if (extrato instanceof ExtratoLancamentoBalance) {
-				analyseResult = syncBalanceLine();
-				analyseResult.setExtrato((ExtratoLancamentoBalance) extrato);
+				// analyseResult = syncBalanceLine();
+				// analyseResult.setExtrato((ExtratoLancamentoBalance) extrato);
+				// TODO Não mostra o resultado da análise para linhas de
+				// balanço, voltar na versão de produção
+				analyseResult = null;
 			} else if (extrato instanceof ExtratoLancamentoTransaction) {
 				analyseResult = syncTransactionLine(lancamentoSemExtratoList, contaDAO, (ExtratoLancamentoTransaction) extrato);
 				analyseResult.setExtrato((ExtratoLancamentoTransaction) extrato);
-			} else if (extrato instanceof ExtratoLancamentoUnknown) {
-				analyseResult = null;
 			} else {
 				throw new ExtratoAnalyseException("Classe de linha desconhecida (\"" + extrato + "\")");
 			}
@@ -293,28 +311,15 @@ public class ExtratoAnalyseAction implements Action {
 		return statuses;
 	}
 
-	private void checkLancamentosNaoResolvidos(List<ParsedExtratoLancamento> extratoLines, List<Lancamento> lancamentoOrfaoList, int i, List<ExtratoLineAnalyseResult> statuses) {
-		ParsedExtratoLancamento extrato = extratoLines.get(i);
+	private void checkLancamentosNaoResolvidos(List<DatedExtratoLancamento> extratoLines, List<Lancamento> lancamentoOrfaoList, int i, List<ExtratoLineAnalyseResult> statuses) {
+		DatedExtratoLancamento extrato = extratoLines.get(i);
 
 		if (i != extratoLines.size() - 1) {
-			Calendar data;
-			if (extrato instanceof DatedExtratoLancamento) {
-				data = ((DatedExtratoLancamento) extrato).getData();
-			} else {
-				return;
-			}
+			Calendar data = extrato.getData();
 
-			ParsedExtratoLancamento proximo = null;
+			DatedExtratoLancamento proximo = extratoLines.get(i + 1);
 
-			Calendar dataProximo = null;
-			for (int j = i + 1; j < extratoLines.size(); j++) {
-				proximo = extratoLines.get(j);
-
-				if (proximo instanceof DatedExtratoLancamento) {
-					dataProximo = ((DatedExtratoLancamento) proximo).getData();
-					break;
-				}
-			}
+			Calendar dataProximo = proximo.getData();
 
 			if ((dataProximo == null) || (!data.equals(dataProximo))) {
 				addLancamentosNaoResolvidos(data, lancamentoOrfaoList, statuses);
@@ -339,7 +344,15 @@ public class ExtratoAnalyseAction implements Action {
 
 	}
 
-	private void makeParser(List<ExtratoLancamento> extratoLancamentoOrfao, List<ParsedExtratoLancamento> extratoLines) throws ExtratoLineParserException, ExtratoAnalyseException {
+	private class ExtratoLinesComparator implements Comparator<DatedExtratoLancamento> {
+
+		@Override
+		public int compare(DatedExtratoLancamento o1, DatedExtratoLancamento o2) {
+			return o1.getData().compareTo(o2.getData());
+		}
+	}
+
+	private void makeParser(List<ExtratoLancamento> extratoLancamentoOrfao, List<DatedExtratoLancamento> extratoLines) throws ExtratoLineParserException, ExtratoAnalyseException {
 		ExtratoLineParser parser = ExtratoParsers.getParser(banco);
 
 		if (parser == null) {
@@ -349,8 +362,13 @@ public class ExtratoAnalyseAction implements Action {
 		for (ExtratoLancamento el : extratoLancamentoOrfao) {
 			ParsedExtratoLancamento line = parser.parse(el);
 
-			extratoLines.add(line);
+			if (line instanceof DatedExtratoLancamento) {
+				extratoLines.add((DatedExtratoLancamento) line);
+			}
 		}
+
+		// TODO Ordenar pela data atribuída pelo parser
+		Collections.sort(extratoLines, new ExtratoLinesComparator());
 	}
 
 	private ExtratoLineAnalyseResult syncBalanceLine() {
@@ -447,16 +465,18 @@ public class ExtratoAnalyseAction implements Action {
 	}
 
 	private Conta resolveReference(ContaDAO contaDAO, String referencia) {
-		Conta conta = contaDAO.resolveExtratoLine(banco, referencia);
-
-		if (conta != null) {
-			return conta;
-		}
-
+		// Consulta as referências manuais para resolver a conta
 		for (InternalManualReference imr : manualRefList) {
 			if (referencia.matches(imr.getRegex())) {
 				return imr.getConta();
 			}
+		}
+
+		// Se não conseguiu, vai para as referências automaticas
+		Conta conta = contaDAO.resolveExtratoLine(banco, referencia);
+
+		if (conta != null) {
+			return conta;
 		}
 
 		return null;
@@ -468,11 +488,16 @@ public class ExtratoAnalyseAction implements Action {
 		grid.getData().setHeaderSeparatorChar('=');
 		grid.getData().setTitle("Sincronização de Extrato banco \"" + banco.getNome() + "\"");
 
+//		TextGridFormattedColumn.createFormattedColumn(grid, "Extrato", TextGridFormattedColumn.INTEGER_FORMATTER, TextGridColumnAlignment.RIGHT, "getExtratoID");
+//		TextGridFormattedColumn.createFormattedColumn(grid, "Lancto", TextGridFormattedColumn.INTEGER_FORMATTER, TextGridColumnAlignment.RIGHT, "getLancamentoID");
+
+		TextGridFormattedColumn.createFormattedColumn(grid, "ID", TextGridFormattedColumn.ID_FORMATTER, TextGridColumnAlignment.RIGHT, "getExtratoID");
 		TextGridFormattedColumn.createFormattedColumn(grid, "", new ToStringFormatter(""), TextGridColumnAlignment.CENTER, "getStatusLinha");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Date", TextGridFormattedColumn.DATE_FORMATTER, TextGridColumnAlignment.LEFT, "getOriginalDate");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Original", TextGridFormattedColumn.STRING_FORMATTER, TextGridColumnAlignment.LEFT, "getLinhaOriginal");
 		TextGridFormattedColumn.createFormattedColumn(grid, "", new ToStringFormatter(""), TextGridColumnAlignment.CENTER, "getContaStatus");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Conta", ControleFinanceiroFormatters.CONTA_FORMATTER, TextGridColumnAlignment.LEFT, "getConta");
+		TextGridFormattedColumn.createFormattedColumn(grid, "ID", TextGridFormattedColumn.ID_FORMATTER, TextGridColumnAlignment.RIGHT, "getLancamentoID");
 		TextGridFormattedColumn.createFormattedColumn(grid, "", new ToStringFormatter(""), TextGridColumnAlignment.CENTER, "getLancamentoStatus");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Lancamento", ControleFinanceiroFormatters.LANCAMENTO_FORMATTER, TextGridColumnAlignment.LEFT, "getLancamento");
 
