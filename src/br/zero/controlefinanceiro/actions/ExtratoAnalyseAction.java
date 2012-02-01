@@ -515,17 +515,11 @@ public class ExtratoAnalyseAction implements Action {
 	}
 
 	private boolean extratoLineMatch(Lancamento lancto, ExtratoLancamentoTransaction line, Conta contaOrigemEsperada, Conta contaDestinoEsperada) {
-		Calendar menorDataEsperada = line.getData();
-		// Regras dos três dias. Por enquanto não vou utilizar.
-		// Calendar maiorDataEsperada = (Calendar) line.getData().clone();
-		// maiorDataEsperada.add(Calendar.DAY_OF_MONTH, 3);
-		//
-		// boolean dataOk = ((lancto.getData().compareTo(maiorDataEsperada) <=
-		// 0) && (lancto.getData().compareTo(menorDataEsperada) >= 0));
+		Calendar dataEsperada = line.getData();
 
 		Comparator<Calendar> comparator = new TimeIgnoringComparator();
 
-		boolean dataOk = comparator.compare(lancto.getData(), menorDataEsperada) == 0;
+		boolean dataOk = comparator.compare(lancto.getData(), dataEsperada) == 0;
 
 		boolean origemOk = lancto.getContaOrigem().equals(contaOrigemEsperada);
 		boolean destinoOk = lancto.getContaDestino().equals(contaDestinoEsperada);
