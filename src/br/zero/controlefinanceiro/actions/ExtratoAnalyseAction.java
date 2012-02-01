@@ -34,7 +34,7 @@ import br.zero.tinycontroller.Action;
 public class ExtratoAnalyseAction implements Action {
 
 	public enum StatusLinha {
-		BALANCE("B"), TRANSACTION("T"), UNKNOWN("?"), DONT_APPLY("-");
+		BALANCE("B"), TRANSACTION("T"), DONT_APPLY("-");
 
 		private String toString;
 
@@ -48,24 +48,8 @@ public class ExtratoAnalyseAction implements Action {
 		}
 	}
 
-	public enum ContaStatus {
-		NOT_FOUND("!"), DONT_APPLY("-"), OK(" ");
-
-		private String toString;
-
-		private ContaStatus(String toString) {
-			this.toString = toString;
-		}
-
-		@Override
-		public String toString() {
-			return toString;
-		}
-
-	}
-
 	public enum LancamentoStatus {
-		DONT_APPLY("-"), UPDATE("U"), DELETE("X"), NEW("*");
+		DONT_APPLY("-"), UPDATE("U"), DELETE("X"), NEW("*"), CONTA_NOT_FOUND("!");
 
 		private String toString;
 
@@ -105,10 +89,8 @@ public class ExtratoAnalyseAction implements Action {
 
 		private StatusLinha statusLinha;
 		private DatedExtratoLancamento extratoLancamento;
-		private Conta conta;
 		private Lancamento lancamento;
 		private LancamentoStatus lancamentoStatus;
-		private ContaStatus contaStatus;
 
 		public Integer getExtratoID() {
 			if (extratoLancamento instanceof AbstractParsedExtratoLancamento) {
@@ -142,14 +124,6 @@ public class ExtratoAnalyseAction implements Action {
 			this.extratoLancamento = extrato;
 		}
 
-		public Conta getConta() {
-			return conta;
-		}
-
-		public void setConta(Conta conta) {
-			this.conta = conta;
-		}
-
 		public Lancamento getLancamento() {
 			return lancamento;
 		}
@@ -164,14 +138,6 @@ public class ExtratoAnalyseAction implements Action {
 
 		public void setLancamentoStatus(LancamentoStatus lancamentoStatus) {
 			this.lancamentoStatus = lancamentoStatus;
-		}
-
-		public ContaStatus getContaStatus() {
-			return contaStatus;
-		}
-
-		public void setContaStatus(ContaStatus contaStatus) {
-			this.contaStatus = contaStatus;
 		}
 
 		public Calendar getOriginalDate() {
@@ -249,6 +215,14 @@ public class ExtratoAnalyseAction implements Action {
 		} catch (TextGridException e) {
 			throw new ExtratoAnalyseException(e);
 		}
+
+		System.out.println();
+		System.out.println("Legenda:");
+		System.out.println("  - : Não se aplica.");
+		System.out.println("  U : Update.");
+		System.out.println("  * : Insert.");
+		System.out.println("  X : Delete.");
+		System.out.println("  ! : Conta não encontrada.");
 	}
 
 	private List<InternalManualReference> makeManualRefList() throws ExtratoAnalyseException {
@@ -339,7 +313,6 @@ public class ExtratoAnalyseAction implements Action {
 				ExtratoLineAnalyseResult r = new ExtratoLineAnalyseResult();
 
 				r.setLinhaStatus(StatusLinha.DONT_APPLY);
-				r.setContaStatus(ContaStatus.DONT_APPLY);
 				r.setLancamentoStatus(LancamentoStatus.DELETE);
 				r.setLancamento(lancamento);
 
@@ -380,7 +353,6 @@ public class ExtratoAnalyseAction implements Action {
 	private ExtratoLineAnalyseResult syncBalanceLine() {
 		ExtratoLineAnalyseResult result = new ExtratoLineAnalyseResult();
 		result.setLinhaStatus(StatusLinha.BALANCE);
-		result.setContaStatus(ContaStatus.DONT_APPLY);
 		result.setLancamentoStatus(LancamentoStatus.DONT_APPLY);
 
 		return result;
@@ -393,13 +365,9 @@ public class ExtratoAnalyseAction implements Action {
 		Conta contaExtrato = resolveReference(contaDAO, line.getReferencia());
 
 		if (contaExtrato == null) {
-			result.setContaStatus(ContaStatus.NOT_FOUND);
+			result.setLancamentoStatus(LancamentoStatus.CONTA_NOT_FOUND);
 			return result;
 		}
-
-		result.setContaStatus(ContaStatus.OK);
-
-		result.setConta(contaExtrato);
 
 		for (Lancamento lancamentoSemExtrato : lancamentoSemExtratoList) {
 			Conta contaOrigemEsperada;
@@ -494,16 +462,9 @@ public class ExtratoAnalyseAction implements Action {
 		grid.getData().setHeaderSeparatorChar('=');
 		grid.getData().setTitle("Sincronização de Extrato banco \"" + banco.getNome() + "\"");
 
-//		TextGridFormattedColumn.createFormattedColumn(grid, "Extrato", TextGridFormattedColumn.INTEGER_FORMATTER, TextGridColumnAlignment.RIGHT, "getExtratoID");
-//		TextGridFormattedColumn.createFormattedColumn(grid, "Lancto", TextGridFormattedColumn.INTEGER_FORMATTER, TextGridColumnAlignment.RIGHT, "getLancamentoID");
-
-//		TextGridFormattedColumn.createFormattedColumn(grid, "ID", TextGridFormattedColumn.ID_FORMATTER, TextGridColumnAlignment.RIGHT, "getExtratoID");
 		TextGridFormattedColumn.createFormattedColumn(grid, "", new ToStringFormatter(""), TextGridColumnAlignment.CENTER, "getStatusLinha");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Date", TextGridFormattedColumn.DATE_FORMATTER, TextGridColumnAlignment.LEFT, "getOriginalDate");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Original", TextGridFormattedColumn.STRING_FORMATTER, TextGridColumnAlignment.LEFT, "getLinhaOriginal");
-		TextGridFormattedColumn.createFormattedColumn(grid, "", new ToStringFormatter(""), TextGridColumnAlignment.CENTER, "getContaStatus");
-		TextGridFormattedColumn.createFormattedColumn(grid, "Conta", ControleFinanceiroFormatters.CONTA_FORMATTER, TextGridColumnAlignment.LEFT, "getConta");
-//		TextGridFormattedColumn.createFormattedColumn(grid, "ID", TextGridFormattedColumn.ID_FORMATTER, TextGridColumnAlignment.RIGHT, "getLancamentoID");
 		TextGridFormattedColumn.createFormattedColumn(grid, "", new ToStringFormatter(""), TextGridColumnAlignment.CENTER, "getLancamentoStatus");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Lancamento", ControleFinanceiroFormatters.LANCAMENTO_FORMATTER, TextGridColumnAlignment.LEFT, "getLancamento");
 
