@@ -315,21 +315,27 @@ public class ExtratoAnalyseAction implements Action {
 		DatedExtratoLancamento extrato = extratoLines.get(i);
 
 		if (i != extratoLines.size() - 1) {
-			Calendar data = extrato.getData();
+			Calendar dataAtual = extrato.getData();
 
 			DatedExtratoLancamento proximo = extratoLines.get(i + 1);
 
 			Calendar dataProximo = proximo.getData();
 
-			if ((dataProximo == null) || (!data.equals(dataProximo))) {
-				addLancamentosNaoResolvidos(data, lancamentoOrfaoList, statuses);
+			if ((dataProximo == null) || (!dataAtual.equals(dataProximo))) {
+				addLancamentosNaoResolvidos(dataAtual, dataProximo, lancamentoOrfaoList, statuses);
 			}
 		}
 	}
 
-	private void addLancamentosNaoResolvidos(Calendar data, List<Lancamento> lancamentoOrfaoList, List<ExtratoLineAnalyseResult> statuses) {
+	private void addLancamentosNaoResolvidos(Calendar dataAtual, Calendar dataProximo, List<Lancamento> lancamentoOrfaoList, List<ExtratoLineAnalyseResult> statuses) {
+		TimeIgnoringComparator comparator = new TimeIgnoringComparator();
+		
 		for (Lancamento lancamento : lancamentoOrfaoList) {
-			if ((lancamento.getData().equals(data)) && (lancamento.getExtrato() == null)) {
+			boolean isPosteriorAtual = comparator.compare(lancamento.getData(), dataAtual) >= 0;
+			boolean anteriorProximo = comparator.compare(lancamento.getData(), dataProximo) < 0;
+			boolean isOrfao = lancamento.getExtrato() == null;
+			
+			if (isPosteriorAtual && anteriorProximo && isOrfao) {
 				ExtratoLineAnalyseResult r = new ExtratoLineAnalyseResult();
 
 				r.setLinhaStatus(StatusLinha.DONT_APPLY);
