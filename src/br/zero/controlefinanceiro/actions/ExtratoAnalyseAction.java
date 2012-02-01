@@ -65,7 +65,7 @@ public class ExtratoAnalyseAction implements Action {
 	}
 
 	public enum LancamentoStatus {
-		DONT_APPLY("-"), FOUND("U"), NOT_RELATED("?"), NEW("*");
+		DONT_APPLY("-"), UPDATE("U"), DELETE("D"), NEW("*");
 
 		private String toString;
 
@@ -340,7 +340,7 @@ public class ExtratoAnalyseAction implements Action {
 
 				r.setLinhaStatus(StatusLinha.DONT_APPLY);
 				r.setContaStatus(ContaStatus.DONT_APPLY);
-				r.setLancamentoStatus(LancamentoStatus.NOT_RELATED);
+				r.setLancamentoStatus(LancamentoStatus.DELETE);
 				r.setLancamento(lancamento);
 
 				statuses.add(r);
@@ -416,7 +416,7 @@ public class ExtratoAnalyseAction implements Action {
 			}
 
 			if ((lancamentoSemExtrato.getExtrato() == null) && (extratoLineMatch(lancamentoSemExtrato, line, contaOrigemEsperada, contaDestinoEsperada))) {
-				result.setLancamentoStatus(LancamentoStatus.FOUND);
+				result.setLancamentoStatus(LancamentoStatus.UPDATE);
 
 				lancamentoSemExtrato.setExtrato(line.getOrigem());
 
