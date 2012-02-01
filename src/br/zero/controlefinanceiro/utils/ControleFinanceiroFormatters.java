@@ -1,9 +1,6 @@
 package br.zero.controlefinanceiro.utils;
 
-import java.text.SimpleDateFormat;
-
 import br.zero.controlefinanceiro.model.Conta;
-import br.zero.controlefinanceiro.model.Lancamento;
 import br.zero.controlefinanceiro.model.modelo.Modelo;
 import br.zero.textgrid.TextGridException;
 import br.zero.textgrid.TextGridFormattedColumn;
@@ -11,49 +8,8 @@ import br.zero.textgrid.TextGridFormatter;
 
 public class ControleFinanceiroFormatters {
 
-	public static final TextGridFormatter LANCAMENTO_FORMATTER = createLancamentoFormatter();
 	public static final TextGridFormatter CONTA_FORMATTER = createContaFormatter();
 	public static final TextGridFormatter MODELO_FORMATTER = createModeloFormatter();
-
-	private static TextGridFormatter createLancamentoFormatter() {
-		TextGridFormatter lancamentoFormatter = new TextGridFormatter() {
-
-			@Override
-			public StringBuilder parse(Object cellValue) throws TextGridException {
-				if (cellValue == null) {
-					return TextGridFormattedColumn.NULL_FORMATTER.parse(cellValue);
-				}
-
-				if (!(cellValue instanceof Lancamento)) {
-					throw new TextGridException("LANCAMENTO_FORMATTER: Must be used only with br.zero.controlefinanceiro.model.Lancamento fields.");
-				}
-
-				Lancamento value = (Lancamento) cellValue;
-
-				StringBuilder finalValue = formatLancamento(value);
-
-				return finalValue;
-			}
-
-			private StringBuilder formatLancamento(Lancamento lancamento) {
-				SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
-
-				StringBuilder formatted = new StringBuilder();
-				
-				formatted.append((lancamento.getData() != null) ? (sdf.format(lancamento.getData().getTime())) : "[null]");
-				formatted.append(", ");
-				formatted.append((lancamento.getContaOrigem() != null) ? lancamento.getContaOrigem().getNome() : "[null]");
-				formatted.append(" -> ");
-				formatted.append((lancamento.getContaDestino() != null) ? lancamento.getContaDestino().getNome() : "[null]");
-				formatted.append(", ");
-				formatted.append((lancamento.getValor() != null) ? lancamento.getValor().toString() : "[null]");
-
-				return formatted;
-			}
-		};
-
-		return lancamentoFormatter;
-	}
 
 	private static TextGridFormatter createContaFormatter() {
 		TextGridFormatter contaFormatter = new TextGridFormatter() {

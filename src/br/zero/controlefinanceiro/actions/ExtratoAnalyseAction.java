@@ -124,8 +124,14 @@ public class ExtratoAnalyseAction implements Action {
 			this.extratoLancamento = extrato;
 		}
 
-		public Lancamento getLancamento() {
-			return lancamento;
+		public String getLancamento() {
+			String s = "#" + lancamento.getId() + " " + lancamento.toString();
+
+			if (s.length() > 85) {
+				s = s.substring(0, 82) + "...";
+			}
+
+			return s;
 		}
 
 		public void setLancamento(Lancamento lancamento) {
@@ -303,12 +309,12 @@ public class ExtratoAnalyseAction implements Action {
 
 	private void addLancamentosNaoResolvidos(Calendar dataAtual, Calendar dataProximo, List<Lancamento> lancamentoOrfaoList, List<ExtratoLineAnalyseResult> statuses) {
 		TimeIgnoringComparator comparator = new TimeIgnoringComparator();
-		
+
 		for (Lancamento lancamento : lancamentoOrfaoList) {
 			boolean isPosteriorAtual = comparator.compare(lancamento.getData(), dataAtual) >= 0;
 			boolean anteriorProximo = comparator.compare(lancamento.getData(), dataProximo) < 0;
 			boolean isOrfao = lancamento.getExtrato() == null;
-			
+
 			if (isPosteriorAtual && anteriorProximo && isOrfao) {
 				ExtratoLineAnalyseResult r = new ExtratoLineAnalyseResult();
 
@@ -466,7 +472,7 @@ public class ExtratoAnalyseAction implements Action {
 		TextGridFormattedColumn.createFormattedColumn(grid, "Date", TextGridFormattedColumn.DATE_FORMATTER, TextGridColumnAlignment.LEFT, "getOriginalDate");
 		TextGridFormattedColumn.createFormattedColumn(grid, "Original", TextGridFormattedColumn.STRING_FORMATTER, TextGridColumnAlignment.LEFT, "getLinhaOriginal");
 		TextGridFormattedColumn.createFormattedColumn(grid, "", new ToStringFormatter(""), TextGridColumnAlignment.CENTER, "getLancamentoStatus");
-		TextGridFormattedColumn.createFormattedColumn(grid, "Lancamento", ControleFinanceiroFormatters.LANCAMENTO_FORMATTER, TextGridColumnAlignment.LEFT, "getLancamento");
+		TextGridFormattedColumn.createFormattedColumn(grid, "Lancamento", TextGridFormattedColumn.STRING_FORMATTER, TextGridColumnAlignment.LEFT, "getLancamento");
 
 		return grid;
 	}
