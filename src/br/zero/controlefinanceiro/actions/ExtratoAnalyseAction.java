@@ -22,7 +22,6 @@ import br.zero.controlefinanceiro.model.extrato.ExtratoLancamento;
 import br.zero.controlefinanceiro.model.extrato.ExtratoLancamentoDAO;
 import br.zero.controlefinanceiro.utils.AbstractParsedExtratoLancamento;
 import br.zero.controlefinanceiro.utils.ControleFinanceiroException;
-import br.zero.controlefinanceiro.utils.ControleFinanceiroFormatters;
 import br.zero.controlefinanceiro.utils.ExtratoLineParserException;
 import br.zero.textgrid.TextGrid;
 import br.zero.textgrid.TextGridColumnAlignment;
@@ -125,6 +124,10 @@ public class ExtratoAnalyseAction implements Action {
 		}
 
 		public String getLancamento() {
+			if (lancamento == null) {
+				return "[null]";
+			}
+			
 			String s = "#" + lancamento.getId() + " " + lancamento.toString();
 
 			if (s.length() > 85) {
@@ -269,11 +272,8 @@ public class ExtratoAnalyseAction implements Action {
 			ExtratoLineAnalyseResult analyseResult;
 
 			if (extrato instanceof ExtratoLancamentoBalance) {
-				// analyseResult = syncBalanceLine();
-				// analyseResult.setExtrato((ExtratoLancamentoBalance) extrato);
-				// TODO Não mostra o resultado da análise para linhas de
-				// balanço, voltar na versão de produção
-				analyseResult = null;
+				 analyseResult = syncBalanceLine();
+				 analyseResult.setExtrato((ExtratoLancamentoBalance) extrato);
 			} else if (extrato instanceof ExtratoLancamentoTransaction) {
 				analyseResult = syncTransactionLine(lancamentoSemExtratoList, contaDAO, (ExtratoLancamentoTransaction) extrato);
 				analyseResult.setExtrato((ExtratoLancamentoTransaction) extrato);
@@ -352,7 +352,6 @@ public class ExtratoAnalyseAction implements Action {
 			}
 		}
 
-		// TODO Ordenar pela data atribuída pelo parser
 		Collections.sort(extratoLines, new ExtratoLinesComparator());
 	}
 
