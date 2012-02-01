@@ -65,7 +65,7 @@ public class ExtratoAnalyseAction implements Action {
 	}
 
 	public enum LancamentoStatus {
-		DONT_APPLY("-"), UPDATE("U"), DELETE("D"), NEW("*");
+		DONT_APPLY("-"), UPDATE("U"), DELETE("X"), NEW("*");
 
 		private String toString;
 
