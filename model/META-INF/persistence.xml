@@ -9,7 +9,7 @@
 		<class>br.zero.controlefinanceiro.model.extrato.ExtratoLancamento</class>
 		<class>br.zero.controlefinanceiro.model.extrato.ReferenciaExtrato</class>
 		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql:master"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql:desenvolvimento"/>
 			<property name="javax.persistence.jdbc.user" value="controlefinanceiro"/>
 			<property name="javax.persistence.jdbc.password" value="zsK3aBnVqw"/>
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
