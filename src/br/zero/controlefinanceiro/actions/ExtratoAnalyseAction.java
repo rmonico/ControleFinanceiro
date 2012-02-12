@@ -385,7 +385,7 @@ public class ExtratoAnalyseAction implements Action {
 			Conta contaOrigemEsperada;
 			Conta contaDestinoEsperada;
 
-			if (lancamentoSemExtrato.getValor() > 0) {
+			if (line.getValor() < 0) {
 				// Dinheiro saiu da conta
 				contaOrigemEsperada = banco;
 				contaDestinoEsperada = contaExtrato;
