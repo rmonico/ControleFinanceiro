@@ -339,7 +339,7 @@
   </body>
 </html></richcontent>
 </node>
-<node CREATED="1326277327650" ID="ID_64718160" MODIFIED="1326277365793" TEXT="Abstrair regras">
+<node BACKGROUND_COLOR="#99ff99" CREATED="1326277327650" ID="ID_64718160" MODIFIED="1329007468748" TEXT="Abstrair regras">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -351,7 +351,7 @@
   </body>
 </html></richcontent>
 </node>
-<node CREATED="1326277374326" ID="ID_1293980155" MODIFIED="1327247864913" TEXT="Ordernar lista">
+<node BACKGROUND_COLOR="#99ff99" CREATED="1326277374326" ID="ID_1293980155" MODIFIED="1329007470674" TEXT="Ordernar lista">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -373,11 +373,10 @@
       Ainda n&#227;o est&#225; calculando o N para lan&#231;amentos gerados durante a sincroniza&#231;&#227;o. Dever&#225; levar em conta lan&#231;amentos j&#225; existentes e os noos gerados durante o processo de sincronia.
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 </node>
-<node CREATED="1322738893562" FOLDED="true" ID="ID_1250441849" MODIFIED="1329007327014" POSITION="right" TEXT="Corre&#xe7;&#xf5;es">
+<node CREATED="1322738893562" ID="ID_1250441849" MODIFIED="1329070214282" POSITION="right" TEXT="Corre&#xe7;&#xf5;es">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -428,7 +427,7 @@
 </html></richcontent>
 </node>
 </node>
-<node CREATED="1326277431201" FOLDED="true" ID="ID_513442912" MODIFIED="1326278602181" POSITION="right" TEXT="Milestone 5">
+<node CREATED="1326277431201" FOLDED="true" ID="ID_513442912" MODIFIED="1329007564564" POSITION="right" TEXT="Milestone 5">
 <node CREATED="1326277444694" ID="ID_1463337530" MODIFIED="1326277482198" TEXT="Objetivos">
 <richcontent TYPE="NOTE"><html>
   <head>
@@ -442,7 +441,7 @@
 </html></richcontent>
 </node>
 </node>
-<node CREATED="1326277497865" FOLDED="true" ID="ID_1202848612" MODIFIED="1326278602873" POSITION="right" TEXT="Milestone 6">
+<node CREATED="1326277497865" ID="ID_1202848612" MODIFIED="1329007565760" POSITION="right" TEXT="Milestone 6">
 <node CREATED="1326277501404" ID="ID_133246500" MODIFIED="1326277626870" TEXT="Objetivos">
 <richcontent TYPE="NOTE"><html>
   <head>
@@ -573,6 +572,32 @@
     </p>
   </body>
 </html></richcontent>
+</node>
+<node CREATED="1329070235411" ID="ID_898986832" MODIFIED="1329070302304" TEXT="lanc-ls: Formato do saldo">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      Melhorar a formata&#231;&#227;o do saldo que aparece ao final da listagem de lan&#231;amentos
+    </p>
+  </body>
+</html>
+</richcontent>
+</node>
+<node CREATED="1329070308828" ID="ID_836758552" MODIFIED="1329070395233" TEXT="Tipo dos campos num&#xe9;ricos">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      Tipos dos campos num&#233;ricos: alterar de double para numeric com 2 casas de precis&#227;o. Ver se isso faz parar de acontecer aqueles problemas de arredondamento que aparecem ao formatar os n&#250;meros em tela.
+    </p>
+  </body>
+</html>
+</richcontent>
 </node>
 </node>
 <node CREATED="1322272082887" FOLDED="true" ID="ID_1707116991" MODIFIED="1326277128364" POSITION="right" TEXT="Funcionalidades futuras">
