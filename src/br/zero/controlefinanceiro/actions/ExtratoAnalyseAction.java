@@ -378,8 +378,13 @@ public class ExtratoAnalyseAction implements Action {
 		
 		for (Lancamento lancamentoSemExtrato : lancamentoSemExtratoList) {
 			// Ignora as linhas anteriores ao lancamento sem extrato
-			if (comparator.compare(line.getData(), lancamentoSemExtrato.getData()) > 0) {
+			int comparision = comparator.compare(lancamentoSemExtrato.getData(), line.getData());
+			
+			if (comparision < 0) {
 				continue;
+			} else if (comparision > 0) {
+				// Se passou da data, sai do loop, não há correspondência
+				break;
 			}
 			
 			Conta contaOrigemEsperada;
