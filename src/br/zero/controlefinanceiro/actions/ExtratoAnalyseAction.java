@@ -412,7 +412,7 @@ public class ExtratoAnalyseAction implements Action {
 		result.setLancamento(novoLancamento);
 
 		novoLancamento.setData(line.getData());
-		// Calcular depois. O cálculo será complicado, deverá levar em conta os
+		// TODO Calcular depois. O cálculo será complicado, deverá levar em conta os
 		// N's pré-existentes no banco e os gerados aqui.
 		novoLancamento.setN(-1);
 
