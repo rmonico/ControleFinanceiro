@@ -351,8 +351,33 @@
   </body>
 </html></richcontent>
 </node>
+<node CREATED="1326277374326" ID="ID_1293980155" MODIFIED="1327247864913" TEXT="Ordernar lista">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      Ordenar a lista pela data que o parser atribui.
+    </p>
+  </body>
+</html></richcontent>
 </node>
-<node CREATED="1322738893562" FOLDED="true" ID="ID_1250441849" MODIFIED="1326278601024" POSITION="right" TEXT="Corre&#xe7;&#xf5;es">
+<node CREATED="1329007329389" ID="ID_1583089983" MODIFIED="1329007438608" TEXT="C&#xe1;lculo do N para novos lan&#xe7;amentos">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      Ainda n&#227;o est&#225; calculando o N para lan&#231;amentos gerados durante a sincroniza&#231;&#227;o. Dever&#225; levar em conta lan&#231;amentos j&#225; existentes e os noos gerados durante o processo de sincronia.
+    </p>
+  </body>
+</html>
+</richcontent>
+</node>
+</node>
+<node CREATED="1322738893562" FOLDED="true" ID="ID_1250441849" MODIFIED="1329007327014" POSITION="right" TEXT="Corre&#xe7;&#xf5;es">
 <richcontent TYPE="NOTE"><html>
   <head>
     
