@@ -351,18 +351,6 @@
   </body>
 </html></richcontent>
 </node>
-<node CREATED="1326277374326" ID="ID_1293980155" MODIFIED="1327247864913" TEXT="Ordernar lista">
-<richcontent TYPE="NOTE"><html>
-  <head>
-    
-  </head>
-  <body>
-    <p>
-      Ordenar a lista pela data que o parser atribui.
-    </p>
-  </body>
-</html></richcontent>
-</node>
 </node>
 <node CREATED="1322738893562" FOLDED="true" ID="ID_1250441849" MODIFIED="1326278601024" POSITION="right" TEXT="Corre&#xe7;&#xf5;es">
 <richcontent TYPE="NOTE"><html>
@@ -559,8 +547,7 @@
       Criar uma coluna para mostrar se a refer&#234;ncia do extrato foi resolvida atrav&#233;s das refer&#234;ncias automaticas existentes no banco de dados ou se foi pelas refer&#234;ncias informadas pela linha de comando.
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 </node>
 <node CREATED="1322272082887" FOLDED="true" ID="ID_1707116991" MODIFIED="1326277128364" POSITION="right" TEXT="Funcionalidades futuras">
