@@ -1,16 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE project>
 
-<project name="ControleFinanceiro" default="deploy" basedir=".">
+<project name="ControleFinanceiro" default="deploy_to_production" basedir=".">
 	<description>
 		ControleFinanceiro Build and Deploy File
     </description>
 
-	<property name="workspaceLibrary" location="../library" />
+	<property name="src" location="src" />
 	<property name="lib" location="lib" />
+	<property name="build" location="build" />
+	<property name="workspaceLibrary" location="../library" />
+	<property name="productionFolder" location="../../programs/javaclasspath" />
 	
 	<target name="UpdateUtils">
 		<copy file="${workspaceLibrary}/utils/Utils.jar" toFile="${lib}/Utils.jar" />
 	</target>
 
+	<target name="init">
+		<tstamp />
+	</target>
+
+	<target name="compile" depends="init" description="compile the source ">
+		<javac srcdir="${src}" destdir="${build}"
+			classpath="${lib}/Utils.jar" />
+	</target>
+
+	<target name="deploy" depends="compile" description="generate the distribution">
+		<jar
+			jarfile="ControleFinanceiro.jar"
+			basedir="${build}" />
+	</target>
+
+	<target name="deploy_to_production" depends="deploy" >
+		<move file="ControleFinanceiro.jar" toFile="${productionFolder}/ControleFinanceiro.jar" />
+	</target>
+	
 </project>
