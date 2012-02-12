@@ -326,7 +326,7 @@
 </html></richcontent>
 </node>
 </node>
-<node CREATED="1326277132680" ID="ID_1176934154" MODIFIED="1326797467921" POSITION="right" TEXT="Milestone 4.2">
+<node BACKGROUND_COLOR="#99ff99" CREATED="1326277132680" FOLDED="true" ID="ID_1176934154" MODIFIED="1329084516216" POSITION="right" TEXT="Milestone 4.2">
 <node CREATED="1326277305110" ID="ID_1431346685" MODIFIED="1326277326287" TEXT="Objetivos">
 <richcontent TYPE="NOTE"><html>
   <head>
@@ -363,7 +363,7 @@
   </body>
 </html></richcontent>
 </node>
-<node CREATED="1329007329389" ID="ID_1583089983" MODIFIED="1329007438608" TEXT="C&#xe1;lculo do N para novos lan&#xe7;amentos">
+<node BACKGROUND_COLOR="#99ff99" CREATED="1329007329389" ID="ID_1583089983" MODIFIED="1329084509767" TEXT="C&#xe1;lculo do N para novos lan&#xe7;amentos">
 <richcontent TYPE="NOTE"><html>
   <head>
     
