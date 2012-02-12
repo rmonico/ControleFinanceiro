@@ -374,7 +374,14 @@ public class ExtratoAnalyseAction implements Action {
 			return result;
 		}
 
+		TimeIgnoringComparator comparator = new TimeIgnoringComparator();
+		
 		for (Lancamento lancamentoSemExtrato : lancamentoSemExtratoList) {
+			// Ignora as linhas anteriores ao lancamento sem extrato
+			if (comparator.compare(line.getData(), lancamentoSemExtrato.getData()) > 0) {
+				continue;
+			}
+			
 			Conta contaOrigemEsperada;
 			Conta contaDestinoEsperada;
 
