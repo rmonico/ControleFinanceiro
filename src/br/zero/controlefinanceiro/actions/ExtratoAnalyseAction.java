@@ -127,7 +127,7 @@ public class ExtratoAnalyseAction implements Action {
 			if (lancamento == null) {
 				return "[null]";
 			}
-			
+
 			String s = "#" + lancamento.getId() + " " + lancamento.toString();
 
 			if (s.length() > 85) {
@@ -272,8 +272,8 @@ public class ExtratoAnalyseAction implements Action {
 			ExtratoLineAnalyseResult analyseResult;
 
 			if (extrato instanceof ExtratoLancamentoBalance) {
-				 analyseResult = syncBalanceLine();
-				 analyseResult.setExtrato((ExtratoLancamentoBalance) extrato);
+				analyseResult = syncBalanceLine();
+				analyseResult.setExtrato((ExtratoLancamentoBalance) extrato);
 			} else if (extrato instanceof ExtratoLancamentoTransaction) {
 				analyseResult = syncTransactionLine(lancamentoSemExtratoList, contaDAO, (ExtratoLancamentoTransaction) extrato);
 				analyseResult.setExtrato((ExtratoLancamentoTransaction) extrato);
@@ -375,18 +375,18 @@ public class ExtratoAnalyseAction implements Action {
 		}
 
 		TimeIgnoringComparator comparator = new TimeIgnoringComparator();
-		
+
 		for (Lancamento lancamentoSemExtrato : lancamentoSemExtratoList) {
 			// Ignora as linhas anteriores ao lancamento sem extrato
 			int comparision = comparator.compare(lancamentoSemExtrato.getData(), line.getData());
-			
+
 			if (comparision < 0) {
 				continue;
 			} else if (comparision > 0) {
 				// Se passou da data, sai do loop, não há correspondência
 				break;
 			}
-			
+
 			Conta contaOrigemEsperada;
 			Conta contaDestinoEsperada;
 
@@ -424,8 +424,8 @@ public class ExtratoAnalyseAction implements Action {
 		result.setLancamento(novoLancamento);
 
 		novoLancamento.setData(line.getData());
-		// TODO Calcular depois. O cálculo será complicado, deverá levar em conta os
-		// N's pré-existentes no banco e os gerados aqui.
+		// TODO Calcular depois. O cálculo será complicado, deverá levar em
+		// conta os N's pré-existentes no banco e os gerados aqui.
 		novoLancamento.setN(-1);
 
 		Conta contaOrigemEsperada;
