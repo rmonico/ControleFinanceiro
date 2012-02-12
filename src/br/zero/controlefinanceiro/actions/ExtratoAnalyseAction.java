@@ -424,9 +424,9 @@ public class ExtratoAnalyseAction implements Action {
 		result.setLancamento(novoLancamento);
 
 		novoLancamento.setData(line.getData());
-		// TODO Calcular depois. O cálculo será complicado, deverá levar em
-		// conta os N's pré-existentes no banco e os gerados aqui.
-		novoLancamento.setN(-1);
+
+		int n = (switches.getRealize() ? lancamentoDAO.getNextN(line.getData()) : -1);
+		novoLancamento.setN(n);
 
 		Conta contaOrigemEsperada;
 		Conta contaDestinoEsperada;
