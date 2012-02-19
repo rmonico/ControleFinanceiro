@@ -326,7 +326,7 @@
 </html></richcontent>
 </node>
 </node>
-<node BACKGROUND_COLOR="#99ff99" CREATED="1326277132680" ID="ID_1176934154" MODIFIED="1329084773861" POSITION="right" TEXT="Milestone 4.2">
+<node BACKGROUND_COLOR="#99ff99" CREATED="1326277132680" FOLDED="true" ID="ID_1176934154" MODIFIED="1329089749626" POSITION="right" TEXT="Milestone 4.2">
 <node CREATED="1326277305110" ID="ID_1431346685" MODIFIED="1326277326287" TEXT="Objetivos">
 <richcontent TYPE="NOTE"><html>
   <head>
@@ -376,7 +376,44 @@
 </html></richcontent>
 </node>
 </node>
-<node CREATED="1322738893562" ID="ID_1250441849" MODIFIED="1329070214282" POSITION="right" TEXT="Corre&#xe7;&#xf5;es">
+<node CREATED="1326277431201" ID="ID_513442912" MODIFIED="1329089803690" POSITION="right" TEXT="Milestone 5">
+<node CREATED="1326277444694" ID="ID_1463337530" MODIFIED="1326277482198" TEXT="Objetivos">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      Finalizar a primeira vers&#227;o funcional do freelook e migrar o sistema para web.
+    </p>
+  </body>
+</html></richcontent>
+</node>
+</node>
+<node CREATED="1326277497865" ID="ID_1202848612" MODIFIED="1329007565760" POSITION="right" TEXT="Milestone 6">
+<node CREATED="1326277501404" ID="ID_133246500" MODIFIED="1326277626870" TEXT="Objetivos">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      Fazer an&#225;lise do balan&#231;o:
+    </p>
+    <p>
+      &#160;&#160;- Propor um lan&#231;amento de confer&#234;ncia quando o balan&#231;o n&#227;o bater com o saldo da conta
+    </p>
+    <p>
+      &#160;- Mostrar um status especial quando o balan&#231;o do extrato bater com o saldo da conta, ou quando j&#225; houver um lancto de confer&#234;ncia que estiver ok
+    </p>
+    <p>
+      &#160;&#160;- Criar a&#231;&#227;o de balan&#231;o, dever&#225; receber um saldo, uma conta e, opcionalmente, uma data.
+    </p>
+  </body>
+</html></richcontent>
+</node>
+</node>
+<node CREATED="1322738893562" FOLDED="true" ID="ID_1250441849" MODIFIED="1329089895240" POSITION="right" TEXT="Corre&#xe7;&#xf5;es">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -427,44 +464,7 @@
 </html></richcontent>
 </node>
 </node>
-<node CREATED="1326277431201" FOLDED="true" ID="ID_513442912" MODIFIED="1329007564564" POSITION="right" TEXT="Milestone 5">
-<node CREATED="1326277444694" ID="ID_1463337530" MODIFIED="1326277482198" TEXT="Objetivos">
-<richcontent TYPE="NOTE"><html>
-  <head>
-    
-  </head>
-  <body>
-    <p>
-      Finalizar a primeira vers&#227;o funcional do freelook e migrar o sistema para web.
-    </p>
-  </body>
-</html></richcontent>
-</node>
-</node>
-<node CREATED="1326277497865" ID="ID_1202848612" MODIFIED="1329007565760" POSITION="right" TEXT="Milestone 6">
-<node CREATED="1326277501404" ID="ID_133246500" MODIFIED="1326277626870" TEXT="Objetivos">
-<richcontent TYPE="NOTE"><html>
-  <head>
-    
-  </head>
-  <body>
-    <p>
-      Fazer an&#225;lise do balan&#231;o:
-    </p>
-    <p>
-      &#160;&#160;- Propor um lan&#231;amento de confer&#234;ncia quando o balan&#231;o n&#227;o bater com o saldo da conta
-    </p>
-    <p>
-      &#160;- Mostrar um status especial quando o balan&#231;o do extrato bater com o saldo da conta, ou quando j&#225; houver um lancto de confer&#234;ncia que estiver ok
-    </p>
-    <p>
-      &#160;&#160;- Criar a&#231;&#227;o de balan&#231;o, dever&#225; receber um saldo, uma conta e, opcionalmente, uma data.
-    </p>
-  </body>
-</html></richcontent>
-</node>
-</node>
-<node CREATED="1324252493893" ID="ID_1726085239" MODIFIED="1327918699216" POSITION="right" TEXT="Melhorias">
+<node CREATED="1324252493893" FOLDED="true" ID="ID_1726085239" MODIFIED="1329089896421" POSITION="right" TEXT="Melhorias">
 <node CREATED="1324252581143" ID="ID_938160062" MODIFIED="1324252601867" TEXT="extrato-analyse: id do lancto"/>
 <node CREATED="1324252602809" ID="ID_723758160" MODIFIED="1324252628136" TEXT="extrato-analyse: a&#xe7;&#xe3;o sync"/>
 <node CREATED="1324252693904" ID="ID_1351041782" MODIFIED="1324254926952" TEXT="extrato-sync: balan&#xe7;os">
@@ -600,7 +600,7 @@
 </richcontent>
 </node>
 </node>
-<node CREATED="1322272082887" FOLDED="true" ID="ID_1707116991" MODIFIED="1326277128364" POSITION="right" TEXT="Funcionalidades futuras">
+<node CREATED="1322272082887" FOLDED="true" ID="ID_1707116991" MODIFIED="1329089887713" POSITION="right" TEXT="Funcionalidades futuras">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -652,7 +652,7 @@
 </html></richcontent>
 </node>
 </node>
-<node CREATED="1322272446879" FOLDED="true" ID="ID_1717968237" MODIFIED="1322738953629" POSITION="right" TEXT="Funcionalidades n&#xe3;o-essenciais">
+<node CREATED="1322272446879" FOLDED="true" ID="ID_1717968237" MODIFIED="1329089886961" POSITION="right" TEXT="Funcionalidades n&#xe3;o-essenciais">
 <node CREATED="1322272462078" ID="ID_1625700189" MODIFIED="1322272469429" TEXT="help">
 <richcontent TYPE="NOTE"><html>
   <head>
