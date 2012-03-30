@@ -1,7 +1,7 @@
 <map version="0.9.0">
 <!-- To view this file, download free mind mapping software FreeMind from http://freemind.sourceforge.net -->
 <node CREATED="1322269798993" ID="ID_1526915694" MODIFIED="1324252493269" TEXT="jfin - Planning">
-<node BACKGROUND_COLOR="#99ff99" CREATED="1322269815461" FOLDED="true" ID="ID_1671579002" MODIFIED="1322875338262" POSITION="right" TEXT="Milestone 1">
+<node BACKGROUND_COLOR="#99ff99" CREATED="1322269815461" FOLDED="true" ID="ID_1671579002" MODIFIED="1333071240580" POSITION="right" TEXT="Milestone 1">
 <node CREATED="1322269881657" ID="ID_802172816" MODIFIED="1322269949887" TEXT="Objetivos">
 <richcontent TYPE="NOTE"><html>
   <head>
@@ -27,7 +27,7 @@
 <node BACKGROUND_COLOR="#99ff99" CREATED="1322269973722" ID="ID_1540285104" MODIFIED="1322269993883" TEXT="Ok (F3)"/>
 <node CREATED="1322269975090" ID="ID_716897189" MODIFIED="1322270304082" TEXT="Pendente (F1)"/>
 </node>
-<node BACKGROUND_COLOR="#99ff99" CREATED="1322270133624" FOLDED="true" ID="ID_209304459" MODIFIED="1326278609691" POSITION="right" TEXT="Milestone 2">
+<node BACKGROUND_COLOR="#99ff99" CREATED="1322270133624" FOLDED="true" ID="ID_209304459" MODIFIED="1333071239090" POSITION="right" TEXT="Milestone 2">
 <node CREATED="1322270137269" ID="ID_1707435879" MODIFIED="1322270160278" TEXT="Objetivos">
 <richcontent TYPE="NOTE"><html>
   <head>
@@ -58,7 +58,7 @@
 </html></richcontent>
 </node>
 </node>
-<node BACKGROUND_COLOR="#99ff99" CREATED="1322270400623" FOLDED="true" ID="ID_674416975" MODIFIED="1326278610923" POSITION="right" TEXT="Milestone 3">
+<node BACKGROUND_COLOR="#99ff99" CREATED="1322270400623" FOLDED="true" ID="ID_674416975" MODIFIED="1333071237858" POSITION="right" TEXT="Milestone 3">
 <node CREATED="1322270408325" ID="ID_662000060" MODIFIED="1322270930606" TEXT="Objetivos">
 <richcontent TYPE="NOTE"><html>
   <head>
@@ -298,7 +298,7 @@
 </html></richcontent>
 </node>
 </node>
-<node BACKGROUND_COLOR="#99ff99" CREATED="1326277118690" FOLDED="true" ID="ID_1858757040" MODIFIED="1326798659333" POSITION="right" TEXT="Milestone 4.1">
+<node BACKGROUND_COLOR="#99ff99" CREATED="1326277118690" FOLDED="true" ID="ID_1858757040" MODIFIED="1333071236690" POSITION="right" TEXT="Milestone 4.1">
 <node CREATED="1326277137957" ID="ID_296700627" MODIFIED="1326277166720" TEXT="Objetivos">
 <richcontent TYPE="NOTE"><html>
   <head>
@@ -326,7 +326,7 @@
 </html></richcontent>
 </node>
 </node>
-<node BACKGROUND_COLOR="#99ff99" CREATED="1326277132680" FOLDED="true" ID="ID_1176934154" MODIFIED="1329089749626" POSITION="right" TEXT="Milestone 4.2">
+<node BACKGROUND_COLOR="#99ff99" CREATED="1326277132680" ID="ID_1176934154" MODIFIED="1333071203397" POSITION="right" TEXT="Milestone 4.2">
 <node CREATED="1326277305110" ID="ID_1431346685" MODIFIED="1326277326287" TEXT="Objetivos">
 <richcontent TYPE="NOTE"><html>
   <head>
@@ -377,18 +377,23 @@
 </node>
 </node>
 <node CREATED="1326277431201" ID="ID_513442912" MODIFIED="1329089803690" POSITION="right" TEXT="Milestone 5">
-<node CREATED="1326277444694" ID="ID_1463337530" MODIFIED="1326277482198" TEXT="Objetivos">
+<node CREATED="1326277444694" ID="ID_1463337530" MODIFIED="1333071202112" TEXT="Objetivos">
 <richcontent TYPE="NOTE"><html>
   <head>
     
   </head>
   <body>
     <p>
-      Finalizar a primeira vers&#227;o funcional do freelook e migrar o sistema para web.
+      Funcionalidades de listar lan&#231;amentos, adicionar lan&#231;amento e adicionar lan&#231;amento full vers&#227;o web.
     </p>
   </body>
-</html></richcontent>
+</html>
+</richcontent>
 </node>
+<node CREATED="1333071205248" ID="ID_1946151865" MODIFIED="1333071219555" TEXT="Add Lancto - Web"/>
+<node CREATED="1333071219994" ID="ID_1186624475" MODIFIED="1333071226059" TEXT="Add Lancto Full - Web"/>
+<node CREATED="1333071226361" ID="ID_1838279097" MODIFIED="1333071231724" TEXT="Lista Lancto - Web"/>
+<node CREATED="1333071249148" ID="ID_1702043462" MODIFIED="1333071252759" TEXT="Migrar para web"/>
 </node>
 <node CREATED="1326277497865" ID="ID_1202848612" MODIFIED="1329007565760" POSITION="right" TEXT="Milestone 6">
 <node CREATED="1326277501404" ID="ID_133246500" MODIFIED="1326277626870" TEXT="Objetivos">
@@ -583,8 +588,7 @@
       Melhorar a formata&#231;&#227;o do saldo que aparece ao final da listagem de lan&#231;amentos
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 <node CREATED="1329070308828" ID="ID_836758552" MODIFIED="1329070395233" TEXT="Tipo dos campos num&#xe9;ricos">
 <richcontent TYPE="NOTE"><html>
@@ -596,8 +600,7 @@
       Tipos dos campos num&#233;ricos: alterar de double para numeric com 2 casas de precis&#227;o. Ver se isso faz parar de acontecer aqueles problemas de arredondamento que aparecem ao formatar os n&#250;meros em tela.
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 </node>
 <node CREATED="1322272082887" FOLDED="true" ID="ID_1707116991" MODIFIED="1329089887713" POSITION="right" TEXT="Funcionalidades futuras">
