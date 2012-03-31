@@ -1,3 +1,4 @@
-#Thu Sep 22 22:39:07 BRT 2011
+#Fri Mar 30 14:15:25 BRT 2012
 eclipse.preferences.version=1
+org.eclipse.jpt.core.discoverAnnotatedClasses=false
 org.eclipse.jpt.core.platform=eclipselink2_1
