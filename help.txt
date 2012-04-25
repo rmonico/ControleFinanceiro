@@ -1,0 +1,53 @@
+Backup: Cria um backup do banco de dados. Não funcional no momento.
+
+conta-ls: Lista todas as contas.
+
+conta-add <nome conta>: Cadastra uma nova conta.
+
+conta-rm <nome conta>: Remove uma conta.
+
+lanc-ls [nome conta]: Lista todos os lançamentos. Caso "conta" seja especificado, apenas os lançamentos da conta informada serão listados.
+
+lanc-balance <nome conta>: Lista todos os lançamentos da conta informada e calcula seu saldo ao longo do tempo.
+
+lanc-add <conta origem> <conta destino> [valor] [observacao]: Cria um novo lançamento na data corrente, {de acordo com o relógio do sistema}. Ver observações ao final do documento para o formato de "valor". {Caso "valor" seja omitido, assume-se 0.}
+
+lanc-addfull <lançamento modelo id> <data> <origem> <destino> [valor] [observacao]: Cria um novo lançamento especificando todas as opções. 
+
+lanc-rm <id do lançamento>: Remove o lançamento de id "id".
+
+modelo-ls: Lista os modelos disponíveis.
+
+modelo-add <nome modelo> [observação]: Cria um novo modelo.
+
+modelo-simulate <modelo> <data base> [<modelo 2> <data base modelo 2> ...]: Simula como ficam os modelo informados caso seus lançamentos sejam realizados.
+
+modelo-rm <nome modelo>: remove um modelo (não implementado...).
+
+modelo-clone <modelo base> <novo modelo>: Usa o "modelo base" para gerar um novo modelo chamado "novo modelo" e copia seus lançamentos.
+
+modelo-analyse <nome modelo> <data base> [--realize]: Verifica quais lançamentos do modelo foram realizados. Por padrão, apenas uma simulação é feita, caso --realize seja especificado os lançamentos propostos pela simulação serão lançados no banco de dados.
+
+lancmodelo-ls <nome modelo>: Lista os lançamentos do modelo informado.
+
+lancmodelo-add <modelo> <dia vencimento> <origem> <destino> <valor> [observacao]: Cria um novo lançamento no modelo informado.
+
+lancmodelo-rm <id>: Remove o lancamento modelo com o id informado. O id de um lançamento modelo pode ser obtido na lista.
+
+extrato-ls <conta>: Lista os extratos da conta informada.
+
+extrato-import <conta> <arquivo>: Importa os lançamentos do arquivo informado para a conta informada.
+
+extrato-analyse <conta> [--realize] [--refs]: Sincroniza os lançamentos em extrato para a conta informada. Caso --realize seja informado os lançamentos sugeridos são persistidos. {--refs permite mapear uma referência no extrato para uma conta. Por exemplo, no extrato o lançamento embratel_21 pode ser mapeado para uma conta chamada embratel com: --refs embratel_21 embratel. Podem ser passada uma quantidade arbitrária de parâmetros após --refs, desde que esse número seja par.
+
+ctaref-ls <conta> <-bco | --banco> <conta>: Lista todas as referências automáticas para a conta e banco informados. Cada referência possui uma string de regex que é utilizada com a referência do extrato para determinar para qual conta a linha do extrato deve ser lançada.
+
+ctaref-add <conta> <-bco | --banco> <conta> <-ref> <regex>: Cria uma nova referência automática para a conta e banco informados, com a string de regex informada.
+
+help <commando>: mostra um texto de ajuda para o comando informado. O comando pode ser qualquer um dos listados acima.
+
+Observações:
+
+- Informações {entre colchetes} não foram testadas.
+- Datas devem ser informadas no formato yyyy-mmm-dd, {por exemplo: 21-abr-2012 -- Não sei o formato deve ser em inglês ou português}
+- Para valores númericos 

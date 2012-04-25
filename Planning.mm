@@ -387,8 +387,7 @@
       Funcionalidades de listar lan&#231;amentos, adicionar lan&#231;amento e adicionar lan&#231;amento full vers&#227;o web.
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 </node>
 <node CREATED="1333071205248" ID="ID_1946151865" MODIFIED="1333071219555" TEXT="Add Lancto - Web"/>
 <node CREATED="1333071219994" ID="ID_1186624475" MODIFIED="1333071226059" TEXT="Add Lancto Full - Web"/>

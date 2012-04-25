@@ -9,7 +9,7 @@ public class HelpSwitches {
 		return entity;
 	}
 
-	@CommandLineSwitch(index=1, param="EntityParser.parseEnum")
+	@CommandLineSwitch(index=1, parser = "EntityParser.parseComplexEnum")
 	public void setEntity(Command entity) {
 		this.entity = entity;
 	}
