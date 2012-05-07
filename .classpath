@@ -13,7 +13,12 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/eclipselink-2.2.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/eclipselink-javax.persistence-2.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/eclipselink-jpa-modelgen-2.2.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/postgresql-8.4-701.jdbc4.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/TheObserver.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/Utils.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
