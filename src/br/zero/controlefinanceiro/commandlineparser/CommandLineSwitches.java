@@ -115,6 +115,12 @@ public class CommandLineSwitches {
 		this.contaListSwitches = contaListSwitches;
 	}
 
+	// TODO Fazer método setter de ContaSetBalanceSwitches
+	
+	public ContaSetBalanceSwitches getContaSetBalanceSwitches() {
+		return null;
+	}
+
 	public LancamentoListSwitches getLancamentoListSwitches() {
 		return lancamentoListSwitches;
 	}

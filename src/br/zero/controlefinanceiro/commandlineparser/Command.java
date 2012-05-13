@@ -15,6 +15,9 @@ public enum Command {
 	@CommandLineSwitchParam(name = "conta-rm")
 	CONTA_REMOVE,
 
+	@CommandLineSwitchParam(name = "conta-setbalance")
+	CONTA_SETBALANCE,
+	
 	@CommandLineSwitchParam(name="lanc-ls")
 	LANCAMENTO_LIST,
 	

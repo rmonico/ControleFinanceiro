@@ -67,7 +67,7 @@ public class ContaSwitchesTests extends CustomParserTests {
 	public void doContaAddTest3() throws ParserException {
 		doContaLoad(new String[] { "conta-add", "nova conta", "--contabilizar" }, Command.CONTA_ADD);
 
-		assertNotNull(switches.getContaAddSwitches());
+		assertNotNull("switches", switches.getContaAddSwitches());
 
 		ContaAddSwitches contaAddSwitches = switches.getContaAddSwitches();
 			
@@ -87,7 +87,14 @@ public class ContaSwitchesTests extends CustomParserTests {
 	}
 	
 	@Test
-	public void doContaSetBalanceTest() {
+	public void doContaSetBalanceTest() throws ParserException {
 		doContaLoad(new String[] { "conta-setbalance", "nome conta", "123.45" }, Command.CONTA_SETBALANCE);
+		
+		assertNotNull("switches", switches.getContaSetBalanceSwitches());
+		
+		ContaSetBalanceSwitches contaSetBalanceSwitches = switches.getContaSetBalanceSwitches();
+		
+		assertEquals("Nome", "nome conta", contaSetBalanceSwitches.getContaNome());
+		assertEquals("Novo Saldo", (Double) 123.45, contaSetBalanceSwitches.getNovoSaldo());
 	}
 }
