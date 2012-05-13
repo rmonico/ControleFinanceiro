@@ -118,7 +118,7 @@ public class CommandLineSwitches {
 	// TODO Fazer método setter de ContaSetBalanceSwitches
 	
 	public ContaSetBalanceSwitches getContaSetBalanceSwitches() {
-		return null;
+		return new ContaSetBalanceSwitches();
 	}
 
 	public LancamentoListSwitches getLancamentoListSwitches() {

@@ -7,7 +7,8 @@ public class ContaSetBalanceSwitches {
 	private Double novoSaldo;
 
 	public String getContaNome() {
-		return contaNome;
+//		return contaNome;
+		return "nome conta";
 	}
 
 	@CommandLineSwitch(index = 1)
@@ -16,7 +17,8 @@ public class ContaSetBalanceSwitches {
 	}
 
 	public Double getNovoSaldo() {
-		return novoSaldo;
+//		return novoSaldo;
+		return 123.45;
 	}
 
 	@CommandLineSwitch(index = 2)
