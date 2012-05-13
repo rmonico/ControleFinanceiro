@@ -393,6 +393,22 @@
 <node CREATED="1333071219994" ID="ID_1186624475" MODIFIED="1333071226059" TEXT="Add Lancto Full - Web"/>
 <node CREATED="1333071226361" ID="ID_1838279097" MODIFIED="1333071231724" TEXT="Lista Lancto - Web"/>
 <node CREATED="1333071249148" ID="ID_1702043462" MODIFIED="1333071252759" TEXT="Migrar para web"/>
+<node CREATED="1336942693067" ID="ID_70465307" MODIFIED="1336943164242" TEXT="conta-setbalance">
+<richcontent TYPE="NOTE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      Criar uma a&#231;&#227;o para alterar o balan&#231;o de uma conta em determinada data. Dever&#225; ser adicionada uma flag de balan&#231;o na tabela de conta e uma quantidade arbitr&#225;ria de contas poder&#227;o ter a flag de balan&#231;o ativa.
+    </p>
+    <p>
+      Durante o c&#225;lculo dos saldos, realizado pelo Contabilizador, o valor de saldo j&#225; calculado dever&#225; ser desconsiderado caso a conta de origem ou destino esteja marcada com balan&#231;o. O novo valor de saldo da outra conta do lan&#231;amento dever&#225; ser, dai por diante, o do lan&#231;amento em quest&#227;o.
+    </p>
+  </body>
+</html>
+</richcontent>
+</node>
 </node>
 <node CREATED="1326277497865" ID="ID_1202848612" MODIFIED="1329007565760" POSITION="right" TEXT="Milestone 6">
 <node CREATED="1326277501404" ID="ID_133246500" MODIFIED="1326277626870" TEXT="Objetivos">
@@ -468,7 +484,7 @@
 </html></richcontent>
 </node>
 </node>
-<node CREATED="1324252493893" FOLDED="true" ID="ID_1726085239" MODIFIED="1329089896421" POSITION="right" TEXT="Melhorias">
+<node CREATED="1324252493893" ID="ID_1726085239" MODIFIED="1336942643532" POSITION="right" TEXT="Melhorias">
 <node CREATED="1324252581143" ID="ID_938160062" MODIFIED="1324252601867" TEXT="extrato-analyse: id do lancto"/>
 <node CREATED="1324252602809" ID="ID_723758160" MODIFIED="1324252628136" TEXT="extrato-analyse: a&#xe7;&#xe3;o sync"/>
 <node CREATED="1324252693904" ID="ID_1351041782" MODIFIED="1324254926952" TEXT="extrato-sync: balan&#xe7;os">
@@ -602,7 +618,7 @@
 </html></richcontent>
 </node>
 </node>
-<node CREATED="1322272082887" FOLDED="true" ID="ID_1707116991" MODIFIED="1329089887713" POSITION="right" TEXT="Funcionalidades futuras">
+<node CREATED="1322272082887" ID="ID_1707116991" MODIFIED="1336942618699" POSITION="right" TEXT="Funcionalidades futuras">
 <richcontent TYPE="NOTE"><html>
   <head>
     
@@ -654,7 +670,7 @@
 </html></richcontent>
 </node>
 </node>
-<node CREATED="1322272446879" FOLDED="true" ID="ID_1717968237" MODIFIED="1329089886961" POSITION="right" TEXT="Funcionalidades n&#xe3;o-essenciais">
+<node CREATED="1322272446879" ID="ID_1717968237" MODIFIED="1336942628225" POSITION="right" TEXT="Funcionalidades n&#xe3;o-essenciais">
 <node CREATED="1322272462078" ID="ID_1625700189" MODIFIED="1322272469429" TEXT="help">
 <richcontent TYPE="NOTE"><html>
   <head>

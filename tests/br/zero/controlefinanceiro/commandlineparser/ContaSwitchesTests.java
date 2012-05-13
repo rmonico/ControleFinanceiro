@@ -85,4 +85,9 @@ public class ContaSwitchesTests extends CustomParserTests {
 			
 		assertEquals("Nome da conta a ser removida", "nome conta", contaRemoveSwitches.getContaNome());
 	}
+	
+	@Test
+	public void doContaSetBalanceTest() {
+		doContaLoad(new String[] { "conta-setbalance", "nome conta", "123.45" }, Command.CONTA_SETBALANCE);
+	}
 }
