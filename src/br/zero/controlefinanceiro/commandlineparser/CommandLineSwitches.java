@@ -12,6 +12,7 @@ public class CommandLineSwitches {
 	private ContaAddSwitches contaAddSwitches;
 	private ContaRemoveSwitches contaRemoveSwitches;
 	private ContaListSwitches contaListSwitches;
+	private ContaSetBalanceSwitches contaSetBalanceSwitches;
 
 	private LancamentoListSwitches lancamentoListSwitches;
 	private LancamentoBalanceSwitches lancamentoBalanceSwitches;
@@ -46,6 +47,7 @@ public class CommandLineSwitches {
 			@SubCommandLine(value = "CONTA_LIST", subCommandLineClass = ContaListSwitches.class, propertyName = "setContaListSwitches"),
 			@SubCommandLine(value = "CONTA_ADD", subCommandLineClass = ContaAddSwitches.class, propertyName = "setContaAddSwitches"),
 			@SubCommandLine(value = "CONTA_REMOVE", subCommandLineClass = ContaRemoveSwitches.class, propertyName = "setContaRemoveSwitches"),
+			@SubCommandLine(value = "CONTA_SETBALANCE", subCommandLineClass = ContaSetBalanceSwitches.class, propertyName = "setContaSetBalanceSwitches"),
 			@SubCommandLine(value = "LANCAMENTO_LIST", subCommandLineClass = LancamentoListSwitches.class, propertyName = "setLancamentoListSwitches"),
 			@SubCommandLine(value = "LANCAMENTO_BALANCE", subCommandLineClass = LancamentoBalanceSwitches.class, propertyName = "setLancamentoBalanceSwitches"),
 			@SubCommandLine(value = "LANCAMENTO_ADD", subCommandLineClass = LancamentoAddSwitches.class, propertyName = "setLancamentoAddSwitches"),
@@ -115,10 +117,12 @@ public class CommandLineSwitches {
 		this.contaListSwitches = contaListSwitches;
 	}
 
-	// TODO Fazer método setter de ContaSetBalanceSwitches
+	public void setContaSetBalanceSwitches(ContaSetBalanceSwitches contaSetBalanceSwitches) {
+		this.contaSetBalanceSwitches = contaSetBalanceSwitches;
+	}
 	
 	public ContaSetBalanceSwitches getContaSetBalanceSwitches() {
-		return new ContaSetBalanceSwitches();
+		return contaSetBalanceSwitches;
 	}
 
 	public LancamentoListSwitches getLancamentoListSwitches() {

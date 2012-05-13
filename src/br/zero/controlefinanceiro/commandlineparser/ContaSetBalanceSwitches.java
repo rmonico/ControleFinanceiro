@@ -7,8 +7,7 @@ public class ContaSetBalanceSwitches {
 	private Double novoSaldo;
 
 	public String getContaNome() {
-//		return contaNome;
-		return "nome conta";
+		return contaNome;
 	}
 
 	@CommandLineSwitch(index = 1)
@@ -17,11 +16,10 @@ public class ContaSetBalanceSwitches {
 	}
 
 	public Double getNovoSaldo() {
-//		return novoSaldo;
-		return 123.45;
+		return novoSaldo;
 	}
 
-	@CommandLineSwitch(index = 2)
+	@CommandLineSwitch(index = 2, parser="PrimitiveParsers.parseDouble")
 	public void setNovoSaldo(Double novoSaldo) {
 		this.novoSaldo = novoSaldo;
 	}
