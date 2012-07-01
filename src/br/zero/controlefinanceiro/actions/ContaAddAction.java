@@ -7,7 +7,7 @@ import br.zero.controlefinanceiro.utils.ControleFinanceiroException;
 import br.zero.tinycontroller.Action;
 
 
-public class ContaAddAction implements Action {
+public class ContaAddAction implements Action<ContaAddSwitches, Object> {
 
 	private class ContaAddException extends ControleFinanceiroException {
 
@@ -25,7 +25,7 @@ public class ContaAddAction implements Action {
 	private ContaAddSwitches switches;
 
 	@Override
-	public void run(Object param) throws ContaAddException {
+	public Object run(ContaAddSwitches param) throws ContaAddException {
 		
 		switches = checkParamValid(param);
 		
@@ -39,11 +39,13 @@ public class ContaAddAction implements Action {
 		
 		contaDAO.inserir(conta);
 		
-		System.out.println();
+		return null;
 		
-		System.out.println("-- Conta adicionada --");
-		
-		System.out.println(conta);
+//		System.out.println();
+//		
+//		System.out.println("-- Conta adicionada --");
+//		
+//		System.out.println(conta);
 	}
 
 	private ContaAddSwitches checkParamValid(Object param) throws ContaAddException {
