@@ -11,6 +11,8 @@ import br.zero.controlefinanceiro.model.LancamentoDAO;
 import br.zero.controlefinanceiro.utils.Contabilizador;
 import br.zero.controlefinanceiro.utils.LancamentoContabilizavel;
 import br.zero.controlefinanceiro.utils.Packer;
+import br.zero.controlefinanceiro.viewer.formatters.ContaFormatter;
+import br.zero.controlefinanceiro.viewer.formatters.MoneyFormatter;
 import br.zero.observer.DateFormatter;
 import br.zero.observer.Document;
 import br.zero.observer.Link;
@@ -28,7 +30,6 @@ public class LancamentoListDocument extends Document {
 			updateLinks();
 		}
 
-		private Link linkInserir = new Link("lanc-add", "Inserir");
 		private Link linkAlterar = new Link("lanc-edit", "Alterar");
 		private Link linkExcluir = new Link("lanc-rm", "Remover");
 
@@ -38,7 +39,6 @@ public class LancamentoListDocument extends Document {
 		}
 
 		private void updateLinks() {
-			linkInserir.getParams().put("id", getId());
 			linkAlterar.getParams().put("id", getId());
 			linkExcluir.getParams().put("id", getId());
 		}
@@ -53,27 +53,27 @@ public class LancamentoListDocument extends Document {
 			return lancamento.getN();
 		}
 
-		@TableColumn(title = "Origem", index = 3)
+		@TableColumn(title = "Origem", index = 3, formatterClass = ContaFormatter.class)
 		public Conta getContaOrigem() {
 			return lancamento.getContaOrigem();
 		}
 
-		@TableColumn(title = "Saldo", index = 4)
+		@TableColumn(title = "Saldo", index = 4, formatterClass = MoneyFormatter.class)
 		public Double getSaldoOrigem() {
 			return lancamento.getSaldoOrigem();
 		}
 
-		@TableColumn(title = "Destino", index = 5)
+		@TableColumn(title = "Destino", index = 5, formatterClass = ContaFormatter.class)
 		public Conta getContaDestino() {
 			return lancamento.getContaDestino();
 		}
 
-		@TableColumn(title = "Saldo", index = 6)
+		@TableColumn(title = "Saldo", index = 6, formatterClass = MoneyFormatter.class)
 		public Double getSaldoDestino() {
 			return lancamento.getSaldoDestino();
 		}
 
-		@TableColumn(title = "Valor", index = 7)
+		@TableColumn(title = "Valor", index = 7, formatterClass = MoneyFormatter.class)
 		public Double getValor() {
 			return lancamento.getValor();
 		}
@@ -83,17 +83,12 @@ public class LancamentoListDocument extends Document {
 			return lancamento.getObservacao();
 		}
 
-		@TableColumn(title = "Inserir", index = 9)
-		public Link getLinkInserir() {
-			return linkInserir;
-		}
-
-		@TableColumn(title = "Alterar", index = 10)
+		@TableColumn(title = "Inserir", linkHandler = "lanc-add", index = 9)
 		public Link getLinkAlterar() {
 			return linkAlterar;
 		}
 
-		@TableColumn(title = "Excluir", index = 11)
+		@TableColumn(title = "Atualizar", linkHandler = "lanc-ls", index = 10)
 		public Link getLinkExcluir() {
 			return linkExcluir;
 		}
@@ -107,12 +102,12 @@ public class LancamentoListDocument extends Document {
 			this.entry = entry;
 		}
 
-		@TableColumn(title = "Conta", index = 0)
+		@TableColumn(title = "Conta", index = 0, formatterClass = ContaFormatter.class)
 		public Conta getConta() {
 			return entry.getKey();
 		}
 
-		@TableColumn(title = "Saldo", index = 1)
+		@TableColumn(title = "Saldo", index = 1, formatterClass = MoneyFormatter.class)
 		public Double getSaldo() {
 			return entry.getValue();
 		}
@@ -136,6 +131,13 @@ public class LancamentoListDocument extends Document {
 		contabilizador.contabilizar();
 
 		setTitle("Lista de Lançamentos");
+		
+		// TODO Depois mexer no renderizador para criar os links quando tiver o handler
+		Link lancamentoAddLink = new Link("lanc-add", "Inserir");
+		Link lancamentoAtualizarLink = new Link("lanc-ls", "Atualizar");
+		
+		addElement(lancamentoAddLink);
+		addElement(lancamentoAtualizarLink);
 
 		Table<LancamentoLine> table = new Table<LancamentoLine>(LancamentoLine.class);
 
