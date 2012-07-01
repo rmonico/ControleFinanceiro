@@ -8,6 +8,7 @@ import br.zero.controlefinanceiro.actions.ContaListAction;
 import br.zero.controlefinanceiro.actions.ContaReferenciaAddAction;
 import br.zero.controlefinanceiro.actions.ContaReferenciaListAction;
 import br.zero.controlefinanceiro.actions.ContaRemoveAction;
+import br.zero.controlefinanceiro.actions.ContaSetBalanceAction;
 import br.zero.controlefinanceiro.actions.ExtratoAnalyseAction;
 import br.zero.controlefinanceiro.actions.ExtratoImportAction;
 import br.zero.controlefinanceiro.actions.ExtratoListAction;
@@ -69,6 +70,7 @@ public class Main {
 		controller.registerAction(ContaListAction.class, switches.getContaListSwitches(), Command.CONTA_LIST);
 		controller.registerAction(ContaAddAction.class, switches.getContaAddSwitches(), Command.CONTA_ADD);
 		controller.registerAction(ContaRemoveAction.class, switches.getContaRemoveSwitches(), Command.CONTA_REMOVE);
+		controller.registerAction(ContaSetBalanceAction.class, switches.getContaSetBalanceSwitches(), Command.CONTA_SETBALANCE);
 
 		controller.registerAction(LancamentoListAction.class, switches.getLancamentoListSwitches(), Command.LANCAMENTO_LIST);
 		controller.registerAction(LancamentoBalanceAction.class, switches.getLancamentoBalanceSwitches(), Command.LANCAMENTO_BALANCE);
