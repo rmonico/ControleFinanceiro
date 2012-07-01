@@ -22,6 +22,10 @@ public class ExtratoParsers {
 		registerExtratoParser("itau", ExtratoParsers.ITAU_EXTRATO_PARSER);
 		registerExtratoParser("santander", ExtratoParsers.SANTANDER_EXTRATO_PARSER);
 	}
+	
+	public static boolean isParsersRegistered() {
+		return !extratoParsers.isEmpty();
+	}
 
 	private static Map<String, ExtratoLineParser> extratoParsers = new HashMap<String, ExtratoLineParser>();
 
