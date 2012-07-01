@@ -1,0 +1,15 @@
+ok Melhoria da aparência do lanc-ls web
+-  lanc-add web
+  -  Precisa continuar fazendo o Field, definir como ele tem que funcionar.
+  -  Será necessário ter um outro documento que apenas lançará a informação obtida no primeiro documento para a web, tem que estudar também como a informação gerada no primeiro documento será transferida através do submit para o segundo.
+-  lanc-setbalance na linha de comando
+  ok Parse da linha de comando.
+  -  Depois: Criar a flag na conta para indicar que é de conferência
+  -  Mexer no Contabilizador para quando encontrar a flag de conferência ativa em um lançamento, desconsidera o saldo já calculado para a outra conta.
+  -  Colocar setbalance em produção
+    -  Arrumar os lançamentos para conta de conferência, olhar eles um a um (há apenas 24 até agora)
+  -  Terminar a ação de setbalance
+-  Melhoria
+  -  Estudar a utilização de um framework de controller como o django ou o jsf
+  -  Estudar como aplicar o Maven neste projeto
+    -  Precisa ter uma maneira de gerar uma versão com os projetos do Utils e do TheObserver
