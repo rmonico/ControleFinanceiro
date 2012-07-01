@@ -10,8 +10,12 @@ import br.zero.textgrid.TextGridException;
 import br.zero.textgrid.TextGridFormattedColumn;
 import br.zero.tinycontroller.Action;
 
-public class ContaListAction implements Action {
+public class ContaListAction implements Action<Object, ContaListAction.ContaListReturn> {
 
+	public static class ContaListReturn {
+		
+	}
+	
 	private TextGrid createGrid() {
 		TextGrid grid = new TextGrid();
 
@@ -27,7 +31,7 @@ public class ContaListAction implements Action {
 	}
 
 	@Override
-	public void run(Object param) throws TextGridException {
+	public ContaListReturn run(Object param) throws TextGridException {
 		ContaDAO dao = new ContaDAO();
 
 		List<Conta> contaList = dao.listarTodos();
@@ -37,5 +41,7 @@ public class ContaListAction implements Action {
 		grid.setValues(contaList);
 
 		grid.show();
+		
+		return null;
 	}
 }
