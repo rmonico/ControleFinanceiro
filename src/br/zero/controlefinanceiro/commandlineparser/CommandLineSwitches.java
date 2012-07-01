@@ -6,6 +6,8 @@ import br.zero.commandlineparser.SubCommandLine;
 public class CommandLineSwitches {
 
 	private Command command;
+	
+	private Object subCommandSwitches;
 
 	private BackupSwitches backupSwitches;
 
@@ -79,6 +81,7 @@ public class CommandLineSwitches {
 
 	public void setBackupSwitches(BackupSwitches value) {
 		backupSwitches = value;
+		subCommandSwitches = value;
 	}
 
 	public BackupSwitches getBackupSwitches() {
@@ -87,6 +90,7 @@ public class CommandLineSwitches {
 
 	public void setHelpSwitches(HelpSwitches value) {
 		helpSwitches = value;
+		subCommandSwitches = value;
 	}
 
 	public HelpSwitches getHelpSwitches() {
@@ -97,28 +101,32 @@ public class CommandLineSwitches {
 		return contaAddSwitches;
 	}
 
-	public void setContaAddSwitches(ContaAddSwitches contaAddSwitches) {
-		this.contaAddSwitches = contaAddSwitches;
+	public void setContaAddSwitches(ContaAddSwitches value) {
+		this.contaAddSwitches = value;
+		subCommandSwitches = value;
 	}
 
 	public ContaRemoveSwitches getContaRemoveSwitches() {
 		return contaRemoveSwitches;
 	}
 
-	public void setContaRemoveSwitches(ContaRemoveSwitches contaRemoveSwitches) {
-		this.contaRemoveSwitches = contaRemoveSwitches;
+	public void setContaRemoveSwitches(ContaRemoveSwitches value) {
+		this.contaRemoveSwitches = value;
+		subCommandSwitches = value;
 	}
 
 	public ContaListSwitches getContaListSwitches() {
 		return contaListSwitches;
 	}
 
-	public void setContaListSwitches(ContaListSwitches contaListSwitches) {
-		this.contaListSwitches = contaListSwitches;
+	public void setContaListSwitches(ContaListSwitches value) {
+		this.contaListSwitches = value;
+		subCommandSwitches = value;
 	}
 
-	public void setContaSetBalanceSwitches(ContaSetBalanceSwitches contaSetBalanceSwitches) {
-		this.contaSetBalanceSwitches = contaSetBalanceSwitches;
+	public void setContaSetBalanceSwitches(ContaSetBalanceSwitches value) {
+		this.contaSetBalanceSwitches = value;
+		subCommandSwitches = value;
 	}
 	
 	public ContaSetBalanceSwitches getContaSetBalanceSwitches() {
@@ -129,132 +137,149 @@ public class CommandLineSwitches {
 		return lancamentoListSwitches;
 	}
 
-	public void setLancamentoListSwitches(LancamentoListSwitches lancamentoListSwitches) {
-		this.lancamentoListSwitches = lancamentoListSwitches;
+	public void setLancamentoListSwitches(LancamentoListSwitches value) {
+		this.lancamentoListSwitches = value;
+		subCommandSwitches = value;
 	}
 
 	public LancamentoBalanceSwitches getLancamentoBalanceSwitches() {
 		return lancamentoBalanceSwitches;
 	}
 
-	public void setLancamentoBalanceSwitches(LancamentoBalanceSwitches lancamentoBalanceSwitches) {
-		this.lancamentoBalanceSwitches = lancamentoBalanceSwitches;
+	public void setLancamentoBalanceSwitches(LancamentoBalanceSwitches value) {
+		this.lancamentoBalanceSwitches = value;
+		subCommandSwitches = value;
 	}
 
 	public LancamentoAddSwitches getLancamentoAddSwitches() {
 		return lancamentoAddSwitches;
 	}
 
-	public void setLancamentoAddSwitches(LancamentoAddSwitches lancamentoAddSwitches) {
-		this.lancamentoAddSwitches = lancamentoAddSwitches;
+	public void setLancamentoAddSwitches(LancamentoAddSwitches value) {
+		this.lancamentoAddSwitches = value;
+		subCommandSwitches = value;
 	}
 
 	public LancamentoAddFullSwitches getLancamentoAddFullSwitches() {
 		return lancamentoAddFullSwitches;
 	}
 
-	public void setLancamentoAddFullSwitches(LancamentoAddFullSwitches lancamentoAddFullSwitches) {
-		this.lancamentoAddFullSwitches = lancamentoAddFullSwitches;
+	public void setLancamentoAddFullSwitches(LancamentoAddFullSwitches value) {
+		this.lancamentoAddFullSwitches = value;
+		subCommandSwitches = value;
 	}
 
 	public LancamentoRemoveSwitches getLancamentoRemoveSwitches() {
 		return lancamentoRemoveSwitches;
 	}
 
-	public void setLancamentoRemoveSwitches(LancamentoRemoveSwitches lancamentoRemoveSwitches) {
-		this.lancamentoRemoveSwitches = lancamentoRemoveSwitches;
+	public void setLancamentoRemoveSwitches(LancamentoRemoveSwitches value) {
+		this.lancamentoRemoveSwitches = value;
+		subCommandSwitches = value;
 	}
 
 	public ModeloAddSwitches getModeloAddSwitches() {
 		return modeloAddSwitches;
 	}
 
-	public void setModeloAddSwitches(ModeloAddSwitches modeloAddSwitches) {
-		this.modeloAddSwitches = modeloAddSwitches;
+	public void setModeloAddSwitches(ModeloAddSwitches value) {
+		this.modeloAddSwitches = value;
+		subCommandSwitches = value;
 	}
 
 	public ModeloSimulateSwitches getModeloSimulateSwitches() {
 		return modeloSimulateSwitches;
 	}
 
-	public void setModeloSimulateSwitches(ModeloSimulateSwitches modeloSimulateSwitches) {
-		this.modeloSimulateSwitches = modeloSimulateSwitches;
+	public void setModeloSimulateSwitches(ModeloSimulateSwitches value) {
+		this.modeloSimulateSwitches = value;
+		subCommandSwitches = value;
 	}
 
 	public ModeloRemoveSwitches getModeloRemoveSwitches() {
 		return modeloRemoveSwitches;
 	}
 
-	public void setModeloRemoveSwitches(ModeloRemoveSwitches modeloRemoveSwitches) {
-		this.modeloRemoveSwitches = modeloRemoveSwitches;
+	public void setModeloRemoveSwitches(ModeloRemoveSwitches value) {
+		this.modeloRemoveSwitches = value;
+		subCommandSwitches = value;
 	}
 
 	public ModeloCloneSwitches getModeloCloneSwitches() {
 		return modeloCloneSwitches;
 	}
 
-	public void setModeloCloneSwitches(ModeloCloneSwitches modeloCloneSwitches) {
-		this.modeloCloneSwitches = modeloCloneSwitches;
+	public void setModeloCloneSwitches(ModeloCloneSwitches value) {
+		this.modeloCloneSwitches = value;
+		subCommandSwitches = value;
 	}
 
 	public ModeloAnalyseSwitches getModeloAnalyseSwitches() {
 		return modeloAnalyseSwitches;
 	}
 
-	public void setModeloAnalyseSwitches(ModeloAnalyseSwitches modeloAnalyseSwitches) {
-		this.modeloAnalyseSwitches = modeloAnalyseSwitches;
+	public void setModeloAnalyseSwitches(ModeloAnalyseSwitches value) {
+		this.modeloAnalyseSwitches = value;
+		subCommandSwitches = value;
 	}
 
 	public LancamentoModeloListSwitches getLancamentoModeloListSwitches() {
 		return lancamentoModeloListSwitches;
 	}
 
-	public void setLancamentoModeloListSwitches(LancamentoModeloListSwitches lancamentoModeloListSwitches) {
-		this.lancamentoModeloListSwitches = lancamentoModeloListSwitches;
+	public void setLancamentoModeloListSwitches(LancamentoModeloListSwitches value) {
+		this.lancamentoModeloListSwitches = value;
+		subCommandSwitches = value;
 	}
 
 	public LancamentoModeloAddSwitches getLancamentoModeloAddSwitches() {
 		return lancamentoModeloAddSwitches;
 	}
 
-	public void setLancamentoModeloAddSwitches(LancamentoModeloAddSwitches lancamentoModeloAddSwitches) {
-		this.lancamentoModeloAddSwitches = lancamentoModeloAddSwitches;
+	public void setLancamentoModeloAddSwitches(LancamentoModeloAddSwitches value) {
+		this.lancamentoModeloAddSwitches = value;
+		subCommandSwitches = value;
 	}
 
 	public LancamentoModeloRemoveSwitches getLancamentoModeloRemoveSwitches() {
 		return lancamentoModeloRemoveSwitches;
 	}
 
-	public void setLancamentoModeloRemoveSwitches(LancamentoModeloRemoveSwitches lancamentoModeloRemoveSwitches) {
-		this.lancamentoModeloRemoveSwitches = lancamentoModeloRemoveSwitches;
+	public void setLancamentoModeloRemoveSwitches(LancamentoModeloRemoveSwitches value) {
+		this.lancamentoModeloRemoveSwitches = value;
+		subCommandSwitches = value;
 	}
 
 	public ExtratoListSwitches getExtratoListSwitches() {
 		return extratoListSwitches;
 	}
 
-	public void setExtratoListSwitches(ExtratoListSwitches extratoListSwitches) {
-		this.extratoListSwitches = extratoListSwitches;
+	public void setExtratoListSwitches(ExtratoListSwitches value) {
+		this.extratoListSwitches = value;
+		subCommandSwitches = value;
 	}
 
 	public ExtratoImportSwitches getExtratoImportSwitches() {
 		return extratoImportSwitches;
 	}
 
-	public void setExtratoImportSwitches(ExtratoImportSwitches extratoImportSwitches) {
-		this.extratoImportSwitches = extratoImportSwitches;
+	public void setExtratoImportSwitches(ExtratoImportSwitches value) {
+		this.extratoImportSwitches = value;
+		subCommandSwitches = value;
 	}
 
 	public ExtratoAnalyseSwitches getExtratoAnalyseSwitches() {
 		return extratoAnalyseSwitches;
 	}
 
-	public void setExtratoAnalyseSwitches(ExtratoAnalyseSwitches extratoAnalyseSwitches) {
-		this.extratoAnalyseSwitches = extratoAnalyseSwitches;
+	public void setExtratoAnalyseSwitches(ExtratoAnalyseSwitches value) {
+		this.extratoAnalyseSwitches = value;
+		subCommandSwitches = value;
 	}
 
-	public void setContaReferenciaListSwitches(ContaReferenciaListSwitches contaReferenciaListSwitches) {
-		this.contaReferenciaListSwitches = contaReferenciaListSwitches;
+	public void setContaReferenciaListSwitches(ContaReferenciaListSwitches value) {
+		this.contaReferenciaListSwitches = value;
+		subCommandSwitches = value;
 	}
 
 	public ContaReferenciaListSwitches getContaReferenciaListSwitches() {
@@ -265,8 +290,13 @@ public class CommandLineSwitches {
 		return contaReferenciaAddSwitches;
 	}
 
-	public void setContaReferenciaAddSwitches(ContaReferenciaAddSwitches contaReferenciaAddSwitches) {
-		this.contaReferenciaAddSwitches = contaReferenciaAddSwitches;
+	public void setContaReferenciaAddSwitches(ContaReferenciaAddSwitches value) {
+		this.contaReferenciaAddSwitches = value;
+		subCommandSwitches = value;
+	}
+	
+	public Object getSubCommandSwitches() {
+		return subCommandSwitches;
 	}
 
 }
