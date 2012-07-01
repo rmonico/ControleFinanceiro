@@ -6,11 +6,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import br.zero.controlefinanceiro.model.Conta;
-import br.zero.controlefinanceiro.model.Lancamento;
-import br.zero.controlefinanceiro.model.LancamentoDAO;
-import br.zero.controlefinanceiro.utils.Contabilizador;
 import br.zero.controlefinanceiro.utils.LancamentoContabilizavel;
-import br.zero.controlefinanceiro.utils.Packer;
 import br.zero.controlefinanceiro.viewer.formatters.ContaFormatter;
 import br.zero.controlefinanceiro.viewer.formatters.MoneyFormatter;
 import br.zero.observer.DateFormatter;
@@ -21,6 +17,25 @@ import br.zero.observer.Table;
 import br.zero.observer.TableColumn;
 
 public class LancamentoListDocument extends Document {
+
+	private List<LancamentoContabilizavel> lancamentoContabilizavelList;
+	private Map<Conta, Double> saldos;
+	
+	public List<LancamentoContabilizavel> getLancamentoContabilizavelList() {
+		return lancamentoContabilizavelList;
+	}
+
+	public void setLancamentoContabilizavelList(List<LancamentoContabilizavel> lancamentoContabilizavelList) {
+		this.lancamentoContabilizavelList = lancamentoContabilizavelList;
+	}
+
+	public Map<Conta, Double> getSaldos() {
+		return saldos;
+	}
+
+	public void setSaldos(Map<Conta, Double> saldos) {
+		this.saldos = saldos;
+	}
 
 	public final class LancamentoLine {
 		private LancamentoContabilizavel lancamento;
@@ -116,20 +131,6 @@ public class LancamentoListDocument extends Document {
 
 	@Override
 	public void create() throws ObserverException {
-		LancamentoDAO dao = new LancamentoDAO();
-
-		List<Lancamento> lancamentoList = dao.listarTodos();
-
-		Contabilizador contabilizador = new Contabilizador();
-
-		Packer<LancamentoContabilizavel, Lancamento> packager = Packer.LANCAMENTO_LANCAMENTOCONTABILIZAVEL_PACKER;
-
-		List<LancamentoContabilizavel> lancamentoContabilizavelList = contabilizador.packageList(lancamentoList, packager);
-
-		contabilizador.setList(lancamentoContabilizavelList);
-
-		contabilizador.contabilizar();
-
 		setTitle("Lista de Lançamentos");
 		
 		// TODO Depois mexer no renderizador para criar os links quando tiver o handler
@@ -148,8 +149,6 @@ public class LancamentoListDocument extends Document {
 		}
 
 		addElement(table);
-
-		Map<Conta, Double> saldos = contabilizador.getSaldosPorConta();
 
 		Table<SaldoLine> saldoTable = new Table<SaldoLine>(SaldoLine.class);
 
