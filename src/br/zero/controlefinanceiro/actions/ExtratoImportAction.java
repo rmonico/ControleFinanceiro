@@ -17,9 +17,9 @@ import br.zero.controlefinanceiro.model.extrato.ArquivoDAO;
 import br.zero.controlefinanceiro.model.extrato.ExtratoLancamento;
 import br.zero.controlefinanceiro.model.extrato.ExtratoLancamentoDAO;
 import br.zero.controlefinanceiro.utils.ExtratoLineParserException;
-import br.zero.tinycontroller.Action;
+import br.zero.tinycontroller.SetupableAction;
 
-public class ExtratoImportAction implements Action {
+public class ExtratoImportAction implements SetupableAction {
 
 	private ExtratoImportSwitches switches;
 
@@ -40,8 +40,14 @@ public class ExtratoImportAction implements Action {
 
 	}
 
+	public void setupAction() throws Exception {
+		if (!ExtratoParsers.isParsersRegistered()) {
+			ExtratoParsers.registerParsers();
+		}
+	}
+
 	@Override
-	public void run(Object param) throws Exception {
+	public Object run(Object param) throws Exception {
 		switches = checkParamValid(param);
 
 		Conta conta = getConta(switches.getNomeConta());
@@ -54,32 +60,34 @@ public class ExtratoImportAction implements Action {
 		} finally {
 			file.close();
 		}
+		
+		return null;
 	}
 
 	private void doImport(BufferedReader file, Conta conta) throws IOException, ExtratoImportException {
 		String line;
-		
+
 		ExtratoLineParser ep = ExtratoParsers.getParser(conta);
-		
+
 		if (ep == null) {
 			throw new ExtratoImportException("Conta \"" + conta.getNome() + "\" não possui um parser de extrato registrado.");
 		}
-		
+
 		Arquivo arquivo = new Arquivo();
 
 		List<ExtratoLancamento> lancamentoList = new ArrayList<ExtratoLancamento>();
-		
+
 		StringBuilder conteudo = new StringBuilder();
-		
+
 		while ((line = file.readLine()) != null) {
 			conteudo.append(line + "\n");
-			
+
 			try {
 				ep.parse(line);
 			} catch (ExtratoLineParserException e) {
 				System.out.println("[ FAIL ] \"" + line + "\" ==> " + e.getMessage());
 			}
-			
+
 			ExtratoLancamento lancamento = new ExtratoLancamento();
 
 			lancamento.setBanco(conta);
@@ -87,22 +95,20 @@ public class ExtratoImportAction implements Action {
 			lancamento.setArquivo(arquivo);
 
 			lancamentoList.add(lancamento);
-			
-			
+
 			System.out.println("[  OK  ] \"" + line + "\"");
 		}
 
 		arquivo.setConteudo(conteudo.toString());
-		
+
 		persistEverything(arquivo, lancamentoList);
 	}
 
 	private void persistEverything(Arquivo arquivo, List<ExtratoLancamento> lancamentoList) {
 		ArquivoDAO arquivoDAO = new ArquivoDAO();
-		
+
 		arquivoDAO.inserir(arquivo);
 
-		
 		ExtratoLancamentoDAO lancamentoDAO = new ExtratoLancamentoDAO();
 
 		for (ExtratoLancamento el : lancamentoList) {

@@ -28,9 +28,9 @@ import br.zero.textgrid.TextGridColumnAlignment;
 import br.zero.textgrid.TextGridException;
 import br.zero.textgrid.TextGridFormattedColumn;
 import br.zero.textgrid.formatters.ToStringFormatter;
-import br.zero.tinycontroller.Action;
+import br.zero.tinycontroller.SetupableAction;
 
-public class ExtratoAnalyseAction implements Action {
+public class ExtratoAnalyseAction implements SetupableAction {
 
 	public enum StatusLinha {
 		BALANCE("B"), TRANSACTION("T"), DONT_APPLY("-");
@@ -190,7 +190,14 @@ public class ExtratoAnalyseAction implements Action {
 	}
 
 	@Override
-	public void run(Object param) throws ExtratoAnalyseException {
+	public void setupAction() throws Exception {
+		if (!ExtratoParsers.isParsersRegistered()) {
+			ExtratoParsers.registerParsers();
+		}
+	}
+
+	@Override
+	public Object run(Object param) throws ExtratoAnalyseException {
 		switches = checkParamValid(param);
 
 		manualRefList = makeManualRefList();
@@ -205,7 +212,7 @@ public class ExtratoAnalyseAction implements Action {
 			System.out.println();
 			System.out.println("Nenhum item de extrato órfão encontrado para o banco \"" + banco.getNome() + "\".");
 
-			return;
+			return null;
 		}
 
 		TextGrid grid = createGrid();
@@ -232,6 +239,8 @@ public class ExtratoAnalyseAction implements Action {
 		System.out.println("  * : Insert.");
 		System.out.println("  X : Delete.");
 		System.out.println("  ! : Conta não encontrada.");
+
+		return null;
 	}
 
 	private List<InternalManualReference> makeManualRefList() throws ExtratoAnalyseException {
