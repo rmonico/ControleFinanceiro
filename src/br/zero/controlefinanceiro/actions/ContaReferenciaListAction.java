@@ -12,7 +12,7 @@ import br.zero.textgrid.TextGridColumnAlignment;
 import br.zero.textgrid.TextGridFormattedColumn;
 import br.zero.tinycontroller.Action;
 
-public class ContaReferenciaListAction implements Action {
+public class ContaReferenciaListAction implements Action<ContaReferenciaListSwitches, Object> {
 
 	public class ContaReferenciaListException extends Exception {
 
@@ -28,8 +28,8 @@ public class ContaReferenciaListAction implements Action {
 	}
 
 	@Override
-	public void run(Object param) throws Exception {
-		ContaReferenciaListSwitches switches = checkParamValid(param);
+	public Object run(ContaReferenciaListSwitches switches) throws Exception {
+		checkParamValid(switches);
 		
 		ContaDAO contaDAO = new ContaDAO();
 		
@@ -55,7 +55,8 @@ public class ContaReferenciaListAction implements Action {
 		grid.setValues(list);
 
 		grid.show();
-
+		
+		return null;
 	}
 
 	private TextGrid createGrid() {
@@ -71,13 +72,7 @@ public class ContaReferenciaListAction implements Action {
 		return grid;
 	}
 
-	private ContaReferenciaListSwitches checkParamValid(Object param) throws ContaReferenciaListException {
-		if (!(param instanceof ContaReferenciaListSwitches)) {
-			throw new ContaReferenciaListException("Parametro deve ser um ContaReferenciaListSwitches.");
-		}
-		
-		ContaReferenciaListSwitches switches = (ContaReferenciaListSwitches) param;
-		
+	private void checkParamValid(ContaReferenciaListSwitches switches) throws ContaReferenciaListException {
 		if (switches.getNomeConta() ==  null) {
 			throw new ContaReferenciaListException("Conta deve ser informada.");
 		}
@@ -85,8 +80,6 @@ public class ContaReferenciaListAction implements Action {
 		if (switches.getNomeBanco() == null) {
 			throw new ContaReferenciaListException("Banco deve ser informado.");
 		}
-		
-		return switches;
 	}
 
 }

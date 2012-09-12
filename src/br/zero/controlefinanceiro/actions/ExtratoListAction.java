@@ -12,9 +12,7 @@ import br.zero.textgrid.TextGridException;
 import br.zero.textgrid.TextGridFormattedColumn;
 import br.zero.tinycontroller.Action;
 
-public class ExtratoListAction implements Action {
-
-	private ExtratoListSwitches switches;
+public class ExtratoListAction implements Action<ExtratoListSwitches, Object> {
 
 	public class ExtratoListException extends Exception {
 
@@ -29,7 +27,7 @@ public class ExtratoListAction implements Action {
 
 	}
 
-	private TextGrid createGrid() {
+	private TextGrid createGrid(ExtratoListSwitches switches) {
 		TextGrid grid = new TextGrid();
 
 		grid.getData().setHeaderSeparatorChar('=');
@@ -43,32 +41,25 @@ public class ExtratoListAction implements Action {
 	}
 
 	@Override
-	public void run(Object param) throws ExtratoListException, TextGridException {
-		switches = checkParamValid(param);
+	public Object run(ExtratoListSwitches switches) throws ExtratoListException, TextGridException {
+		checkParamValid(switches);
 		
 		ExtratoLancamentoDAO dao = new ExtratoLancamentoDAO();
 
 		List<ExtratoLancamento> extratoList = dao.listarPorConta(switches.getNomeConta());
 
-		TextGrid grid = createGrid();
+		TextGrid grid = createGrid(switches);
 
 		grid.setValues(extratoList);
 
 		grid.show();
-
+		
+		return null;
 	}
 
-	private ExtratoListSwitches checkParamValid(Object param) throws ExtratoListException {
-		if (!(param instanceof ExtratoListSwitches)) {
-			throw new ExtratoListException("Parametro deve ser um ExtratoListSwitches.");
-		}
-		
-		ExtratoListSwitches switches = (ExtratoListSwitches) param;
-		
+	private void checkParamValid(ExtratoListSwitches switches) throws ExtratoListException {
 		if (switches.getNomeConta() ==  null) {
 			throw new ExtratoListException("Nome da conta deve ser informada.");
 		}
-		
-		return switches;
 	}
 }

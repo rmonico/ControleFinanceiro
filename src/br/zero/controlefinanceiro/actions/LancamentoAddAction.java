@@ -12,7 +12,7 @@ import br.zero.controlefinanceiro.model.LancamentoDAO;
 import br.zero.controlefinanceiro.utils.ControleFinanceiroException;
 import br.zero.tinycontroller.Action;
 
-public class LancamentoAddAction implements Action {
+public class LancamentoAddAction implements Action<LancamentoAddSwitches, Object> {
 	
 	private class LancamentoAddException extends ControleFinanceiroException {
 
@@ -28,9 +28,8 @@ public class LancamentoAddAction implements Action {
 	}
 	
 	@Override
-	public void run(Object param) throws LancamentoAddException {
-		
-		LancamentoAddSwitches switches = checkParamValid(param);
+	public Object run(LancamentoAddSwitches switches) throws LancamentoAddException {
+		checkParamValid(switches);
 		
 		ContaDAO contaDAO = new ContaDAO();
 		
@@ -75,15 +74,11 @@ public class LancamentoAddAction implements Action {
 		System.out.println("-- Lançamento adicionado --");
 		
 		System.out.println(lancamento);
+		
+		return null;
 	}
 
-	private LancamentoAddSwitches checkParamValid(Object param) throws LancamentoAddException {
-		if (!(param instanceof LancamentoAddSwitches)) {
-			throw new LancamentoAddException("Parametro deve ser um LancamentoAddSwitches.");
-		}
-		
-		LancamentoAddSwitches switches = (LancamentoAddSwitches) param;
-		
+	private void checkParamValid(LancamentoAddSwitches switches) throws LancamentoAddException {
 		if (switches.getContaOrigem() ==  null) {
 			throw new LancamentoAddException("Conta de origem deve ser informada.");
 		}
@@ -91,8 +86,6 @@ public class LancamentoAddAction implements Action {
 		if (switches.getContaDestino() == null) {
 			throw new LancamentoAddException("Conta de destino deve ser informada.");
 		}
-		
-		return switches;
 	}
 
 }

@@ -19,9 +19,7 @@ import br.zero.controlefinanceiro.model.extrato.ExtratoLancamentoDAO;
 import br.zero.controlefinanceiro.utils.ExtratoLineParserException;
 import br.zero.tinycontroller.Action;
 
-public class ExtratoImportAction implements Action {
-
-	private ExtratoImportSwitches switches;
+public class ExtratoImportAction implements Action<ExtratoImportSwitches, Object> {
 
 	public class ExtratoImportException extends Exception {
 
@@ -41,8 +39,8 @@ public class ExtratoImportAction implements Action {
 	}
 
 	@Override
-	public void run(Object param) throws Exception {
-		switches = checkParamValid(param);
+	public Object run(ExtratoImportSwitches switches) throws Exception {
+		checkParamValid(switches);
 
 		Conta conta = getConta(switches.getNomeConta());
 
@@ -54,6 +52,8 @@ public class ExtratoImportAction implements Action {
 		} finally {
 			file.close();
 		}
+		
+		return null;
 	}
 
 	private void doImport(BufferedReader file, Conta conta) throws IOException, ExtratoImportException {
@@ -126,13 +126,7 @@ public class ExtratoImportAction implements Action {
 		return conta;
 	}
 
-	private ExtratoImportSwitches checkParamValid(Object param) throws ExtratoImportException {
-		if (!(param instanceof ExtratoImportSwitches)) {
-			throw new ExtratoImportException("Parâmetro deve ser um ExtratoImportSwitches.");
-		}
-
-		ExtratoImportSwitches switches = (ExtratoImportSwitches) param;
-
+	private void checkParamValid(ExtratoImportSwitches switches) throws ExtratoImportException {
 		if (switches.getNomeConta() == null) {
 			throw new ExtratoImportException("Nome da conta deve ser informada.");
 		}
@@ -140,7 +134,5 @@ public class ExtratoImportAction implements Action {
 		if (switches.getNomeArquivo() == null) {
 			throw new ExtratoImportException("Nome do arquivo deve ser informado.");
 		}
-
-		return switches;
 	}
 }

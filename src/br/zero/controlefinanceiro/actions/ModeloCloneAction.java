@@ -10,9 +10,7 @@ import br.zero.controlefinanceiro.model.modelo.ModeloDAO;
 import br.zero.controlefinanceiro.utils.ControleFinanceiroException;
 import br.zero.tinycontroller.Action;
 
-public class ModeloCloneAction implements Action {
-
-	private ModeloCloneSwitches switches;
+public class ModeloCloneAction implements Action<ModeloCloneSwitches, Object> {
 
 	private class ModeloCloneException extends ControleFinanceiroException {
 
@@ -28,9 +26,8 @@ public class ModeloCloneAction implements Action {
 	}
 	
 	@Override
-	public void run(Object param) throws ModeloCloneException {
-		
-		switches = checkParamValid(param);
+	public Object run(ModeloCloneSwitches switches) throws ModeloCloneException {
+		checkParamValid(switches);
 		
 		ModeloDAO dao = new ModeloDAO();
 		
@@ -40,7 +37,7 @@ public class ModeloCloneAction implements Action {
 			throw new ModeloCloneException("Modelo base não encontrado: \"" + switches.getModeloBase() + "\".");
 		}
 		
-		Modelo modeloClonado = clonarModelo(modeloBase);
+		Modelo modeloClonado = clonarModelo(modeloBase, switches);
 
 		
 		System.out.println();
@@ -48,9 +45,11 @@ public class ModeloCloneAction implements Action {
 		System.out.println("-- Modelo Clonado --");
 		
 		System.out.println(modeloBase + " -> " + modeloClonado);
+		
+		return null;
 	}
 
-	private Modelo clonarModelo(Modelo modeloBase) {
+	private Modelo clonarModelo(Modelo modeloBase, ModeloCloneSwitches switches) {
 		Modelo modeloClonado = new Modelo();
 		
 		modeloClonado.setNome(switches.getModeloNovo());
@@ -97,13 +96,7 @@ public class ModeloCloneAction implements Action {
 		}
 	}
 
-	private ModeloCloneSwitches checkParamValid(Object param) throws ModeloCloneException {
-		if (!(param instanceof ModeloCloneSwitches)) {
-			throw new ModeloCloneException("Parametro deve ser um ModeloCloneSwitches.");
-		}
-		
-		ModeloCloneSwitches switches = (ModeloCloneSwitches) param;
-		
+	private void checkParamValid(ModeloCloneSwitches switches) throws ModeloCloneException {
 		if (switches.getModeloBase() ==  null) {
 			throw new ModeloCloneException("Modelo base deve ser informado.");
 		}
@@ -111,8 +104,6 @@ public class ModeloCloneAction implements Action {
 		if (switches.getModeloNovo() == null) {
 			throw new ModeloCloneException("Modelo novo deve ser informado.");
 		}
-		
-		return switches;
 	}
 
 

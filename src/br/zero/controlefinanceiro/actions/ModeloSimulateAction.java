@@ -24,7 +24,7 @@ import br.zero.textgrid.TextGridException;
 import br.zero.textgrid.TextGridFormattedColumn;
 import br.zero.tinycontroller.Action;
 
-public class ModeloSimulateAction implements Action {
+public class ModeloSimulateAction implements Action<ModeloSimulateSwitches, Object> {
 
 	private class ModeloSimulateException extends ControleFinanceiroException {
 
@@ -116,8 +116,8 @@ public class ModeloSimulateAction implements Action {
 	}
 
 	@Override
-	public void run(Object param) throws ModeloSimulateException, TextGridException {
-		ModeloSimulateSwitches switches = checkParamValid(param);
+	public Object run(ModeloSimulateSwitches switches) throws ModeloSimulateException, TextGridException {
+		checkParamValid(switches);
 
 		Contabilizador contabilizador = new Contabilizador();
 
@@ -148,6 +148,8 @@ public class ModeloSimulateAction implements Action {
 		for (Conta conta : saldos.keySet()) {
 			System.out.println("===> " + conta.getNome() + ": " + saldos.get(conta));
 		}
+		
+		return null;
 	}
 
 	private List<LancamentoSimulated> createFinalList(List<LancamentoSimulated> lancamentoContabilizavelList, List<LancamentoSimulated> lancamentoModeloContabilizavelList) {
@@ -240,13 +242,7 @@ public class ModeloSimulateAction implements Action {
 		return dao.listarTodos();
 	}
 
-	private ModeloSimulateSwitches checkParamValid(Object param) throws ModeloSimulateException {
-		if (!(param instanceof ModeloSimulateSwitches)) {
-			throw new ModeloSimulateException("Parametro deve ser um ModeloSimulateSwitches.");
-		}
-
-		ModeloSimulateSwitches switches = (ModeloSimulateSwitches) param;
-
+	private void checkParamValid(ModeloSimulateSwitches switches) throws ModeloSimulateException {
 		if (switches.getModelo().size() == 0) {
 			throw new ModeloSimulateException("Pelo menos um modelo deve ser informado.");
 		}
@@ -260,8 +256,6 @@ public class ModeloSimulateAction implements Action {
 				throw new ModeloSimulateException("Data base deve ser informada.");
 			}
 		}
-		
-		return switches;
 	}
 
 }

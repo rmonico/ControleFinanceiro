@@ -7,7 +7,7 @@ import br.zero.controlefinanceiro.utils.ControleFinanceiroException;
 import br.zero.tinycontroller.Action;
 
 
-public class ContaAddAction implements Action {
+public class ContaAddAction implements Action<ContaAddSwitches, Object> {
 
 	private class ContaAddException extends ControleFinanceiroException {
 
@@ -22,12 +22,9 @@ public class ContaAddAction implements Action {
 		
 	}
 	
-	private ContaAddSwitches switches;
-
 	@Override
-	public void run(Object param) throws ContaAddException {
-		
-		switches = checkParamValid(param);
+	public Object run(ContaAddSwitches switches) throws ContaAddException {
+		checkParamValid(switches);
 		
 		ContaDAO contaDAO = new ContaDAO();
 		
@@ -44,20 +41,14 @@ public class ContaAddAction implements Action {
 		System.out.println("-- Conta adicionada --");
 		
 		System.out.println(conta);
+		
+		return null;
 	}
 
-	private ContaAddSwitches checkParamValid(Object param) throws ContaAddException {
-		if (!(param instanceof ContaAddSwitches)) {
-			throw new ContaAddException("Parametro deve ser um ContaAddSwitches.");
-		}
-		
-		ContaAddSwitches switches = (ContaAddSwitches) param;
-		
+	private void checkParamValid(ContaAddSwitches switches) throws ContaAddException {
 		if (switches.getNome() ==  null) {
 			throw new ContaAddException("Nome da conta deve ser informado.");
 		}
-		
-		return switches;
 	}
 
 }

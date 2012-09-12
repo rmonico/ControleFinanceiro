@@ -6,7 +6,7 @@ import br.zero.controlefinanceiro.model.modelo.ModeloDAO;
 import br.zero.controlefinanceiro.utils.ControleFinanceiroException;
 import br.zero.tinycontroller.Action;
 
-public class ModeloAddAction implements Action {
+public class ModeloAddAction implements Action<ModeloAddSwitches, Object> {
 
 	private class ModeloAddException extends ControleFinanceiroException {
 
@@ -22,9 +22,8 @@ public class ModeloAddAction implements Action {
 	}
 	
 	@Override
-	public void run(Object param) throws ModeloAddException {
-		
-		ModeloAddSwitches switches = checkParamValid(param);
+	public Object run(ModeloAddSwitches switches) throws ModeloAddException {
+		checkParamValid(switches);
 
 		ModeloDAO modeloDAO = new ModeloDAO();
 		
@@ -42,20 +41,14 @@ public class ModeloAddAction implements Action {
 		System.out.println("-- Modelo adicionado --");
 		
 		System.out.println(modelo);
+		
+		return null;
 	}
 
-	private ModeloAddSwitches checkParamValid(Object param) throws ModeloAddException {
-		if (!(param instanceof ModeloAddSwitches)) {
-			throw new ModeloAddException("Parametro deve ser um ModeloAddSwitches.");
-		}
-		
-		ModeloAddSwitches switches = (ModeloAddSwitches) param;
-		
+	private void checkParamValid(ModeloAddSwitches switches) throws ModeloAddException {
 		if (switches.getNome() ==  null) {
 			throw new ModeloAddException("Nome do modelo deve ser informado");
 		}
-		
-		return switches;
 	}
 
 }

@@ -21,7 +21,7 @@ import br.zero.textgrid.TextGridException;
 import br.zero.textgrid.TextGridFormattedColumn;
 import br.zero.tinycontroller.Action;
 
-public class LancamentoModeloListAction implements Action {
+public class LancamentoModeloListAction implements Action<LancamentoModeloListSwitches, Object> {
 
 	public class LancamentoModeloContabilizavel implements Contabilizavel {
 
@@ -211,9 +211,7 @@ public class LancamentoModeloListAction implements Action {
 	private Double totalDespesas;
 
 	@Override
-	public void run(Object param) throws TextGridException, LancamentoModeloListException {
-
-		LancamentoModeloListSwitches switches = checkParamValid(param);
+	public Object run(LancamentoModeloListSwitches switches) throws TextGridException, LancamentoModeloListException {
 
 		List<LancamentoModelo> lancamentoModeloList = getLancamentosPorModelo(switches);
 
@@ -246,6 +244,8 @@ public class LancamentoModeloListAction implements Action {
 		for (Conta conta : saldos.keySet()) {
 			System.out.println("===> " + conta.getNome() + ": " + saldos.get(conta));
 		}
+		
+		return null;
 	}
 
 	private void calcStatistics(List<LancamentoModeloContabilizavel> lancamentoContabilizavelList) {
@@ -304,16 +304,6 @@ public class LancamentoModeloListAction implements Action {
 		}
 
 		return lancamentoModeloList;
-	}
-
-	private LancamentoModeloListSwitches checkParamValid(Object param) throws LancamentoModeloListException {
-		if (!(param instanceof LancamentoModeloListSwitches)) {
-			throw new LancamentoModeloListException("Parametro deve ser um LancamentoModeloListSwitches.");
-		}
-
-		LancamentoModeloListSwitches switches = (LancamentoModeloListSwitches) param;
-
-		return switches;
 	}
 
 }

@@ -6,7 +6,7 @@ import br.zero.controlefinanceiro.model.ContaDAO;
 import br.zero.controlefinanceiro.utils.ControleFinanceiroException;
 import br.zero.tinycontroller.Action;
 
-public class ContaRemoveAction implements Action {
+public class ContaRemoveAction implements Action<ContaRemoveSwitches, Object> {
 
 	private class ContaRemoveException extends ControleFinanceiroException {
 
@@ -21,12 +21,9 @@ public class ContaRemoveAction implements Action {
 		
 	}
 	
-	private ContaRemoveSwitches switches;
-
 	@Override
-	public void run(Object param) throws ContaRemoveException {
-		
-		switches = checkParamValid(param);
+	public Object run(ContaRemoveSwitches switches) throws ContaRemoveException {
+		checkParamValid(switches);
 		
 		ContaDAO contaDAO = new ContaDAO();
 		
@@ -43,20 +40,14 @@ public class ContaRemoveAction implements Action {
 		System.out.println("-- Conta removida --");
 		
 		System.out.println(conta);
+		
+		return null;
 	}
 
-	private ContaRemoveSwitches checkParamValid(Object param) throws ContaRemoveException {
-		if (!(param instanceof ContaRemoveSwitches)) {
-			throw new ContaRemoveException("Parametro deve ser um ContaRemoveSwitches.");
-		}
-		
-		ContaRemoveSwitches switches = (ContaRemoveSwitches) param;
-		
+	private void checkParamValid(ContaRemoveSwitches switches) throws ContaRemoveException {
 		if (switches.getContaNome() ==  null) {
 			throw new ContaRemoveException("Nome da conta deve ser informado.");
 		}
-		
-		return switches;
 	}
 
 }

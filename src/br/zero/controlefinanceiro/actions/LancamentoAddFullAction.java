@@ -10,7 +10,7 @@ import br.zero.controlefinanceiro.model.modelo.LancamentoModeloDAO;
 import br.zero.controlefinanceiro.utils.ControleFinanceiroException;
 import br.zero.tinycontroller.Action;
 
-public class LancamentoAddFullAction implements Action {
+public class LancamentoAddFullAction implements Action<LancamentoAddFullSwitches, Object> {
 	
 	private class LancamentoAddFullException extends ControleFinanceiroException {
 
@@ -25,12 +25,9 @@ public class LancamentoAddFullAction implements Action {
 		
 	}
 	
-	private LancamentoAddFullSwitches switches;
-
 	@Override
-	public void run(Object param) throws LancamentoAddFullException {
-		
-		switches = checkParamValid(param);
+	public Object run(LancamentoAddFullSwitches switches) throws LancamentoAddFullException {
+		checkParamValid(switches);
 		
 		ContaDAO contaDAO = new ContaDAO();
 		
@@ -69,15 +66,11 @@ public class LancamentoAddFullAction implements Action {
 		
 		
 		lancamentoDAO.inserir(lancamento);
+		
+		return null;
 	}
 
-	private LancamentoAddFullSwitches checkParamValid(Object param) throws LancamentoAddFullException {
-		if (!(param instanceof LancamentoAddFullSwitches)) {
-			throw new LancamentoAddFullException("Parametro deve ser um LancamentoAddFullSwitches.");
-		}
-		
-		LancamentoAddFullSwitches switches = (LancamentoAddFullSwitches) param;
-		
+	private void checkParamValid(LancamentoAddFullSwitches switches) throws LancamentoAddFullException {
 		if (switches.getData() == null) {
 			throw new LancamentoAddFullException("Data deve ser informada.");
 		}
@@ -93,8 +86,6 @@ public class LancamentoAddFullAction implements Action {
 		if (switches.getValor() == null) {
 			throw new LancamentoAddFullException("Valor deve ser informado.");
 		}
-		
-		return switches;
 	}
 
 }

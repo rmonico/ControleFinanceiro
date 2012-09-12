@@ -3,7 +3,7 @@ package br.zero.controlefinanceiro.actions;
 import br.zero.controlefinanceiro.commandlineparser.ContaSetBalanceSwitches;
 import br.zero.tinycontroller.Action;
 
-public class ContaSetBalanceAction implements Action {
+public class ContaSetBalanceAction implements Action<ContaSetBalanceSwitches, Object> {
 
 	public class ContaSetBalanceException extends Exception {
 
@@ -18,21 +18,14 @@ public class ContaSetBalanceAction implements Action {
 		
 	}
 
-	private ContaSetBalanceSwitches switches;
-	
 	@Override
-	public void run(Object param) throws Exception {
-		switches = checkParamValid(param);
+	public Object run(ContaSetBalanceSwitches switches) throws Exception {
+		checkParamValid(switches);
 		
+		return null;
 	}
 
-	private ContaSetBalanceSwitches checkParamValid(Object param) throws ContaSetBalanceException {
-		if (!(param instanceof ContaSetBalanceSwitches)) {
-			throw new ContaSetBalanceException("Parametro deve ser um ContaSetBalanceSwitches.");
-		}
-		
-		ContaSetBalanceSwitches switches = (ContaSetBalanceSwitches) param;
-		
+	private void checkParamValid(ContaSetBalanceSwitches switches) throws ContaSetBalanceException {
 		if (switches.getContaNome() ==  null) {
 			throw new ContaSetBalanceException("Nome da conta deve ser informado.");
 		}
@@ -40,8 +33,6 @@ public class ContaSetBalanceAction implements Action {
 		if (switches.getNovoSaldo() ==  null) {
 			throw new ContaSetBalanceException("Novo Saldo da conta deve ser informado.");
 		}
-		
-		return switches;
 	}
 
 }

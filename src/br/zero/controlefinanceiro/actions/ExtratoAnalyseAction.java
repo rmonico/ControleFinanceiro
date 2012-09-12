@@ -30,7 +30,7 @@ import br.zero.textgrid.TextGridFormattedColumn;
 import br.zero.textgrid.formatters.ToStringFormatter;
 import br.zero.tinycontroller.Action;
 
-public class ExtratoAnalyseAction implements Action {
+public class ExtratoAnalyseAction implements Action<ExtratoAnalyseSwitches, Object> {
 
 	public enum StatusLinha {
 		BALANCE("B"), TRANSACTION("T"), DONT_APPLY("-");
@@ -169,7 +169,6 @@ public class ExtratoAnalyseAction implements Action {
 
 	private LancamentoDAO lancamentoDAO;
 	private Conta banco;
-	private ExtratoAnalyseSwitches switches;
 	private List<InternalManualReference> manualRefList;
 
 	private class ExtratoAnalyseException extends ControleFinanceiroException {
@@ -190,10 +189,10 @@ public class ExtratoAnalyseAction implements Action {
 	}
 
 	@Override
-	public void run(Object param) throws ExtratoAnalyseException {
-		switches = checkParamValid(param);
+	public Object run(ExtratoAnalyseSwitches switches) throws ExtratoAnalyseException {
+		checkParamValid(switches);
 
-		manualRefList = makeManualRefList();
+		manualRefList = makeManualRefList(switches);
 
 		banco = getConta(switches.getNomeBanco());
 
@@ -205,14 +204,14 @@ public class ExtratoAnalyseAction implements Action {
 			System.out.println();
 			System.out.println("Nenhum item de extrato órfão encontrado para o banco \"" + banco.getNome() + "\".");
 
-			return;
+			return null;
 		}
 
 		TextGrid grid = createGrid();
 		List<ExtratoLineAnalyseResult> statuses;
 
 		try {
-			statuses = makeSync(lancamentoSemExtratoList, extratoLancamentoOrfao);
+			statuses = makeSync(lancamentoSemExtratoList, extratoLancamentoOrfao, switches);
 		} catch (ExtratoLineParserException e) {
 			throw new ExtratoAnalyseException(e);
 		}
@@ -232,9 +231,11 @@ public class ExtratoAnalyseAction implements Action {
 		System.out.println("  * : Insert.");
 		System.out.println("  X : Delete.");
 		System.out.println("  ! : Conta não encontrada.");
+		
+		return null;
 	}
 
-	private List<InternalManualReference> makeManualRefList() throws ExtratoAnalyseException {
+	private List<InternalManualReference> makeManualRefList(ExtratoAnalyseSwitches switches) throws ExtratoAnalyseException {
 		List<InternalManualReference> mrl = new ArrayList<InternalManualReference>();
 
 		ContaDAO dao = new ContaDAO();
@@ -257,7 +258,7 @@ public class ExtratoAnalyseAction implements Action {
 		return mrl;
 	}
 
-	private List<ExtratoLineAnalyseResult> makeSync(List<Lancamento> lancamentoSemExtratoList, List<ExtratoLancamento> extratoLancamentoOrfao) throws ExtratoLineParserException, ExtratoAnalyseException {
+	private List<ExtratoLineAnalyseResult> makeSync(List<Lancamento> lancamentoSemExtratoList, List<ExtratoLancamento> extratoLancamentoOrfao, ExtratoAnalyseSwitches switches) throws ExtratoLineParserException, ExtratoAnalyseException {
 		List<DatedExtratoLancamento> extratoLines = new ArrayList<DatedExtratoLancamento>();
 
 		makeParser(extratoLancamentoOrfao, extratoLines);
@@ -275,7 +276,7 @@ public class ExtratoAnalyseAction implements Action {
 				analyseResult = syncBalanceLine();
 				analyseResult.setExtrato((ExtratoLancamentoBalance) extrato);
 			} else if (extrato instanceof ExtratoLancamentoTransaction) {
-				analyseResult = syncTransactionLine(lancamentoSemExtratoList, contaDAO, (ExtratoLancamentoTransaction) extrato);
+				analyseResult = syncTransactionLine(lancamentoSemExtratoList, contaDAO, (ExtratoLancamentoTransaction) extrato, switches);
 				analyseResult.setExtrato((ExtratoLancamentoTransaction) extrato);
 			} else {
 				throw new ExtratoAnalyseException("Classe de linha desconhecida (\"" + extrato + "\")");
@@ -363,7 +364,7 @@ public class ExtratoAnalyseAction implements Action {
 		return result;
 	}
 
-	private ExtratoLineAnalyseResult syncTransactionLine(List<Lancamento> lancamentoSemExtratoList, ContaDAO contaDAO, ExtratoLancamentoTransaction line) {
+	private ExtratoLineAnalyseResult syncTransactionLine(List<Lancamento> lancamentoSemExtratoList, ContaDAO contaDAO, ExtratoLancamentoTransaction line, ExtratoAnalyseSwitches switches) {
 		ExtratoLineAnalyseResult result = new ExtratoLineAnalyseResult();
 		result.setLinhaStatus(StatusLinha.TRANSACTION);
 
@@ -536,18 +537,10 @@ public class ExtratoAnalyseAction implements Action {
 		return lancamentoDAO.listarSemExtrato(banco);
 	}
 
-	private ExtratoAnalyseSwitches checkParamValid(Object param) throws ExtratoAnalyseException {
-		if (!(param instanceof ExtratoAnalyseSwitches)) {
-			throw new ExtratoAnalyseException("Parametro deve ser um ExtratoAnalyseSwitches.");
-		}
-
-		ExtratoAnalyseSwitches switches = (ExtratoAnalyseSwitches) param;
-
+	private void checkParamValid(ExtratoAnalyseSwitches switches) throws ExtratoAnalyseException {
 		if (switches.getNomeBanco() == null) {
 			throw new ExtratoAnalyseException("Nome do banco deve ser informado.");
 		}
-
-		return switches;
 	}
 
 }

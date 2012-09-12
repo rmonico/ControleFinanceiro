@@ -19,7 +19,7 @@ import br.zero.textgrid.TextGridException;
 import br.zero.textgrid.TextGridFormattedColumn;
 import br.zero.tinycontroller.Action;
 
-public class LancamentoBalanceAction implements Action {
+public class LancamentoBalanceAction implements Action<LancamentoBalanceSwitches, Object> {
 
 	private LancamentoBalanceSwitches switches;
 	private Conta contaBalance;
@@ -64,14 +64,10 @@ public class LancamentoBalanceAction implements Action {
 	}
 
 	@Override
-	public void run(Object param) throws TextGridException {
+	public Object run(LancamentoBalanceSwitches switches) throws TextGridException, LancamentoBalanceException {
 		LancamentoDAO dao = new LancamentoDAO();
 
-		try {
-			switches = checkParamValid(param);
-		} catch (LancamentoBalanceException e) {
-			throw new TextGridException(e);
-		}
+		checkParamValid(switches);
 
 		ContaDAO contaDAO = new ContaDAO();
 
@@ -111,20 +107,14 @@ public class LancamentoBalanceAction implements Action {
 		Double saldo = saldosPorConta.get(contaBalance);
 		
 		System.out.println("===> Saldo: " + saldo);
+		
+		return null;
 	}
 
-	private LancamentoBalanceSwitches checkParamValid(Object param) throws LancamentoBalanceException {
-		if (!(param instanceof LancamentoBalanceSwitches)) {
-			throw new LancamentoBalanceException("Parametro deve ser um LancamentoBalanceSwitches.");
-		}
-
-		LancamentoBalanceSwitches switches = (LancamentoBalanceSwitches) param;
-
+	private void checkParamValid(LancamentoBalanceSwitches param) throws LancamentoBalanceException {
 		if (switches.getConta() == null) {
 			throw new LancamentoBalanceException("Conta deve ser informada");
 		}
-
-		return switches;
 	}
 
 }

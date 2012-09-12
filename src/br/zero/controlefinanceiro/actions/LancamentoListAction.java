@@ -16,7 +16,7 @@ import br.zero.textgrid.TextGridException;
 import br.zero.textgrid.TextGridFormattedColumn;
 import br.zero.tinycontroller.Action;
 
-public class LancamentoListAction implements Action {
+public class LancamentoListAction implements Action<Object, Object> {
 
 	private TextGrid createGrid() {
 		TextGrid grid = new TextGrid();
@@ -38,7 +38,7 @@ public class LancamentoListAction implements Action {
 	}
 
 	@Override
-	public void run(Object param) throws TextGridException {
+	public Object run(Object param) throws TextGridException {
 		LancamentoDAO dao = new LancamentoDAO();
 
 		List<Lancamento> lancamentoList = dao.listarTodos();
@@ -68,6 +68,8 @@ public class LancamentoListAction implements Action {
 		for (Conta conta : saldos.keySet()) {
 			System.out.println("===> " + conta.getNome() + ": " + saldos.get(conta));
 		}
+		
+		return null;
 	}
 
 }

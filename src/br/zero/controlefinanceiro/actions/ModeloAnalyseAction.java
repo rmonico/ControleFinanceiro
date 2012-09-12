@@ -21,7 +21,7 @@ import br.zero.textgrid.TextGridFormattedColumn;
 import br.zero.tinycontroller.Action;
 import br.zero.types.DateRange;
 
-public class ModeloAnalyseAction implements Action {
+public class ModeloAnalyseAction implements Action<ModeloAnalyseSwitches, Object> {
 
 	private List<Lancamento> unrelatedLancamentoList;
 	private Map<LancamentoModelo, List<Lancamento>> lancamentoModeloMap;
@@ -40,8 +40,8 @@ public class ModeloAnalyseAction implements Action {
 	}
 
 	@Override
-	public void run(Object param) throws ModeloAnalyseException, TextGridException {
-		ModeloAnalyseSwitches switches = checkParamValid(param);
+	public Object run(ModeloAnalyseSwitches switches) throws ModeloAnalyseException, TextGridException {
+		checkParamValid(switches);
 
 		String modeMessage = switches.getRealizeFlag() ? "Modo de Gravação Ativo" : "Modo de Simulação Ativo (use --realize para gravar).";
 
@@ -52,6 +52,8 @@ public class ModeloAnalyseAction implements Action {
 		showUnrelatedLancamentos();
 
 		showProposedChanges();
+		
+		return null;
 	}
 
 	private void showProposedChanges() {
@@ -194,13 +196,7 @@ public class ModeloAnalyseAction implements Action {
 		return dao.listarSemModeloPorData(lancamentoRange.getStart(), lancamentoRange.getEnd());
 	}
 
-	private ModeloAnalyseSwitches checkParamValid(Object param) throws ModeloAnalyseException {
-		if (!(param instanceof ModeloAnalyseSwitches)) {
-			throw new ModeloAnalyseException("Parametro deve ser um ModeloAnalyseSwitches.");
-		}
-
-		ModeloAnalyseSwitches switches = (ModeloAnalyseSwitches) param;
-
+	private void checkParamValid(ModeloAnalyseSwitches switches) throws ModeloAnalyseException {
 		if (switches.getNomeModelo() == null) {
 			throw new ModeloAnalyseException("Nome do modelo deve ser informado.");
 		}
@@ -208,8 +204,6 @@ public class ModeloAnalyseAction implements Action {
 		if (switches.getDataBase() == null) {
 			throw new ModeloAnalyseException("Data base deve ser informada.");
 		}
-
-		return switches;
 	}
 
 }

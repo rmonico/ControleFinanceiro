@@ -6,7 +6,7 @@ import br.zero.controlefinanceiro.model.LancamentoDAO;
 import br.zero.controlefinanceiro.utils.ControleFinanceiroException;
 import br.zero.tinycontroller.Action;
 
-public class LancamentoRemoveAction implements Action {
+public class LancamentoRemoveAction implements Action<LancamentoRemoveSwitches, Object> {
 
 	private class LancamentoRemoveException extends ControleFinanceiroException {
 
@@ -21,12 +21,9 @@ public class LancamentoRemoveAction implements Action {
 		
 	}
 	
-	private LancamentoRemoveSwitches switches;
-
 	@Override
-	public void run(Object param) throws LancamentoRemoveException {
-		
-		switches = checkParamValid(param);
+	public Object run(LancamentoRemoveSwitches switches) throws LancamentoRemoveException {
+		checkParamValid(switches);
 		
 		LancamentoDAO lancamentoDAO = new LancamentoDAO();
 		
@@ -39,20 +36,14 @@ public class LancamentoRemoveAction implements Action {
 		System.out.println("-- Lançamento removido --");
 		
 		System.out.println(lancamento);
+		
+		return null;
 	}
 
-	private LancamentoRemoveSwitches checkParamValid(Object param) throws LancamentoRemoveException {
-		if (!(param instanceof LancamentoRemoveSwitches)) {
-			throw new LancamentoRemoveException("Parametro deve ser um LancamentoRemoveSwitches.");
-		}
-		
-		LancamentoRemoveSwitches switches = (LancamentoRemoveSwitches) param;
-		
+	private void checkParamValid(LancamentoRemoveSwitches switches) throws LancamentoRemoveException {
 		if (switches.getId() ==  null) {
 			throw new LancamentoRemoveException("ID deve ser informado.");
 		}
-		
-		return switches;
 	}
 
 }

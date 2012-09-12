@@ -10,7 +10,7 @@ import br.zero.textgrid.TextGridException;
 import br.zero.textgrid.TextGridFormattedColumn;
 import br.zero.tinycontroller.Action;
 
-public class ModeloListAction implements Action {
+public class ModeloListAction implements Action<Object, Object> {
 
 	private TextGrid createGrid() {
 		TextGrid grid = new TextGrid();
@@ -26,7 +26,7 @@ public class ModeloListAction implements Action {
 	}
 
 	@Override
-	public void run(Object param) throws TextGridException {
+	public Object run(Object param) throws TextGridException {
 		ModeloDAO modeloDAO = new ModeloDAO();
 		
 		List<Modelo> listModelos = modeloDAO.listarTodos();
@@ -36,6 +36,8 @@ public class ModeloListAction implements Action {
 		grid.setValues(listModelos);
 
 		grid.show();
+		
+		return null;
 	}
 
 }

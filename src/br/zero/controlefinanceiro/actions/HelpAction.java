@@ -5,15 +5,15 @@ import br.zero.controlefinanceiro.commandlineparser.HelpSwitches;
 import br.zero.tinycontroller.Action;
 import br.zero.tinycontroller.TinyControllerException;
 
-public class HelpAction implements Action {
+public class HelpAction implements Action<HelpSwitches, Object> {
 
 	@Override
-	public void run(Object param) throws TinyControllerException {
-		HelpSwitches switches = (HelpSwitches) param;
-		
+	public Object run(HelpSwitches switches) throws TinyControllerException {
 		Command entity = switches.getEntity();
 		
 		out("Help: " + entity.toString());
+		
+		return null;
 	}
 
 	private void out(String value) {

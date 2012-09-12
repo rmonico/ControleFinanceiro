@@ -7,7 +7,7 @@ import br.zero.controlefinanceiro.model.extrato.ReferenciaExtrato;
 import br.zero.controlefinanceiro.model.extrato.ReferenciaExtratoDAO;
 import br.zero.tinycontroller.Action;
 
-public class ContaReferenciaAddAction implements Action {
+public class ContaReferenciaAddAction implements Action<ContaReferenciaAddSwitches, Object> {
 
 	public class ContaReferenciaAddException extends Exception {
 
@@ -23,8 +23,8 @@ public class ContaReferenciaAddAction implements Action {
 	}
 
 	@Override
-	public void run(Object param) throws Exception {
-		ContaReferenciaAddSwitches switches = checkParamValid(param);
+	public Object run(ContaReferenciaAddSwitches switches) throws Exception {
+		checkParamValid(switches);
 		
 		ContaDAO contaDAO = new ContaDAO();
 		
@@ -57,15 +57,11 @@ public class ContaReferenciaAddAction implements Action {
 		System.out.println("-- Referência Adicionada --");
 		
 		System.out.println(re);
+		
+		return null;
 	}
 
-	private ContaReferenciaAddSwitches checkParamValid(Object param) throws ContaReferenciaAddException {
-		if (!(param instanceof ContaReferenciaAddSwitches)) {
-			throw new ContaReferenciaAddException("Parametro deve ser um ContaReferenciaAddSwitches.");
-		}
-
-		ContaReferenciaAddSwitches switches = (ContaReferenciaAddSwitches) param;
-
+	private void checkParamValid(ContaReferenciaAddSwitches switches) throws ContaReferenciaAddException {
 		if (switches.getNomeConta() == null) {
 			throw new ContaReferenciaAddException("Conta deve ser informada.");
 		}
@@ -77,8 +73,6 @@ public class ContaReferenciaAddAction implements Action {
 		if (switches.getRegex() == null) {
 			throw new ContaReferenciaAddException("String de regex deve ser informada.");
 		}
-
-		return switches;
 	}
 
 }

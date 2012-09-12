@@ -10,7 +10,7 @@ import br.zero.controlefinanceiro.model.modelo.ModeloDAO;
 import br.zero.controlefinanceiro.utils.ControleFinanceiroException;
 import br.zero.tinycontroller.Action;
 
-public class LancamentoModeloAddAction implements Action {
+public class LancamentoModeloAddAction implements Action<LancamentoModeloAddSwitches, Object> {
 
 	private class LancamentoModeloAddException extends ControleFinanceiroException {
 
@@ -26,9 +26,9 @@ public class LancamentoModeloAddAction implements Action {
 	}
 
 	@Override
-	public void run(Object param) throws LancamentoModeloAddException {
+	public Object run(LancamentoModeloAddSwitches switches) throws LancamentoModeloAddException {
 
-		LancamentoModeloAddSwitches switches = checkParamValid(param);
+		checkParamValid(switches);
 
 		LancamentoModelo lancamentoModelo = new LancamentoModelo();
 
@@ -60,15 +60,11 @@ public class LancamentoModeloAddAction implements Action {
 		System.out.println("-- Lançamento Modelo adicionado --");
 
 		System.out.println(lancamentoModelo);
+		
+		return null;
 	}
 
-	private LancamentoModeloAddSwitches checkParamValid(Object param) throws LancamentoModeloAddException {
-		if (!(param instanceof LancamentoModeloAddSwitches)) {
-			throw new LancamentoModeloAddException("Parametro deve ser um LancamentoModeloAddSwitches.");
-		}
-
-		LancamentoModeloAddSwitches switches = (LancamentoModeloAddSwitches) param;
-
+	private void checkParamValid(LancamentoModeloAddSwitches switches) throws LancamentoModeloAddException {
 		if (switches.getModelo() == null) {
 			throw new LancamentoModeloAddException("Modelo deve ser informado.");
 		}
@@ -88,8 +84,6 @@ public class LancamentoModeloAddAction implements Action {
 		if (switches.getValor() == null) {
 			throw new LancamentoModeloAddException("Valor deve ser informado.");
 		}
-
-		return switches;
 	}
 
 	private Modelo getModelo(String nomeModelo) throws LancamentoModeloAddException {
