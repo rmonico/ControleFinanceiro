@@ -99,6 +99,7 @@ public class Main {
 
 		controller.registerAction(HelpAction.class, switches.getHelpSwitches(), Command.HELP);
 
+		@SuppressWarnings({ "unchecked", "rawtypes" })
 		Class<Action> actionClass = (Class<Action>) controller.selectAction(switches.getCommand());
 
 		if (!(controller.isActionFound())) {
