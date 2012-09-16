@@ -1,4 +1,5 @@
 #!/bin/bash
 # packer
 
-jar cvf ControleFinanceiro.jar -C build/ .
+jar cvf ControleFinanceiro.jar -C build/classes/ .
+
