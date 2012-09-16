@@ -30,7 +30,6 @@ import br.zero.controlefinanceiro.actions.ModeloSimulateAction;
 import br.zero.controlefinanceiro.commandlineparser.Command;
 import br.zero.controlefinanceiro.commandlineparser.CommandLineLoader;
 import br.zero.controlefinanceiro.commandlineparser.CommandLineSwitches;
-import br.zero.tinycontroller.Action;
 import br.zero.tinycontroller.TinyController;
 import br.zero.tinycontroller.TinyControllerException;
 
@@ -99,17 +98,13 @@ public class Main {
 
 		controller.registerAction(HelpAction.class, switches.getHelpSwitches(), Command.HELP);
 
-		@SuppressWarnings({ "unchecked", "rawtypes" })
-		Class<Action> actionClass = (Class<Action>) controller.selectAction(switches.getCommand());
-
-		if (!(controller.isActionFound())) {
+		if (!(controller.selectAction(switches.getCommand()))) {
 			System.out.println("Ação não encontrada...");
 
 			return;
 		}
 
-		// TODO Conferir se o primeiro parâmetro tem que ser isso mesmo
-		controller.runAction(switches.getSubCommandSwitches(), actionClass);
+		controller.runSelectedAction(switches.getSubCommandSwitches());
 	}
 
 }
