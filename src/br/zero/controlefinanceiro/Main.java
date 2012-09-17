@@ -65,38 +65,38 @@ public class Main {
 	private void setupAndRunController(CommandLineSwitches switches) throws TinyControllerException {
 		TinyController controller = new TinyController();
 
-		controller.registerAction(BackupAction.class, switches.getBackupSwitches(), Command.BACKUP);
+		controller.registerAction(BackupAction.class, Command.BACKUP);
 
-		controller.registerAction(ContaListAction.class, switches.getContaListSwitches(), Command.CONTA_LIST);
-		controller.registerAction(ContaAddAction.class, switches.getContaAddSwitches(), Command.CONTA_ADD);
-		controller.registerAction(ContaRemoveAction.class, switches.getContaRemoveSwitches(), Command.CONTA_REMOVE);
-		controller.registerAction(ContaSetBalanceAction.class, switches.getContaSetBalanceSwitches(), Command.CONTA_SETBALANCE);
+		controller.registerAction(ContaListAction.class, Command.CONTA_LIST);
+		controller.registerAction(ContaAddAction.class, Command.CONTA_ADD);
+		controller.registerAction(ContaRemoveAction.class, Command.CONTA_REMOVE);
+		controller.registerAction(ContaSetBalanceAction.class, Command.CONTA_SETBALANCE);
 
-		controller.registerAction(LancamentoListAction.class, switches.getLancamentoListSwitches(), Command.LANCAMENTO_LIST);
-		controller.registerAction(LancamentoBalanceAction.class, switches.getLancamentoBalanceSwitches(), Command.LANCAMENTO_BALANCE);
-		controller.registerAction(LancamentoAddAction.class, switches.getLancamentoAddSwitches(), Command.LANCAMENTO_ADD);
-		controller.registerAction(LancamentoAddFullAction.class, switches.getLancamentoAddFullSwitches(), Command.LANCAMENTO_ADDFULL);
-		controller.registerAction(LancamentoRemoveAction.class, switches.getLancamentoRemoveSwitches(), Command.LANCAMENTO_REMOVE);
+		controller.registerAction(LancamentoListAction.class, Command.LANCAMENTO_LIST);
+		controller.registerAction(LancamentoBalanceAction.class, Command.LANCAMENTO_BALANCE);
+		controller.registerAction(LancamentoAddAction.class, Command.LANCAMENTO_ADD);
+		controller.registerAction(LancamentoAddFullAction.class, Command.LANCAMENTO_ADDFULL);
+		controller.registerAction(LancamentoRemoveAction.class, Command.LANCAMENTO_REMOVE);
 
-		controller.registerAction(ModeloListAction.class, null, Command.MODELO_LIST);
-		controller.registerAction(ModeloAddAction.class, switches.getModeloAddSwitches(), Command.MODELO_ADD);
-		controller.registerAction(ModeloSimulateAction.class, switches.getModeloSimulateSwitches(), Command.MODELO_SIMULATE);
-		controller.registerAction(ModeloRemoveAction.class, switches.getModeloRemoveSwitches(), Command.MODELO_REMOVE);
-		controller.registerAction(ModeloCloneAction.class, switches.getModeloCloneSwitches(), Command.MODELO_CLONE);
-		controller.registerAction(ModeloAnalyseAction.class, switches.getModeloAnalyseSwitches(), Command.MODELO_ANALYSE);
+		controller.registerAction(ModeloListAction.class, Command.MODELO_LIST);
+		controller.registerAction(ModeloAddAction.class, Command.MODELO_ADD);
+		controller.registerAction(ModeloSimulateAction.class, Command.MODELO_SIMULATE);
+		controller.registerAction(ModeloRemoveAction.class, Command.MODELO_REMOVE);
+		controller.registerAction(ModeloCloneAction.class, Command.MODELO_CLONE);
+		controller.registerAction(ModeloAnalyseAction.class, Command.MODELO_ANALYSE);
 
-		controller.registerAction(LancamentoModeloListAction.class, switches.getLancamentoModeloListSwitches(), Command.LANCAMENTOMODELO_LIST);
-		controller.registerAction(LancamentoModeloAddAction.class, switches.getLancamentoModeloAddSwitches(), Command.LANCAMENTOMODELO_ADD);
-		controller.registerAction(LancamentoModeloRemoveAction.class, switches.getLancamentoModeloRemoveSwitches(), Command.LANCAMENTOMODELO_REMOVE);
+		controller.registerAction(LancamentoModeloListAction.class, Command.LANCAMENTOMODELO_LIST);
+		controller.registerAction(LancamentoModeloAddAction.class, Command.LANCAMENTOMODELO_ADD);
+		controller.registerAction(LancamentoModeloRemoveAction.class, Command.LANCAMENTOMODELO_REMOVE);
 
-		controller.registerAction(ExtratoListAction.class, switches.getExtratoListSwitches(), Command.EXTRATO_LIST);
-		controller.registerAction(ExtratoImportAction.class, switches.getExtratoImportSwitches(), Command.EXTRATO_IMPORT);
-		controller.registerAction(ExtratoAnalyseAction.class, switches.getExtratoAnalyseSwitches(), Command.EXTRATO_ANALYSE);
+		controller.registerAction(ExtratoListAction.class, Command.EXTRATO_LIST);
+		controller.registerAction(ExtratoImportAction.class, Command.EXTRATO_IMPORT);
+		controller.registerAction(ExtratoAnalyseAction.class, Command.EXTRATO_ANALYSE);
 
-		controller.registerAction(ContaReferenciaListAction.class, switches.getContaReferenciaListSwitches(), Command.CONTAREFERENCIA_LIST);
-		controller.registerAction(ContaReferenciaAddAction.class, switches.getContaReferenciaAddSwitches(), Command.CONTAREFERENCIA_ADD);
+		controller.registerAction(ContaReferenciaListAction.class, Command.CONTAREFERENCIA_LIST);
+		controller.registerAction(ContaReferenciaAddAction.class, Command.CONTAREFERENCIA_ADD);
 
-		controller.registerAction(HelpAction.class, switches.getHelpSwitches(), Command.HELP);
+		controller.registerAction(HelpAction.class, Command.HELP);
 
 		if (!(controller.selectAction(switches.getCommand()))) {
 			System.out.println("Ação não encontrada...");
