@@ -1,12 +1,9 @@
 package br.zero.controlefinanceiro.model.modelo;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import br.zero.controlefinanceiro.model.Conta;
@@ -22,8 +19,8 @@ import br.zero.customdao.EntitySetup;
 public class LancamentoModelo {
 
 	@Id
-	@SequenceGenerator(name = "CONTROLEFINANCEIRO_MODELO.LANCAMENTO_ID_SEQ", sequenceName = "CONTROLEFINANCEIRO_MODELO.LANCAMENTO_ID_SEQ", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CONTROLEFINANCEIRO_MODELO.LANCAMENTO_ID_SEQ")
+//	@SequenceGenerator(name = "CONTROLEFINANCEIRO_MODELO.LANCAMENTO_ID_SEQ", sequenceName = "CONTROLEFINANCEIRO_MODELO.LANCAMENTO_ID_SEQ", allocationSize = 1)
+//	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CONTROLEFINANCEIRO_MODELO.LANCAMENTO_ID_SEQ")
 	private Integer id;
 
 	@ManyToOne
