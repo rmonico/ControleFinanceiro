@@ -10,7 +10,7 @@ import br.zero.controlefinanceiro.model.Conta;
 import br.zero.customdao.EntitySetup;
 
 @Entity
-@Table(name = "lancamento", schema = "controlefinanceiro_extrato")
+@Table(name = "extrato_lancamento")
 @EntitySetup(findAllQuery = "select e from ExtratoLancamento e order by e.data, e.id", findByIdQuery = "select e from ExtratoLancamento e where e.id=:id", idFieldName = "id")
 public class ExtratoLancamento {
 

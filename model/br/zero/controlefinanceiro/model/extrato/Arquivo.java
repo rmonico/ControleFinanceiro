@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import br.zero.customdao.EntitySetup;
 
 @Entity
-@Table(name = "arquivo", schema = "controlefinanceiro_extrato")
+@Table(name = "extrato_arquivo")
 @EntitySetup(findAllQuery = "select e from Arquivo a order by a.id", findByIdQuery = "select a from Arquivo a where e.id=:id", idFieldName = "id")
 public class Arquivo {
 

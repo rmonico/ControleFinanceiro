@@ -13,7 +13,7 @@ import br.zero.customdao.EntitySetup;
  * 
  */
 @Entity
-@Table(schema = "controlefinanceiro")
+@Table
 @EntitySetup(findAllQuery = "select c from Conta c order by c.nome", findByIdQuery = "select c from Conta c where c.id=:id", idFieldName = "id")
 public class Conta implements Serializable {
 

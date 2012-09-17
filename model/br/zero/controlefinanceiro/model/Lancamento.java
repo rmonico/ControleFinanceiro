@@ -16,7 +16,7 @@ import br.zero.controlefinanceiro.model.modelo.LancamentoModelo;
 import br.zero.customdao.EntitySetup;
 
 @Entity
-@Table(name = "lancamento", schema = "controlefinanceiro")
+@Table(name = "lancamento")
 @EntitySetup(findAllQuery = "select l from Lancamento l order by l.data, l.n", findByIdQuery = "select l from Lancamento l where l.id=:id", idFieldName = "id")
 public class Lancamento implements Comparable<Lancamento> {
 

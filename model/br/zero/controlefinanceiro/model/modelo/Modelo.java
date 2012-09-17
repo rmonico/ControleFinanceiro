@@ -13,7 +13,7 @@ import br.zero.customdao.EntitySetup;
  * 
  */
 @Entity
-@Table(schema = "controlefinanceiro_modelo")
+@Table(name="modelo_modelo")
 @EntitySetup(findAllQuery = "select o from Modelo o order by o.nome", findByIdQuery = "select o from Modelo o where o.id=:id", idFieldName = "id")
 public class Modelo implements Serializable {
 	private static final long serialVersionUID = 1L;

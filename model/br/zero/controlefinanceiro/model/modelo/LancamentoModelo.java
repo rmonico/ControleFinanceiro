@@ -14,7 +14,7 @@ import br.zero.customdao.EntitySetup;
  * 
  */
 @Entity
-@Table(name = "lancamento", schema = "controlefinanceiro_modelo")
+@Table(name = "modelo_lancamento")
 @EntitySetup(findAllQuery = "select lm from LancamentoModelo lm order by lm.modelo.nome, lm.diaVencimento", findByIdQuery = "select lm from LancamentoModelo lm where lm.id=:id", idFieldName = "id")
 public class LancamentoModelo {
 
