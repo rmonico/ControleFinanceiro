@@ -20,5 +20,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/postgresql-8.4-701.jdbc4.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/TheObserver.jar" sourcepath="/TheObserver"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/Utils.jar" sourcepath="/Utils"/>
+	<classpathentry kind="lib" path="/home/kxorroloko/workspaces/default/ControleFinanceiro/WebContent/WEB-INF/lib/sqlite-jdbc-3.7.2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
