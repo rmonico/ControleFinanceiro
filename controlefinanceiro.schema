@@ -67,7 +67,6 @@ create table controlefinanceiro.extrato_referenciaextrato (
   referencia text,
   n integer,
   FOREIGN KEY(contaid) REFERENCES "controlefinanceiro.conta"(id),
-  FOREIGN KEY(bancoid) REFERENCES "controlefinanceiro.conta"(id),
-  UNIQUE (n));
+  FOREIGN KEY(bancoid) REFERENCES "controlefinanceiro.conta"(id));
 
 .quit
