@@ -1,0 +1,9 @@
+Graves:
+modelo-clone, extrato-import: está dando problema. Parece que é por que está tentando inserir um registro com id nulo (prioritário fazer o extrato-import funcionar).
+
+Fazer depois:
+lanc-ls: não está filtrando quando uma conta é informada
+lanc-balance: está lançando nullpointer
+lancmodelo-rm: não funcionou.
+help: está lançando exceção (nullpointer), acho que não foi corretamente implementado.
+
