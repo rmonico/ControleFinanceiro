@@ -1,38 +1,13 @@
-attach database "controlefinanceiro.sqlite" as controlefinanceiro;
-
-create table controlefinanceiro.modelo_modelo (
-  id integer primary key autoincrement,
-  nome text,
-  observacao text);
-
-
-create table controlefinanceiro.conta (
+CREATE TABLE conta (
   id integer primary key autoincrement,
   nome text,
   observacao text,
   contabilizavel boolean);
-
-
-create table controlefinanceiro.modelo_lancamento (
-  id integer primary key autoincrement,
-  modeloid integer,
-  diavencimento integer,
-  contaorigemid integer,
-  contadestinoid integer,
-  valor double precision,
-  observacao text,
-
-  FOREIGN KEY(modeloid) REFERENCES "controlefinanceiro.modelo_modelo"(id),
-  FOREIGN KEY(contaorigemid) REFERENCES "controlefinanceiro.conta"(id),
-  FOREIGN KEY(contadestinoid) REFERENCES "controlefinanceiro.conta"(id));
-
-create table controlefinanceiro.extrato_arquivo
+CREATE TABLE extrato_arquivo
 (
   id integer primary key autoincrement,
   conteudo text);
-
-
-create table controlefinanceiro.extrato_lancamento
+CREATE TABLE extrato_lancamento
 (
   id integer primary key autoincrement,
   bancoid integer,
@@ -41,9 +16,15 @@ create table controlefinanceiro.extrato_lancamento
 
   FOREIGN KEY(bancoid) REFERENCES "controlefinanceiro.conta"(id),
   FOREIGN KEY(arquivoid) REFERENCES "controlefinanceiro.extrato_arquivo"(id));
-
-
-create table controlefinanceiro.lancamento (
+CREATE TABLE extrato_referenciaextrato (  
+  id integer primary key autoincrement,
+  contaid integer,
+  bancoid integer,
+  referencia text,
+  n integer,
+  FOREIGN KEY(contaid) REFERENCES "controlefinanceiro.conta"(id),
+  FOREIGN KEY(bancoid) REFERENCES "controlefinanceiro.conta"(id));
+CREATE TABLE lancamento (
   id integer primary key autoincrement,
   lancamentomodeloid integer,
   data date,
@@ -56,17 +37,20 @@ create table controlefinanceiro.lancamento (
   FOREIGN KEY(lancamentomodeloid) REFERENCES "controlefinanceiro.modelo_lancamento"(id),
   FOREIGN KEY(contaorigemid) REFERENCES "controlefinanceiro.conta"(id),
   FOREIGN KEY(contadestinoid) REFERENCES "controlefinanceiro.conta"(id),
-  UNIQUE (n),
   FOREIGN KEY(extratoid) REFERENCES "controlefinanceiro.extrato_lancamento"(id));
-
-
-create table controlefinanceiro.extrato_referenciaextrato (  
+CREATE TABLE modelo_lancamento (
   id integer primary key autoincrement,
-  contaid integer,
-  bancoid integer,
-  referencia text,
-  n integer,
-  FOREIGN KEY(contaid) REFERENCES "controlefinanceiro.conta"(id),
-  FOREIGN KEY(bancoid) REFERENCES "controlefinanceiro.conta"(id));
+  modeloid integer,
+  diavencimento integer,
+  contaorigemid integer,
+  contadestinoid integer,
+  valor double precision,
+  observacao text,
 
-.quit
+  FOREIGN KEY(modeloid) REFERENCES "controlefinanceiro.modelo_modelo"(id),
+  FOREIGN KEY(contaorigemid) REFERENCES "controlefinanceiro.conta"(id),
+  FOREIGN KEY(contadestinoid) REFERENCES "controlefinanceiro.conta"(id));
+CREATE TABLE modelo_modelo (
+  id integer primary key autoincrement,
+  nome text,
+  observacao text);
