@@ -54,3 +54,7 @@ CREATE TABLE modelo_modelo (
   id integer primary key autoincrement,
   nome text,
   observacao text);
+CREATE TABLE sequence (
+  seq_name text,
+  seq_count integer);
+
