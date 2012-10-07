@@ -1,6 +1,7 @@
 package br.zero.controlefinanceiro.model.extrato;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -15,8 +16,7 @@ import br.zero.customdao.EntitySetup;
 public class ExtratoLancamento {
 
 	@Id
-//	@SequenceGenerator(name = "CONTROLEFINANCEIRO_EXTRATO.LANCAMENTO_ID_SEQ", sequenceName = "CONTROLEFINANCEIRO_EXTRATO.LANCAMENTO_ID_SEQ", allocationSize = 1)
-//	@GeneratedValue(strategy = GenerationType.AUTO, generator = "CONTROLEFINANCEIRO_EXTRATO.LANCAMENTO_ID_SEQ")
+	@GeneratedValue
 	private Integer id;
 
 	@ManyToOne

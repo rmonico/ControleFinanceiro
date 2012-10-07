@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,8 +22,7 @@ import br.zero.customdao.EntitySetup;
 public class Lancamento implements Comparable<Lancamento> {
 
 	@Id
-//	@SequenceGenerator(name = "CONTROLEFINANCEIRO.LANCAMENTO_ID_SEQ", sequenceName = "CONTROLEFINANCEIRO.LANCAMENTO_ID_SEQ", allocationSize = 1)
-//	@GeneratedValue(strategy = GenerationType.AUTO, generator = "CONTROLEFINANCEIRO.LANCAMENTO_ID_SEQ")
+	@GeneratedValue
 	private Integer id;
 
 	@ManyToOne

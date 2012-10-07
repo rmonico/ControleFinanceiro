@@ -3,6 +3,7 @@ package br.zero.controlefinanceiro.model;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -19,8 +20,7 @@ public class Conta implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
-//	@SequenceGenerator(name = "CONTROLEFINANCEIRO.CONTA_ID_SEQ", sequenceName = "CONTROLEFINANCEIRO.CONTA_ID_SEQ", allocationSize = 1)
-//	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CONTROLEFINANCEIRO.CONTA_ID_SEQ")
+	@GeneratedValue
 	private Integer id;
 	private String nome;
 	private Boolean contabilizavel;
