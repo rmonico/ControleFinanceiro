@@ -49,5 +49,5 @@ help <commando>: mostra um texto de ajuda para o comando informado. O comando po
 Observações:
 
 - Informações {entre colchetes} não foram testadas.
-- Datas devem ser informadas no formato yyyy-mmm-dd, {por exemplo: 21-abr-2012 -- Não sei o formato deve ser em inglês ou português}
-- Para valores númericos 
+- Datas devem ser informadas no formato dd/mmm/yyyy, (por exemplo: 21/Apr/2012, notar que o mês deve ser abreviado em inglês e ter a primeira letra em maiúscula)
+- Para valores númericos deve-se usar . no lugar de , (confirmar)
