@@ -1,5 +1,5 @@
 #!/bin/bash
 # packer
 
-jar cvf ControleFinanceiro.jar -C build/classes/ .
+jar cvf ControleFinanceiro.jar -C build/classes/ . META-INF/
 
