@@ -13,3 +13,4 @@ ok Melhoria da aparência do lanc-ls web
   -  Estudar a utilização de um framework de controller como o django ou o jsf
   -  Estudar como aplicar o Maven neste projeto
     -  Precisa ter uma maneira de gerar uma versão com os projetos do Utils e do TheObserver
+- Uma compra na coop pode ter de ir pra mais de uma conta. Pensar numa maneira de tratar essa situação
