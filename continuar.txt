@@ -14,3 +14,9 @@ ok Melhoria da aparência do lanc-ls web
   -  Estudar como aplicar o Maven neste projeto
     -  Precisa ter uma maneira de gerar uma versão com os projetos do Utils e do TheObserver
 - Uma compra na coop pode ter de ir pra mais de uma conta. Pensar numa maneira de tratar essa situação
+- ItauExtratoParser, método parseData, verificar se a linha bate com o regex: [0-9]{2}/[0-9]{2}
+- Fazer as referências diretas (para ids de extrato)
+  - E fazer os ids dos extratos aparecerem na analise do extrato, pelo menos
+- Adicionar parâmetro de data limite ao extrato-analyse
+
+
