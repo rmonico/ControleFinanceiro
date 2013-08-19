@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Controle Financeiro</string>
+
+    <string-array name="mainmenuitens">
+        <item>lanc-add</item>
+        <item>lanc-addfull</item>
+        <item>sair</item>
+    </string-array>
+    <string name="lancadd_title">lanc-add</string>
+    <string name="lancaddfull_title">lanc-addfull</string>
+    
+</resources>
