@@ -1,6 +1,8 @@
 package br.zero.fin.database;
 
 public interface DatabaseStructure {
+	
+	public static final DatabaseStructure instance = new DefaultDatabaseStructure();
 
 	public String getName();
 	

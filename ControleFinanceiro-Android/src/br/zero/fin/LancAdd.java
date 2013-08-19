@@ -1,16 +1,12 @@
 package br.zero.fin;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.app.Activity;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
+import android.widget.SimpleCursorAdapter;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import br.zero.fin.datasource.LancamentoDataSource;
 import br.zero.fin.model.Conta;
 import br.zero.fin.model.modelo.Lancamento;
@@ -22,31 +18,19 @@ public class LancAdd extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.lanc_add);
 
-		View view = findViewById(R.id.listView1);
+		setSpinnerContaOrigemAdapter();
+	}
 
-		ListView expandableView = (ListView) view;
+	private void setSpinnerContaOrigemAdapter() {
+		Spinner spinnerContaOrigem = (Spinner) findViewById(R.id.spinnerContaOrigem);
 
-		List<Map<String, String>> data = new ArrayList<Map<String, String>>();
-
-		Map<String, String> item = new HashMap<String, String>();
-		item.put("Key 1", "value 1");
-		data.add(item);
-
-		item = new HashMap<String, String>();
-		item.put("Key 1", "value 2");
-		data.add(item);
-
-		item = new HashMap<String, String>();
-		item.put("Key 3", "value 3");
-		data.add(item);
-
-		ListAdapter adapter = new SimpleAdapter(this, data,
-				android.R.layout.simple_selectable_list_item, new String[] {},
-				new int[] {});
-		// ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-		// android.R.layout.simple_list_item_1, values);
-
-		expandableView.setAdapter(adapter);
+		ContaDataSource contaDataSource = new ContaDataSource();
+		
+		Cursor cursor = contaDataSource.getCursorForAll();
+				
+		SpinnerAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.simple_spinner_item, cursor, new String[] {"nome"}, new int[] {0}, 0);
+		
+		spinnerContaOrigem.setAdapter(adapter);
 	}
 
 	public void okClick(View view) {
@@ -76,7 +60,10 @@ public class LancAdd extends Activity {
 	}
 
 	private String getContaOrigem() {
-		// TODO
+//		Spinner listView = (Spinner) findViewById(R.id.spinnerContaOrigem);
+//		
+//		int selectedItemPosition = listView.getSelectedItemPosition();
+		
 		return "";
 	}
 

@@ -14,7 +14,7 @@ public class DefaultDatabaseStructure implements DatabaseStructure {
 	public String getDatabaseCreationSQL() {
 		// TODO Ler do arquivo controlefinanceiro.sqlite
 		String databaseCreation = 
-				  "--attach database \"controlefinanceiro.db\" as controlefinanceiro;\n"
+				  "--attach database \"controlefinanceiro.sqlite\" as controlefinanceiro;\n"
 						  + "\n"
 						  + "create table controlefinanceiro.modelo_modelo (\n"
 						  + "  id integer primary key autoincrement,\n"
