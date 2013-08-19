@@ -1,0 +1,16 @@
+X: Estudar se ele exclui mesmo os lanctos marcados com X
+U: Marcar a linha como verde
+
+- Criar uma referência. Por padrão será apenas para a sessão corrente, mas deverá ter uma opção fazer persistente.
+- Procurar uma linha do extrato ou lancamento pelo valor, texto, conta (valido apenas para lancto), 
+
+Todas as linhas deverão ter uma coluna de verificado. Só será permitido realizar a sincronização quando todas as linhas estiverem marcadas como verificadas.
+
+- Separar as movimentações por dia para sincronizar
+- Marcar os lançamentos que tiverem pra excluir e os sem conta resolvida em cor diferente
+- Não mostrar as linhas de balanço (enquanto a sincronização do balanço não estiver ok)
+
+- Mudar regra de análise de extrato: criar um status para quando a referência foi resolvida, há outro lançamento com valor correspondente mas para outra conta. O status seria algo como Special Update, Risk Update, etc
+- Erro lógico na regra de negócio: é possível que a mesma referência esteja mapeada para duas contas diferentes. Deveria ser feita essa verificação no início e dar pau quando a condição não é atendida.
+- Regra de negócio: filtrar por data
+- Regra de negócio: aceitar um arquivo de referências no lugar de deixar tudo na linha de comando
