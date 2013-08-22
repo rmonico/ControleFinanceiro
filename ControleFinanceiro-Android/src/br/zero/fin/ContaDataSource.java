@@ -11,7 +11,8 @@ import br.zero.fin.model.Conta;
 public class ContaDataSource extends AbstractDataSource<Conta> {
 	
 	public ContaDataSource() {
-		super("conta", new String[] {"id", "nome", "observacao"});
+		// TODO Mover isso para uma classe de structure que agora est‡ no DBHelper anonima
+		super("conta", new String[] {"_id", "nome", "observacao"});
 	}
 
 	public Conta getContaByName(String nomeConta) {
@@ -20,7 +21,6 @@ public class ContaDataSource extends AbstractDataSource<Conta> {
 
 	@Override
 	public Cursor getCursorForAll() {
-		// TODO Testar Application.getAppContext, est‡ definido nesta app
 		DBHelper dbHelper = new DBHelper(Application.getAppContext(), DatabaseStructure.instance);
 		
 		SQLiteDatabase database = dbHelper.getWritableDatabase();
