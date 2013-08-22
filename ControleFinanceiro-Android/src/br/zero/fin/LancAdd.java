@@ -28,7 +28,7 @@ public class LancAdd extends Activity {
 		
 		Cursor cursor = contaDataSource.getCursorForAll();
 				
-		SpinnerAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.simple_spinner_item, cursor, new String[] {"nome"}, new int[] {0}, 0);
+		SpinnerAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.simple_spinner_item, cursor, new String[] {"nome"}, new int[] { android.R.id.text1 }, 0);
 		
 		spinnerContaOrigem.setAdapter(adapter);
 	}
