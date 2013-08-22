@@ -1,94 +1,98 @@
 package br.zero.fin.database;
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class DefaultDatabaseStructure implements DatabaseStructure {
-	
+
 	public String getName() {
-		return "controlefinanceiro.db";
+		return "controlefinanceiro.sqlite";
 	}
 
 	public Integer getVersion() {
 		return 1;
 	}
 
-	public String getDatabaseCreationSQL() {
-		// TODO Ler do arquivo controlefinanceiro.sqlite
-		String databaseCreation = 
-				  "--attach database \"controlefinanceiro.sqlite\" as controlefinanceiro;\n"
-						  + "\n"
-						  + "create table controlefinanceiro.modelo_modelo (\n"
-						  + "  id integer primary key autoincrement,\n"
-						  + "  nome text,\n"
-						  + "  observacao text);\n"
-						  + "\n"
-						  + "\n"
-						  + "create table controlefinanceiro.conta (\n"
-						  + "  id integer primary key autoincrement,\n"
-						  + "  nome text,\n"
-						  + "  observacao text);\n"
-						  + "\n"
-						  + "\n"
-						  + "create table controlefinanceiro.modelo_lancamento (\n"
-						  + "  id integer primary key autoincrement,\n"
-						  + "  modeloid integer,\n"
-						  + "  diavencimento integer,\n"
-						  + "  contaorigemid integer,\n"
-						  + "  contadestinoid integer,\n"
-						  + "  valor double precision,\n"
-						  + "  observacao text,\n"
-						  + "\n"
-						  + "  FOREIGN KEY(modeloid) REFERENCES \"controlefinanceiro.modelo_modelo\"(id),\n"
-						  + "  FOREIGN KEY(contaorigemid) REFERENCES \"controlefinanceiro.conta\"(id),\n"
-						  + "  FOREIGN KEY(contadestinoid) REFERENCES \"controlefinanceiro.conta\"(id));\n"
-						  + "\n"
-						  + "create table controlefinanceiro.extrato_arquivo (\n"
-						  + "  id integer primary key autoincrement,\n"
-						  + "  conteudo text);\n"
-						  + "\n"
-						  + "\n"
-						  + "create table controlefinanceiro.extrato_lancamento (\n"
-						  + "  id integer primary key autoincrement,\n"
-						  + "  bancoid integer,\n"
-						  + "  original text,\n"
-						  + "  arquivoid integer,\n"
-						  + "\n"
-						  + "  FOREIGN KEY(bancoid) REFERENCES \"controlefinanceiro.conta\"(id),\n"
-						  + "  FOREIGN KEY(arquivoid) REFERENCES \"controlefinanceiro.extrato_arquivo\"(id));\n"
-						  + "\n"
-						  + "\n"
-						  + "create table controlefinanceiro.lancamento (\n"
-						  + "  id integer primary key autoincrement,\n"
-						  + "  lancamentomodeloid integer,\n"
-						  + "  data date,\n"
-						  + "  contaorigemid integer,\n"
-						  + "  contadestinoid integer,\n"
-						  + "  valor real,\n"
-						  + "  observacao text,\n"
-						  + "  n integer,\n"
-						  + "  extratoid integer,\n"
-						  + "  FOREIGN KEY(lancamentomodeloid) REFERENCES \"controlefinanceiro.modelo_lancamento\"(id),\n"
-						  + "  FOREIGN KEY(contaorigemid) REFERENCES \"controlefinanceiro.conta\"(id),\n"
-						  + "  FOREIGN KEY(contadestinoid) REFERENCES \"controlefinanceiro.conta\"(id),\n"
-						  + "  UNIQUE (n),\n"
-						  + "  FOREIGN KEY(extratoid) REFERENCES \"controlefinanceiro.extrato_lancamento\"(id));\n"
-						  + "\n"
-						  + "\n"
-						  + "create table controlefinanceiro.extrato_referenciaextrato (\n"
-						  + "  id integer primary key autoincrement,\n"
-						  + "  contaid integer,\n"
-						  + "  bancoid integer,\n"
-						  + "  referencia text,\n"
-						  + "  n integer,\n"
-						  + "  FOREIGN KEY(contaid) REFERENCES \"controlefinanceiro.conta\"(id),\n"
-						  + "  FOREIGN KEY(bancoid) REFERENCES \"controlefinanceiro.conta\"(id),\n"
-						  + "  UNIQUE (n));";
-		
-		return databaseCreation;
-						  
+	public List<TableStructure> getTables() {
+		List<TableStructure> tables = new ArrayList<TableStructure>();
+
+		tables.add(createModeloModeloTableStructure());
+		tables.add(createContaTableStructure());
+
+		return tables;
 	}
 
-	public String getUpgradeSQL(int oldVersion, int newVersion) {
-		return "";
+	private TableStructure createModeloModeloTableStructure() {
+		TableStructure table = new TableStructure() {
+
+			public String getDatabaseCreationSQL() {
+				return "CREATE TABLE modelo_modelo ("
+						+ "  id integer primary key autoincrement,"
+						+ "  nome text," + "  observacao text);";
+			}
+
+			public String getUpgradeSQL(int oldVersion, int newVersion) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			public void getPopulationSQLs(List<String> list) {
+				list.add("INSERT INTO \"modelo_modelo\" VALUES(1,'main',NULL);");
+			}
+
+		};
+
+		return table;
+	}
+
+	private TableStructure createContaTableStructure() {
+		TableStructure table = new TableStructure() {
+
+			public String getDatabaseCreationSQL() {
+				return "CREATE TABLE conta ("
+						+ "  _id integer primary key autoincrement,"
+						+ "  nome text,"
+						+ "  observacao text,"
+						+ "  contabilizavel boolean);";
+			}
+
+			public String getUpgradeSQL(int oldVersion, int newVersion) {
+				return "";
+			}
+
+			public void getPopulationSQLs(List<String> list) {
+				list.add("INSERT INTO \"conta\" VALUES(97,'academia',NULL,0);");
+				list.add("INSERT INTO \"conta\" VALUES(98,'aesa',NULL,0);");
+				list.add("INSERT INTO \"conta\" VALUES(99,'almoco',NULL,0);");
+				list.add("INSERT INTO \"conta\" VALUES(100,'cabelo',NULL,0);");
+				list.add("INSERT INTO \"conta\" VALUES(101,'carteira',NULL,1);");
+				list.add("INSERT INTO \"conta\" VALUES(102,'casa',NULL,0);");
+				list.add("INSERT INTO \"conta\" VALUES(103,'claro - 7653-0794',NULL,0);");
+				list.add("INSERT INTO \"conta\" VALUES(104,'claro - 96587-4452',NULL,0);");
+				list.add("INSERT INTO \"conta\" VALUES(105,'claro tv',NULL,0);");
+				list.add("INSERT INTO \"conta\" VALUES(106,'conferencia',NULL,0);");
+				list.add("INSERT INTO \"conta\" VALUES(107,'coop',NULL,0);");
+				list.add("INSERT INTO \"conta\" VALUES(108,'despesas bancarias',NULL,0);");
+				list.add("INSERT INTO \"conta\" VALUES(109,'diversos',NULL,0);");
+				list.add("INSERT INTO \"conta\" VALUES(110,'emprestimo',NULL,0);");
+				list.add("INSERT INTO \"conta\" VALUES(111,'greenline',NULL,0);");
+				list.add("INSERT INTO \"conta\" VALUES(112,'inss',NULL,0);");
+				list.add("INSERT INTO \"conta\" VALUES(113,'internet',NULL,0);");
+				list.add("INSERT INTO \"conta\" VALUES(114,'itau',NULL,1);");
+				list.add("INSERT INTO \"conta\" VALUES(115,'itau credito',NULL,1);");
+				list.add("INSERT INTO \"conta\" VALUES(116,'lanche',NULL,0);");
+				list.add("INSERT INTO \"conta\" VALUES(117,'luz',NULL,0);");
+				list.add("INSERT INTO \"conta\" VALUES(118,'medico',NULL,0);");
+				list.add("INSERT INTO \"conta\" VALUES(119,'metro',NULL,0);");
+				list.add("INSERT INTO \"conta\" VALUES(120,'salario',NULL,0);");
+				list.add("INSERT INTO \"conta\" VALUES(121,'santander credito',NULL,1);");
+				list.add("INSERT INTO \"conta\" VALUES(122,'semasa',NULL,0);");
+				list.add("INSERT INTO \"conta\" VALUES(123,'vivo',NULL,0);");
+			}
+
+		};
+
+		return table;
 	}
 
 }

@@ -1,5 +1,7 @@
 package br.zero.fin.database;
 
+import java.util.List;
+
 public interface DatabaseStructure {
 	
 	public static final DatabaseStructure instance = new DefaultDatabaseStructure();
@@ -8,7 +10,6 @@ public interface DatabaseStructure {
 	
 	public Integer getVersion();
 	
-	public String getDatabaseCreationSQL();
+	public List<TableStructure> getTables();
 	
-	public String getUpgradeSQL(int oldVersion, int newVersion);
 }

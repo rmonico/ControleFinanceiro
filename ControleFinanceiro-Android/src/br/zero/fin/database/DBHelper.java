@@ -1,5 +1,8 @@
 package br.zero.fin.database;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -19,20 +22,39 @@ public class DBHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase database) {
 		log.log("Creating database...");
-		database.execSQL(structure.getDatabaseCreationSQL());
+		
+		for (TableStructure table : structure.getTables()) {
+			createTableStructureAndPopulate(database, table);
+		}
+	}
+
+	private void createTableStructureAndPopulate(SQLiteDatabase database, TableStructure table) {
+		String databaseCreationSQL = table.getDatabaseCreationSQL();
+		
+		if (!databaseCreationSQL.isEmpty()) {
+			database.execSQL(databaseCreationSQL);
+		}
+		
+		List<String> statements = new ArrayList<String>();
+		
+		table.getPopulationSQLs(statements);
+		
+		for (String statement : statements) {
+			database.execSQL(statement);
+		};
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {
-		String upgradeSQL = structure.getUpgradeSQL(oldVersion, newVersion);
+		log.log("Updating database...");
 		
-		if (!upgradeSQL.isEmpty()) {
-			log.log("Database: Upgrading database from " + oldVersion + " to " + newVersion);
-			database.execSQL(upgradeSQL);
-		} else {
-			log.log("Database: nothing to upgrade.");
+		for (TableStructure table : structure.getTables()) {
+			String upgradeSQL = table.getUpgradeSQL(oldVersion, newVersion);
+			
+			if (!upgradeSQL.isEmpty()){
+				database.execSQL(upgradeSQL);
+			}
 		}
-		
 	}
 
 }
