@@ -59,11 +59,7 @@ public class LancAdd extends Activity {
 
 		LancamentoDataSource lancamentoSource = new LancamentoDataSource();
 
-		lancamentoSource.open();
-
 		lancamentoSource.create(lancamento);
-
-		lancamentoSource.close();
 	}
 
 	public void cancelClick(View view) {
