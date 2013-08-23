@@ -1,6 +1,8 @@
 package br.zero.fin.datasource;
 
+import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import br.zero.fin.AbstractDataSource;
 import br.zero.fin.model.modelo.Lancamento;
 
@@ -25,6 +27,15 @@ public class LancamentoDataSource extends AbstractDataSource<Lancamento> {
 
 	@Override
 	public void create(Lancamento obj) {
+		SQLiteDatabase database = getDatabase();
+		
+		ContentValues values = new ContentValues();
+		values.put("origemid", obj.getOrigem().getId());
+		values.put("destinoid", obj.getDestino().getId());
+		values.put("valor", obj.getValor());
+		values.put("observacao", obj.getObservacao());
+		
+		database.insert("lancamento", null, values);
 	}
 
 }
