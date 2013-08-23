@@ -1,7 +1,5 @@
 package br.zero.fin;
 
-import java.util.List;
-
 import android.database.Cursor;
 
 public interface DataSource<T> {
@@ -11,6 +9,5 @@ public interface DataSource<T> {
 	
 	Cursor getCursorForAll();
 
-	public List<T> getAll();
-	
+	T convertCurrentPositionToModel(Cursor cursor);
 }

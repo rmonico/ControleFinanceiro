@@ -1,7 +1,5 @@
 package br.zero.fin;
 
-import java.util.List;
-
 import android.database.Cursor;
 
 public abstract class AbstractDataSource<T> implements DataSource<T> {
@@ -24,6 +22,5 @@ public abstract class AbstractDataSource<T> implements DataSource<T> {
 
 	public abstract Cursor getCursorForAll();
 	
-	public abstract List<T> getAll();
-
+	public abstract T convertCurrentPositionToModel(Cursor cursor);
 }

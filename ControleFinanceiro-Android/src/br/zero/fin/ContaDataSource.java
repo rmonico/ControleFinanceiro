@@ -1,7 +1,5 @@
 package br.zero.fin;
 
-import java.util.List;
-
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import br.zero.fin.database.DBHelper;
@@ -11,12 +9,18 @@ import br.zero.fin.model.Conta;
 public class ContaDataSource extends AbstractDataSource<Conta> {
 	
 	public ContaDataSource() {
-		// TODO Mover isso para uma classe de structure que agora est‡ no DBHelper anonima
+		// TODO Mover isso para uma classe de structure que agora estï¿½ no DBHelper anonima
 		super("conta", new String[] {"_id", "nome", "observacao"});
 	}
-
-	public Conta getContaByName(String nomeConta) {
-		return null;
+	
+	public Conta convertCurrentPositionToModel(Cursor cursor) {
+		Conta conta = new Conta();
+		
+		conta.setId(cursor.getInt(0));
+		conta.setNome(cursor.getString(1));
+		conta.setObservacao(cursor.getString(2));
+		
+		return conta;
 	}
 
 	@Override
@@ -30,10 +34,4 @@ public class ContaDataSource extends AbstractDataSource<Conta> {
 		return cursor;
 	}
 	
-	@Override
-	public List<Conta> getAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
