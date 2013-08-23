@@ -1,6 +1,9 @@
 package br.zero.fin;
 
+import br.zero.fin.database.DBHelper;
+import br.zero.fin.database.DatabaseStructure;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 public abstract class AbstractDataSource<T> implements DataSource<T> {
 
@@ -10,6 +13,13 @@ public abstract class AbstractDataSource<T> implements DataSource<T> {
 	public AbstractDataSource(String tableName, String[] allColumns) {
 		this.tableName = tableName;
 		this.allColumns = allColumns;
+	}
+	
+	protected SQLiteDatabase getDatabase() {
+		DBHelper dbHelper = new DBHelper(Application.getAppContext(), DatabaseStructure.instance);
+		
+		SQLiteDatabase database = dbHelper.getWritableDatabase();
+		return database;
 	}
 
 	public String getTableName() {

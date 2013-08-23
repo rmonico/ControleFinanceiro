@@ -2,8 +2,6 @@ package br.zero.fin;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import br.zero.fin.database.DBHelper;
-import br.zero.fin.database.DatabaseStructure;
 import br.zero.fin.model.Conta;
 
 public class ContaDataSource extends AbstractDataSource<Conta> {
@@ -25,9 +23,7 @@ public class ContaDataSource extends AbstractDataSource<Conta> {
 
 	@Override
 	public Cursor getCursorForAll() {
-		DBHelper dbHelper = new DBHelper(Application.getAppContext(), DatabaseStructure.instance);
-		
-		SQLiteDatabase database = dbHelper.getWritableDatabase();
+		SQLiteDatabase database = getDatabase();
 		
 		Cursor cursor = database.query(getTableName(), getAllColumns(), null, null, null, null, null);
 		
