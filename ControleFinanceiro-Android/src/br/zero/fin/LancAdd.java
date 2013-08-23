@@ -13,63 +13,57 @@ import br.zero.fin.model.modelo.Lancamento;
 
 public class LancAdd extends Activity {
 
+	private Cursor contaOrigemCursor;
+	private Cursor contaDestinoCursor;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.lanc_add);
 
-		setSpinnerContaOrigemAdapter();
-	}
-
-	private void setSpinnerContaOrigemAdapter() {
 		Spinner spinnerContaOrigem = (Spinner) findViewById(R.id.spinnerContaOrigem);
 
+		contaOrigemCursor = setSpinnerContaAdapter(spinnerContaOrigem);
+
+		Spinner spinnerContaDestino = (Spinner) findViewById(R.id.spinnerContaDestino);
+
+		contaDestinoCursor = setSpinnerContaAdapter(spinnerContaDestino);
+	}
+
+	private Cursor setSpinnerContaAdapter(Spinner spinner) {
 		ContaDataSource contaDataSource = new ContaDataSource();
-		
+
 		Cursor cursor = contaDataSource.getCursorForAll();
-				
-		SpinnerAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.simple_spinner_item, cursor, new String[] {"nome"}, new int[] { android.R.id.text1 }, 0);
+
+		SpinnerAdapter adapter = new SimpleCursorAdapter(this,
+				android.R.layout.simple_spinner_item, cursor,
+				new String[] { "nome" }, new int[] { android.R.id.text1 }, 0);
+
+		spinner.setAdapter(adapter);
 		
-		spinnerContaOrigem.setAdapter(adapter);
+		return cursor;
 	}
 
 	public void okClick(View view) {
 		Lancamento lancamento = new Lancamento();
-		
+
 		ContaDataSource contaDataSource = new ContaDataSource();
 
-		String nomeContaOrigem = getContaOrigem();
-		
-		Conta origem = contaDataSource.getContaByName(nomeContaOrigem);
-		
+		Conta origem = contaDataSource.convertCurrentPositionToModel(contaOrigemCursor);
+
 		lancamento.setOrigem(origem);
-		
-		String nomeContaDestino = getContaDestino();
-		
-		Conta destino = contaDataSource.getContaByName(nomeContaDestino);
-		
+
+		Conta destino = contaDataSource.convertCurrentPositionToModel(contaDestinoCursor);
+
 		lancamento.setDestino(destino);
 
 		LancamentoDataSource lancamentoSource = new LancamentoDataSource();
 
 		lancamentoSource.open();
-		
+
 		lancamentoSource.create(lancamento);
-		
+
 		lancamentoSource.close();
-	}
-
-	private String getContaOrigem() {
-//		Spinner listView = (Spinner) findViewById(R.id.spinnerContaOrigem);
-//		
-//		int selectedItemPosition = listView.getSelectedItemPosition();
-		
-		return "";
-	}
-
-	private String getContaDestino() {
-		// TODO
-		return "";
 	}
 
 	public void cancelClick(View view) {
