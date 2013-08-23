@@ -33,5 +33,11 @@ public class ContaDataSource extends AbstractDataSource<Conta> {
 		
 		return cursor;
 	}
+
+	@Override
+	public void create(Conta obj) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

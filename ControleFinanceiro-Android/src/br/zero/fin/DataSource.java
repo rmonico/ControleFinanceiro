@@ -10,4 +10,6 @@ public interface DataSource<T> {
 	Cursor getCursorForAll();
 
 	T convertCurrentPositionToModel(Cursor cursor);
+	
+	void create(T obj);
 }

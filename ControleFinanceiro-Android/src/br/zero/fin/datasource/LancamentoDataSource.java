@@ -1,24 +1,30 @@
 package br.zero.fin.datasource;
 
+import android.database.Cursor;
+import br.zero.fin.AbstractDataSource;
 import br.zero.fin.model.modelo.Lancamento;
 
-public class LancamentoDataSource {
+public class LancamentoDataSource extends AbstractDataSource<Lancamento> {
 
 	public LancamentoDataSource() {
-		
+		// TODO
+		super("", null);
 	}
 
-	public void create(Lancamento lancamento) {
+	@Override
+	public Cursor getCursorForAll() {
 		// TODO Auto-generated method stub
+		return null;
 	}
 
-	public void open() {
+	@Override
+	public Lancamento convertCurrentPositionToModel(Cursor cursor) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
-	public void close() {
-		// TODO Auto-generated method stub
-		
+	@Override
+	public void create(Lancamento obj) {
 	}
+
 }
