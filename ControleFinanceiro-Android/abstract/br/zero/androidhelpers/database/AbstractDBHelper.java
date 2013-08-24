@@ -6,7 +6,7 @@ import java.util.List;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import br.zero.fin.database.Logger;
+import br.zero.androidhelpers.logger.Logger;
 
 public abstract class AbstractDBHelper extends SQLiteOpenHelper {
 

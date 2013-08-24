@@ -1,4 +1,4 @@
-package br.zero.fin.database;
+package br.zero.androidhelpers.logger;
 
 public class Logger {
 
