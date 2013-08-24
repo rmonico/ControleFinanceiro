@@ -1,4 +1,4 @@
-package br.zero.fin;
+package br.zero.fin.datasource;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
