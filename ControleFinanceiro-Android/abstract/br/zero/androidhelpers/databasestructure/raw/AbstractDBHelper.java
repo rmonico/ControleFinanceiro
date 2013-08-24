@@ -41,7 +41,6 @@ public abstract class AbstractDBHelper extends SQLiteOpenHelper {
 		for (String sql : sqls) {
 			database.execSQL(sql);
 		}
-		;
 	}
 
 	@Override
@@ -67,7 +66,6 @@ public abstract class AbstractDBHelper extends SQLiteOpenHelper {
 		for (String sql : sqls) {
 			database.execSQL(sql);
 		}
-		;
 	}
 
 }
