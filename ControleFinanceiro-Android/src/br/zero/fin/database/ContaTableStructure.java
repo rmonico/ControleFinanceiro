@@ -7,6 +7,9 @@ import br.zero.androidhelpers.databasestructure.table.FieldType;
 public class ContaTableStructure extends AbstractTableStructure {
 	
 	public static final ContaTableStructure get = new ContaTableStructure();
+	public final Field nome = new Field("nome", FieldType.TEXT);
+	public final Field observacao = new Field("observacao", FieldType.TEXT);
+	public final Field contabilizavel = new Field("contabilizavel", FieldType.BOOLEAN);
 
 	@Override
 	public String getName() {
@@ -15,11 +18,7 @@ public class ContaTableStructure extends AbstractTableStructure {
 
 	@Override
 	protected Field[] createFields() {
-		Field nome = new Field("nome", FieldType.TEXT);
-		Field observacao = new Field("observacao", FieldType.TEXT);
-		Field contabilizavel = new Field("contabilizavel", FieldType.BOOLEAN);
-		
-		return new Field[] { Field.new_IdField(), nome, observacao, contabilizavel };
+		return new Field[] { _id, nome, observacao, contabilizavel };
 	}
 
 }

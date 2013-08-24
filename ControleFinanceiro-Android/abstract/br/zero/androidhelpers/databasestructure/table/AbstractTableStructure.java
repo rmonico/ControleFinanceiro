@@ -5,6 +5,7 @@ import java.util.List;
 
 public abstract class AbstractTableStructure implements TableStructure {
 	private Field[] fields;
+	public final Field _id = Field.new_IdField();
 
 	public abstract String getName();
 
