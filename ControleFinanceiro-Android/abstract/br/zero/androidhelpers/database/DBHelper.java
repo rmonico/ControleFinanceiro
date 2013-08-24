@@ -1,14 +1,17 @@
-package br.zero.fin.database;
+package br.zero.androidhelpers.database;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import br.zero.fin.database.Logger;
+import br.zero.fin.database.TableStructure;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 
-public class DBHelper extends SQLiteOpenHelper {
+public abstract class DBHelper extends SQLiteOpenHelper {
 	
 	private Logger log = Logger.global();
 	private DatabaseStructure structure;

@@ -3,7 +3,10 @@ package br.zero.fin.database;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DefaultDatabaseStructure implements DatabaseStructure {
+import br.zero.androidhelpers.database.DatabaseRawObjectStructure;
+import br.zero.androidhelpers.database.DatabaseStructure;
+
+public class ControleFinanceiroDatabaseStructure implements DatabaseStructure {
 
 	public String getName() {
 		return "controlefinanceiro.sqlite";
@@ -93,6 +96,12 @@ public class DefaultDatabaseStructure implements DatabaseStructure {
 		};
 
 		return table;
+	}
+
+	public void createRawObjectStructures(
+			List<DatabaseRawObjectStructure> objects) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
