@@ -5,6 +5,8 @@ import br.zero.androidhelpers.databasestructure.table.Field;
 import br.zero.androidhelpers.databasestructure.table.FieldType;
 
 public class ContaTableStructure extends AbstractTableStructure {
+	
+	public static final ContaTableStructure get = new ContaTableStructure();
 
 	@Override
 	public String getName() {
