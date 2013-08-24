@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import br.zero.fin.database.ContaTableStructure;
 import br.zero.fin.datasource.ContaDataSource;
 import br.zero.fin.datasource.LancamentoDataSource;
 import br.zero.fin.model.Conta;
@@ -38,7 +39,7 @@ public class LancAdd extends Activity {
 
 		SpinnerAdapter adapter = new SimpleCursorAdapter(this,
 				android.R.layout.simple_spinner_item, cursor,
-				new String[] { "nome" }, new int[] { android.R.id.text1 }, 0);
+				new String[] { ContaTableStructure.get.nome.getName() }, new int[] { android.R.id.text1 }, 0);
 
 		spinner.setAdapter(adapter);
 		
