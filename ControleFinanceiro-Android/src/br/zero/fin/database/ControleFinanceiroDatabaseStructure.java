@@ -98,7 +98,7 @@ public class ControleFinanceiroDatabaseStructure implements DatabaseStructure {
 		return table;
 	}
 
-	public void createRawObjectStructures(
+	public void populateRawObjectStructures(
 			List<DatabaseRawObjectStructure> objects) {
 		// TODO Auto-generated method stub
 		
