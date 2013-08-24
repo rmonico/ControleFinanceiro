@@ -6,11 +6,6 @@ import br.zero.fin.model.Conta;
 
 public class ContaDataSource extends AbstractDataSource<Conta> {
 	
-	public ContaDataSource() {
-		// TODO Mover isso para uma classe de structure que agora est� no DBHelper anonima
-		super("conta", new String[] {"_id", "nome", "observacao"});
-	}
-	
 	public Conta convertCurrentPositionToModel(Cursor cursor) {
 		Conta conta = new Conta();
 		
