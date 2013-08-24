@@ -1,4 +1,4 @@
-package br.zero.androidhelpers.database;
+package br.zero.androidhelpers.databasestructure.raw;
 
 import java.util.List;
 

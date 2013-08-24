@@ -1,14 +1,14 @@
-package br.zero.androidhelpers.database;
+package br.zero.androidhelpers.databasestructure.table;
 
 public abstract class AbstractTableStructure implements TableStructure {
-	private FieldStructure[] fields;
+	private Field[] fields;
 
 	public abstract String getName();
 
-	public FieldStructure[] getFields() {
+	public Field[] getFields() {
 		return fields != null ? fields : (fields = createFields());
 	}
 
-	protected abstract FieldStructure[] createFields();
+	protected abstract Field[] createFields();
 
 }

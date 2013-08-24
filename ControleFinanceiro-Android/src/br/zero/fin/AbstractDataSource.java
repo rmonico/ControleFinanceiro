@@ -1,7 +1,7 @@
 package br.zero.fin;
 
-import br.zero.androidhelpers.database.AbstractDBHelper;
-import br.zero.androidhelpers.database.DatabaseStructure;
+import br.zero.androidhelpers.databasestructure.raw.AbstractDBHelper;
+import br.zero.androidhelpers.databasestructure.raw.DatabaseStructure;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
