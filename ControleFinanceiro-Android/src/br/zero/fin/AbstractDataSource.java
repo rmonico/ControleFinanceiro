@@ -1,6 +1,6 @@
 package br.zero.fin;
 
-import br.zero.androidhelpers.database.DBHelper;
+import br.zero.androidhelpers.database.AbstractDBHelper;
 import br.zero.androidhelpers.database.DatabaseStructure;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -16,7 +16,7 @@ public abstract class AbstractDataSource<T> implements DataSource<T> {
 	}
 	
 	protected SQLiteDatabase getDatabase() {
-		DBHelper dbHelper = new DBHelper(Application.getAppContext(), DatabaseStructure.instance);
+		AbstractDBHelper dbHelper = new AbstractDBHelper(Application.getAppContext(), DatabaseStructure.instance);
 		
 		SQLiteDatabase database = dbHelper.getWritableDatabase();
 		return database;

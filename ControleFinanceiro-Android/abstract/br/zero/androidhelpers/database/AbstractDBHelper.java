@@ -8,12 +8,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import br.zero.fin.database.Logger;
 
-public abstract class DBHelper extends SQLiteOpenHelper {
+public abstract class AbstractDBHelper extends SQLiteOpenHelper {
 
 	private Logger log = Logger.global();
 	private DatabaseStructure structure;
 
-	public DBHelper(Context context, DatabaseStructure structure) {
+	public AbstractDBHelper(Context context, DatabaseStructure structure) {
 		super(context, structure.getName(), null, structure.getVersion());
 
 		this.structure = structure;
