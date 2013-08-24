@@ -15,9 +15,5 @@ public abstract class AbstractDataSource<T> implements DataSource<T> {
 		return database;
 	}
 
-	public abstract Cursor getCursorForAll();
-	
-	public abstract T convertCurrentPositionToModel(Cursor cursor);
-	
 	public abstract void create(T obj);
 }
