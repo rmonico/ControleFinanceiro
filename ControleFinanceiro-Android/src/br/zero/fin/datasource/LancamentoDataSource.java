@@ -3,7 +3,7 @@ package br.zero.fin.datasource;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import br.zero.fin.AbstractDataSource;
+import br.zero.androidhelpers.datasource.AbstractDataSource;
 import br.zero.fin.model.modelo.Lancamento;
 
 public class LancamentoDataSource extends AbstractDataSource<Lancamento> {

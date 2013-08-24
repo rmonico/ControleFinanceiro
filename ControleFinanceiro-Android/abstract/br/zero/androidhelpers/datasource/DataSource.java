@@ -1,4 +1,4 @@
-package br.zero.fin;
+package br.zero.androidhelpers.datasource;
 
 import android.database.Cursor;
 

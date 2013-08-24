@@ -2,6 +2,7 @@ package br.zero.fin;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import br.zero.androidhelpers.datasource.AbstractDataSource;
 import br.zero.fin.model.Conta;
 
 public class ContaDataSource extends AbstractDataSource<Conta> {
