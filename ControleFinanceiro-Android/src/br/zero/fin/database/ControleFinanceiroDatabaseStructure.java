@@ -3,7 +3,7 @@ package br.zero.fin.database;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.zero.androidhelpers.database.DatabaseRawObjectStructure;
+import br.zero.androidhelpers.database.RawDatabaseObjectStructure;
 import br.zero.androidhelpers.database.DatabaseStructure;
 
 public class ControleFinanceiroDatabaseStructure implements DatabaseStructure {
@@ -99,7 +99,7 @@ public class ControleFinanceiroDatabaseStructure implements DatabaseStructure {
 	}
 
 	public void populateRawObjectStructures(
-			List<DatabaseRawObjectStructure> objects) {
+			List<RawDatabaseObjectStructure> objects) {
 		// TODO Auto-generated method stub
 		
 	}

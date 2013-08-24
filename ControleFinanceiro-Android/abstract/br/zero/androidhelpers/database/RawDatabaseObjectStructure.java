@@ -2,7 +2,7 @@ package br.zero.androidhelpers.database;
 
 import java.util.List;
 
-public interface DatabaseRawObjectStructure {
+public interface RawDatabaseObjectStructure {
 	
 	void populateObjectCreationSQLs(List<String> sqls);
 	

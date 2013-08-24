@@ -23,17 +23,17 @@ public abstract class AbstractDBHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase database) {
 		log.log("Creating database...");
 
-		List<DatabaseRawObjectStructure> objects = new ArrayList<DatabaseRawObjectStructure>();
+		List<RawDatabaseObjectStructure> objects = new ArrayList<RawDatabaseObjectStructure>();
 
 		structure.populateRawObjectStructures(objects);
 
-		for (DatabaseRawObjectStructure object : objects) {
+		for (RawDatabaseObjectStructure object : objects) {
 			execObjectCreationSQLs(database, object);
 		}
 	}
 
 	private void execObjectCreationSQLs(SQLiteDatabase database,
-			DatabaseRawObjectStructure object) {
+			RawDatabaseObjectStructure object) {
 		List<String> sqls = new ArrayList<String>();
 
 		object.populateObjectCreationSQLs(sqls);
@@ -49,17 +49,17 @@ public abstract class AbstractDBHelper extends SQLiteOpenHelper {
 			int newVersion) {
 		log.log("Updating database...");
 
-		List<DatabaseRawObjectStructure> objects = new ArrayList<DatabaseRawObjectStructure>();
+		List<RawDatabaseObjectStructure> objects = new ArrayList<RawDatabaseObjectStructure>();
 
 		structure.populateRawObjectStructures(objects);
 
-		for (DatabaseRawObjectStructure object : objects) {
+		for (RawDatabaseObjectStructure object : objects) {
 			execObjectUpgradeSQLs(database, object, oldVersion, newVersion);
 		}
 	}
 
 	private void execObjectUpgradeSQLs(SQLiteDatabase database,
-			DatabaseRawObjectStructure object, int oldVersion, int newVersion) {
+			RawDatabaseObjectStructure object, int oldVersion, int newVersion) {
 		List<String> sqls = new ArrayList<String>();
 
 		object.populateUpgradeSQL(sqls, oldVersion, newVersion);
