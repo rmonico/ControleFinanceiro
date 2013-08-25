@@ -23,23 +23,14 @@ public abstract class AbstractDBHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase database) {
 		log.log("Creating database...");
 
-		List<RawDatabaseObjectStructure> objects = new ArrayList<RawDatabaseObjectStructure>();
-
-		structure.populateRawObjectStructures(objects);
+		List<RawDatabaseObjectStructure> objects = structure.populateRawObjectStructures();
 
 		for (RawDatabaseObjectStructure object : objects) {
-			execObjectCreationSQLs(database, object);
-		}
-	}
+			List<String> sqls = object.getObjectCreationSQLs();
 
-	private void execObjectCreationSQLs(SQLiteDatabase database,
-			RawDatabaseObjectStructure object) {
-		List<String> sqls = new ArrayList<String>();
-
-		object.populateObjectCreationSQLs(sqls);
-
-		for (String sql : sqls) {
-			database.execSQL(sql);
+			for (String sql : sqls) {
+				database.execSQL(sql);
+			}
 		}
 	}
 
@@ -59,13 +50,9 @@ public abstract class AbstractDBHelper extends SQLiteOpenHelper {
 
 	private void execObjectUpgradeSQLs(SQLiteDatabase database,
 			RawDatabaseObjectStructure object, int oldVersion, int newVersion) {
-		List<String> sqls = new ArrayList<String>();
+		StringBuilder s = object.getUpgradeSQL(oldVersion, newVersion);
 
-		object.populateUpgradeSQL(sqls, oldVersion, newVersion);
-
-		for (String sql : sqls) {
-			database.execSQL(sql);
-		}
+		database.execSQL(s.toString());
 	}
 
 }
