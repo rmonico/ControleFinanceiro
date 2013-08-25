@@ -1,33 +1,19 @@
 package br.zero.fin.datasource;
 
 import android.content.ContentValues;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import br.zero.android.helpers.appdefaults.AppDefaults;
 import br.zero.androidhelpers.datasource.AbstractDataSource;
 import br.zero.fin.model.modelo.Lancamento;
 
 public class LancamentoDataSource extends AbstractDataSource<Lancamento> {
 
-	public LancamentoDataSource() {
-		// TODO
-		super("", null);
-	}
-
-	@Override
-	public Cursor getCursorForAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Lancamento convertCurrentPositionToModel(Cursor cursor) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	@Override
 	public void create(Lancamento obj) {
-		SQLiteDatabase database = getDatabase();
+		SQLiteOpenHelper helper = AppDefaults.get.createHelper();
+		
+		SQLiteDatabase database = helper.getWritableDatabase();
 		
 		ContentValues values = new ContentValues();
 		values.put("origemid", obj.getOrigem().getId());

@@ -1,7 +1,5 @@
 package br.zero.fin.datasource;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import br.zero.androidhelpers.datasource.AbstractDataSource;
 import br.zero.fin.model.Conta;
 
