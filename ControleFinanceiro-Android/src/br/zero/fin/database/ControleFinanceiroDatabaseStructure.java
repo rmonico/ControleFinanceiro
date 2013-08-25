@@ -12,6 +12,8 @@ import br.zero.fin.model.modelo.Modelo;
 public class ControleFinanceiroDatabaseStructure implements DatabaseStructure {
 
 	private int nextId;
+	
+	public static final ControleFinanceiroDatabaseStructure get = new ControleFinanceiroDatabaseStructure();
 
 	public String getName() {
 		return "controlefinanceiro.sqlite";

@@ -1,17 +1,16 @@
 package br.zero.fin;
 
-import android.content.Context;
+import br.zero.android.helpers.appdefaults.AppDefaults;
 
 public class Application extends android.app.Application {
 
-	private static Context context;
-
 	public void onCreate() {
 		super.onCreate();
-		context = getApplicationContext();
+		
+		AppDefaults defaults = AppDefaults.get;
+		
+		defaults.setAppContext(getApplicationContext());
+		defaults.setHelperFactory(new ControleFinanceiroHelperFactory());
 	}
 
-	public static Context getAppContext() {
-		return Application.context;
-	}
 }
