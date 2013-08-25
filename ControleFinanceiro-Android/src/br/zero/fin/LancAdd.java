@@ -2,13 +2,16 @@ package br.zero.fin;
 
 import android.app.Activity;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import br.zero.android.helpers.appdefaults.AppDefaults;
 import br.zero.fin.database.ContaTableStructure;
 import br.zero.fin.datasource.ContaDataSource;
+import br.zero.fin.datasource.ContaProviderFactory;
 import br.zero.fin.datasource.LancamentoDataSource;
 import br.zero.fin.model.Conta;
 import br.zero.fin.model.modelo.Lancamento;
@@ -33,9 +36,9 @@ public class LancAdd extends Activity {
 	}
 
 	private Cursor setSpinnerContaAdapter(Spinner spinner) {
-		ContaDataSource contaDataSource = new ContaDataSource();
-
-		Cursor cursor = contaDataSource.getCursorForAll();
+		ContaProviderFactory provider = new ContaProviderFactory();
+		
+		Cursor cursor = provider.getCursorForAll();
 
 		SpinnerAdapter adapter = new SimpleCursorAdapter(this,
 				android.R.layout.simple_spinner_item, cursor,
