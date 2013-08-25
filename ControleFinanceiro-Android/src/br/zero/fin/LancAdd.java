@@ -2,15 +2,12 @@ package br.zero.fin;
 
 import android.app.Activity;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
-import br.zero.android.helpers.appdefaults.AppDefaults;
 import br.zero.fin.database.ContaTableStructure;
-import br.zero.fin.datasource.ContaDataSource;
 import br.zero.fin.datasource.ContaProviderFactory;
 import br.zero.fin.datasource.LancamentoDataSource;
 import br.zero.fin.model.Conta;
@@ -52,13 +49,13 @@ public class LancAdd extends Activity {
 	public void okClick(View view) {
 		Lancamento lancamento = new Lancamento();
 
-		ContaDataSource contaDataSource = new ContaDataSource();
+		ContaProviderFactory provider = new ContaProviderFactory();
 
-		Conta origem = contaDataSource.convertCurrentPositionToModel(contaOrigemCursor);
+		Conta origem = provider.convertCurrentPositionToModel(contaOrigemCursor);
 
 		lancamento.setOrigem(origem);
 
-		Conta destino = contaDataSource.convertCurrentPositionToModel(contaDestinoCursor);
+		Conta destino = provider.convertCurrentPositionToModel(contaDestinoCursor);
 
 		lancamento.setDestino(destino);
 
