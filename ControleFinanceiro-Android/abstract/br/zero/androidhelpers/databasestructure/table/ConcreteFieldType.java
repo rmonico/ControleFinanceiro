@@ -1,14 +1,20 @@
 package br.zero.androidhelpers.databasestructure.table;
 
 class ConcreteFieldType implements FieldType {
-	private String toString;
+	private String sqliteTypeName;
+	private Class<?> javaCorrespondingType;
 
-	ConcreteFieldType(String toString) {
-		this.toString = toString;
+	ConcreteFieldType(String sqliteTypeName, Class<?> javaCorrespondingType) {
+		this.sqliteTypeName = sqliteTypeName;
+		this.javaCorrespondingType = javaCorrespondingType;
 	}
 	
-	@Override
-	public String toString() {
-		return toString;
+	public String getSQLiteTypeName() {
+		return sqliteTypeName;
 	}
+	
+	public Class<?> getJavaCorrespondingType() {
+		return javaCorrespondingType;
+	}
+	
 }

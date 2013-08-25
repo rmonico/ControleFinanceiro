@@ -8,10 +8,10 @@ public abstract class AbstractTableStructure implements TableStructure {
 	private Field[] fields;
 	public final Field _id;
 	
-	public AbstractTableStructure() {
+	public AbstractTableStructure(Class<?> beanClass) throws DatabaseStructureException {
 		super();
 		
-		_id = Field.new_IdField();
+		_id = Field.new_IdField(beanClass);
 	}
 
 	public abstract String getName();

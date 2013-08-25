@@ -26,8 +26,8 @@ public class ControleFinanceiroDatabaseStructure implements DatabaseStructure {
 	public List<RawDatabaseObjectStructure> populateRawObjectStructures() {
 		List<RawDatabaseObjectStructure> objects = new ArrayList<RawDatabaseObjectStructure>();
 		
-		objects.add(new TableToRawSQLAdapter(ModeloModeloTableStructure.get, createModeloModeloInitialData()));
-		objects.add(new TableToRawSQLAdapter(ContaTableStructure.get, createContaInitialData()));
+		objects.add(new TableToRawSQLAdapter(ModeloModeloTableStructure.get(), createModeloModeloInitialData()));
+		objects.add(new TableToRawSQLAdapter(ContaTableStructure.get(), createContaInitialData()));
 		
 		return objects;
 	}

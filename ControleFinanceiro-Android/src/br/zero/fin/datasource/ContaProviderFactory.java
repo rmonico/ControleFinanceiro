@@ -26,7 +26,7 @@ public class ContaProviderFactory implements ProviderFactory<Conta> {
 		SQLiteDatabase database = helper.getWritableDatabase();
 		
 		// TODO Esta Ž a œnica coisa que Ž espec’fica desta classe. Pode ser passada por invers‹o de controle
-		ContaTableStructure structure = ContaTableStructure.get;
+		ContaTableStructure structure = ContaTableStructure.get();
 		
 		Cursor cursor = database.query(structure.getName(), structure.getFieldNames(), null, null, null, null, null);
 		
