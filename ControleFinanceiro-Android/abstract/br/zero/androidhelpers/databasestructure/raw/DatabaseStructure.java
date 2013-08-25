@@ -8,6 +8,6 @@ public interface DatabaseStructure {
 	
 	Integer getVersion();
 	
-	void populateRawObjectStructures(List<RawDatabaseObjectStructure> objects);
+	List<RawDatabaseObjectStructure> populateRawObjectStructures();
 	
 }
