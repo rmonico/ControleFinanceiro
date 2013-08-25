@@ -1,6 +1,5 @@
 package br.zero.androidhelpers.databasestructure.raw;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -28,9 +27,7 @@ public abstract class AbstractDBHelper extends SQLiteOpenHelper {
 		for (RawDatabaseObjectStructure object : objects) {
 			List<String> sqls = object.getObjectCreationSQLs();
 
-			for (String sql : sqls) {
-				database.execSQL(sql);
-			}
+			execSQLList(database, sqls);
 		}
 	}
 
@@ -39,20 +36,19 @@ public abstract class AbstractDBHelper extends SQLiteOpenHelper {
 			int newVersion) {
 		log.log("Updating database...");
 
-		List<RawDatabaseObjectStructure> objects = new ArrayList<RawDatabaseObjectStructure>();
-
-		structure.populateRawObjectStructures(objects);
+		List<RawDatabaseObjectStructure> objects = structure.populateRawObjectStructures();
 
 		for (RawDatabaseObjectStructure object : objects) {
-			execObjectUpgradeSQLs(database, object, oldVersion, newVersion);
+			List<String> sqls = object.getUpgradeSQL(oldVersion, newVersion);
+
+			execSQLList(database, sqls);
 		}
 	}
 
-	private void execObjectUpgradeSQLs(SQLiteDatabase database,
-			RawDatabaseObjectStructure object, int oldVersion, int newVersion) {
-		StringBuilder s = object.getUpgradeSQL(oldVersion, newVersion);
-
-		database.execSQL(s.toString());
+	private void execSQLList(SQLiteDatabase database, List<String> sqls) {
+		for (String sql : sqls) {
+			database.execSQL(sql);
+		}
 	}
 
 }
