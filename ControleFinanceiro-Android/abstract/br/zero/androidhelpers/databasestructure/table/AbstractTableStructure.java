@@ -4,19 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractTableStructure implements TableStructure {
+	
 	private Field[] fields;
-	public final Field _id = Field.new_IdField();
+	public final Field _id;
+	
+	public AbstractTableStructure() {
+		super();
+		
+		_id = Field.new_IdField();
+	}
 
 	public abstract String getName();
 
 	public Field[] getFields() {
-		return fields != null ? fields : (fields = createFields());
+		return fields == null ? fields = createFields() : fields;
 	}
 	
 	public String[] getFieldNames() {
 		List<String> fieldNames = new ArrayList<String>();
 		
-		for (Field field : fields) {
+		for (Field field : getFields()) {
 			fieldNames.add(field.getName());
 		}
 		
