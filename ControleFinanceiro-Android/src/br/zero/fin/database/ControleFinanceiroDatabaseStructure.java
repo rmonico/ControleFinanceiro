@@ -23,10 +23,13 @@ public class ControleFinanceiroDatabaseStructure implements DatabaseStructure {
 		return 1;
 	}
 
-	public void populateRawObjectStructures(
-			List<RawDatabaseObjectStructure> objects) {
+	public List<RawDatabaseObjectStructure> populateRawObjectStructures() {
+		List<RawDatabaseObjectStructure> objects = new ArrayList<RawDatabaseObjectStructure>();
+		
 		objects.add(new TableToRawSQLAdapter(ModeloModeloTableStructure.get, createModeloModeloInitialData()));
 		objects.add(new TableToRawSQLAdapter(ContaTableStructure.get, createContaInitialData()));
+		
+		return objects;
 	}
 
 	private List<Modelo> createModeloModeloInitialData() {
@@ -95,5 +98,5 @@ public class ControleFinanceiroDatabaseStructure implements DatabaseStructure {
 		
 		return conta;
 	}
-	
+
 }
