@@ -1,5 +1,6 @@
 package br.zero.androidhelpers.databasestructure.table;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.zero.androidhelpers.databasestructure.raw.RawDatabaseObjectStructure;
@@ -14,23 +15,37 @@ public class TableToRawSQLAdapter implements RawDatabaseObjectStructure {
 	}
 	
 	public TableToRawSQLAdapter(TableStructure table, List<? extends Object> initialData) {
+		this.table = table;
 		this.initialData = initialData;
 	}
 
-	public void populateObjectCreationSQLs(List<String> sqls) {
-		sqls.add("create table " + table.getName());
-
-		if (table.getFields().length > 0) {
-			putFields(sqls, table.getFields());
-		}
+	public List<String> getObjectCreationSQLs() {
+		List<String> sqls = new ArrayList<String>();
 		
-		sqls.add(";");
+		sqls.add(getCreateTableStatement());
 		
-		populateInitialData(sqls);
+		createInitialDataStatements(sqls);
+		
+		return sqls;
 	}
 
-	private void putFields(List<String> sqls, Field[] fields) {
-		StringBuilder s = new StringBuilder("(");
+	private String getCreateTableStatement() {
+		StringBuilder s = new StringBuilder();
+		
+		s.append("create table " + table.getName());
+
+		if (table.getFields().length > 0) {
+			putFields(s, table.getFields());
+		}
+		
+		s.append(";");
+		
+		return s.toString();
+	}
+
+	private void putFields(StringBuilder s, Field[] fields) {
+		s.append("(");
+		
 		for (int i = 0; i < fields.length; i++) {
 			Field field = fields[i];
 
@@ -43,11 +58,10 @@ public class TableToRawSQLAdapter implements RawDatabaseObjectStructure {
 			}
 			
 			if (i < fields.length - 1) {
-				s.append(",\n");
+				s.append(", ");
 			}
-			
-			sqls.add(s.toString());
 		}
+		
 		s.append(")");
 	}
 
@@ -58,15 +72,15 @@ public class TableToRawSQLAdapter implements RawDatabaseObjectStructure {
 		}
 	}
 
-	private void populateInitialData(List<String> sqls) {
-		// TODO Auto-generated method stub
+	private void createInitialDataStatements(List<String> sqls) {
+		for (Object obj : initialData) {
+			
+		}
 		
 	}
-	
-	public void populateUpgradeSQL(List<String> sqls, int oldVersion,
-			int newVersion) {
-		// TODO Auto-generated method stub
 
+	public List<String> getUpgradeSQL(int oldVersion, int newVersion) {
+		return null;
 	}
 
 }
