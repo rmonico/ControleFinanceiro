@@ -1,12 +1,12 @@
 package br.zero.androidhelpers.databasestructure.raw;
 
-import br.zero.fin.Application;
+import br.zero.android.helpers.appdefaults.AppDefaults;
 import br.zero.fin.database.ControleFinanceiroDatabaseStructure;
 
 public class ControleFinanceiroDBHelper extends AbstractDBHelper {
 
 	public ControleFinanceiroDBHelper() {
-		super(Application.getAppContext(), ControleFinanceiroDatabaseStructure.get);
+		super(AppDefaults.get.getAppContext(), ControleFinanceiroDatabaseStructure.get);
 	}
 
 }
