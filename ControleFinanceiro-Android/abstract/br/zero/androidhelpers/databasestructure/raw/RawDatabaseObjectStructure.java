@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface RawDatabaseObjectStructure {
 
-	List<String> populateObjectCreationSQLs();
+	List<String> getObjectCreationSQLs();
 
-	List<String> populateUpgradeSQL(int oldVersion, int newVersion);
+	List<String> getUpgradeSQL(int oldVersion, int newVersion);
 }
