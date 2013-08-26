@@ -14,6 +14,10 @@ public abstract class AbstractTableStructure implements TableStructure {
 		_id = Field.new_IdField(beanClass);
 	}
 
+	public int[] getPKFieldsIndexes() {
+		return new int[] { 0 };
+	}
+	
 	public abstract String getName();
 
 	public Field[] getFields() {
