@@ -85,7 +85,7 @@ public class TableToRawSQLAdapter implements RawDatabaseObjectStructure {
 	private String createInsertIntoStatement(Object obj) throws DatabaseStructureException {
 		StringBuilder s = new StringBuilder();
 		
-		s.append("insert into " + table.getName() + "(");
+		s.append("insert into " + table.getName() + " (");
 		
 		putFieldValues(obj, s);
 		
@@ -99,7 +99,7 @@ public class TableToRawSQLAdapter implements RawDatabaseObjectStructure {
 			throws DatabaseStructureException {
 		Field[] fields = table.getFields();
 		
-		for (int i = 0; i < fields.length - 1; i++) {
+		for (int i = 0; i < fields.length; i++) {
 			Field field = fields[i];
 			
 			Method getter = field.getGetter();
@@ -109,14 +109,14 @@ public class TableToRawSQLAdapter implements RawDatabaseObjectStructure {
 			@SuppressWarnings("rawtypes")
 			FieldType type = field.getType();
 			
-			if (!(type.getJavaCorrespondingType().equals(value.getClass()))) {
+			if ((value != null) && (!(type.getJavaCorrespondingType().equals(value.getClass())))) {
 				throw new DatabaseStructureException("Tipo do getter n‹o corresponde ao tipo do campo definido na cria‹o da estrutura da tabela.");
 			}
 			
 			// O if acima garante que nunca vai acontecer problema aqui
 			s.append(type.formatToSQL(value));
 			
-			if (i < fields.length - 1) {
+			if (i < fields.length) {
 				s.append(", ");
 			}
 		}
