@@ -2,6 +2,7 @@ package br.zero.fin;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.util.GregorianCalendar;
 
 import android.app.Activity;
 import android.database.Cursor;
@@ -15,7 +16,7 @@ import br.zero.fin.database.ContaTableStructure;
 import br.zero.fin.datasource.ContaProviderFactory;
 import br.zero.fin.datasource.LancamentoDataSource;
 import br.zero.fin.model.Conta;
-import br.zero.fin.model.modelo.Lancamento;
+import br.zero.fin.model.Lancamento;
 
 public class LancAdd extends Activity {
 
@@ -89,6 +90,8 @@ public class LancAdd extends Activity {
 		if (!observacao.isEmpty()) {
 			lancamento.setObservacao(observacao);
 		}
+		
+		lancamento.setDate(GregorianCalendar.getInstance());
 		
 		lancamentoSource.create(lancamento);
 		

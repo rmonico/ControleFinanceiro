@@ -4,8 +4,9 @@ import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import br.zero.android.helpers.appdefaults.AppDefaults;
+import br.zero.androidhelpers.databasestructure.table.FieldType;
 import br.zero.androidhelpers.datasource.AbstractDataSource;
-import br.zero.fin.model.modelo.Lancamento;
+import br.zero.fin.model.Lancamento;
 
 public class LancamentoDataSource extends AbstractDataSource<Lancamento> {
 
@@ -18,6 +19,10 @@ public class LancamentoDataSource extends AbstractDataSource<Lancamento> {
 		ContentValues values = new ContentValues();
 		values.put("contaorigemid", obj.getOrigem().getID());
 		values.put("contadestinoid", obj.getDestino().getID());
+		
+		String strDate = FieldType.DATE.formatToSQL(obj.getDate());
+		
+		values.put("date", strDate);
 		values.put("valor", obj.getValor());
 		values.put("observacao", obj.getObservacao());
 		

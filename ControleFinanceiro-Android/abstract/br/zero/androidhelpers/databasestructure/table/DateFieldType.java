@@ -11,7 +11,8 @@ class DateFieldType extends ConcreteFieldType<Calendar> {
 	DateFieldType() {
 		super("date", Calendar.class);
 		
-		sdf = new SimpleDateFormat("dd/mm/yyyy", Locale.US);
+//		sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss.SSSS", Locale.US);
+		sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 	}
 
 	public String formatToSQL(Calendar value) {

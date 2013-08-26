@@ -24,7 +24,7 @@ public class LancamentoTableStructure extends AbstractTableStructure<Lancamento>
 // TODO Depois faço a estrutura destas tabelas		
 //		lancamentomodeloid = new Field("lancamentoid", new ForeignFieldType<br.zero.fin.model.modelo.Lancamento>(LancamentoModeloTableStructure.class), Lancamento.class, "getModelo", "setModelo");
 		lancamentomodeloid = new Field("lancamentomodeloid", FieldType.INTEGER, Lancamento.class, "getModelo", "setModelo");
-		date = new Field("data", FieldType.DATE, Lancamento.class, "getDate", "setDate");
+		date = new Field("date", FieldType.DATE, Lancamento.class, "getDate", "setDate");
 		contaorigemid = new Field("contaorigemid", ContaTableStructure.getForeignFieldType(), Lancamento.class, "getOrigem", "setOrigem");
 		contadestinoid = new Field("contadestinoid", ContaTableStructure.getForeignFieldType(), Lancamento.class, "getDestino", "setDestino");
 		valor = new Field("valor", FieldType.REAL, Lancamento.class, "getValor", "setValor");
