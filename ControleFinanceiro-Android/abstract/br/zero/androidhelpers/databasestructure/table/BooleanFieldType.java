@@ -7,6 +7,10 @@ class BooleanFieldType extends ConcreteFieldType<Boolean> {
 	}
 
 	public String formatToSQL(Boolean value) {
+		if (value == null) {
+			return "NULL";
+		}
+		
 		return value ? "1" : "0";
 	}
 

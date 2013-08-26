@@ -8,10 +8,14 @@ class StringFieldType extends ConcreteFieldType<String> {
 	
 	@Override
 	public String formatToSQL(String value) {
+		if (value == null) {
+			return "NULL";
+		}
+		
 		// TODO Testar com valores com "
 		value = value.replaceAll("\"", "");
 		
-		return "\"" + value.toString() + "\"";
+		return "'" + value.toString() + "'";
 	}
 
 }

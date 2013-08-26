@@ -7,6 +7,10 @@ class IntegerFieldType extends ConcreteFieldType<Integer> {
 	}
 
 	public String formatToSQL(Integer value) {
+		if (value == null) {
+			return "NULL";
+		}
+		
 		return value.toString();
 	}
 
