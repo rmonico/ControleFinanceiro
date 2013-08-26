@@ -8,14 +8,14 @@ import br.zero.androidhelpers.databasestructure.raw.RawDatabaseObjectStructure;
 
 public class TableToRawSQLAdapter implements RawDatabaseObjectStructure {
 
-	private TableStructure table;
+	private TableStructure<?> table;
 	private List<? extends Object> initialData;
 
-	public TableToRawSQLAdapter(TableStructure table) {
+	public TableToRawSQLAdapter(TableStructure<?> table) {
 		this(table, null);
 	}
 	
-	public TableToRawSQLAdapter(TableStructure table, List<? extends Object> initialData) {
+	public TableToRawSQLAdapter(TableStructure<?> table, List<? extends Object> initialData) {
 		this.table = table;
 		this.initialData = initialData;
 	}

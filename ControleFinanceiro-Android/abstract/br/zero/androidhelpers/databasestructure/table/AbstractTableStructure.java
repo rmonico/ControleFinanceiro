@@ -3,13 +3,13 @@ package br.zero.androidhelpers.databasestructure.table;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractTableStructure implements TableStructure {
+public abstract class AbstractTableStructure<T> implements TableStructure<T> {
 	
 	private Field[] fields;
 	public final Field _id;
-	private Class<?> beanClass;
+	private Class<T> beanClass;
 	
-	public AbstractTableStructure(Class<?> beanClass) throws DatabaseStructureException {
+	public AbstractTableStructure(Class<T> beanClass) throws DatabaseStructureException {
 		super();
 		
 		this.beanClass = beanClass;
@@ -38,7 +38,7 @@ public abstract class AbstractTableStructure implements TableStructure {
 
 	protected abstract Field[] createFields();
 	
-	public Class<?> getBeanClass() {
+	public Class<T> getBeanClass() {
 		return beanClass;
 	}
 

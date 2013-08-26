@@ -6,7 +6,7 @@ import br.zero.androidhelpers.databasestructure.table.Field;
 import br.zero.androidhelpers.databasestructure.table.FieldType;
 import br.zero.fin.model.modelo.Modelo;
 
-public class ModeloModeloTableStructure extends AbstractTableStructure {
+public class ModeloModeloTableStructure extends AbstractTableStructure<Modelo> {
 
 	private static ModeloModeloTableStructure get;
 	public final Field nome;

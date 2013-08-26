@@ -1,11 +1,11 @@
 package br.zero.androidhelpers.databasestructure.table;
 
-public interface TableStructure {
+public interface TableStructure<T> {
 	String getName();
 	
 	int[] getPKFieldsIndexes();
 
 	Field[] getFields();
 	
-	Class<?> getBeanClass();
+	Class<? extends T> getBeanClass();
 }
