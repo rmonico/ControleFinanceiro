@@ -5,6 +5,7 @@ import java.util.List;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import br.zero.androidhelpers.databasestructure.table.DatabaseStructureException;
 import br.zero.androidhelpers.logger.Logger;
 
 public abstract class AbstractDBHelper extends SQLiteOpenHelper {
@@ -25,7 +26,12 @@ public abstract class AbstractDBHelper extends SQLiteOpenHelper {
 		List<RawDatabaseObjectStructure> objects = structure.populateRawObjectStructures();
 
 		for (RawDatabaseObjectStructure object : objects) {
-			List<String> sqls = object.getObjectCreationSQLs();
+			List<String> sqls;
+			try {
+				sqls = object.getObjectCreationSQLs();
+			} catch (DatabaseStructureException e) {
+				throw new RuntimeException(e);
+			}
 
 			execSQLList(database, sqls);
 		}
@@ -39,7 +45,12 @@ public abstract class AbstractDBHelper extends SQLiteOpenHelper {
 		List<RawDatabaseObjectStructure> objects = structure.populateRawObjectStructures();
 
 		for (RawDatabaseObjectStructure object : objects) {
-			List<String> sqls = object.getUpgradeSQL(oldVersion, newVersion);
+			List<String> sqls;
+			try {
+				sqls = object.getUpgradeSQL(oldVersion, newVersion);
+			} catch (DatabaseStructureException e) {
+				throw new RuntimeException(e);
+			}
 
 			execSQLList(database, sqls);
 		}

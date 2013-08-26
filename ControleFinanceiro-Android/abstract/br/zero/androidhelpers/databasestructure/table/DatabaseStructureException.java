@@ -10,5 +10,9 @@ public class DatabaseStructureException extends Exception {
 	public DatabaseStructureException(Throwable throwable) {
 		super(throwable);
 	}
+
+	public DatabaseStructureException(String message) {
+		super(message);
+	}
 	
 }

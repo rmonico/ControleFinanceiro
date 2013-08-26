@@ -1,5 +1,6 @@
 package br.zero.androidhelpers.databasestructure.table;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class TableToRawSQLAdapter implements RawDatabaseObjectStructure {
 		this.initialData = initialData;
 	}
 
-	public List<String> getObjectCreationSQLs() {
+	public List<String> getObjectCreationSQLs() throws DatabaseStructureException {
 		List<String> sqls = new ArrayList<String>();
 		
 		sqls.add(getCreateTableStatement());
@@ -49,7 +50,7 @@ public class TableToRawSQLAdapter implements RawDatabaseObjectStructure {
 		for (int i = 0; i < fields.length; i++) {
 			Field field = fields[i];
 
-			s.append(field.getName() + " " + field.getType().toString());
+			s.append(field.getName() + " " + field.getType().getSQLiteTypeName());
 			
 			FieldModifier[] modifiers = field.getModifiers();
 			
@@ -72,14 +73,68 @@ public class TableToRawSQLAdapter implements RawDatabaseObjectStructure {
 		}
 	}
 
-	private void createInitialDataStatements(List<String> sqls) {
+	private void createInitialDataStatements(List<String> sqls) throws DatabaseStructureException {
 		for (Object obj : initialData) {
+			String insertIntoStatement = createInsertIntoStatement(obj);
 			
+			sqls.add(insertIntoStatement);
 		}
 		
 	}
 
-	public List<String> getUpgradeSQL(int oldVersion, int newVersion) {
+	private String createInsertIntoStatement(Object obj) throws DatabaseStructureException {
+		StringBuilder s = new StringBuilder();
+		
+		s.append("insert into " + table.getName() + "(");
+		
+		putFieldValues(obj, s);
+		
+		s.append(");");
+		
+		return s.toString();
+	}
+
+	@SuppressWarnings("unchecked")
+	private void putFieldValues(Object obj, StringBuilder s)
+			throws DatabaseStructureException {
+		Field[] fields = table.getFields();
+		
+		for (int i = 0; i < fields.length - 1; i++) {
+			Field field = fields[i];
+			
+			Method getter = field.getGetter();
+			
+			Object value = getData(obj, getter);
+			
+			@SuppressWarnings("rawtypes")
+			FieldType type = field.getType();
+			
+			if (!(type.getJavaCorrespondingType().equals(value.getClass()))) {
+				throw new DatabaseStructureException("Tipo do getter n‹o corresponde ao tipo do campo definido na cria‹o da estrutura da tabela.");
+			}
+			
+			// O if acima garante que nunca vai acontecer problema aqui
+			s.append(type.formatToSQL(value));
+			
+			if (i < fields.length - 1) {
+				s.append(", ");
+			}
+		}
+	}
+
+	private Object getData(Object obj, Method getter)
+			throws DatabaseStructureException {
+		Object value;
+		
+		try {
+			value = getter.invoke(obj);
+		} catch (Exception e) {
+			throw new DatabaseStructureException(e);
+		}
+		return value;
+	}
+
+	public List<String> getUpgradeSQL(int oldVersion, int newVersion) throws DatabaseStructureException {
 		return null;
 	}
 
