@@ -5,6 +5,7 @@ public interface FieldType<T> {
 	public static FieldType<Integer> INTEGER = new IntegerFieldType();
 	public static FieldType<String> TEXT = new StringFieldType();
 	public static FieldType<Boolean> BOOLEAN = new BooleanFieldType();
+	public static FieldType<?> DATE = new DateFieldType();
 	
 	Class<? extends T> getJavaCorrespondingType();
 
