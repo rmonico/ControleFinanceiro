@@ -6,4 +6,6 @@ public interface TableStructure {
 	int[] getPKFieldsIndexes();
 
 	Field[] getFields();
+	
+	Class<?> getBeanClass();
 }

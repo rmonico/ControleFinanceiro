@@ -7,10 +7,12 @@ public abstract class AbstractTableStructure implements TableStructure {
 	
 	private Field[] fields;
 	public final Field _id;
+	private Class<?> beanClass;
 	
 	public AbstractTableStructure(Class<?> beanClass) throws DatabaseStructureException {
 		super();
 		
+		this.beanClass = beanClass;
 		_id = Field.new_IdField(beanClass);
 	}
 
@@ -35,5 +37,9 @@ public abstract class AbstractTableStructure implements TableStructure {
 	}
 
 	protected abstract Field[] createFields();
+	
+	public Class<?> getBeanClass() {
+		return beanClass;
+	}
 
 }
