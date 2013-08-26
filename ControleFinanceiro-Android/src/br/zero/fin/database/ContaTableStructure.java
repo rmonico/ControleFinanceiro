@@ -4,10 +4,12 @@ import br.zero.androidhelpers.databasestructure.table.AbstractTableStructure;
 import br.zero.androidhelpers.databasestructure.table.DatabaseStructureException;
 import br.zero.androidhelpers.databasestructure.table.Field;
 import br.zero.androidhelpers.databasestructure.table.FieldType;
+import br.zero.androidhelpers.databasestructure.table.ForeignFieldType;
 import br.zero.fin.model.Conta;
 
-public class ContaTableStructure extends AbstractTableStructure {
+public class ContaTableStructure extends AbstractTableStructure<Conta> {
 	
+	private static ForeignFieldType<Conta> foreignFieldType;
 	private static ContaTableStructure get;
 	public final Field nome;
 	public final Field observacao;
@@ -21,7 +23,15 @@ public class ContaTableStructure extends AbstractTableStructure {
 		contabilizavel = new Field("contabilizavel", FieldType.BOOLEAN, Conta.class, "getContabilizavel", "setContabilizavel");
 	}
 
-	public static final ContaTableStructure get() {
+	public static ForeignFieldType<Conta> getForeignFieldType() {
+		if (foreignFieldType == null) {
+			foreignFieldType = new ForeignFieldType<Conta>(ContaTableStructure.get());
+		}
+		
+		return foreignFieldType;
+	}
+	
+	public static ContaTableStructure get() {
 		try {
 			return get == null ? get = new ContaTableStructure() : get;
 		} catch (DatabaseStructureException e) {
