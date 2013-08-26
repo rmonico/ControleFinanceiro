@@ -4,31 +4,42 @@ import java.util.Calendar;
 
 public class Lancamento {
 	private int id;
-	private br.zero.fin.model.modelo.Lancamento modelo;
+//	private br.zero.fin.model.modelo.Lancamento modelo;
+	private int modelo;
 	private Calendar date;
 	private Conta origem;
 	private Conta destino;
 	private double valor;
 	private String observacao;
 	private int n;
-	private br.zero.fin.model.extrato.Lancamento extrato;
-
-	public int getId() {
+//	private br.zero.fin.model.extrato.Lancamento extrato;
+	private int extrato;
+	
+	public int getID() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setID(Integer id) {
 		this.id = id;
 	}
 
-	public br.zero.fin.model.modelo.Lancamento getModelo() {
+//	public br.zero.fin.model.modelo.Lancamento getModelo() {
+//		return modelo;
+//	}
+//
+//	public void setModelo(br.zero.fin.model.modelo.Lancamento modelo) {
+//		this.modelo = modelo;
+//	}
+//
+	
+	public int getModelo() {
 		return modelo;
 	}
-
-	public void setModelo(br.zero.fin.model.modelo.Lancamento modelo) {
+	
+	public void setModelo(Integer modelo) {
 		this.modelo = modelo;
 	}
-
+	
 	public Calendar getDate() {
 		return date;
 	}
@@ -57,7 +68,7 @@ public class Lancamento {
 		return valor;
 	}
 
-	public void setValor(double valor) {
+	public void setValor(Double valor) {
 		this.valor = valor;
 	}
 
@@ -77,12 +88,20 @@ public class Lancamento {
 		this.n = n;
 	}
 
-	public br.zero.fin.model.extrato.Lancamento getExtrato() {
+	public int getExtrato() {
 		return extrato;
 	}
-
-	public void setExtrato(br.zero.fin.model.extrato.Lancamento extrato) {
+	
+	public void setExtrato(Integer extrato) {
 		this.extrato = extrato;
 	}
+	
+//	public br.zero.fin.model.extrato.Lancamento getExtrato() {
+//		return extrato;
+//	}
+//
+//	public void setExtrato(br.zero.fin.model.extrato.Lancamento extrato) {
+//		this.extrato = extrato;
+//	}
 
 }
