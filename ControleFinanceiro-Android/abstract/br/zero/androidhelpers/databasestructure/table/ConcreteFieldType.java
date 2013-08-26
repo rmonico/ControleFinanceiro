@@ -1,10 +1,10 @@
 package br.zero.androidhelpers.databasestructure.table;
 
-class ConcreteFieldType implements FieldType {
+abstract class ConcreteFieldType<T> implements FieldType<T> {
 	private String sqliteTypeName;
-	private Class<?> javaCorrespondingType;
+	private Class<? extends T> javaCorrespondingType;
 
-	ConcreteFieldType(String sqliteTypeName, Class<?> javaCorrespondingType) {
+	ConcreteFieldType(String sqliteTypeName, Class<? extends T> javaCorrespondingType) {
 		this.sqliteTypeName = sqliteTypeName;
 		this.javaCorrespondingType = javaCorrespondingType;
 	}
@@ -13,8 +13,10 @@ class ConcreteFieldType implements FieldType {
 		return sqliteTypeName;
 	}
 	
-	public Class<?> getJavaCorrespondingType() {
+	public Class<? extends T> getJavaCorrespondingType() {
 		return javaCorrespondingType;
 	}
+
+	public abstract String formatToSQL(T value);
 	
 }

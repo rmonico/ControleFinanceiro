@@ -1,13 +1,15 @@
 package br.zero.androidhelpers.databasestructure.table;
 
-public interface FieldType {
+public interface FieldType<T> {
 	
-	public static FieldType INTEGER = new ConcreteFieldType("integer", Integer.class) {};
-	public static FieldType TEXT = new ConcreteFieldType("text", String.class) {};
-	public static FieldType BOOLEAN = new ConcreteFieldType("boolean", Boolean.class) {};
+	public static FieldType<Integer> INTEGER = new IntegerFieldType();
+	public static FieldType<String> TEXT = new StringFieldType();
+	public static FieldType<Boolean> BOOLEAN = new BooleanFieldType();
 	
-	Class<?> getJavaCorrespondingType();
+	Class<? extends T> getJavaCorrespondingType();
 
 	String getSQLiteTypeName();
+
+	String formatToSQL(T value);
 	
 }
