@@ -85,7 +85,7 @@ public class TableToRawSQLAdapter implements RawDatabaseObjectStructure {
 	private String createInsertIntoStatement(Object obj) throws DatabaseStructureException {
 		StringBuilder s = new StringBuilder();
 		
-		s.append("insert into " + table.getName() + " (");
+		s.append("insert into \"" + table.getName() + "\" values (");
 		
 		putFieldValues(obj, s);
 		
@@ -116,7 +116,7 @@ public class TableToRawSQLAdapter implements RawDatabaseObjectStructure {
 			// O if acima garante que nunca vai acontecer problema aqui
 			s.append(type.formatToSQL(value));
 			
-			if (i < fields.length) {
+			if (i < fields.length - 1) {
 				s.append(", ");
 			}
 		}
