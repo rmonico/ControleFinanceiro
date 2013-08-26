@@ -20,7 +20,7 @@ public class Field {
 		this.modifiers = modifiers;
 		
 		try {
-			getter = beanClass.getMethod(getterName, (Class<?>) null);
+			getter = beanClass.getDeclaredMethod(getterName, new Class<?>[] {});
 
 			Class<?> setterParameterType = type.getJavaCorrespondingType();
 			
