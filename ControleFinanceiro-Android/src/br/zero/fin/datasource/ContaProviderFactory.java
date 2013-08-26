@@ -13,7 +13,7 @@ public class ContaProviderFactory implements ProviderFactory<Conta> {
 	public Conta convertCurrentPositionToModel(Cursor cursor) {
 		Conta conta = new Conta();
 		
-		conta.setId(cursor.getInt(0));
+		conta.setID(cursor.getInt(0));
 		conta.setNome(cursor.getString(1));
 		conta.setObservacao(cursor.getString(2));
 		

@@ -5,11 +5,11 @@ public class Modelo {
 	private String nome;
 	private String observacao;
 
-	public int getId() {
+	public int getID() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setID(Integer id) {
 		this.id = id;
 	}
 

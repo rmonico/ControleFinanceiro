@@ -4,12 +4,13 @@ public class Conta {
 	private int id;
 	private String nome;
 	private String observacao;
+	private boolean contabilizavel;
 
-	public int getId() {
+	public int getID() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setID(Integer id) {
 		this.id = id;
 	}
 
@@ -27,6 +28,14 @@ public class Conta {
 
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
+	}
+
+	public boolean getContabilizavel() {
+		return contabilizavel;
+	}
+
+	public void setContabilizavel(Boolean contabilizavel) {
+		this.contabilizavel = contabilizavel;
 	}
 
 }

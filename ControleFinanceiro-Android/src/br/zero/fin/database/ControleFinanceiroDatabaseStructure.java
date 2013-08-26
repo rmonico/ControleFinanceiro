@@ -36,7 +36,7 @@ public class ControleFinanceiroDatabaseStructure implements DatabaseStructure {
 		List<Modelo> data = new ArrayList<Modelo>();
 		
 		Modelo modelo = new Modelo();
-		modelo.setId(1);
+		modelo.setID(1);
 		modelo.setNome("Main");
 		
 		data.add(modelo);
@@ -93,7 +93,7 @@ public class ControleFinanceiroDatabaseStructure implements DatabaseStructure {
 		Conta conta = new Conta();
 		
 		// TODO Testar o ++ nessa situação
-		conta.setId(nextId++);
+		conta.setID(nextId++);
 		conta.setNome(nome);
 		
 		return conta;

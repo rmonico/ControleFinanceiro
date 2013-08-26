@@ -16,8 +16,8 @@ public class LancamentoDataSource extends AbstractDataSource<Lancamento> {
 		SQLiteDatabase database = helper.getWritableDatabase();
 		
 		ContentValues values = new ContentValues();
-		values.put("origemid", obj.getOrigem().getId());
-		values.put("destinoid", obj.getDestino().getId());
+		values.put("origemid", obj.getOrigem().getID());
+		values.put("destinoid", obj.getDestino().getID());
 		values.put("valor", obj.getValor());
 		values.put("observacao", obj.getObservacao());
 		
