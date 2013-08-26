@@ -1,9 +1,13 @@
 package br.zero.fin;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
+
 import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
@@ -17,6 +21,8 @@ public class LancAdd extends Activity {
 
 	private Cursor contaOrigemCursor;
 	private Cursor contaDestinoCursor;
+	private EditText editTextValor;
+	private EditText editTextObservacao;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -30,6 +36,10 @@ public class LancAdd extends Activity {
 		Spinner spinnerContaDestino = (Spinner) findViewById(R.id.spinnerContaDestino);
 
 		contaDestinoCursor = setSpinnerContaAdapter(spinnerContaDestino);
+		
+		editTextValor = (EditText) findViewById(R.id.editTextValor);
+		
+		editTextObservacao = (EditText) findViewById(R.id.editTextObservacao);
 	}
 
 	private Cursor setSpinnerContaAdapter(Spinner spinner) {
@@ -60,8 +70,29 @@ public class LancAdd extends Activity {
 		lancamento.setDestino(destino);
 
 		LancamentoDataSource lancamentoSource = new LancamentoDataSource();
-
+		
+		String valorText = editTextValor.getText().toString();
+		
+		double valor = 0.0;
+		
+		try {
+			valor = NumberFormat.getNumberInstance().parse(valorText).doubleValue();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		lancamento.setValor(valor);
+		
+		String observacao = editTextObservacao.getText().toString();
+		
+		if (!observacao.isEmpty()) {
+			lancamento.setObservacao(observacao);
+		}
+		
 		lancamentoSource.create(lancamento);
+		
+		finish();
 	}
 
 	public void cancelClick(View view) {
