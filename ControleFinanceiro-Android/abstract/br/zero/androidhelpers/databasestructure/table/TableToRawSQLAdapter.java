@@ -25,8 +25,10 @@ public class TableToRawSQLAdapter implements RawDatabaseObjectStructure {
 		
 		sqls.add(getCreateTableStatement());
 		
-		createInitialDataStatements(sqls);
-		
+		if (initialData != null) {
+			createInitialDataStatements(sqls);
+		}
+	
 		return sqls;
 	}
 
