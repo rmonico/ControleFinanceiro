@@ -28,6 +28,7 @@ public class ControleFinanceiroDatabaseStructure implements DatabaseStructure {
 		
 		objects.add(new TableToRawSQLAdapter(ModeloModeloTableStructure.get(), createModeloModeloInitialData()));
 		objects.add(new TableToRawSQLAdapter(ContaTableStructure.get(), createContaInitialData()));
+		objects.add(new TableToRawSQLAdapter(LancamentoTableStructure.get()));
 		
 		return objects;
 	}

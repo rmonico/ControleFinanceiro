@@ -8,6 +8,7 @@ import br.zero.fin.model.Lancamento;
 
 public class LancamentoTableStructure extends AbstractTableStructure<Lancamento> {
 
+	private static LancamentoTableStructure get;
 	private Field lancamentomodeloid;
 	private Field date;
 	private Field contaorigemid;
@@ -41,6 +42,15 @@ public class LancamentoTableStructure extends AbstractTableStructure<Lancamento>
 	@Override
 	protected Field[] createFields() {
 		return new Field[] { _id, lancamentomodeloid, date, contaorigemid, contadestinoid, valor, observacao, n, extratoid };
+	}
+
+	public static LancamentoTableStructure get() {
+		try {
+			return get == null ? get = new LancamentoTableStructure() : get;
+		} catch (DatabaseStructureException e) {
+			throw new RuntimeException(e);
+		}
+
 	}
 
 }

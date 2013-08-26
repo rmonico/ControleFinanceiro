@@ -84,7 +84,7 @@ public class Lancamento {
 		return n;
 	}
 
-	public void setN(int n) {
+	public void setN(Integer n) {
 		this.n = n;
 	}
 
